@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: sh -c 'pnpm format'
+        language: system
+        files: '\.(js|jsx|ts|tsx|json|yml|yaml|md)$'
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: sh -c 'pnpm lint'
+        language: system
+        files: '\.(js|jsx|ts|tsx)$'
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: vitest
+        name: vitest
+        entry: sh -c 'CI=true pnpm test:unit'
+        language: system
+        files: '\.(ts|tsx|js|jsx)$'
+        pass_filenames: false
