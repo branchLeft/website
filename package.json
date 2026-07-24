@@ -12,7 +12,7 @@
     "test:ui": "vitest --ui",
     "lint": "eslint app --ext .ts,.tsx --fix",
     "format": "prettier --write .",
-    "prepare": "pre-commit install"
+    "prepare": "[ \"$CI\" = \"true\" ] || pre-commit install"
   },
   "dependencies": {
     "@react-router/node": "^8",
