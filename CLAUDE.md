@@ -70,10 +70,54 @@ If a commit is blocked, fix the reported issues and re-commit.
 
 ### Styling
 
-- All visual decisions flow from a central theme (colours, spacing scale, typography) defined in `app/theme.css` or Tailwind config — never hardcode one-off values.
-- Prefer Tailwind utility classes. Extend the theme rather than overriding with arbitrary values.
+**All visual decisions live in `app/theme.css` — nowhere else.** Route TSX must stay as close to bare semantic markup as possible. If you find yourself typing more than one utility class on an element, stop and promote the pattern to the theme.
+
+#### File layout
+
+- `app/app.css` — Tailwind v4 entry. Two `@import` lines; do not add rules here.
+- `app/theme.css` — the single source of truth:
+  - `@font-face` → self-hosted font registrations. Family names must match the `--font-*` tokens.
+  - `@theme` → design tokens (colours, font stacks, spacing/scale extensions).
+  - `@layer base` → element defaults (`html`, `body`, `h1`–`h6`, `p`, `a`, `img`, form controls, `code`, `pre`, focus ring).
+  - `@layer components` → named reusable patterns (`.page-shell`, `.hero-wordmark`, `.tagline`, `.brand-mark`, `.stack-trace`, …).
+
+#### The styling hierarchy (strict order)
+
+When you need to style something, work down this list and stop at the first level that fits:
+
+1. **Element default (`@layer base` in `theme.css`).** If every `h2` on the site should look the same, style `h2` directly — no class in TSX.
+2. **Component class (`@layer components` in `theme.css`).** If a pattern repeats or needs a variant (`.page-shell`, `.page-shell--tight`), define it once and reference it by name. Use BEM-style modifiers (`.name--variant`) rather than utility stacks.
+3. **Tailwind utility on the element.** Escape hatch only. Requires a code comment on the line above explaining why the pattern isn't promoted to the theme.
+
+#### Hard rules
+
+- **Never** hardcode a colour, font, size, or spacing literal in TSX (`className="text-[#b31761]"`, `style={{ marginTop: 12 }}`). Extend `@theme` tokens instead.
+- **Never** use arbitrary Tailwind values (`w-[137px]`, `text-[13px]`) in TSX. If you need a new size, add it as a token or component class.
+- **Never** stack more than one Tailwind utility on a single element in TSX without a justifying comment. Two utilities = you owe the theme a new component class.
+- **Never** re-declare tokens, `@font-face` blocks, or element defaults in `app.css` or route files.
+- `className` values in route TSX should be a single component-class token (`className="page-shell"`) or absent entirely. A grep for `className="` in `app/` is a quick health check.
+
+#### Recipes
+
+**Add a new colour or font.** Edit the `@theme` block in `theme.css`. Tailwind auto-generates `bg-*`, `text-*`, `border-*`, `font-*` utilities from it — but you should still consume the token through a base rule or component class, not a utility in TSX.
+
+**Change how all `h1`s look.** Edit the `h1` rule in `@layer base` in `theme.css`. Do not add per-page overrides.
+
+**Introduce a new page layout.** Add a component class in `@layer components` (`.page-shell-*`, `.section-*`) and reference it from the route with a single `className`.
+
+**One-off exception.** Add the utility in TSX with a comment: `{/* one-off: RFP mock-up only, remove after launch */}`.
+
+#### Migration checklist for new work
+
+- [ ] Route TSX contains no colour, spacing, or typography utilities.
+- [ ] Every `className` in `app/routes/**` is a single component-class name or empty.
+- [ ] New tokens landed in `theme.css` `@theme`, not inline.
+- [ ] New shared patterns landed in `@layer components`, not inline.
+
+#### Aesthetic principles
+
 - Designs should be simple. Favour whitespace, contrast, and hierarchy over decoration.
-- **Responsive-first:** every component must work at `sm`, `md`, `lg`, and `xl` breakpoints. Test at 375 px and 1440 px minimum.
+- **Responsive-first:** every component must work at `sm`, `md`, `lg`, and `xl` breakpoints. Test at 375 px and 1440 px minimum. Responsive rules belong in `theme.css` (media queries inside base or component layers), not in TSX.
 
 ### Components
 

@@ -10,7 +10,6 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-import './app.scss';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
@@ -53,11 +52,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className="page-shell page-shell--tight">
       <h1>{message}</h1>
-      <p>{details}</p>
+      <p className="tagline">{details}</p>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="stack-trace">
           <code>{stack}</code>
         </pre>
       )}
