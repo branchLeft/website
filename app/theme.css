@@ -1,0 +1,205 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * theme.css — Single source of truth for branchLeft site styling.
+ *
+ * Everything visual lives here so TSX stays as close to bare semantic markup
+ * as possible. Do not add utility classes to route components unless the
+ * pattern is a genuine one-off; instead:
+ *
+ *   1. First choice → adjust an element default in @layer base below.
+ *   2. Second choice → add or extend a component class in @layer components.
+ *   3. Last resort  → utility class in TSX, with a comment explaining why
+ *                     it wasn't promoted here.
+ *
+ * See website/CLAUDE.md → "Styling" for the full rule set.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Self-hosted fonts ──────────────────────────────────────────────────── */
+/* Registered here so font-family strings are only
+ * defined once in this file — the @font-face names must line up with the
+ * --font-* tokens declared in @theme below.                                 */
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/Syne/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  /* Colour palette */
+  --color-brand: #b31761;
+  --color-brand-bright: #ff006e;
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+
+  /* Font stacks — family names must match the @font-face declarations above. */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Roboto Mono', ui-monospace, monospace;
+}
+
+/* ─── Element defaults ───────────────────────────────────────────────────── */
+/* Baked-in element styling so route markup can stay class-free. Add sizes,
+ * weights, and colours here rather than sprinkling utilities in TSX.        */
+@layer base {
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    color-scheme: dark;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  } /* text-4xl */
+  h2 {
+    font-size: 1.875rem;
+  } /* text-3xl */
+  h3 {
+    font-size: 1.5rem;
+  } /* text-2xl */
+  h4 {
+    font-size: 1.25rem;
+  } /* text-xl */
+  h5 {
+    font-size: 1.125rem;
+  } /* text-lg */
+  h6 {
+    font-size: 1rem;
+  } /* text-base */
+
+  p {
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus-visible {
+    text-decoration: underline;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: inherit;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-bright);
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Reusable component classes ─────────────────────────────────────────── */
+/* Named patterns used across routes. Route markup should reference these by
+ * name (e.g. class="page-shell") rather than repeating utility bundles.    */
+@layer components {
+  /* Full-viewport centred hero layout — the default page frame. */
+  .page-shell {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem; /* gap-12 */
+    padding: 2rem; /* p-8 */
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  /* Tighter variant for utility pages (errors, 404, etc.). */
+  .page-shell--tight {
+    gap: 1.5rem; /* gap-6 */
+  }
+
+  /* Oversized wordmark used for the branchLeft hero on marketing routes. */
+  .hero-wordmark {
+    font-family: var(--font-wordmark);
+    font-size: 3.75rem; /* text-6xl */
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  /* Small brand-coloured supporting copy (taglines, meta lines). */
+  .tagline {
+    color: var(--color-brand);
+    font-size: 0.875rem; /* text-sm */
+    letter-spacing: 0.02em;
+  }
+
+  /* Fixed square used for the logo mark on marketing routes. */
+  .brand-mark {
+    width: 9rem; /* w-36 */
+    height: 9rem; /* h-36 */
+  }
+
+  /* Development-only stack trace block rendered by ErrorBoundary. */
+  .stack-trace {
+    width: 100%;
+    max-width: 42rem; /* max-w-2xl */
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.75rem; /* text-xs */
+    opacity: 0.5;
+  }
+}
