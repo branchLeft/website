@@ -1,16 +1,41 @@
 @import 'tailwindcss';
 
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
 @theme {
-  --font-sans:
-    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+  --color-brand: #b31761;
+  --color-brand-bright: #ff006e;
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Roboto Mono', ui-monospace, monospace;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
+/* ─── Base element styles ────────────────────────────────────────────────── */
+/* Defined here (not app.scss) so Tailwind sees var() refs and emits tokens. */
+@layer base {
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
     color-scheme: dark;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: inherit;
   }
 }
