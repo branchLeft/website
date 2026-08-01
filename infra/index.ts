@@ -3,6 +3,7 @@ import { domainMappingDnsRecords } from './domainMapping';
 import { repository } from './artifactRegistry';
 import { workloadIdentityProvider, deployerServiceAccountEmail } from './workloadIdentity';
 import { region, artifactRegistryRepoId, projectId } from './config';
+import './kms';
 
 export const cloudRunUrl = service.uri;
 export const dnsRecordsToAddAtIonos = domainMappingDnsRecords;
