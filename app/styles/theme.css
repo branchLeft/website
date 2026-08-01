@@ -15,10 +15,11 @@
  *   fonts.css              → @font-face declarations
  *   base.css               → @layer base element defaults
  *   primitives.css         → @layer components cross-page primitives
- *   @branchleft/components/css → bl-values-cloud structural CSS (unlayered
- *                             on the package side, pulled into an explicit
- *                             `bl-components` layer here — see below — so
- *                             every local override in this file wins)
+ *   @branchleft/components/css → bl-values-cloud structural CSS, pulled into
+ *                             a `bl-components` layer here so it stays low
+ *                             priority (see components/values-cloud.css for
+ *                             why its overrides are deliberately unlayered
+ *                             rather than relying on layer order to win)
  *   components/site-nav    → primary sticky navigation
  *   components/page-transition → layout for bl-page-transition (from @branchleft/components)
  *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
@@ -47,9 +48,9 @@
 @import './fonts.css';
 @import './base.css';
 @import './primitives.css';
-/* @branchleft/components' structural CSS (currently just ValuesCloud) —
- * layered so every local `@layer components` rule below naturally overrides
- * it, since CSS layers declared later win regardless of selector specificity. */
+/* @branchleft/components' structural CSS (currently just ValuesCloud) — kept
+ * in its own low-priority layer so it can't win against unlayered local CSS
+ * regardless of import order (see components/values-cloud.css). */
 @import '@branchleft/components/css' layer(bl-components);
 @import './components/site-nav.css';
 @import './components/page-transition.css';
