@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
+import { SocialLinksItems } from './SocialLinksItems';
 
 export function Footer(): React.JSX.Element {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === '/';
+
   return (
     <footer className="site-footer" aria-label="Site footer">
       <div className="site-footer__inner">
@@ -19,6 +23,13 @@ export function Footer(): React.JSX.Element {
               Terms
             </Link>
           </li>
+          {/* Homepage already shows these icons in the hero — omit here to avoid redundancy. */}
+          {!isHomePage ? (
+            <SocialLinksItems
+              linkClassName="site-footer__social-link"
+              iconClassName="site-footer__social-icon"
+            />
+          ) : null}
         </ul>
       </div>
     </footer>

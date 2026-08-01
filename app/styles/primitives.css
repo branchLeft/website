@@ -97,6 +97,21 @@
     gap: 0.625rem;
   }
 
+  /* Rotating disclosure indicator shared by any <details>'s chevron icon
+   * (site-nav dropdown, article accordions, …). An SVG icon — unlike a
+   * unicode glyph such as ▾ — is drawn centred within its own viewBox, so
+   * rotating it 180deg via `transform` pivots cleanly around its visual
+   * midpoint instead of the lopsided box a text glyph sits in. Colour and
+   * size stay with each consumer's own class. */
+  .chevron-icon {
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] > summary .chevron-icon {
+    transform: rotate(180deg);
+  }
+
   /* Development-only stack trace block rendered by ErrorBoundary. */
   .stack-trace {
     @apply w-full max-w-2xl p-4 text-xs;

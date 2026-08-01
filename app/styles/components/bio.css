@@ -33,12 +33,16 @@
 
   .bio__linkedin {
     @apply shrink-0;
-    opacity: 0.6;
+    color: var(--colour-fg-muted);
     transition: opacity 0.2s ease;
   }
 
   .bio__linkedin:hover {
-    opacity: 1;
+    color: var(--color-brand-bright);
+  }
+
+  .bio__linkedin-icon {
+    @apply w-7 h-7;
   }
 
   .bio__pronouns {

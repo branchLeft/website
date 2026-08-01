@@ -20,4 +20,27 @@
       color: #00aa00;
     }
   }
+
+  /* Social icon row beneath the hero's "learn more" link. Repeated in the
+   * footer (see .site-footer__social-link) on every route except this one,
+   * to avoid showing the same icons twice on the homepage. */
+  .home-socials {
+    @apply flex items-center gap-6 mt-4;
+    list-style: none;
+    padding: 0;
+  }
+
+  .home-socials__link {
+    @apply flex items-center;
+    color: var(--color-fg);
+  }
+
+  .home-socials__link:hover,
+  .home-socials__link:focus-visible {
+    color: var(--color-brand-bright);
+  }
+
+  .home-socials__icon {
+    @apply w-6 h-6;
+  }
 }
