@@ -7,6 +7,7 @@ const requiredServices = [
   'iam.googleapis.com',
   'iamcredentials.googleapis.com',
   'cloudresourcemanager.googleapis.com',
+  'cloudkms.googleapis.com',
 ];
 
 export const enabledApis = requiredServices.map(
