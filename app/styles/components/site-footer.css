@@ -12,8 +12,14 @@
     @apply flex flex-col items-start gap-3 max-w-6xl mx-auto px-6 py-3;
   }
 
+  /* Neither child may shrink below its natural width — otherwise, right at
+   * the row breakpoint where the two barely don't fit side by side, flexbox
+   * squeezes each individually (wrapping the copy text mid-sentence and
+   * dropping a lone icon) instead of moving the whole link list down as a
+   * unit. flex-wrap on the row below makes that the fallback instead. */
   .site-footer__copy {
     @apply text-[10px];
+    flex-shrink: 0;
     color: #959595; /* WCAG-AAA minimum on black — 7:1 contrast */
   }
 
@@ -23,6 +29,7 @@
      * the inherited body font-size and the smaller link text sits off-centre
      * within it. */
     @apply flex flex-wrap items-center gap-6 text-[10px];
+    flex-shrink: 0;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -60,6 +67,7 @@
   @media (min-width: 640px) {
     .site-footer__inner {
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
     }
