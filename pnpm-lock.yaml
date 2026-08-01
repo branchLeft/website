@@ -8,8 +8,8 @@ importers:
   .:
     dependencies:
       '@branchleft/components':
-        specifier: 0.0.4
-        version: 0.0.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 0.1.0
+        version: 0.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@react-router/node':
         specifier: ^8
         version: 8.3.0(react-router@8.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(typescript@5.9.3)
@@ -370,11 +370,11 @@ packages:
       }
     engines: { node: '>=18' }
 
-  '@branchleft/components@0.0.4':
+  '@branchleft/components@0.1.0':
     resolution:
       {
-        integrity: sha512-GOm0wt7nj5RkIzZ3bSNDB2eQ1RFwOxnuSXCfkEcGQthSX6jehEex1Kp+BWd02h9nYIvSTeluNRecr+gvIPlwOA==,
-        tarball: https://npm.pkg.github.com/download/@branchleft/components/0.0.4/958fe2786a77c6a5d83f28691ff23ddfcf5867e5,
+        integrity: sha512-ZgEVshIOFgyqnXsyHH7HWumFywgfUc+JnG+g3v3Wuqo9Q+Z8e9sJ1AniDODsl04OyWWBvvOm+gTOimH1+KBrXQ==,
+        tarball: https://npm.pkg.github.com/download/@branchleft/components/0.1.0/c005f6388c408925803904b64bd88f310b43790d,
       }
     peerDependencies:
       react: ^18.2.0 || ^19.0.0
@@ -4538,10 +4538,14 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@branchleft/components@0.0.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@branchleft/components@0.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
+      framer-motion: 12.42.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      lucide-react: 1.27.0(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
 
   '@csstools/color-helpers@6.1.0': {}
 

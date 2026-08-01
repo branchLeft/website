@@ -1,0 +1,11 @@
+/* ─── Page transition ────────────────────────────────────────────────────── */
+/* @branchleft/components' PageTransition ships no CSS beyond the
+ * bl-page-transition class hook — supply the flex-fill layout so it grows to
+ * push .site-footer to the bottom of .app-layout, same as before extraction. */
+@layer components {
+  .bl-page-transition {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}

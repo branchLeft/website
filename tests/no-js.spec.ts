@@ -18,7 +18,7 @@ test.describe('sitewide content visibility', () => {
       // PageTransition SSRs opacity:0/translateY(10px) as its framer-motion
       // `initial` state — toBeVisible() alone would miss this (it ignores
       // opacity), so assert the computed style directly.
-      const pageTransition = page.locator('.page-transition');
+      const pageTransition = page.locator('.bl-page-transition');
       await expect(pageTransition).toHaveCSS('opacity', '1');
       await expect(pageTransition).toHaveCSS('transform', 'none');
 
@@ -90,15 +90,15 @@ test.describe('Values cloud (About page)', () => {
   test('ring is hidden and all 7 value descriptions are visible', async ({ page }) => {
     await page.goto('/about');
 
-    await expect(page.locator('.values-cloud__stage')).not.toBeVisible();
+    await expect(page.locator('.bl-values-cloud__stage')).not.toBeVisible();
 
-    const panels = page.locator('.values-cloud__accordion-panel-inner');
+    const panels = page.locator('.bl-values-cloud__accordion-panel-inner');
     await expect(panels).toHaveCount(7);
     const count = await panels.count();
     for (let i = 0; i < count; i++) {
       const panel = panels.nth(i);
       await expect(panel).toHaveCSS('opacity', '1');
-      await expect(panel.locator('.values-cloud__accordion-body')).not.toHaveText('');
+      await expect(panel.locator('.bl-values-cloud__accordion-body')).not.toHaveText('');
     }
   });
 });
@@ -123,10 +123,10 @@ test.describe('contact form', () => {
 test.describe('SectionNav (About page)', () => {
   test('anchor links navigate via native fragment navigation', async ({ page }) => {
     await page.goto('/about');
-    // Scoped to .section-nav — SectionHeading also renders a same-named
+    // Scoped to .bl-section-nav — SectionHeading also renders a same-named
     // "#values" permalink on the heading itself, which would otherwise
     // collide with this locator.
-    await page.locator('.section-nav').getByRole('link', { name: 'Values' }).click();
+    await page.locator('.bl-section-nav').getByRole('link', { name: 'Values' }).click();
     await expect(page).toHaveURL(/#values$/);
   });
 });

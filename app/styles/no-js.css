@@ -12,10 +12,11 @@
  * never runs in the first place — see the site-nav.css precedent this
  * pattern is based on. */
 @layer components {
-  /* PageTransition (root.tsx) SSRs `opacity:0; transform:translateY(10px)`
-   * as its framer-motion `initial` state on every route — without JS this
-   * never animates to visible, making the entire site permanently blank. */
-  .page-transition {
+  /* PageTransition (root.tsx, from @branchleft/components) SSRs
+   * `opacity:0; transform:translateY(10px)` as its framer-motion `initial`
+   * state on every route — without JS this never animates to visible,
+   * making the entire site permanently blank. */
+  .bl-page-transition {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -35,28 +36,29 @@
     margin-bottom: 3rem;
   }
 
-  /* Values cloud (About page): the orbiting ring is entirely click-to-reveal
-   * with no native fallback, and the accordion (already the small-mobile
-   * fallback markup) is collapsed by default. Drop the ring and force the
-   * accordion fully open so all 7 value descriptions are readable. */
-  .values-cloud__stage {
+  /* Values cloud (About page, from @branchleft/components): the orbiting
+   * ring is entirely click-to-reveal with no native fallback, and the
+   * accordion (already the small-mobile fallback markup) is collapsed by
+   * default. Drop the ring and force the accordion fully open so all 7
+   * value descriptions are readable. */
+  .bl-values-cloud__stage {
     display: none !important;
   }
 
-  .values-cloud__accordion {
+  .bl-values-cloud__accordion {
     display: flex !important;
   }
 
-  .values-cloud__accordion-panel {
+  .bl-values-cloud__accordion-panel {
     grid-template-rows: 1fr !important;
   }
 
-  .values-cloud__accordion-panel-inner {
+  .bl-values-cloud__accordion-panel-inner {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  .values-cloud__accordion-chevron {
+  .bl-values-cloud__accordion-chevron {
     display: none !important;
   }
 }

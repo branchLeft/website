@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { useLocation } from 'react-router';
 import { TrendingUp, Leaf, Brain, Heart, Code, Activity, AlertCircle } from 'lucide-react';
-import { SectionHeading } from '@branchleft/components';
-import { SectionNav, type Section } from '../components/SectionNav';
+import {
+  SectionHeading,
+  SectionNav,
+  ValuesCloud,
+  type Section,
+  type Value,
+} from '@branchleft/components';
 import { SolutionsShowcase } from '../components/SolutionsShowcase';
-import { ValuesCloud, type Value } from '../components/ValuesCloud';
 
 export function meta() {
   return [{ title: 'About — branchLeft' }, { name: 'description', content: 'About branchLeft' }];

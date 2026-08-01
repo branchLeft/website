@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
-import { usePrefersReducedMotion } from '../lib/usePrefersReducedMotion';
+import { usePrefersReducedMotion } from '@branchleft/components';
 import { useHasMounted } from '../lib/useHasMounted';
 
 type Solution = {
