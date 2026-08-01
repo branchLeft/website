@@ -182,5 +182,3 @@ jobs:
           pulumi stack select production
           pulumi config set imageTag ${{ github.sha }}
           pulumi up --yes
-        env:
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}

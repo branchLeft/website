@@ -4,7 +4,8 @@ config:
   branchleft-website-infra:githubRepo: branchLeft/website
   branchleft-website-infra:imageTag: bootstrap-amd64-v2
   branchleft-website-infra:gmailUser:
-    secure: v1:o7fRJGa7eGtoK9Fd:DD5V4GwYRCGwyc4ijdcsgOZ5uVlK6WlxuClHmWM4uZMGI6h4
+    secure: v1:MgpyLJ7Kt2YbVUvP:YZLG8iraWZq0DBMvNICISlEhZnupkgM1/3H1ahjki0QlAGrN
   branchleft-website-infra:gmailAppPassword:
-    secure: v1:CIeCpY/D57ApQS5G:pTORAQsZrSS9NbET7VYDam1J0edJ8cextACKFiiWVPU=
-encryptionsalt: v1:pWq3NXfgVsk=:v1:1RlYkvIYq7gOFdig:oEB7P1vsVpw73pb2bt+c96J0oR5kow==
+    secure: v1:fcT5y3+eC4Ins8J1:gRKMFKFx3BKwyWZ7QCeC4vX6X4rzfZqXV9P4XZ2fiRI=
+secretsprovider: gcpkms://projects/branchleft-prod/locations/europe-west1/keyRings/pulumi/cryptoKeys/pulumi-secrets
+encryptedkey: CiQAefexUiGtT/EVJf7moGIQITcVH1XG6Y+z0AK38B9KrIUlIE0SSQBxixxQ2JkM9W0Bla0e6wCJNRkN3NmeO0Z4WIiWcqaVUqsZDygjdfhy83uS++Vhx2BAzHCg3pK0J/b0TChp6jSNh8gXM6xspTM=

@@ -91,3 +91,42 @@ gcloud storage buckets add-iam-policy-binding gs://branchleft-pulumi-state \
 it via `pulumi up` — the same bootstrap problem applies to any future
 recreation of the SA or bucket. If the deployer SA is ever recreated, redo
 the `gcloud` grant above manually before the next deploy.
+
+## Pulumi stack secrets are encrypted with a Cloud KMS key — bootstrap it via `gcloud`, not Pulumi
+
+**Context:** the `production` stack's secret config values (`gmailUser`,
+`gmailAppPassword`) use a `gcpkms://` secrets provider instead of a shared
+passphrase, so decrypt access is a normal, revocable IAM grant rather than a
+single `PULUMI_CONFIG_PASSPHRASE` GitHub secret.
+
+**Same chicken-and-egg shape as the two issues above:** Pulumi cannot grant
+itself access to the key it needs in order to decrypt the stack config it
+would use to run `pulumi up` in the first place. So the keyring
+(`pulumi`), key (`pulumi-secrets`, location `europe-west1`), and the two
+`roles/cloudkms.cryptoKeyEncrypterDecrypter` IAM bindings (for
+`github-actions-deployer@branchleft-prod.iam.gserviceaccount.com` and
+`rob@branchleft.co.uk`) were created manually via `gcloud`, then adopted
+into the Pulumi program (`infra/kms.ts`) with `pulumi import` afterward —
+never `pulumi up` for the initial creation.
+
+**If the keyring/key is ever lost or needs recreating:**
+
+```bash
+gcloud services enable cloudkms.googleapis.com --project=branchleft-prod
+gcloud kms keyrings create pulumi --location=europe-west1 --project=branchleft-prod
+gcloud kms keys create pulumi-secrets --keyring=pulumi --location=europe-west1 \
+  --purpose=encryption --project=branchleft-prod
+
+gcloud kms keys add-iam-policy-binding pulumi-secrets \
+  --keyring=pulumi --location=europe-west1 --project=branchleft-prod \
+  --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
+  --role="roles/cloudkms.cryptoKeyEncrypterDecrypter"
+gcloud kms keys add-iam-policy-binding pulumi-secrets \
+  --keyring=pulumi --location=europe-west1 --project=branchleft-prod \
+  --member="user:rob@branchleft.co.uk" \
+  --role="roles/cloudkms.cryptoKeyEncrypterDecrypter"
+```
+
+Note Cloud KMS key rings can never be deleted, and keys are only ever
+disabled, not destroyed — `pulumiSecretsKey` in `infra/kms.ts` is marked
+`protect: true` for this reason.
