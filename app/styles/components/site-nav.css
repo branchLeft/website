@@ -74,8 +74,17 @@
      element is desktop-only for the mobile toggle — see
      .site-nav__links--desktop below for the always-visible desktop copy. */
   @media (max-width: 767px) {
+    .site-nav__toggle {
+      width: 100%;
+    }
+
     .site-nav__mobile-details[open] {
       flex-basis: 100%;
+      padding-block: 0.75rem;
+    }
+
+    .site-nav__mobile-details[open] .site-nav__links {
+      padding-top: 0.75rem;
     }
   }
 
@@ -137,12 +146,7 @@
   }
 
   .site-nav__chevron {
-    @apply text-[10px];
-    transition: transform 0.15s ease;
-  }
-
-  .site-nav__details[open] .site-nav__chevron {
-    transform: rotate(180deg);
+    @apply text-lg;
   }
 
   .site-nav__submenu {

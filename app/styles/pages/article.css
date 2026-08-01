@@ -20,16 +20,211 @@
   }
 
   .article-page__feature-group {
+    border: 1px solid var(--color-hairline);
+    padding: 0.875rem 1rem;
+  }
+
+  .article-page__feature-group ul {
+    padding-top: 0.75rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
 
-    h3 {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--colour-fg-muted);
+  .article-page__feature-group[data-accent='design'] {
+    --feature-accent: var(--color-brand-bright);
+  }
+
+  .article-page__feature-group[data-accent='quality'] {
+    --feature-accent: var(--color-value-society);
+  }
+
+  .article-page__feature-group[data-accent='hosting'] {
+    --feature-accent: var(--color-value-environment);
+  }
+
+  .article-page__feature-group[data-accent='ownership'] {
+    --feature-accent: var(--color-value-opensource);
+  }
+
+  .article-page__feature-group[data-accent='addons'] {
+    --feature-accent: var(--color-value-agility);
+  }
+
+  .article-page__feature-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .article-page__feature-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .article-page__feature-summary-label {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .article-page__feature-icon {
+    @apply w-4 h-4;
+    color: var(--feature-accent);
+    flex-shrink: 0;
+  }
+
+  .article-page__feature-summary h3 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--feature-accent);
+    padding-top: 0;
+  }
+
+  .article-page__feature-chevron {
+    @apply text-2xl;
+    color: var(--feature-accent);
+  }
+
+  /* Fade+drop reveal for the feature groups above, matching the accordion
+   * treatment used by the values cloud (see ValuesCloud.css). The native
+   * <details>/<summary> element hides non-summary children via a
+   * UA-stylesheet `display: none` rule when closed; author-origin rules
+   * always beat UA-origin rules regardless of specificity, so forcing
+   * `display: grid` here overrides that without touching the element's
+   * open/closed accessibility semantics (still driven by the `open`
+   * attribute, not by computed display). The grid-rows 0fr/1fr collapse
+   * animates height without a JS-measured pixel value; the inner element
+   * carries the actual opacity/transform fade+drop on its own transition
+   * so the two effects run concurrently rather than fighting over one
+   * `transition` declaration. */
+  .article-page__feature-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+  }
+
+  details[open] > .article-page__feature-panel {
+    grid-template-rows: 1fr;
+  }
+
+  .article-page__feature-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+  }
+
+  details[open] > .article-page__feature-panel .article-page__feature-panel-inner {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .article-page__feature-panel,
+    .article-page__feature-panel-inner {
+      transition: none;
+    }
+  }
+
+  /* One continuous rail drawn once behind the whole list, with the nodes
+   * painted on top of it — instead of stitching together a separate
+   * segment per gap (which kept landing a fraction off whatever the node
+   * size/gap/row-height happened to be). The first and last nodes are
+   * pinned flush to the track's own edges (see the align-self overrides
+   * below), so the rail only ever needs a single fixed inset of half a
+   * node on each end — no per-column arithmetic, no drift. */
+  .article-page__process {
+    --process-node-size: 2rem;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .article-page__process::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    background: var(--color-hairline);
+    left: calc(var(--process-node-size) / 2);
+    top: calc(var(--process-node-size) / 2);
+    bottom: calc(var(--process-node-size) / 2);
+    width: 1px;
+  }
+
+  .article-page__process-step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Flush the first/last node to the track's own start/end edge on mobile
+   * (top/bottom of the column). Not needed on desktop — the column layout
+   * with align-items: flex-start naturally positions them correctly. */
+  .article-page__process-step:first-child .article-page__process-index {
+    align-self: flex-start;
+  }
+
+  .article-page__process-step:last-child .article-page__process-index {
+    align-self: flex-end;
+  }
+
+  .article-page__process-index {
+    flex-shrink: 0;
+    width: var(--process-node-size);
+    height: var(--process-node-size);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid var(--color-brand);
+    color: var(--color-brand-bright);
+    background: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .article-page__process {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .article-page__process::before {
+      left: calc(var(--process-node-size) / 2);
+      right: calc(var(--process-node-size) / 2);
+      top: calc(var(--process-node-size) / 2);
+      bottom: auto;
+      width: auto;
+      height: 1px;
+    }
+
+    .article-page__process-step {
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding-block: 0;
+    }
+
+    .article-page__process-step:first-child .article-page__process-index,
+    .article-page__process-step:last-child .article-page__process-index {
+      align-self: auto;
     }
   }
 
@@ -46,23 +241,5 @@
     @apply text-lg;
     font-family: var(--font-mono);
     font-weight: 400;
-  }
-
-  .article-page__comparison {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-
-    @media (min-width: 640px) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .article-page__comparison-column h3 {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--colour-fg-muted);
   }
 }

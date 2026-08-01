@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
+import { SectionHeading } from '@branchleft/components';
 
 export function meta() {
   return [
@@ -20,9 +21,11 @@ export default function LocalNews(): React.JSX.Element {
         </span>
         <span>Back</span>
       </Link>
-      <h1>Local News &amp; Independent Media</h1>
+      <SectionHeading as="h1" anchor="local-news">
+        Local News & Independent Media
+      </SectionHeading>
 
-      <section className="article-page__section">
+      <section className="article-page__section" aria-labelledby="local-news">
         <p>
           Local news reporting in the public interest is more important than ever. Not too long ago,
           local newspapers and radio stations were the lifeblood of communities, providing residents
@@ -40,8 +43,10 @@ export default function LocalNews(): React.JSX.Element {
         </p>
       </section>
 
-      <section className="article-page__section">
-        <h2>...but we're not the first to notice.</h2>
+      <section className="article-page__section" aria-labelledby="not-first-to-notice">
+        <SectionHeading as="h2" anchor="not-first-to-notice">
+          ...but we&rsquo;re not the first to notice.
+        </SectionHeading>
         <p>
           There's no point in reiterating the brilliant vision that the Public Interest News
           Foundation (PINF) are already acting on. Learn more about their work at the following
@@ -59,8 +64,10 @@ export default function LocalNews(): React.JSX.Element {
         </ul>
       </section>
 
-      <section className="article-page__section">
-        <h2>What We're Building</h2>
+      <section className="article-page__section" aria-labelledby="what-were-building">
+        <SectionHeading as="h2" anchor="what-were-building">
+          What We&rsquo;re Building
+        </SectionHeading>
         <p>
           <span className="logo-font">branchLeft</span> is building relationships with the PINF and
           its members to provide a platform and ecosystem tailored to the needs of public interest
@@ -68,8 +75,10 @@ export default function LocalNews(): React.JSX.Element {
           <a href="https://ghost.org/">Ghost</a>, we're developing the technical infrastructure
           enabling:
         </p>
-        <div className="article-page__feature-group">
-          <h3>Publishing Infrastructure</h3>
+        <div className="article-page__feature-group" aria-labelledby="publishing-infrastructure">
+          <SectionHeading as="h3" anchor="publishing-infrastructure">
+            Publishing Infrastructure
+          </SectionHeading>
           <ul>
             <li>ethical and affordable hosting and CMS</li>
             <li>quick onboarding and migration</li>
@@ -77,16 +86,20 @@ export default function LocalNews(): React.JSX.Element {
             <li>cost-effective customisation of theme, branding, and site functionality</li>
           </ul>
         </div>
-        <div className="article-page__feature-group">
-          <h3>Revenue</h3>
+        <div className="article-page__feature-group" aria-labelledby="revenue">
+          <SectionHeading as="h3" anchor="revenue">
+            Revenue
+          </SectionHeading>
           <ul>
             <li>paid subscriptions/memberships</li>
             <li>one-time donations/tips</li>
             <li>non-intrusive and ethical advertising, relevant to local audiences</li>
           </ul>
         </div>
-        <div className="article-page__feature-group">
-          <h3>Growing Your Audience</h3>
+        <div className="article-page__feature-group" aria-labelledby="growing-your-audience">
+          <SectionHeading as="h3" anchor="growing-your-audience">
+            Growing Your Audience
+          </SectionHeading>
           <ul>
             <li>direct community engagement</li>
             <li>social media integrations and calls to action</li>
@@ -96,8 +109,10 @@ export default function LocalNews(): React.JSX.Element {
         </div>
       </section>
 
-      <section className="article-page__section">
-        <h2>Our Goal</h2>
+      <section className="article-page__section" aria-labelledby="our-goal">
+        <SectionHeading as="h2" anchor="our-goal">
+          Our Goal
+        </SectionHeading>
         <p>
           We're building the tools needed to catalyse the revival of local news in the public
           interest in the UK. Because we're not seeking profit, when we build reusable and scalable
@@ -106,8 +121,10 @@ export default function LocalNews(): React.JSX.Element {
         </p>
       </section>
 
-      <section className="article-page__section">
-        <h2>Work With Us</h2>
+      <section className="article-page__section" aria-labelledby="work-with-us">
+        <SectionHeading as="h2" anchor="work-with-us">
+          Work With Us
+        </SectionHeading>
         <div className="article-page__callout">
           <p className="article-page__callout-label">New or growing outlet?</p>
           <p>

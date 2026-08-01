@@ -57,3 +57,37 @@ the next `pulumi preview`/`up` — no import needed.
   Domain Mapping being a GCP "preview" feature with no SLA — the alternative
   (external HTTPS Load Balancer + Certificate Manager) doesn't have this
   particular problem, at the cost of a fixed monthly forwarding-rule charge.
+
+## `github-actions-deployer` SA needs manual IAM on the Pulumi state bucket
+
+**Symptom:** `pulumi login gs://branchleft-pulumi-state` fails in the `deploy`
+CI job with:
+
+```
+error: problem logging in: error listing stacks: could not list bucket:
+blob (code=NotFound): googleapi: Error 403:
+github-actions-deployer@branchleft-prod.iam.gserviceaccount.com does not
+have storage.objects.list access to the Google Cloud Storage bucket ...
+```
+
+**Root cause:** chicken-and-egg, same shape as the Domain Mapping issue
+above. `serviceAccounts.ts` grants the deployer SA `artifactregistry.writer`,
+`run.developer`, and `iam.serviceAccountUser` — all via Pulumi, i.e. things
+Pulumi can only grant _after_ it has already authenticated and read state
+from this bucket. It cannot also grant itself read/write access to the very
+bucket it needs to log in to, so the bucket's IAM was never covered by the
+Pulumi program.
+
+**Fix (already applied 2026-08-01):** granted manually via `gcloud`, not
+through Pulumi:
+
+```bash
+gcloud storage buckets add-iam-policy-binding gs://branchleft-pulumi-state \
+  --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
+  --role="roles/storage.objectAdmin"
+```
+
+**Do not** try to import this binding into the Pulumi program and reconcile
+it via `pulumi up` — the same bootstrap problem applies to any future
+recreation of the SA or bucket. If the deployer SA is ever recreated, redo
+the `gcloud` grant above manually before the next deploy.
