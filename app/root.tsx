@@ -11,8 +11,8 @@ import {
 import type { Route } from './+types/root';
 import './app.css';
 import noJsStylesHref from './styles/no-js.css?url';
+import { PageTransition } from '@branchleft/components';
 import { NavBar } from './components/NavBar';
-import { PageTransition } from './components/PageTransition';
 import { Footer } from './components/Footer';
 
 export const links: Route.LinksFunction = () => [

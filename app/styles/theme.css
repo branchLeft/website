@@ -15,13 +15,18 @@
  *   fonts.css              → @font-face declarations
  *   base.css               → @layer base element defaults
  *   primitives.css         → @layer components cross-page primitives
+ *   @branchleft/components/css → bl-values-cloud structural CSS (unlayered
+ *                             on the package side, pulled into an explicit
+ *                             `bl-components` layer here — see below — so
+ *                             every local override in this file wins)
  *   components/site-nav    → primary sticky navigation
- *   components/section-nav → in-page anchor navigation
+ *   components/page-transition → layout for bl-page-transition (from @branchleft/components)
+ *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
  *   components/section-heading → bl-section-heading (from @branchleft/components)
  *   components/bio         → people section entry card
  *   components/back-link   → back-link styling (article page returns)
  *   components/call-to-action → CTA link styling
- *   components/values-cloud    → orbiting icon cloud + mobile accordion (about page values)
+ *   components/values-cloud    → --bl-* token mapping + accent colours for bl-values-cloud (from @branchleft/components)
  *   components/solutions-showcase → tabbed solutions panel
  *   components/site-footer → site footer
  *   pages/home             → home route
@@ -42,7 +47,12 @@
 @import './fonts.css';
 @import './base.css';
 @import './primitives.css';
+/* @branchleft/components' structural CSS (currently just ValuesCloud) —
+ * layered so every local `@layer components` rule below naturally overrides
+ * it, since CSS layers declared later win regardless of selector specificity. */
+@import '@branchleft/components/css' layer(bl-components);
 @import './components/site-nav.css';
+@import './components/page-transition.css';
 @import './components/section-nav.css';
 @import './components/section-heading.css';
 @import './components/bio.css';
@@ -92,7 +102,7 @@
 
   /* Sticky nav offset — the height of the primary .site-nav row. Section
    * pages use this for scroll-margin-top and for stacking the secondary
-   * .section-nav directly beneath the primary nav. Keep in sync with the
+   * .bl-section-nav directly beneath the primary nav. Keep in sync with the
    * primary nav padding/line-height if either changes. */
   --nav-offset: 3.5rem;
 
