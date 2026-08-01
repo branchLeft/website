@@ -236,7 +236,7 @@ export default function Privacy(): React.JSX.Element {
         </p>
         <p>
           You can read more about your rights on the ICO&rsquo;s website at{' '}
-          <a href="https://ico.org.uk/for-the-public/" rel="noreferrer">
+          <a href="https://ico.org.uk/for-the-public/" target="_blank" rel="noopener noreferrer">
             ico.org.uk/for-the-public
           </a>
           .
@@ -264,7 +264,7 @@ export default function Privacy(): React.JSX.Element {
           <br />
           Helpline: 0303 123 1113
           <br />
-          <a href="https://ico.org.uk/make-a-complaint" rel="noreferrer">
+          <a href="https://ico.org.uk/make-a-complaint" target="_blank" rel="noopener noreferrer">
             ico.org.uk/make-a-complaint
           </a>
         </address>
