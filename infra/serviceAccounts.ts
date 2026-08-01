@@ -49,3 +49,14 @@ new gcp.serviceaccount.IAMMember('deployer-can-act-as-runtime-sa', {
   role: 'roles/iam.serviceAccountUser',
   member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
 });
+
+// Lets the deployer SA manage the gcp.projects.Service resources in
+// apis.ts. Granted via gcloud and then `pulumi import`ed — like the two
+// bindings above, CI can't create this itself (no project setIamPolicy),
+// so it must already exist in state before a deploy runs. See
+// KNOWN_ISSUES.md.
+new gcp.projects.IAMMember('deployer-service-usage-admin', {
+  project: projectId,
+  role: 'roles/serviceusage.serviceUsageAdmin',
+  member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
+});

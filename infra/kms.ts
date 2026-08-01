@@ -1,7 +1,5 @@
-import * as pulumi from '@pulumi/pulumi';
 import * as gcp from '@pulumi/gcp';
 import { region } from './config';
-import { githubActionsDeployerSa } from './serviceAccounts';
 
 // Bootstrapped manually via gcloud before this program could run (Pulumi
 // can't decrypt its own stack secrets to grant itself access to the key
@@ -25,14 +23,11 @@ export const pulumiSecretsKey = new gcp.kms.CryptoKey(
   { protect: true }
 );
 
-new gcp.kms.CryptoKeyIAMMember('pulumi-secrets-key-deployer-access', {
-  cryptoKeyId: pulumiSecretsKey.id,
-  role: 'roles/cloudkms.cryptoKeyEncrypterDecrypter',
-  member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
-});
-
-new gcp.kms.CryptoKeyIAMMember('pulumi-secrets-key-rob-access', {
-  cryptoKeyId: pulumiSecretsKey.id,
-  role: 'roles/cloudkms.cryptoKeyEncrypterDecrypter',
-  member: 'user:rob@branchleft.co.uk',
-});
+// NOTE: this key's IAM bindings (cryptoKeyEncrypterDecrypter for the
+// deployer SA and rob@branchleft.co.uk) are deliberately NOT managed here.
+// Managing them would require granting CI roles/cloudkms.admin, letting the
+// deploy pipeline rewrite who can decrypt the stack's own secrets — exactly
+// the control this key exists to provide. They're also a bootstrap
+// prerequisite: they must already exist for Pulumi to decrypt config and
+// run at all. Same reasoning as the state bucket IAM binding; both are
+// gcloud-managed and documented in KNOWN_ISSUES.md.
