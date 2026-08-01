@@ -1,10 +1,10 @@
-encryptionsalt: v1:QhGCoZIakRU=:v1:SC5InR/mWqgRJEcW:jRfE4mLNIthvt1ANLAVNbQhOmFwQjQ==
+encryptionsalt: v1:+llKDqAbBSU=:v1:EBPqbqnsRBDP0jvM:SQvJHLK8u899Xukg7sug+0dgTTKL4g==
 config:
   gcp:project: branchleft-prod
   branchleft-website-infra:region: europe-west1
   branchleft-website-infra:githubRepo: branchLeft/website
   branchleft-website-infra:gmailUser:
-    secure: v1:a/QlBg0n9MqK/crZ:vPLEzUSsF8/6bTItJgxljAYDi2gqPOYsYW6jePEfQuMjYdlj/Q==
+    secure: v1:wlt1hePHdVUBfbN1:8/samegUm/Ja0dDRMmwcpFHatrF79GeS0WVyrrbE2/vV49xOIg==
   branchleft-website-infra:gmailAppPassword:
-    secure: v1:9hSxcNU3nuZIxxi6:OTA9neWs2hWUYpUDqNQg700beWwKUm2Dy7Himl5iHkA=
+    secure: v1:YqMtH8VJyE9s0Ong:9EQhVXvukdC2TSpSPO4B2utJHJb6+I95sOc9hup8zIM=
   branchleft-website-infra:imageTag: bootstrap-amd64-v2
