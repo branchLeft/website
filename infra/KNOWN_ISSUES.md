@@ -130,3 +130,39 @@ gcloud kms keys add-iam-policy-binding pulumi-secrets \
 Note Cloud KMS key rings can never be deleted, and keys are only ever
 disabled, not destroyed — `pulumiSecretsKey` in `infra/kms.ts` is marked
 `protect: true` for this reason.
+
+## `github-actions-deployer` SA needs manual `serviceusage.serviceUsageAdmin` to manage `apis.ts`
+
+**Symptom:** CI's `pulumi up` fails creating a new `gcp:projects:Service` resource with:
+
+```
+error: 1 error occurred:
+  * Error when reading or editing Project Service : Request `List Project
+  Services <project>` returned error: ... 403 ... Permission denied to list
+  services for consumer container ... AUTH_PERMISSION_DENIED
+```
+
+**Root cause:** same bootstrap chicken-and-egg as the state bucket IAM and
+KMS key issues above. The original entries in `requiredServices`
+(`apis.ts`) were enabled the first time under `rob@branchleft.co.uk`'s
+`roles/owner` account during initial setup, so CI's `github-actions-deployer`
+SA — which only ever holds `artifactregistry.writer`, `run.developer`, and
+`iam.serviceAccountUser` — never had to exercise the `gcp:projects:Service`
+create/list path until a _new_ entry was added to `requiredServices`
+(`cloudkms.googleapis.com`, for the KMS migration above). It surfaced only
+then because it's the first API added to the list since CI became the sole
+identity running `pulumi up`.
+
+**Fix (already applied):** granted manually via `gcloud`, then declared in
+`serviceAccounts.ts` (`deployer-service-usage-admin`) so it's tracked and
+re-appliable going forward:
+
+```bash
+gcloud projects add-iam-policy-binding branchleft-prod \
+  --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
+  --role="roles/serviceusage.serviceUsageAdmin"
+```
+
+**How to apply:** if the deployer SA is ever recreated, redo this grant
+manually before the next `apis.ts` change — Pulumi still can't grant itself
+a permission it needs in order to read/manage its own dependency APIs.

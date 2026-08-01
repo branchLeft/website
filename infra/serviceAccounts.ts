@@ -49,3 +49,14 @@ new gcp.serviceaccount.IAMMember('deployer-can-act-as-runtime-sa', {
   role: 'roles/iam.serviceAccountUser',
   member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
 });
+
+// Lets the deployer SA manage the gcp.projects.Service resources in
+// apis.ts. Granted manually via gcloud first (bootstrap chicken-and-egg,
+// same shape as the KMS key and state bucket IAM — see KNOWN_ISSUES.md):
+// the deployer SA can't grant itself the permission it needs to even read
+// project API state before this binding exists.
+new gcp.projects.IAMMember('deployer-service-usage-admin', {
+  project: projectId,
+  role: 'roles/serviceusage.serviceUsageAdmin',
+  member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
+});
