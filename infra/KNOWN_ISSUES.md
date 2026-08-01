@@ -131,6 +131,23 @@ Note Cloud KMS key rings can never be deleted, and keys are only ever
 disabled, not destroyed — `pulumiSecretsKey` in `infra/kms.ts` is marked
 `protect: true` for this reason.
 
+**Do not manage this key's IAM bindings in Pulumi.** An attempt to declare
+them as `gcp.kms.CryptoKeyIAMMember` resources fails in CI with:
+
+```
+Error retrieving IAM policy for KMS CryptoKey "...": googleapi: Error 403:
+Permission 'cloudkms.cryptoKeys.getIamPolicy' denied on resource ...
+```
+
+`roles/cloudkms.cryptoKeyEncrypterDecrypter` grants _use_ of the key, not
+`get/setIamPolicy` — managing the bindings would require giving CI
+`roles/cloudkms.admin`. Don't. That would let the deploy pipeline rewrite
+who is allowed to decrypt the stack's own secrets, which is precisely the
+control this key was introduced to provide. The bindings are also a
+bootstrap prerequisite (they must exist before Pulumi can decrypt config and
+run at all), so managing them from inside the program is circular. Keep them
+in `gcloud`, exactly like the state bucket IAM binding above.
+
 ## `github-actions-deployer` SA needs manual `serviceusage.serviceUsageAdmin` to manage `apis.ts`
 
 **Symptom:** CI's `pulumi up` fails creating a new `gcp:projects:Service` resource with:
@@ -163,6 +180,16 @@ gcloud projects add-iam-policy-binding branchleft-prod \
   --role="roles/serviceusage.serviceUsageAdmin"
 ```
 
+It is declared in `serviceAccounts.ts` (`deployer-service-usage-admin`) for
+documentation, but was brought into state with `pulumi import` — **not** left
+for CI to create. The deployer SA has no `resourcemanager.projects.setIamPolicy`,
+so any project-level `IAMMember` that isn't already in state will 403 during a
+CI deploy. The two older project bindings (`artifactregistry.writer`,
+`run.developer`) only work because they were created under the owner account
+during initial setup.
+
 **How to apply:** if the deployer SA is ever recreated, redo this grant
 manually before the next `apis.ts` change — Pulumi still can't grant itself
-a permission it needs in order to read/manage its own dependency APIs.
+a permission it needs in order to read/manage its own dependency APIs. Any
+_new_ project-level IAM binding added to this program must likewise be
+granted via `gcloud` and then `pulumi import`ed locally, never applied by CI.
