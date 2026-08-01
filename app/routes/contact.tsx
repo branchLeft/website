@@ -61,7 +61,8 @@ export async function action({ request }: Route.ActionArgs): Promise<ActionResul
 
   try {
     await sendContactEmail({ category, email, message });
-  } catch {
+  } catch (error) {
+    console.error('Failed to send contact form email:', error);
     return {
       ok: false,
       error: (

@@ -25,9 +25,13 @@
    * footer (see .site-footer__social-link) on every route except this one,
    * to avoid showing the same icons twice on the homepage. */
   .home-socials {
-    @apply flex items-center gap-6 mt-4;
+    @apply flex flex-wrap items-center gap-6 mt-4;
     list-style: none;
     padding: 0;
+  }
+
+  .home-socials > li {
+    flex-shrink: 0;
   }
 
   .home-socials__link {
