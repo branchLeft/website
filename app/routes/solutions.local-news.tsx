@@ -54,10 +54,20 @@ export default function LocalNews(): React.JSX.Element {
         </p>
         <ul>
           <li>
-            <a href="https://www.publicinterestnews.org.uk/about/">About the PINF</a>
+            <a
+              href="https://www.publicinterestnews.org.uk/about/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About the PINF
+            </a>
           </li>
           <li>
-            <a href="https://map.publicinterestnews.org.uk/?ref=publicinterestnews.org.uk">
+            <a
+              href="https://map.publicinterestnews.org.uk/?ref=publicinterestnews.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Local News Desert Map
             </a>
           </li>
@@ -72,8 +82,10 @@ export default function LocalNews(): React.JSX.Element {
           <span className="logo-font">branchLeft</span> is building relationships with the PINF and
           its members to provide a platform and ecosystem tailored to the needs of public interest
           local news outlets in the UK. Initially built around{' '}
-          <a href="https://ghost.org/">Ghost</a>, we're developing the technical infrastructure
-          enabling:
+          <a href="https://ghost.org/" target="_blank" rel="noopener noreferrer">
+            Ghost
+          </a>
+          , we're developing the technical infrastructure enabling:
         </p>
         <div className="article-page__feature-group" aria-labelledby="publishing-infrastructure">
           <SectionHeading as="h3" anchor="publishing-infrastructure">
