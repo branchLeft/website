@@ -166,7 +166,7 @@ jobs:
           push: true
           tags: ${{ env.IMAGE }}
           secrets: |
-            node_auth_token=${{ secrets.GH_PACKAGES_TOKEN }}
+            node_auth_token=${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Pulumi CLI
         uses: pulumi/actions@v6
