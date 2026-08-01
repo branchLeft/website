@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SectionHeading } from '@branchleft/components';
 
 export function meta() {
   return [
@@ -21,16 +22,20 @@ export default function Terms(): React.JSX.Element {
       </header>
 
       <section aria-labelledby="who-we-are">
-        <h2 id="who-we-are">Who we are</h2>
+        <SectionHeading as="h2" anchor="who-we-are">
+          Who we are
+        </SectionHeading>
         <p>
-          This site is operated by BRANCHLEFT LTD, a company registered in England &amp; Wales
-          (company number 17355203), registered office 71-75 Shelton Street, Covent Garden, London,
-          WC2H 9JQ. Contact: <a href="mailto:contact@branchleft.co.uk">contact@branchleft.co.uk</a>.
+          This site is operated by BRANCHLEFT LTD, a company registered in England & Wales (company
+          number 17355203), registered office 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ.
+          Contact: <a href="mailto:contact@branchleft.co.uk">contact@branchleft.co.uk</a>.
         </p>
       </section>
 
       <section aria-labelledby="informational">
-        <h2 id="informational">Informational only</h2>
+        <SectionHeading as="h2" anchor="informational">
+          Informational only
+        </SectionHeading>
         <p>
           Everything on this website — including descriptions of services, case studies, opinions,
           and any technical or commercial commentary — is provided for general information only. It
@@ -39,7 +44,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="no-relationship">
-        <h2 id="no-relationship">No client relationship</h2>
+        <SectionHeading as="h2" anchor="no-relationship">
+          No client relationship
+        </SectionHeading>
         <p>
           Browsing this site, submitting the contact form, or exchanging emails with us does not
           create a contract, retainer, or client relationship. Any engagement with branchLeft begins
@@ -49,7 +56,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="ip">
-        <h2 id="ip">Intellectual property</h2>
+        <SectionHeading as="h2" anchor="ip">
+          Intellectual property
+        </SectionHeading>
         <p>
           All content on this website — text, code, layout, graphics, and the branchLeft name and
           logo — is owned by BRANCHLEFT LTD or its licensors and is protected by UK and
@@ -61,7 +70,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="acceptable-use">
-        <h2 id="acceptable-use">Acceptable use</h2>
+        <SectionHeading as="h2" anchor="acceptable-use">
+          Acceptable use
+        </SectionHeading>
         <p>You agree not to:</p>
         <ul>
           <li>use the site in any way that breaches applicable law;</li>
@@ -75,7 +86,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="third-party-links">
-        <h2 id="third-party-links">Third-party links</h2>
+        <SectionHeading as="h2" anchor="third-party-links">
+          Third-party links
+        </SectionHeading>
         <p>
           This site may link to third-party websites (for example, source repositories or published
           articles). Those sites are outside our control and we accept no responsibility for their
@@ -84,7 +97,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="as-is">
-        <h2 id="as-is">Provided &ldquo;as is&rdquo;</h2>
+        <SectionHeading as="h2" anchor="as-is">
+          Provided &ldquo;as is&rdquo;
+        </SectionHeading>
         <p>
           The website is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. To
           the fullest extent permitted by law we make no warranties, express or implied, that the
@@ -94,7 +109,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="liability">
-        <h2 id="liability">Limitation of liability</h2>
+        <SectionHeading as="h2" anchor="liability">
+          Limitation of liability
+        </SectionHeading>
         <p>
           Nothing in these terms limits or excludes our liability for (a) death or personal injury
           caused by our negligence, (b) fraud or fraudulent misrepresentation, or (c) any liability
@@ -120,14 +137,18 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="privacy">
-        <h2 id="privacy">Privacy</h2>
+        <SectionHeading as="h2" anchor="privacy">
+          Privacy
+        </SectionHeading>
         <p>
           Your use of the site is also governed by our <a href="/privacy">Privacy Notice</a>.
         </p>
       </section>
 
       <section aria-labelledby="changes">
-        <h2 id="changes">Changes to these terms</h2>
+        <SectionHeading as="h2" anchor="changes">
+          Changes to these terms
+        </SectionHeading>
         <p>
           We may update these terms from time to time. The current version and its effective date
           are shown above. Continued use of the site after a change constitutes acceptance of the
@@ -136,7 +157,9 @@ export default function Terms(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="governing-law">
-        <h2 id="governing-law">Governing law and jurisdiction</h2>
+        <SectionHeading as="h2" anchor="governing-law">
+          Governing law and jurisdiction
+        </SectionHeading>
         <p>
           These terms and any dispute arising out of or in connection with them are governed by the
           laws of England and Wales. The courts of England and Wales have exclusive jurisdiction,

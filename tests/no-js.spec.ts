@@ -103,6 +103,31 @@ test.describe('Values cloud (About page)', () => {
   });
 });
 
+test.describe('Affordable Websites feature accordion', () => {
+  test('the initially-open group is visible and the rest are reachable without JS', async ({
+    page,
+  }) => {
+    await page.goto('/solutions/affordable-websites');
+
+    // Server-rendered `open` attribute drives the CSS grid-rows/opacity
+    // state directly — no JS needed for the initially-open group to render
+    // expanded, or for a closed group's <summary> to reveal the rest.
+    const openPanel = page.locator(
+      'details[data-accent="design"] .article-page__feature-panel-inner'
+    );
+    await expect(openPanel).toHaveCSS('opacity', '1');
+    await expect(openPanel.locator('li').first()).toBeVisible();
+
+    const closedGroup = page.locator('details[data-accent="quality"]');
+    await expect(closedGroup).not.toHaveAttribute('open', '');
+    await closedGroup.locator('summary').click();
+    await expect(closedGroup).toHaveAttribute('open', '');
+    await expect(
+      closedGroup.locator('.article-page__feature-panel-inner li').first()
+    ).toBeVisible();
+  });
+});
+
 test.describe('contact form', () => {
   // Never submit — the form sends a real email via Gmail SMTP (see
   // tests/contact.spec.ts), and CI has no credentials configured.

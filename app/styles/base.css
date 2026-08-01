@@ -49,6 +49,10 @@
     @apply list-disc pl-6;
   }
 
+  ol {
+    @apply list-decimal pl-6;
+  }
+
   li {
     line-height: 1.6;
   }

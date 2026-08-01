@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router';
+import { ChevronDown } from 'lucide-react';
 import { Logo } from '@branchleft/components';
 
 type NavLinkItem = { to: string; label: string; end: boolean };
@@ -70,9 +71,7 @@ function NavDropdown({
           className={`site-nav__link site-nav__summary${isAnyChildActive ? ' site-nav__link--active' : ''}`}
         >
           {item.label}
-          <span className="site-nav__chevron" aria-hidden="true">
-            ▾
-          </span>
+          <ChevronDown size="1em" className="site-nav__chevron chevron-icon" aria-hidden="true" />
         </summary>
         <ul className="site-nav__submenu">
           {item.children.map((child) => (
@@ -153,10 +152,7 @@ export function NavBar(): React.JSX.Element {
             >
               ☰
             </span>
-            <span
-              className="pb-0.75 site-nav__toggle-icon site-nav__toggle-icon--open"
-              aria-hidden="true"
-            >
+            <span className="site-nav__toggle-icon site-nav__toggle-icon--open" aria-hidden="true">
               ✕
             </span>
             <span className="eyebrow site-nav__toggle-label">MENU</span>

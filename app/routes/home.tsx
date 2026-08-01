@@ -1,4 +1,5 @@
 import { Logo } from '@branchleft/components';
+import { SocialLinksItems } from '../components/SocialLinksItems';
 
 export function meta() {
   return [{ title: 'branchLeft' }, { name: 'description', content: 'branchLeft' }];
@@ -19,6 +20,9 @@ export default function Home() {
           →
         </span>
       </a>
+      <ul className="home-socials">
+        <SocialLinksItems linkClassName="home-socials__link" iconClassName="home-socials__icon" />
+      </ul>
     </main>
   );
 }

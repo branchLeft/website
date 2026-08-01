@@ -9,6 +9,7 @@ import {
   type Value,
 } from '@branchleft/components';
 import { SolutionsShowcase } from '../components/SolutionsShowcase';
+import { LinkedInIcon } from '../components/icons/LinkedInIcon';
 
 export function meta() {
   return [{ title: 'About — branchLeft' }, { name: 'description', content: 'About branchLeft' }];
@@ -86,9 +87,7 @@ export default function About() {
       <SectionNav sections={SECTIONS} ariaLabel="About sections" />
       <main className="long-form about-page">
         <SectionHeading as="h1" anchor="what-is-branchleft">
-          <h1>
-            What is <span className="logo-font">branchLeft</span>?
-          </h1>
+          What is <span className="logo-font">branchLeft</span>?
         </SectionHeading>
         <section className="about-page__section" aria-labelledby="what-is-branchleft">
           <p>
@@ -145,7 +144,7 @@ export default function About() {
                   rel="noopener noreferrer"
                   aria-label="LinkedIn profile"
                 >
-                  <img src="/icons/linkedin.svg" alt="" width={28} height={28} />
+                  <LinkedInIcon className="bio__linkedin-icon" />
                 </a>
               </div>
               <p className="bio__title">Director, Founder & Lead Engineer</p>

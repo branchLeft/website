@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SectionHeading } from '@branchleft/components';
 
 export function meta() {
   return [
@@ -18,11 +19,13 @@ export default function Privacy(): React.JSX.Element {
       </header>
 
       <section aria-labelledby="who-we-are">
-        <h2 id="who-we-are">Who we are</h2>
+        <SectionHeading as="h2" anchor="who-we-are">
+          Who we are
+        </SectionHeading>
         <p>
           BRANCHLEFT LTD (&ldquo;branchLeft&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a company
-          registered in England &amp; Wales (company number 17355203). Our registered office is
-          71-75 Shelton Street, Covent Garden, London, WC2H 9JQ.
+          registered in England & Wales (company number 17355203). Our registered office is 71-75
+          Shelton Street, Covent Garden, London, WC2H 9JQ.
         </p>
         <p>
           We are the data controller for the personal information described in this notice. We are
@@ -32,7 +35,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="contact">
-        <h2 id="contact">Contact</h2>
+        <SectionHeading as="h2" anchor="contact">
+          Contact
+        </SectionHeading>
         <p>
           For any question about this notice or your personal information, email{' '}
           <a href="mailto:contact@branchleft.co.uk">contact@branchleft.co.uk</a>.
@@ -40,13 +45,17 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="what-we-collect">
-        <h2 id="what-we-collect">What information we collect and why</h2>
+        <SectionHeading as="h2" anchor="what-we-collect">
+          What information we collect and why
+        </SectionHeading>
         <p>
           The website has one interactive feature: a contact form. We collect only the information
           you choose to submit through that form, together with a minimal amount of technical
           information necessary to deliver the site.
         </p>
-        <h3>Enquiries submitted through the contact form</h3>
+        <SectionHeading as="h3" anchor="enquiries-contact-form">
+          Enquiries submitted through the contact form
+        </SectionHeading>
         <ul>
           <li>Your name</li>
           <li>Your email address</li>
@@ -57,18 +66,24 @@ export default function Privacy(): React.JSX.Element {
           We use this information to read your enquiry, reply to you, and (if the conversation leads
           to work) to enter into and perform a contract with you.
         </p>
-        <h3>Delivering services to clients</h3>
+        <SectionHeading as="h3" anchor="delivering-services-to-clients">
+          Delivering services to clients
+        </SectionHeading>
         <p>
           Where an enquiry becomes an engagement, we hold ordinary business-contact information
           (name, work email, phone, correspondence, and records of meetings and decisions) for the
           duration of the engagement and afterwards as required to meet our legal obligations.
         </p>
-        <h3>Legal obligations</h3>
+        <SectionHeading as="h3" anchor="legal-obligations">
+          Legal obligations
+        </SectionHeading>
         <p>
           We keep records required by UK tax and company law (for example, invoices and contract
           records for HMRC).
         </p>
-        <h3>Technical information</h3>
+        <SectionHeading as="h3" anchor="technical-information">
+          Technical information
+        </SectionHeading>
         <p>
           Our host may automatically log basic request metadata (IP address, user-agent, timestamp)
           for security and abuse prevention. We do not use this data to identify you and we do not
@@ -82,7 +97,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="lawful-bases">
-        <h2 id="lawful-bases">Lawful bases</h2>
+        <SectionHeading as="h2" anchor="lawful-bases">
+          Lawful bases
+        </SectionHeading>
         <p>
           Under the UK GDPR we must have a &ldquo;lawful basis&rdquo; for collecting and using
           personal information. The bases we rely on are:
@@ -110,7 +127,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="sources">
-        <h2 id="sources">Where we get personal information from</h2>
+        <SectionHeading as="h2" anchor="sources">
+          Where we get personal information from
+        </SectionHeading>
         <ul>
           <li>Directly from you (via the contact form or subsequent correspondence).</li>
           <li>
@@ -121,7 +140,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="processors">
-        <h2 id="processors">Who we share it with</h2>
+        <SectionHeading as="h2" anchor="processors">
+          Who we share it with
+        </SectionHeading>
         <p>We do not sell personal information. We share it only with:</p>
         <ul>
           <li>
@@ -154,7 +175,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="retention">
-        <h2 id="retention">How long we keep information</h2>
+        <SectionHeading as="h2" anchor="retention">
+          How long we keep information
+        </SectionHeading>
         <table className="legal-page__table">
           <thead>
             <tr>
@@ -193,7 +216,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="rights">
-        <h2 id="rights">Your UK GDPR rights</h2>
+        <SectionHeading as="h2" anchor="rights">
+          Your UK GDPR rights
+        </SectionHeading>
         <p>You have the right to:</p>
         <ul>
           <li>Ask for a copy of the personal information we hold about you (right of access).</li>
@@ -219,7 +244,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="complaints">
-        <h2 id="complaints">How to complain</h2>
+        <SectionHeading as="h2" anchor="complaints">
+          How to complain
+        </SectionHeading>
         <p>
           If you have a concern about how we&rsquo;ve used your personal information, please contact
           us first at <a href="mailto:complaints@branchleft.co.uk">complaints@branchleft.co.uk</a>{' '}
@@ -244,7 +271,9 @@ export default function Privacy(): React.JSX.Element {
       </section>
 
       <section aria-labelledby="changes">
-        <h2 id="changes">Changes to this notice</h2>
+        <SectionHeading as="h2" anchor="changes">
+          Changes to this notice
+        </SectionHeading>
         <p>
           We will post any material change to this notice here, together with an updated effective
           date. Where a change materially affects how we use information you have already given us,

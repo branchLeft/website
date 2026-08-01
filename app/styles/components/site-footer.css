@@ -36,6 +36,20 @@
     text-decoration: none;
   }
 
+  .site-footer__social-link {
+    @apply flex items-center;
+    color: #959595; /* WCAG-AAA minimum on black — 7:1 contrast, matches .site-footer__link */
+  }
+
+  .site-footer__social-link:hover,
+  .site-footer__social-link:focus-visible {
+    color: var(--color-brand-bright);
+  }
+
+  .site-footer__social-icon {
+    @apply w-4 h-4;
+  }
+
   @media (min-width: 640px) {
     .site-footer__inner {
       flex-direction: row;
