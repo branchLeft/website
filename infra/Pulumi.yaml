@@ -1,0 +1,3 @@
+name: branchleft-website-infra
+runtime: nodejs
+description: GCP infrastructure for branchleft.co.uk (Cloud Run, Artifact Registry, Secret Manager, domain mapping, CI/CD identity federation)

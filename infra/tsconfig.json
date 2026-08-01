@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "outDir": "bin",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true
+  },
+  "files": [
+    "index.ts",
+    "apis.ts",
+    "artifactRegistry.ts",
+    "secrets.ts",
+    "serviceAccounts.ts",
+    "cloudRun.ts",
+    "domainMapping.ts",
+    "workloadIdentity.ts",
+    "config.ts"
+  ]
+}
