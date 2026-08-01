@@ -2,4 +2,4 @@ allowBuilds:
   '@parcel/watcher': false
   esbuild: false
 minimumReleaseAgeExclude:
-  - '@branchleft/components@0.1.0'
+  - '@branchleft/components@0.1.0 || 0.1.1'
