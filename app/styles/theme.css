@@ -15,11 +15,13 @@
  *   fonts.css              → @font-face declarations
  *   base.css               → @layer base element defaults
  *   primitives.css         → @layer components cross-page primitives
- *   @branchleft/components/css → bl-values-cloud structural CSS, pulled into
- *                             a `bl-components` layer here so it stays low
- *                             priority (see components/values-cloud.css for
- *                             why its overrides are deliberately unlayered
- *                             rather than relying on layer order to win)
+ *   @branchleft/components/css → structural CSS shipped by the package
+ *                             (bl-values-cloud layout, bl-section-heading's
+ *                             icon/text gap), pulled into a `bl-components`
+ *                             layer here so it stays low priority (see
+ *                             components/values-cloud.css for why its
+ *                             overrides are deliberately unlayered rather
+ *                             than relying on layer order to win)
  *   components/site-nav    → primary sticky navigation
  *   components/page-transition → layout for bl-page-transition (from @branchleft/components)
  *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
@@ -48,9 +50,9 @@
 @import './fonts.css';
 @import './base.css';
 @import './primitives.css';
-/* @branchleft/components' structural CSS (currently just ValuesCloud) — kept
- * in its own low-priority layer so it can't win against unlayered local CSS
- * regardless of import order (see components/values-cloud.css). */
+/* @branchleft/components' structural CSS (bl-values-cloud, bl-section-heading)
+ * — kept in its own low-priority layer so it can't win against unlayered
+ * local CSS regardless of import order (see components/values-cloud.css). */
 @import '@branchleft/components/css' layer(bl-components);
 @import './components/site-nav.css';
 @import './components/page-transition.css';
