@@ -5,3 +5,15 @@
 # React Router
 /.react-router/
 /build/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Vitest coverage
+/coverage/
+
+# Chrome DevTools workspace probe (auto-created by running `pnpm dev` and
+# opening DevTools locally; not project content)
+/public/.well-known/appspecific/com.chrome.devtools.json

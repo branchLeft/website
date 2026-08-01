@@ -1,0 +1,70 @@
+/* ─── Self-hosted fonts ──────────────────────────────────────────────────── */
+/* @font-face declarations. Family names must line up with the --font-* tokens
+ * declared in theme.css (@theme).                                           */
+
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/Syne/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* IBM Plex Sans — reading font for body copy. Static TTFs (Google Fonts
+ * distribution does not currently ship a variable file for Plex Sans).
+ * Only the weights we actually use are loaded to keep transfer light. */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

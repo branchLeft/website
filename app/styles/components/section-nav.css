@@ -1,0 +1,57 @@
+/* ─── Section nav ────────────────────────────────────────────────────────── */
+/* In-page anchor navigation (e.g. /about). Rendered by SectionNav.tsx and
+ * stacked directly beneath .site-nav via the --nav-offset token.           */
+@layer components {
+  .section-nav {
+    position: sticky;
+    top: var(--nav-offset);
+    z-index: 40;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-hairline);
+    /* Horizontal scroll fallback on very narrow screens */
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-nav__inner {
+    @apply flex items-center gap-6 max-w-6xl mx-auto px-6;
+    list-style: none;
+    margin-block: 0;
+    padding-block: 0.5rem;
+    scroll-snap-type: x proximity;
+  }
+
+  .section-nav__inner > li {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .section-nav__link {
+    @apply block text-[11px];
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+    text-decoration: none;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-block: 0.375rem;
+    border-bottom: 2px solid transparent;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .section-nav__link:hover,
+  .section-nav__link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+    border-bottom-color: color-mix(in srgb, var(--color-brand-bright) 40%, transparent);
+  }
+
+  .section-nav__link--active {
+    color: var(--color-brand-bright);
+    border-bottom-color: var(--color-brand-bright);
+  }
+}

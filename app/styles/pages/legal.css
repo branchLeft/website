@@ -1,0 +1,69 @@
+/* ─── Legal pages (privacy, terms) ──────────────────────────────────────── */
+/* Long-form document layout. Wider than a hero page-shell, narrower than
+ * a marketing section, with clear vertical rhythm for headings and lists. */
+@layer components {
+  .legal-page {
+    @apply flex flex-col gap-8;
+  }
+
+  .legal-page__meta {
+    @apply text-xs;
+    color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+  }
+
+  .legal-page section {
+    @apply flex flex-col gap-3;
+  }
+
+  .legal-page h2 {
+    @apply text-2xl mt-4;
+  }
+
+  .legal-page h3 {
+    @apply text-lg mt-2;
+  }
+
+  .legal-page ul,
+  .legal-page ol {
+    @apply flex flex-col gap-1 pl-6;
+    list-style: disc;
+  }
+
+  .legal-page ol {
+    list-style: decimal;
+  }
+
+  .legal-page li {
+    line-height: 1.55;
+  }
+
+  /* Placeholder tokens visible in the DOM so unresolved owner-input is
+   * obviously synthetic (e.g. COMPANY_NUMBER, REGISTERED_OFFICE_ADDRESS). */
+  .legal-page__token {
+    font-family: var(--font-mono);
+    padding: 0 0.25em;
+    color: var(--color-brand-bright);
+    background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+    border: 1px dashed color-mix(in srgb, var(--color-brand-bright) 40%, transparent);
+  }
+
+  /* Retention schedule table. */
+  .legal-page__table {
+    @apply w-full text-sm;
+    border-collapse: collapse;
+  }
+
+  .legal-page__table th,
+  .legal-page__table td {
+    @apply py-2.5 px-3 text-left align-top;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .legal-page__table th {
+    @apply text-xs font-medium;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+  }
+}

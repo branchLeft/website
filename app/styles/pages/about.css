@@ -1,0 +1,13 @@
+/* ─── About page ─────────────────────────────────────────────────────────── */
+/* Sectioned marketing layout with SectionNav + SectionHeading headings.    */
+@layer components {
+  .about-page {
+    @apply flex flex-col gap-16;
+  }
+
+  .about-page__section {
+    @apply flex flex-col gap-4;
+    /* Clear both nav bars when an anchor jump lands on this section. */
+    scroll-margin-top: var(--section-scroll-offset);
+  }
+}

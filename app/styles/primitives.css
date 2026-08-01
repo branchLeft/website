@@ -1,0 +1,106 @@
+/* ─── Cross-page primitives ──────────────────────────────────────────────── */
+/* Patterns used by root.tsx (error boundary, app shell) and by more than one
+ * route. Single-route patterns live in styles/pages/ instead.              */
+@layer components {
+  /* Root flex column so nav + page-shell fill exactly 100dvh */
+  .app-layout {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Full-viewport centred hero layout — the default page frame. */
+  .page-shell {
+    @apply flex flex-1 flex-col items-center justify-center gap-12 p-8;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  /* Tighter variant for utility pages (errors, 404, etc.). */
+  .page-shell--tight {
+    @apply gap-6;
+  }
+
+  /* Small brand-coloured supporting copy (taglines, meta lines). */
+  .tagline {
+    @apply text-sm;
+    font-family: var(--font-mono);
+    color: var(--color-brand-bright);
+    letter-spacing: 0.02em;
+  }
+
+  /* Mono-uppercase label pattern. Applied alongside a BEM class that
+   * carries the per-consumer size and colour (e.g. .contact-form__label,
+   * .site-footer__copy, .legal-page__meta). Consumers with non-default
+   * letter-spacing keep their own value inline in their rule. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Long-form document shell. Applied alongside .about-page, .article-page,
+   * or .legal-page — those classes now only supply their per-page gap and
+   * any page-specific descendant styling. */
+  .long-form {
+    @apply flex flex-col max-w-3xl mx-auto px-6 py-16;
+    width: 100%;
+  }
+
+  /* Inline brand-name span — switches to the wordmark font weight/family. */
+  .logo-font {
+    font-family: var(--font-wordmark);
+    font-weight: 500;
+  }
+
+  /* Directional link: mono inline-flex link with a sliding arrow child.
+   * Shared base for .cta, the home hero link, and .back-link. */
+  .directional-link {
+    @apply inline-flex items-center gap-2 text-sm;
+    font-family: var(--font-mono);
+    color: var(--color-fg);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .directional-link:hover,
+  .directional-link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+
+  .directional-link__arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .directional-link:hover .directional-link__arrow,
+  .directional-link:focus-visible .directional-link__arrow {
+    transform: translateX(2px);
+  }
+
+  /* Expanding-underline treatment: hairline border, letter-spaced caps,
+   * arrow gap widens on hover. Used by CTA-style links (not back-links). */
+  .directional-link--underline {
+    letter-spacing: 0.12em;
+    padding-block: 0.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      gap 0.2s ease;
+  }
+
+  .directional-link--underline:hover,
+  .directional-link--underline:focus-visible {
+    border-bottom-color: var(--color-brand-bright);
+    gap: 0.625rem;
+  }
+
+  /* Development-only stack trace block rendered by ErrorBoundary. */
+  .stack-trace {
+    @apply w-full max-w-2xl p-4 text-xs;
+    overflow-x: auto;
+    opacity: 0.5;
+  }
+}

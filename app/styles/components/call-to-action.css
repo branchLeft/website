@@ -1,0 +1,6 @@
+/* Call-to-action styling — residue on top of .directional-link. */
+@layer components {
+  .cta {
+    align-self: flex-start;
+  }
+}

@@ -1,0 +1,92 @@
+/* ─── Element defaults ───────────────────────────────────────────────────── */
+/* Baked-in element styling so route markup can stay class-free. Add sizes,
+ * weights, and colours here rather than sprinkling utilities in TSX.        */
+@layer base {
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    color-scheme: dark;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+  h6 {
+    @apply text-base;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  ul {
+    @apply list-disc pl-6;
+  }
+
+  li {
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus-visible {
+    text-decoration: underline;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: inherit;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-bright);
+    outline-offset: 2px;
+  }
+}

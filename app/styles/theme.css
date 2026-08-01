@@ -1,0 +1,107 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * styles/theme.css — entry point for branchLeft site styling.
+ *
+ * Everything visual lives under styles/ so TSX stays as close to bare
+ * semantic markup as possible. Do not add utility classes to route components
+ * unless the pattern is a genuine one-off; instead:
+ *
+ *   1. First choice → adjust an element default in base.css (@layer base).
+ *   2. Second choice → add or extend a component class in the appropriate
+ *                      split file (see import order below).
+ *   3. Last resort  → utility class in TSX, with a comment explaining why
+ *                     it wasn't promoted here.
+ *
+ * File split (import order is authoritative for cascade):
+ *   fonts.css              → @font-face declarations
+ *   base.css               → @layer base element defaults
+ *   primitives.css         → @layer components cross-page primitives
+ *   components/site-nav    → primary sticky navigation
+ *   components/section-nav → in-page anchor navigation
+ *   components/section-heading → bl-section-heading (from @branchleft/components)
+ *   components/bio         → people section entry card
+ *   components/back-link   → back-link styling (article page returns)
+ *   components/call-to-action → CTA link styling
+ *   components/values-cloud    → orbiting icon cloud + mobile accordion (about page values)
+ *   components/solutions-showcase → tabbed solutions panel
+ *   components/site-footer → site footer
+ *   pages/home             → home route
+ *   pages/about            → /about route
+ *   pages/contact          → /contact route
+ *   pages/article          → solutions.* article routes
+ *   pages/legal            → /privacy and /terms routes
+ *
+ * See website/CLAUDE.md → "Styling" for the full rule set.
+ *
+ * Exception: styles/no-js.css is NOT imported here. It's loaded only via a
+ * <noscript><link> in root.tsx, so it must stay outside this bundle — an
+ * import here would apply it to every visitor, not just no-JS ones. See
+ * that file's header comment for what it overrides and why.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Imports ────────────────────────────────────────────────────────────── */
+@import './fonts.css';
+@import './base.css';
+@import './primitives.css';
+@import './components/site-nav.css';
+@import './components/section-nav.css';
+@import './components/section-heading.css';
+@import './components/bio.css';
+@import './components/back-link.css';
+@import './components/call-to-action.css';
+@import './components/values-cloud.css';
+@import './components/solutions-showcase.css';
+@import './components/site-footer.css';
+@import './pages/home.css';
+@import './pages/about.css';
+@import './pages/contact.css';
+@import './pages/article.css';
+@import './pages/legal.css';
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  /* Colour palette */
+  --color-brand: #b31761;
+  --color-brand-bright: #ff006e;
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+  --colour-fg-muted: color-mix(in srgb, var(--color-fg) 75%, var(--color-bg));
+
+  /* Values-cloud accent hues — one per value, used ONLY by .values-cloud
+   * (see components/values-cloud.css) to visually distinguish the 7 values.
+   * A deliberate, scoped exception to the monochrome + single-accent system
+   * above; not meant to be reused as general-purpose site colours. */
+  --color-value-sustainability: #d4a72c;
+  --color-value-environment: #3fae5c;
+  --color-value-ai: #8b6fd6;
+  --color-value-society: #e8637a;
+  --color-value-opensource: #3b9fd6;
+  --color-value-agility: #e07a2c;
+  --color-value-redlines: #c62828;
+
+  /* Font stacks — family names must match the @font-face declarations in
+   * fonts.css.
+   *   --font-display : headings (h1–h6)
+   *   --font-wordmark: brand mark / hero wordmark
+   *   --font-sans    : body / reading copy (humanist geometric)
+   *   --font-mono    : uppercase labels, CTAs, section-nav, code — anything
+   *                    that should read as "machine voice". */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+  /* Sticky nav offset — the height of the primary .site-nav row. Section
+   * pages use this for scroll-margin-top and for stacking the secondary
+   * .section-nav directly beneath the primary nav. Keep in sync with the
+   * primary nav padding/line-height if either changes. */
+  --nav-offset: 3.5rem;
+
+  /* Anchor-jump landing offset. Clears both nav bars when an anchor
+   * scrolls into view. Consumed by .bl-section-heading, .about-page__section,
+   * and .article-page__section. */
+  --section-scroll-offset: calc(var(--nav-offset) + 3rem);
+
+  /* Hairline rule (nav/section-nav borders, table dividers). Single token
+   * so hairline opacity is tuned in one place. */
+  --color-hairline: color-mix(in srgb, var(--color-fg) 12%, transparent);
+}
