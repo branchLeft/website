@@ -1,0 +1,23 @@
+/* ─── Home page ──────────────────────────────────────────────────────────── */
+@layer components {
+  /* Oversized wordmark used for the branchLeft hero. */
+  .hero-wordmark {
+    @apply text-6xl;
+    font-family: var(--font-wordmark);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  /* Fixed square used for the logo mark. */
+  .brand-mark {
+    @apply w-36 h-36;
+  }
+
+  /* Hero tagline hover highlight (people & planet). */
+  .hover-green {
+    &:hover {
+      transition: color 0.5s ease;
+      color: #00aa00;
+    }
+  }
+}

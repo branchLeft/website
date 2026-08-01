@@ -1,0 +1,12 @@
+/* Back-link: reversed directional-link with a muted default colour. */
+@layer components {
+  .back-link {
+    @apply -mt-4 mb-4;
+    color: var(--colour-fg-muted);
+  }
+
+  .back-link:hover .directional-link__arrow,
+  .back-link:focus-visible .directional-link__arrow {
+    transform: translateX(-2px);
+  }
+}

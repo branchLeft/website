@@ -1,0 +1,35 @@
+/* ─── Section heading ────────────────────────────────────────────────────── */
+/* SectionHeading ships zero CSS; the site owns the theming. Match the
+ * scroll-margin-top so anchor jumps clear both nav bars regardless of
+ * whether the heading or its parent section is the scroll target.          */
+@layer components {
+  .bl-section-heading {
+    @apply pt-4;
+    scroll-margin-top: var(--section-scroll-offset);
+  }
+
+  .bl-section-heading--linked > .bl-section-heading__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    color: inherit;
+    text-decoration: none;
+    transition: color 120ms ease-out;
+  }
+
+  .bl-section-heading__icon {
+    opacity: 0;
+    transition: opacity 120ms ease-out;
+    flex-shrink: 0;
+  }
+
+  .bl-section-heading--linked:hover > .bl-section-heading__link,
+  .bl-section-heading--linked:focus-within > .bl-section-heading__link {
+    color: var(--color-brand-bright);
+  }
+
+  .bl-section-heading--linked:hover .bl-section-heading__icon,
+  .bl-section-heading--linked:focus-within .bl-section-heading__icon {
+    opacity: 1;
+  }
+}

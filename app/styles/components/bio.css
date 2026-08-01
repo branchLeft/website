@@ -1,0 +1,63 @@
+/* ─── Bio ────────────────────────────────────────────────────────────────── */
+/* People section entry (currently used in /about#people).                  */
+@layer components {
+  .bio {
+    @apply flex flex-row flex-wrap items-center gap-8;
+  }
+
+  .bio__photo {
+    @apply shrink-0;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    background: color-mix(in srgb, var(--color-fg) 10%, transparent);
+  }
+
+  .bio__body {
+    @apply flex flex-col gap-2 text-sm flex-1;
+    min-width: 200px;
+  }
+
+  .bio__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .bio__name {
+    font-size: 1.75rem;
+    font-family: var(--font-wordmark);
+  }
+
+  .bio__linkedin {
+    @apply shrink-0;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .bio__linkedin:hover {
+    opacity: 1;
+  }
+
+  .bio__pronouns {
+    @apply text-sm;
+    display: inline-block;
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-fg) 75%, transparent);
+  }
+
+  .bio__title {
+    @apply text-sm;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .bio {
+      flex-direction: column;
+    }
+  }
+}

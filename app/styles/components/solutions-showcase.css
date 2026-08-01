@@ -1,0 +1,87 @@
+/* ─── Solutions showcase ─────────────────────────────────────────────────── */
+/* Vertical tabs on desktop / stacked buttons on mobile with a single
+ * animated panel body. Stays inside the .about-page reading column.       */
+@layer components {
+  .solutions-tabs {
+    @apply flex flex-col gap-6;
+    width: 100%;
+  }
+
+  .solutions-tabs__tablist {
+    /* Mobile default: full-width stacked buttons. Each tab is its own row so
+     * long titles wrap naturally and every tab stays fully clickable at any
+     * viewport width — no horizontal scroll. */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .solutions-tabs__tab {
+    @apply flex items-center py-3 px-1 text-left w-full;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+    cursor: pointer;
+    font-family: inherit;
+    padding-left: 1rem;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .solutions-tabs__tab:hover,
+  .solutions-tabs__tab:focus-visible {
+    color: var(--color-fg);
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+  }
+
+  .solutions-tabs__tab[aria-selected='true'] {
+    color: var(--color-brand-bright);
+    border-left-color: var(--color-brand-bright);
+  }
+
+  .solutions-tabs__tab-title {
+    @apply text-sm;
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  /* Panel frame: CSS grid overlay so all panels occupy the same cell.
+   * The cell height is determined by the tallest panel — no layout shift
+   * when switching tabs. */
+  .solutions-tabs__panel-frame {
+    display: grid;
+  }
+
+  .solutions-tabs__panel {
+    @apply flex flex-col gap-6 py-2;
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+  }
+
+  .solutions-tabs__panel-body {
+    @apply text-base;
+    color: color-mix(in srgb, var(--color-fg) 88%, transparent);
+    line-height: 1.65;
+    max-width: 42rem;
+  }
+
+  /* Desktop: two-column layout — vertical tablist on the left, animated
+   * panel on the right. The tab accent (left border) already matches this
+   * orientation, so no extra rules needed for the accent side. */
+  @media (min-width: 768px) {
+    .solutions-tabs {
+      display: grid;
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .solutions-tabs__panel {
+      padding-top: 0.5rem;
+    }
+  }
+}

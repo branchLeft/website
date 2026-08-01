@@ -21,6 +21,14 @@ This app is locked to **React Router v7 Framework Mode + SSR**. These decisions 
 
 For detailed patterns and doc pointers, see `.agents/skills/react-router/`.
 
+## Node Version
+
+This repo has an `.nvmrc`. Always run `nvm use` before any commands to activate the correct Node version. Do not hardcode version paths or manipulate `$PATH` manually.
+
+```bash
+nvm use
+```
+
 ## Commands
 
 ### Non-interactive (safe to run directly)
@@ -68,6 +76,31 @@ If a commit is blocked, fix the reported issues and re-commit.
 - **Never write prose or copy on behalf of the user.** Use ALL_CAPS placeholder tokens instead: `HEADING_CONTENT`, `BODY_TEXT`, `CTA_LABEL`, `IMAGE_ALT`, etc.
 - Placeholder tokens live directly in JSX as string literals or comments — they must be obviously synthetic.
 
+### Legal Pages (`/privacy`, `/terms`)
+
+These routes are a documented exception to the "never write prose" rule above: they contain standard UK GDPR / ICO / template boilerplate written verbatim rather than as tokens. If future owner-input values arise (e.g. a new ICO registration number, a change of registered office, a new effective date), tokenise them via a local `<T>` component and render with the `.legal-page__token` style so unresolved values are obviously synthetic in the DOM. Both pages are currently fully resolved — no `<T>` tokens remain.
+
+**Canonical sources**
+
+- Privacy notice: adapted from the ICO "Create your own privacy notice" tool — <https://ico.org.uk/for-organisations/advice-for-small-organisations/privacy-notices-and-cookies/create-your-own-privacy-notice/>. The raw tool output is preserved at `website/gen-priv-not.txt` for reference.
+- Terms of use: owner-reviewed template. The site is informational only with no client-relationship created by browsing or form submission; a formal solicitor review was judged unnecessary.
+
+**What triggers a re-review of these pages**
+
+Update the relevant route file AND the corresponding note in this section whenever any of the following change:
+
+- New data-processing purpose (e.g. adding analytics, cookies, newsletter, careers/recruitment, online payments)
+- New third-party processor (e.g. form backend, email marketing, error tracking, CDN)
+- New international data transfer or change of hosting region
+- Change in company details (registration number, registered office, ICO registration)
+- Change in retention periods or complaint routing
+- Any change to services, liability posture, IP ownership, or governing law
+
+**Contact form**
+
+- `/contact` submits via a route `action` in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`) over Gmail SMTP as `info@branchleft.co.uk` — the mailbox already disclosed as a processor above, so no separate third-party entry is needed.
+- Requires `GMAIL_USER` and `GMAIL_APP_PASSWORD` environment variables (see `.env.example`). Not committed; set as real env vars/secrets on the hosting platform in production.
+
 ### Styling
 
 **All visual decisions live in `app/theme.css` — nowhere else.** Route TSX must stay as close to bare semantic markup as possible. If you find yourself typing more than one utility class on an element, stop and promote the pattern to the theme.
@@ -95,6 +128,7 @@ When you need to style something, work down this list and stop at the first leve
 - **Never** use arbitrary Tailwind values (`w-[137px]`, `text-[13px]`) in TSX. If you need a new size, add it as a token or component class.
 - **Never** stack more than one Tailwind utility on a single element in TSX without a justifying comment. Two utilities = you owe the theme a new component class.
 - **Never** re-declare tokens, `@font-face` blocks, or element defaults in `app.css` or route files.
+- **Never** duplicate a Tailwind token as a raw literal in `theme.css` (`font-size: 1.125rem; /* text-lg */`). Use `@apply text-lg;` so the scale stays single-sourced in Tailwind's theme. Only fall back to raw CSS when no utility maps cleanly (`color-mix()`, `letter-spacing`, custom `--font-*` families, one-off `text-[10px]`).
 - `className` values in route TSX should be a single component-class token (`className="page-shell"`) or absent entirely. A grep for `className="` in `app/` is a quick health check.
 
 #### Recipes
@@ -107,12 +141,31 @@ When you need to style something, work down this list and stop at the first leve
 
 **One-off exception.** Add the utility in TSX with a comment: `{/* one-off: RFP mock-up only, remove after launch */}`.
 
+**Reach for a Tailwind value inside `theme.css`.** Use `@apply <utility>` — never copy the raw rem/px value. Example:
+
+```css
+/* GOOD — token stays single-sourced */
+.hero-wordmark {
+  @apply text-6xl;
+  font-family: var(--font-wordmark);
+}
+
+/* BAD — hardcoded literal with a Tailwind comment */
+.hero-wordmark {
+  font-size: 3.75rem; /* text-6xl */
+  font-family: var(--font-wordmark);
+}
+```
+
+VS Code's built-in CSS validator does not recognise `@apply`/`@theme`/`@layer`. The workspace `.vscode/settings.json` silences the "unknown at-rule" warning; install the Tailwind CSS IntelliSense extension for hover/autocomplete on utility names.
+
 #### Migration checklist for new work
 
 - [ ] Route TSX contains no colour, spacing, or typography utilities.
 - [ ] Every `className` in `app/routes/**` is a single component-class name or empty.
 - [ ] New tokens landed in `theme.css` `@theme`, not inline.
 - [ ] New shared patterns landed in `@layer components`, not inline.
+- [ ] Any Tailwind-scale value in `theme.css` is written as `@apply <utility>`, not a hardcoded rem literal.
 
 #### Aesthetic principles
 

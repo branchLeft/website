@@ -1,0 +1,62 @@
+/* ─── No-JS fallback overrides ───────────────────────────────────────────── */
+/* Loaded ONLY via <noscript><link> in root.tsx's <head> — the browser never
+ * fetches or applies this file when scripting is enabled (per the HTML
+ * spec, <noscript> children are inert to the parser in that case), so this
+ * has zero cost for the ~99% JS-enabled case. See website/CLAUDE.md →
+ * "Styling" for why this lives outside the normal theme.css import chain.
+ *
+ * Every rule here exists to override a JS-only interaction that otherwise
+ * leaves content invisible or unreachable with no fallback. `!important` is
+ * required and safe: it only ever beats *plain* (non-`!important`) inline
+ * styles set by framer-motion, and this file only activates when that JS
+ * never runs in the first place — see the site-nav.css precedent this
+ * pattern is based on. */
+@layer components {
+  /* PageTransition (root.tsx) SSRs `opacity:0; transform:translateY(10px)`
+   * as its framer-motion `initial` state on every route — without JS this
+   * never animates to visible, making the entire site permanently blank. */
+  .page-transition {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Solutions tabs (About page): only the active panel is visible/hittable
+   * (grid overlay + opacity/pointer-events), and switching tabs is a JS
+   * click handler with no native fallback. Force all three panels to stack
+   * in normal flow, fully visible and interactive. */
+  .solutions-tabs__panel-frame {
+    display: block;
+  }
+
+  .solutions-tabs__panel {
+    position: static;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    margin-bottom: 3rem;
+  }
+
+  /* Values cloud (About page): the orbiting ring is entirely click-to-reveal
+   * with no native fallback, and the accordion (already the small-mobile
+   * fallback markup) is collapsed by default. Drop the ring and force the
+   * accordion fully open so all 7 value descriptions are readable. */
+  .values-cloud__stage {
+    display: none !important;
+  }
+
+  .values-cloud__accordion {
+    display: flex !important;
+  }
+
+  .values-cloud__accordion-panel {
+    grid-template-rows: 1fr !important;
+  }
+
+  .values-cloud__accordion-panel-inner {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .values-cloud__accordion-chevron {
+    display: none !important;
+  }
+}

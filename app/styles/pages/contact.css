@@ -1,0 +1,95 @@
+/* ─── Contact page ───────────────────────────────────────────────────────── */
+@layer components {
+  .contact-form {
+    @apply flex flex-col gap-6 w-full max-w-md;
+  }
+
+  .contact-form__field {
+    @apply flex flex-col gap-2;
+  }
+
+  .contact-form__label {
+    @apply text-xs;
+    color: color-mix(in srgb, var(--color-fg) 75%, transparent);
+  }
+
+  .contact-form__input,
+  .contact-form__textarea,
+  .contact-form__select {
+    @apply w-full px-3 py-2 text-sm;
+    background: transparent;
+    color: var(--color-fg);
+    border: 1px solid color-mix(in srgb, var(--color-fg) 25%, transparent);
+    font-family: inherit;
+  }
+
+  .contact-form__textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  /* Native <select> styled to visually match .contact-form__input.
+   * Strips the platform chevron and paints our own via a CSS gradient so the
+   * control matches the flat, monochrome form language. */
+  .contact-form__select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.25rem;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--color-fg) 50%),
+      linear-gradient(135deg, var(--color-fg) 50%, transparent 50%);
+    background-position:
+      calc(100% - 1.05rem) 55%,
+      calc(100% - 0.75rem) 55%;
+    background-size:
+      0.3rem 0.3rem,
+      0.3rem 0.3rem;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  .contact-form__select:focus {
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--color-brand-bright) 50%),
+      linear-gradient(135deg, var(--color-brand-bright) 50%, transparent 50%);
+  }
+
+  /* Dropdown option list adopts the site palette (Firefox/Chromium honour
+   * these; Safari uses OS chrome regardless). */
+  .contact-form__select option {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  .contact-form__input:focus,
+  .contact-form__textarea:focus,
+  .contact-form__select:focus {
+    border-color: var(--color-brand-bright);
+    outline: none;
+  }
+
+  .contact-form__submit {
+    @apply inline-flex items-center justify-center self-start px-5 py-2 text-xs;
+    background: var(--color-brand);
+    color: var(--color-fg);
+    border: 1px solid var(--color-brand);
+    cursor: pointer;
+  }
+
+  .contact-form__submit:hover,
+  .contact-form__submit:focus-visible {
+    background: var(--color-brand-bright);
+    border-color: var(--color-brand-bright);
+  }
+
+  .contact-form__submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .contact-form__status {
+    @apply text-sm py-2.5 px-3;
+    border-left: 2px solid var(--color-brand-bright);
+    background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+  }
+}

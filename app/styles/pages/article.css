@@ -1,0 +1,68 @@
+/* ─── Article / solution pages ───────────────────────────────────────────── */
+/* Long-form layout shared by solutions.* routes.                           */
+@layer components {
+  .article-page {
+    @apply flex flex-col gap-8;
+  }
+
+  .article-page h1 {
+    @apply text-left text-3xl font-normal;
+  }
+
+  .article-page__section {
+    @apply flex flex-col gap-4;
+    scroll-margin-top: var(--section-scroll-offset);
+  }
+
+  .article-page h2 {
+    @apply text-xl font-normal;
+    margin-top: 0.5rem;
+  }
+
+  .article-page__feature-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h3 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--colour-fg-muted);
+    }
+  }
+
+  .article-page__callout {
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--color-brand);
+    background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .article-page__callout-label {
+    @apply text-lg;
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+
+  .article-page__comparison {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .article-page__comparison-column h3 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--colour-fg-muted);
+  }
+}

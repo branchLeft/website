@@ -1,3 +1,5 @@
+import { Logo } from '@branchleft/components';
+
 export function meta() {
   return [{ title: 'branchLeft' }, { name: 'description', content: 'branchLeft' }];
 }
@@ -5,9 +7,18 @@ export function meta() {
 export default function Home() {
   return (
     <main className="page-shell">
-      <img src="/logo.svg" alt="branchLeft logo" className="brand-mark" />
+      <Logo role="img" aria-label="branchLeft logo" className="brand-mark" />
       <h1 className="hero-wordmark">branchLeft</h1>
-      <p className="tagline">coming soon</p>
+      <p className="tagline">
+        building tech for <span className="hover-green">people</span> &{' '}
+        <span className="hover-green">planet</span>
+      </p>
+      <a className="directional-link directional-link--underline" href="/about">
+        <span className="directional-link__label">learn more</span>
+        <span className="directional-link__arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
     </main>
   );
 }

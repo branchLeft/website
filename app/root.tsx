@@ -6,10 +6,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from 'react-router';
-
 import type { Route } from './+types/root';
 import './app.css';
+import noJsStylesHref from './styles/no-js.css?url';
+import { NavBar } from './components/NavBar';
+import { PageTransition } from './components/PageTransition';
+import { Footer } from './components/Footer';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
@@ -23,6 +27,10 @@ export function Layout({ children }: { readonly children: React.JSX.Element }): 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        {/* Only fetched/applied when scripting is disabled — see no-js.css header comment */}
+        <noscript>
+          <link rel="stylesheet" href={noJsStylesHref} />
+        </noscript>
       </head>
       <body>
         {children}
@@ -34,7 +42,16 @@ export function Layout({ children }: { readonly children: React.JSX.Element }): 
 }
 
 export default function App() {
-  return <Outlet />;
+  const location = useLocation();
+  return (
+    <div className="app-layout">
+      <NavBar />
+      <PageTransition key={location.pathname}>
+        <Outlet />
+      </PageTransition>
+      <Footer />
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

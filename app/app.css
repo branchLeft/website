@@ -6,4 +6,4 @@
  * See website/CLAUDE.md → "Styling" for the styling hierarchy.
  */
 @import 'tailwindcss';
-@import './theme.css';
+@import './styles/theme.css';
