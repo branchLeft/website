@@ -1,22 +1,32 @@
-FROM node:24-alpine AS development-dependencies-env
-COPY . /app
-WORKDIR /app
-RUN npm ci
+# syntax=docker/dockerfile:1.7
 
-FROM node:24-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
+FROM node:26-alpine AS base
+ENV CI=true
+RUN npm install --global pnpm@11.17.0
 WORKDIR /app
-RUN npm ci --omit=dev
 
-FROM node:24-alpine AS build-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
-WORKDIR /app
-RUN npm run build
+FROM base AS dependencies-env
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+# pnpm refuses to expand ${NODE_AUTH_TOKEN} from a project-level .npmrc (it's
+# committed to this public repo, so pnpm won't trust env expansion there —
+# see the warning at https://pnpm.io/npmrc). Put the auth line in the user
+# config instead, exactly as CLAUDE.md instructs contributors to for local
+# dev. Only the literal placeholder is written to this layer, never the token.
+RUN echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> /root/.npmrc
+RUN --mount=type=secret,id=node_auth_token \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/node_auth_token) pnpm install --frozen-lockfile
 
-FROM node:24-alpine
-COPY ./package.json package-lock.json /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
-COPY --from=build-env /app/build /app/build
-WORKDIR /app
-CMD ["npm", "run", "start"]
+FROM dependencies-env AS production-dependencies-env
+RUN --mount=type=secret,id=node_auth_token \
+    NODE_AUTH_TOKEN=$(cat /run/secrets/node_auth_token) pnpm install --frozen-lockfile --prod
+
+FROM dependencies-env AS build-env
+COPY . .
+RUN pnpm build
+
+FROM base
+COPY --chown=node:node package.json ./
+COPY --chown=node:node --from=production-dependencies-env /app/node_modules ./node_modules
+COPY --chown=node:node --from=build-env /app/build ./build
+USER node
+CMD ["node_modules/.bin/react-router-serve", "build/server/index.js"]
