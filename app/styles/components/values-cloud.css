@@ -1,43 +1,54 @@
 /* ─── Values cloud ───────────────────────────────────────────────────────── */
 /* @branchleft/components' ValuesCloud ships its own structural/layout CSS
- * (imported in theme.css as `@branchleft/components/css`) — this file only
- * maps the package's `--bl-*` theming hooks onto our own design tokens, and
- * assigns each of our value taxonomy's accent colours. See the package's
- * ValuesCloud docs for the full list of `--bl-*` custom properties. */
-@layer components {
-  .bl-values-cloud {
-    --bl-color-bg: var(--color-bg);
-    --bl-color-fg: var(--color-fg);
-    --bl-color-hairline: var(--color-hairline);
-    --bl-font-mono: var(--font-mono);
-    --bl-font-wordmark: var(--font-wordmark);
-  }
+ * (imported in theme.css as `@branchleft/components/css`, inside the
+ * `bl-components` layer) — this file only maps the package's `--bl-*`
+ * theming hooks onto our own design tokens, and assigns each of our value
+ * taxonomy's accent colours. See the package's ValuesCloud docs for the
+ * full list of `--bl-*` custom properties.
+ *
+ * Deliberately NOT wrapped in `@layer components`: these rules only need to
+ * beat the package's own `[data-accent]` fallback (same specificity, so
+ * without cascade layers it'd come down to source order alone), and in
+ * practice `@tailwindcss/vite`'s CSS bundling didn't preserve the
+ * `@layer bl-components, base, components;` order statement that would
+ * otherwise guarantee `components` outranks `bl-components` — `bl-components`
+ * ended up placed last (highest priority) in the built stylesheet regardless.
+ * Unlayered CSS always outranks any named layer per the cascade spec, so
+ * leaving this file unlayered sidesteps that problem entirely. Low collision
+ * risk: every selector here is scoped to `.bl-values-cloud`/`[data-accent]`,
+ * which nothing else on the site targets. */
+.bl-values-cloud {
+  --bl-color-bg: var(--color-bg);
+  --bl-color-fg: var(--color-fg);
+  --bl-color-hairline: var(--color-hairline);
+  --bl-font-mono: var(--font-mono);
+  --bl-font-wordmark: var(--font-wordmark);
+}
 
-  /* Maps each value's semantic `data-accent` (set via the `values` prop) to
-   * its theme colour token, as `--value-accent` for descendants to consume.
-   * Written as literal `var(--color-value-*)` references (rather than
-   * building the var() string in JS) so the Tailwind build can see these
-   * tokens are actually used — an unreferenced `@theme` custom property
-   * gets stripped from the production CSS otherwise. */
-  [data-accent='sustainability'] {
-    --value-accent: var(--color-value-sustainability);
-  }
-  [data-accent='environment'] {
-    --value-accent: var(--color-value-environment);
-  }
-  [data-accent='ai'] {
-    --value-accent: var(--color-value-ai);
-  }
-  [data-accent='society'] {
-    --value-accent: var(--color-value-society);
-  }
-  [data-accent='opensource'] {
-    --value-accent: var(--color-value-opensource);
-  }
-  [data-accent='agility'] {
-    --value-accent: var(--color-value-agility);
-  }
-  [data-accent='redlines'] {
-    --value-accent: var(--color-value-redlines);
-  }
+/* Maps each value's semantic `data-accent` (set via the `values` prop) to
+ * its theme colour token, as `--value-accent` for descendants to consume.
+ * Written as literal `var(--color-value-*)` references (rather than
+ * building the var() string in JS) so the Tailwind build can see these
+ * tokens are actually used — an unreferenced `@theme` custom property gets
+ * stripped from the production CSS otherwise. */
+[data-accent='sustainability'] {
+  --value-accent: var(--color-value-sustainability);
+}
+[data-accent='environment'] {
+  --value-accent: var(--color-value-environment);
+}
+[data-accent='ai'] {
+  --value-accent: var(--color-value-ai);
+}
+[data-accent='society'] {
+  --value-accent: var(--color-value-society);
+}
+[data-accent='opensource'] {
+  --value-accent: var(--color-value-opensource);
+}
+[data-accent='agility'] {
+  --value-accent: var(--color-value-agility);
+}
+[data-accent='redlines'] {
+  --value-accent: var(--color-value-redlines);
 }
