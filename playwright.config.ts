@@ -26,6 +26,24 @@ export default defineConfig({
       testIgnore: /no-js\.spec\.ts$/,
     },
     {
+      // Safari/iOS is the most CSS-divergent of the major engines and a
+      // large share of real UK traffic — desktop WebKit catches rendering
+      // differences no-js/chromium alone would miss.
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+      testIgnore: /no-js\.spec\.ts$/,
+    },
+    {
+      // Runs the full spec suite at a real mobile viewport (390px) on
+      // WebKit, the same engine iOS Safari uses — complements the explicit
+      // 375/1440 viewport overrides already present in individual specs
+      // (e.g. nav.spec.ts) by exercising every route's default viewport
+      // path too, per CLAUDE.md's 375px/1440px responsive requirement.
+      name: 'mobile',
+      use: { ...devices['iPhone 13'] },
+      testIgnore: /no-js\.spec\.ts$/,
+    },
+    {
       // javaScriptEnabled: false disables script execution in the page's
       // browsing context — the same axe-core relies on to run, so a11y
       // checks are intentionally out of scope for this project (see
