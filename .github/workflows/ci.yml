@@ -52,6 +52,14 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Install infra dependencies
+        working-directory: infra
+        run: npm ci
+
+      - name: Typecheck infra
+        working-directory: infra
+        run: npx tsc --noEmit
+
       - name: Setup Python (for pre-commit)
         uses: actions/setup-python@v5
         with:

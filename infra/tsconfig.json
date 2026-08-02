@@ -12,15 +12,5 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true
   },
-  "files": [
-    "index.ts",
-    "apis.ts",
-    "artifactRegistry.ts",
-    "secrets.ts",
-    "serviceAccounts.ts",
-    "cloudRun.ts",
-    "domainMapping.ts",
-    "workloadIdentity.ts",
-    "config.ts"
-  ]
+  "include": ["*.ts"]
 }
