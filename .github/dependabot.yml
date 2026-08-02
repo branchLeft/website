@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # pnpm root — website app + tooling (React, React Router, Vite, Tailwind, etc.)
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
+      include: 'scope'
+
+  # infra/ — separate npm dependency tree (Pulumi) that nothing else watches
+  - package-ecosystem: 'npm'
+    directory: '/infra'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
+    commit-message:
+      prefix: 'chore(deps-infra)'
+      prefix-development: 'chore(deps-infra-dev)'
+      include: 'scope'
+
+  # GitHub Actions workflows
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    commit-message:
+      prefix: 'chore(ci)'
+      include: 'scope'
