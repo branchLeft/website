@@ -115,7 +115,7 @@ export default function LocalNews(): React.JSX.Element {
           <ul>
             <li>direct community engagement</li>
             <li>social media integrations and calls to action</li>
-            <li>SEO (search engine optimization)</li>
+            <li>SEO (search engine optimisation)</li>
             <li>geo-targeted advertising</li>
           </ul>
         </div>

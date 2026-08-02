@@ -31,7 +31,7 @@ export default function AffordableWebsites(): React.JSX.Element {
         <p>
           Every organisation needs a website, but not all organisations have deep pockets,
           especially those doing work that benefits people & planet. You shouldn't be left choosing
-          between spending money that should go towards their work, or settling for a site that
+          between spending money that should go towards your work and settling for a site that
           undersells what you do.
         </p>
         <p>
@@ -79,7 +79,7 @@ export default function AffordableWebsites(): React.JSX.Element {
           What We Build
         </SectionHeading>
         <p>
-          Affordable pricing doesn't mean a lesser product. Every site we build is engineered to a
+          Affordable pricing doesn't mean a lesser product. Every site we build is engineered to an
           exceptionally high standard.
         </p>
         <details className="article-page__feature-group" data-accent="design" open>
@@ -210,8 +210,9 @@ export default function AffordableWebsites(): React.JSX.Element {
                 </li>
                 <li>
                   a full branding consultation: a bespoke logo and complete visual theme (colours,
-                  typeface, and so on) that's a consistent language for your brand and is yours to
-                  keep and reuse across all your organisation's content, not just your site.
+                  typeface, and so on) that together form a consistent language for your brand and
+                  are yours to keep and reuse across all your organisation's content, not just your
+                  site.
                 </li>
               </ul>
             </div>
