@@ -38,6 +38,18 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Fallback title/description for any request that matches no route (e.g. a
+// 404) and so never reaches a leaf route's own meta(). React Router's <Meta/>
+// lets the deepest matched route's meta win for shared keys like `title`, so
+// this has no effect on ordinary pages — each still renders only its own
+// leaf-level title.
+export function meta() {
+  return [
+    { title: 'Page not found — branchLeft' },
+    { name: 'description', content: 'Page not found.' },
+  ];
+}
+
 /**
  * Root-level `headers()` is inherited by every route that doesn't export its
  * own `headers()` (React Router v7 merges from root down to the matched leaf;
