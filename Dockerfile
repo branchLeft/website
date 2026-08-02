@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:26-alpine AS base
+FROM node@sha256:233761595746769ebfdb6090f44fc7cdf818ae0ce62d2b37e0367723b9823e36 AS base
+# ^ node:26.5.1-alpine (alpine 3.24) — resolved via `docker buildx imagetools inspect node:26-alpine`
 ENV CI=true
 RUN npm install --global pnpm@11.17.0
 WORKDIR /app
