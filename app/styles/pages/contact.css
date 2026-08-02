@@ -8,12 +8,10 @@
     @apply flex flex-col gap-2;
   }
 
-  /* Honeypot trap (see HONEYPOT_FIELD_NAME in app/routes/contact.tsx).
-   * Positioned off-screen rather than display:none/visibility:hidden so it
-   * still parses as a normal, fillable field to bots that don't render CSS.
-   * Paired with aria-hidden + tabIndex={-1} in the markup so it's
-   * unreachable by keyboard and invisible to assistive tech. */
-  .contact-form__honeypot {
+  /* Off-screen rather than display:none/visibility:hidden, so it still
+   * parses as a normal fillable field to anything that doesn't render CSS.
+   * Deliberately not named after what it's for — see contact.tsx. */
+  .contact-form__field--alt {
     position: absolute;
     width: 1px;
     height: 1px;

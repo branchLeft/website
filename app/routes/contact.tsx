@@ -4,24 +4,9 @@ import type { Route } from './+types/contact';
 import { sendContactEmail } from '../lib/sendContactEmail.server';
 
 /**
- * Contact form abuse-protection notes.
- *
- * This route has no CAPTCHA — that would be a new third-party processor,
- * which triggers a privacy-notice re-review (see CLAUDE.md), so it's
- * deliberately out of scope here. Instead it layers three cheap,
- * dependency-free defences against scripted abuse of the Gmail SMTP send:
- *
- *   1. Hard caps on `email`/`message` length (below), so a submission can't
- *      carry an arbitrarily large body into the SMTP send.
- *   2. A honeypot field + minimum time-on-page check, which silently
- *      "succeed" (no email sent, no error shown) so scripted clients get no
- *      signal to adapt to.
- *   3. A per-IP in-memory rate limit, keyed on `X-Forwarded-For`.
- *
- * Known limitation on (3): the rate-limit map is per Cloud Run instance
- * (maxInstanceCount: 3), not shared across instances, so a distributed
- * abuser can get up to ~3x the stated budget. Still meaningfully raises the
- * bar over no limiting at all, without adding infra (Redis etc).
+ * Abuse protection: length caps, a honeypot + minimum time-on-page check,
+ * and a per-IP rate limit (in-memory, per Cloud Run instance — see
+ * isRateLimited below).
  */
 
 export function meta() {
@@ -61,10 +46,10 @@ const MESSAGE_MIN_LENGTH = 30;
 export const EMAIL_MAX_LENGTH = 254;
 export const MESSAGE_MAX_LENGTH = 5000;
 
-// Honeypot: a field real users never see or reach — it's aria-hidden,
-// removed from tab order, and visually hidden off-screen in CSS (see
-// .contact-form__honeypot in app/styles/pages/contact.css). Bots that fill
-// every field they find in the raw HTML trip it; any value here means spam.
+// Honeypot: a field real users never see or reach (aria-hidden, removed
+// from tab order, visually hidden off-screen — see contact.css). Its name
+// and label deliberately don't say "honeypot" anywhere client-visible;
+// that word is a common bot-side blocklist keyword.
 export const HONEYPOT_FIELD_NAME = 'company';
 
 // Minimum time between the page rendering (stamped by `loader` below as
@@ -137,9 +122,9 @@ export async function action({ request }: Route.ActionArgs): Promise<ActionResul
   const honeypot = formString(formData, HONEYPOT_FIELD_NAME);
   const renderedAt = Number(formString(formData, 'renderedAt'));
 
-  // Bot signals: a filled honeypot, or a submission posted faster than a
-  // human could plausibly fill the form. Pretend success rather than
-  // surfacing an error, so scripted clients get no signal to adapt to.
+  // Bot signals: the honeypot got filled, or the form posted faster than a
+  // human could fill it. Pretend success either way, so scripted clients
+  // get no signal to adapt to.
   if (honeypot !== '' || !Number.isFinite(renderedAt) || now - renderedAt < MIN_SUBMIT_DELAY_MS) {
     return { ok: true };
   }
@@ -194,14 +179,12 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
       ) : (
         <Form className="contact-form" method="post">
           <input type="hidden" name="renderedAt" value={loaderData.renderedAt} />
-          {/* Honeypot: hidden from sighted users (off-screen, see
-              .contact-form__honeypot) and from assistive tech (aria-hidden +
-              tabIndex={-1} removes it from both the accessibility tree and
-              the tab order). Only a bot filling every field in the raw HTML
-              will ever populate this. */}
-          <div className="contact-form__field contact-form__honeypot" aria-hidden="true">
+          {/* Honeypot: hidden from sighted users (off-screen CSS) and from
+              assistive tech (aria-hidden + tabIndex={-1}). Only a bot
+              filling every field in the raw HTML will ever populate this. */}
+          <div className="contact-form__field contact-form__field--alt" aria-hidden="true">
             <label className="eyebrow contact-form__label" htmlFor="company">
-              HONEYPOT_FIELD_DO_NOT_FILL
+              Company
             </label>
             <input
               className="contact-form__input"
