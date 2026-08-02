@@ -1,5 +1,8 @@
 allowBuilds:
   '@parcel/watcher': false
   esbuild: false
+# minimumReleaseAge blocks installing packages published within the cooldown window;
+# exempt the whole @branchleft scope since those are first-party releases from this org, not
+# third-party supply-chain risk, and pinning per-version here would break the next release again.
 minimumReleaseAgeExclude:
-  - '@branchleft/components@0.1.0 || 0.1.1'
+  - '@branchleft/*'
