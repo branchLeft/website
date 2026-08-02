@@ -125,13 +125,26 @@ export default function About() {
           </SectionHeading>
 
           <article className="bio" aria-labelledby="bio-robert-murray">
-            <img
-              className="bio__photo"
-              src="/people/headshot.jpg"
-              alt=""
-              width={160}
-              height={160}
-            />
+            {/* Rendered at 10rem (160px, see .bio__photo) — srcset offers 1x/2x/3x
+                so we ship pixels close to what the display can actually show,
+                webp first with the original jpeg as a universal fallback. */}
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/people/headshot-160.webp 160w, /people/headshot-320.webp 320w, /people/headshot-480.webp 480w"
+                sizes="160px"
+              />
+              <img
+                className="bio__photo"
+                src="/people/headshot-320.jpg"
+                srcSet="/people/headshot-160.jpg 160w, /people/headshot-320.jpg 320w, /people/headshot-480.jpg 480w"
+                sizes="160px"
+                alt=""
+                width={160}
+                height={160}
+              />
+            </picture>
+
             <div className="bio__body">
               <div className="bio__name-row">
                 <h3 className="bio__name" id="bio-robert-murray">
