@@ -18,6 +18,24 @@ import { buildSecurityHeaders } from './lib/security-headers';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+  // Preload the two families used in the site-wide nav bar (brand wordmark +
+  // nav labels), rendered above the fold on every route. The other two
+  // families (heading/body) vary by route, so they're left to font-display:
+  // swap rather than preloaded on every page.
+  {
+    rel: 'preload',
+    as: 'font',
+    type: 'font/woff2',
+    href: '/fonts/Syne/Syne-VariableFont_wght.woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    as: 'font',
+    type: 'font/woff2',
+    href: '/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2',
+    crossOrigin: 'anonymous',
+  },
 ];
 
 /**
