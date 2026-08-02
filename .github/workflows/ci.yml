@@ -190,3 +190,29 @@ jobs:
           pulumi stack select production
           pulumi config set imageTag ${{ github.sha }}
           pulumi up --yes
+
+      # `pulumi up` succeeding only means the API call to update the Cloud
+      # Run service returned OK — it does not confirm the new revision is
+      # actually serving traffic without errors (e.g. booting then 500ing
+      # on every request). Hit the live site directly, with retries to
+      # absorb cold start / DNS-level propagation, and fail the job loudly
+      # if it doesn't come up healthy.
+      - name: Smoke test deployed site
+        run: |
+          check() {
+            url="$1"
+            for attempt in $(seq 1 10); do
+              if curl -fsS --max-time 10 "$url" -o /dev/null; then
+                echo "OK: $url"
+                return 0
+              fi
+              echo "Attempt $attempt failed for $url, retrying in 6s..."
+              sleep 6
+            done
+            echo "::error::Smoke test failed: $url did not return a successful response after retries"
+            return 1
+          }
+
+          check "https://branchleft.co.uk/"
+          check "https://branchleft.co.uk/about"
+          check "https://branchleft.co.uk/contact"
