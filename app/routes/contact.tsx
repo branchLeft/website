@@ -4,11 +4,12 @@ import type { Route } from './+types/contact';
 import { sendContactEmail } from '../lib/sendContactEmail.server';
 
 /**
- * B6 abuse-protection notes.
+ * Contact form abuse-protection notes.
  *
- * This route has no CAPTCHA (a new third-party processor, out of scope —
- * see BACKLOG.md B6). Instead it layers three cheap, dependency-free
- * defences against scripted abuse of the Gmail SMTP send:
+ * This route has no CAPTCHA — that would be a new third-party processor,
+ * which triggers a privacy-notice re-review (see CLAUDE.md), so it's
+ * deliberately out of scope here. Instead it layers three cheap,
+ * dependency-free defences against scripted abuse of the Gmail SMTP send:
  *
  *   1. Hard caps on `email`/`message` length (below), so a submission can't
  *      carry an arbitrarily large body into the SMTP send.
