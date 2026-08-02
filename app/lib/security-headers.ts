@@ -68,8 +68,8 @@ export function buildSecurityHeaders(nonce?: string): Record<string, string> {
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Permissions-Policy': PERMISSIONS_POLICY,
     // Conservative max-age (~180 days), no includeSubDomains (unvetted
-    // subdomains), no preload — see CLAUDE.md / B19 guidance: HSTS is only
-    // safe once HTTPS is confirmed permanent, and preload is a one-way door.
+    // subdomains), no preload: HSTS is only safe to widen once HTTPS is
+    // confirmed permanent, and preload submission is a one-way door.
     'Strict-Transport-Security': 'max-age=15552000',
   };
 }
