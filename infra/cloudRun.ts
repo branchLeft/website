@@ -11,14 +11,14 @@ export const service = new gcp.cloudrunv2.Service(
     location: region,
     ingress: 'INGRESS_TRAFFIC_ALL',
     // Service has been stable in production since 2026-08-01; no longer a
-    // freely-replaceable bootstrap resource. (B23)
+    // freely-replaceable bootstrap resource.
     deletionProtection: true,
     template: {
       serviceAccount: cloudRunRuntimeSa.email,
       scaling: {
         // >0 avoids a full cold start for every visitor after an idle
         // period, at the cost of a few pounds/month for the always-on
-        // instance. (B23)
+        // instance.
         minInstanceCount: 1,
         maxInstanceCount: 3,
       },
@@ -55,7 +55,7 @@ export const service = new gcp.cloudrunv2.Service(
           // fails here instead of serving requests. All other probes are
           // suspended until this one succeeds, so the generous failure
           // budget (60s) only affects cold start, not steady-state
-          // detection. (B4, B23)
+          // detection.
           startupProbe: {
             httpGet: {
               path: '/',
@@ -66,7 +66,7 @@ export const service = new gcp.cloudrunv2.Service(
           },
           // Restarts a container that has gone unhealthy after startup
           // (e.g. wedged event loop) rather than leaving it serving
-          // errors indefinitely. (B23)
+          // errors indefinitely.
           livenessProbe: {
             httpGet: {
               path: '/',
