@@ -8,6 +8,17 @@
     @apply flex flex-col gap-2;
   }
 
+  /* Off-screen rather than display:none/visibility:hidden, so it still
+   * parses as a normal fillable field to anything that doesn't render CSS.
+   * Deliberately not named after what it's for — see contact.tsx. */
+  .contact-form__field--alt {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    left: -9999px;
+  }
+
   .contact-form__label {
     @apply text-xs;
     color: color-mix(in srgb, var(--color-fg) 75%, transparent);
