@@ -8,3 +8,11 @@ The branchLeft marketing / product website, built with React Router v7 (SSR) + T
 - **Styling:** Tailwind CSS v4 · self-hosted fonts
 - **Build:** Vite 8 · pnpm
 - **Tests:** Vitest
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+MIT — see [LICENSE](LICENSE). The branchLeft name and brand assets are excluded from that grant; see [NOTICE.md](NOTICE.md).
