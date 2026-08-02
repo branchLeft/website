@@ -10,18 +10,27 @@ export const service = new gcp.cloudrunv2.Service(
     name: 'branchleft-website',
     location: region,
     ingress: 'INGRESS_TRAFFIC_ALL',
-    // IaC-managed and expected to be replaced/updated freely; flip to true
-    // once the service has been stable in production for a while.
-    deletionProtection: false,
+    // Service has been stable in production since 2026-08-01; no longer a
+    // freely-replaceable bootstrap resource. (B23)
+    deletionProtection: true,
     template: {
       serviceAccount: cloudRunRuntimeSa.email,
       scaling: {
-        minInstanceCount: 0,
+        // >0 avoids a full cold start for every visitor after an idle
+        // period, at the cost of a few pounds/month for the always-on
+        // instance. (B23)
+        minInstanceCount: 1,
         maxInstanceCount: 3,
       },
       containers: [
         {
           image: imageUrl,
+          ports: {
+            // react-router-serve reads $PORT, which Cloud Run sets to this
+            // value; declared explicitly so the probes below have an
+            // unambiguous default port to target.
+            containerPort: 8080,
+          },
           resources: {
             limits: {
               cpu: '1',
@@ -42,6 +51,30 @@ export const service = new gcp.cloudrunv2.Service(
               },
             },
           ],
+          // Gates traffic promotion: a revision that never becomes healthy
+          // fails here instead of serving requests. All other probes are
+          // suspended until this one succeeds, so the generous failure
+          // budget (60s) only affects cold start, not steady-state
+          // detection. (B4, B23)
+          startupProbe: {
+            httpGet: {
+              path: '/',
+            },
+            periodSeconds: 10,
+            timeoutSeconds: 5,
+            failureThreshold: 6,
+          },
+          // Restarts a container that has gone unhealthy after startup
+          // (e.g. wedged event loop) rather than leaving it serving
+          // errors indefinitely. (B23)
+          livenessProbe: {
+            httpGet: {
+              path: '/',
+            },
+            periodSeconds: 30,
+            timeoutSeconds: 5,
+            failureThreshold: 3,
+          },
         },
       ],
     },
