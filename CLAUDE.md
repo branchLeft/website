@@ -82,7 +82,7 @@ These routes are a documented exception to the "never write prose" rule above: t
 
 **Canonical sources**
 
-- Privacy notice: adapted from the ICO "Create your own privacy notice" tool — <https://ico.org.uk/for-organisations/advice-for-small-organisations/privacy-notices-and-cookies/create-your-own-privacy-notice/>. The raw tool output is preserved at `website/gen-priv-not.txt` for reference.
+- Privacy notice: adapted from the ICO "Create your own privacy notice" tool — <https://ico.org.uk/for-organisations/advice-for-small-organisations/privacy-notices-and-cookies/create-your-own-privacy-notice/>.
 - Terms of use: owner-reviewed template. The site is informational only with no client-relationship created by browsing or form submission; a formal solicitor review was judged unnecessary.
 
 **What triggers a re-review of these pages**

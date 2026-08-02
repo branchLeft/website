@@ -57,7 +57,7 @@ const VALUES: readonly Value[] = [
     title: 'Agility',
     icon: Activity,
     accent: 'agility',
-    body: 'We adapt quickly to a rapidly evolving world. We engineer our solutions to avoid lock-in to vendors or platforms. We build solutions that allow you to migrate away from us, and we demonstrate why you should stay. ',
+    body: 'We adapt quickly to a rapidly evolving world. We engineer our solutions to avoid lock-in to vendors or platforms. We build solutions that allow you to migrate away from us, and we demonstrate why you should stay.',
   },
   {
     title: 'Red Lines',
