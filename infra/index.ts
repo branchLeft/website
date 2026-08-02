@@ -4,6 +4,7 @@ import { repository } from './artifactRegistry';
 import { workloadIdentityProvider, deployerServiceAccountEmail } from './workloadIdentity';
 import { region, artifactRegistryRepoId, projectId } from './config';
 import './kms';
+import './monitoring';
 
 export const cloudRunUrl = service.uri;
 export const dnsRecordsToAddAtIonos = domainMappingDnsRecords;
