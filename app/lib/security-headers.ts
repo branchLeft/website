@@ -18,9 +18,20 @@
  */
 const STYLE_SRC = "'self' 'unsafe-inline'";
 
-export function buildContentSecurityPolicy(nonce?: string): string {
+/**
+ * `isSecure` defaults to `true` (production's normal case) since most
+ * callers have no way to know the actual request's scheme — see
+ * `app/entry.server.tsx`, the one caller that does, for why it matters:
+ * `upgrade-insecure-requests` is a live, per-response instruction (unlike
+ * `Strict-Transport-Security`, it doesn't need a prior secure connection or
+ * any browser-side cache to take effect) that force-upgrades every
+ * same-page subresource request to HTTPS — including on a plain-HTTP
+ * request, which breaks asset loading entirely against a server with no
+ * TLS listener (`pnpm start`, the e2e test server).
+ */
+export function buildContentSecurityPolicy(nonce?: string, isSecure = true): string {
   const scriptSrc = nonce ? `'self' 'nonce-${nonce}'` : "'self'";
-  return [
+  const directives = [
     "default-src 'self'",
     `script-src ${scriptSrc}`,
     `style-src ${STYLE_SRC}`,
@@ -31,8 +42,9 @@ export function buildContentSecurityPolicy(nonce?: string): string {
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "object-src 'none'",
-    'upgrade-insecure-requests',
-  ].join('; ');
+  ];
+  if (isSecure) directives.push('upgrade-insecure-requests');
+  return directives.join('; ');
 }
 
 const PERMISSIONS_POLICY = [
