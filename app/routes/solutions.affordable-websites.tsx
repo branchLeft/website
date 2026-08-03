@@ -2,16 +2,15 @@ import * as React from 'react';
 import { Link } from 'react-router';
 import { Palette, Star, Server, Code, Plus, ChevronDown } from 'lucide-react';
 import { SectionHeading } from '@branchleft/components';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [
-    { title: 'Affordable Websites — branchLeft' },
-    {
-      name: 'description',
-      content:
-        'Websites built and hosted at-cost for eligible UK-based entities working in the public interest: charities, CIOs, CICs, community benefit societies, co-operatives and worker-owned businesses.',
-    },
-  ];
+  return buildMeta({
+    title: 'Affordable Websites — branchLeft',
+    description:
+      'Websites built and hosted at-cost for eligible UK-based entities working in the public interest: charities, CIOs, CICs, community benefit societies, co-operatives and worker-owned businesses.',
+    path: '/solutions/affordable-websites',
+  });
 }
 
 export default function AffordableWebsites(): React.JSX.Element {

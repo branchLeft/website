@@ -47,6 +47,11 @@ export function meta() {
   return [
     { title: 'Page not found — branchLeft' },
     { name: 'description', content: 'Page not found.' },
+    // Not routed through buildMeta() (app/lib/meta.ts): a canonical URL and
+    // OG/Twitter card don't make sense for a response with no real page
+    // behind it. noindex instead, so a 404 never gets indexed under
+    // whatever URL produced it.
+    { name: 'robots', content: 'noindex' },
   ];
 }
 

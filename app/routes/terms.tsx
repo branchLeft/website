@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { SectionHeading } from '@branchleft/components';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [
-    { title: 'Terms — branchLeft' },
-    { name: 'description', content: 'Terms of use for the branchleft.co.uk website.' },
-  ];
+  return buildMeta({
+    title: 'Terms — branchLeft',
+    description: 'Terms of use for the branchleft.co.uk website.',
+    path: '/terms',
+  });
 }
 
 export default function Terms(): React.JSX.Element {

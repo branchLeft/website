@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { SectionHeading } from '@branchleft/components';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [
-    { title: 'Local News & Independent Media — branchLeft' },
-    {
-      name: 'description',
-      content: 'A platform supporting journalists reporting on local issues in the UK.',
-    },
-  ];
+  return buildMeta({
+    title: 'Local News & Independent Media — branchLeft',
+    description: 'A platform supporting journalists reporting on local issues in the UK.',
+    path: '/solutions/local-news',
+  });
 }
 
 export default function LocalNews(): React.JSX.Element {

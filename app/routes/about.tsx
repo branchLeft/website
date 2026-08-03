@@ -10,9 +10,14 @@ import {
 } from '@branchleft/components';
 import { SolutionsShowcase } from '../components/SolutionsShowcase';
 import { LinkedInIcon } from '../components/icons/LinkedInIcon';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [{ title: 'About — branchLeft' }, { name: 'description', content: 'About branchLeft' }];
+  return buildMeta({
+    title: 'About — branchLeft',
+    description: 'About branchLeft',
+    path: '/about',
+  });
 }
 
 const SECTIONS: readonly Section[] = [

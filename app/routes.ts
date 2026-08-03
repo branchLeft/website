@@ -12,4 +12,7 @@ export default [
   // the site favicon and any /logo.svg reference stay in sync with the
   // published component.
   route('logo.svg', 'routes/logo-svg.tsx'),
+  // Resource route: serves a generated sitemap.xml listing the indexable
+  // page routes above — see the module comment in sitemap-xml.tsx.
+  route('sitemap.xml', 'routes/sitemap-xml.tsx'),
 ] satisfies RouteConfig;

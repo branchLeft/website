@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { SectionHeading } from '@branchleft/components';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [
-    { title: 'Privacy — branchLeft' },
-    { name: 'description', content: 'BRANCHLEFT LTD privacy notice.' },
-  ];
+  return buildMeta({
+    title: 'Privacy — branchLeft',
+    description: 'BRANCHLEFT LTD privacy notice.',
+    path: '/privacy',
+  });
 }
 
 export default function Privacy(): React.JSX.Element {
