@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, useActionData, useNavigation, useSearchParams } from 'react-router';
 import type { Route } from './+types/contact';
 import { sendContactEmail } from '../lib/sendContactEmail.server';
+import { buildMeta } from '../lib/meta';
 
 /**
  * Abuse protection: length caps, a honeypot + minimum time-on-page check,
@@ -10,10 +11,11 @@ import { sendContactEmail } from '../lib/sendContactEmail.server';
  */
 
 export function meta() {
-  return [
-    { title: 'Contact — branchLeft' },
-    { name: 'description', content: 'Contact branchLeft' },
-  ];
+  return buildMeta({
+    title: 'Contact — branchLeft',
+    description: 'Contact branchLeft',
+    path: '/contact',
+  });
 }
 
 /**

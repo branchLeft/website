@@ -1,8 +1,17 @@
 import { Logo } from '@branchleft/components';
 import { SocialLinksItems } from '../components/SocialLinksItems';
+import { buildMeta } from '../lib/meta';
 
 export function meta() {
-  return [{ title: 'branchLeft' }, { name: 'description', content: 'branchLeft' }];
+  return buildMeta({
+    title: 'branchLeft',
+    // ALL_CAPS placeholder — see CLAUDE.md's "never write prose" rule. This
+    // is the single most-linked page on the site (shared on LinkedIn,
+    // Bluesky, Slack via the footer), so it needs a real one/two-sentence
+    // description before this is content-complete.
+    description: 'TODO_HOMEPAGE_DESCRIPTION',
+    path: '/',
+  });
 }
 
 export default function Home() {
