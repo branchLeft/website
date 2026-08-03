@@ -8,7 +8,10 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: [],
     // Playwright specs live in tests/ and run via `pnpm test:e2e`, not Vitest.
-    exclude: [...configDefaults.exclude, 'tests/**'],
+    // Also exclude nested worktree checkouts under .claude/worktrees/ — each is
+    // its own git worktree with its own tests/ dir, and root-level tooling
+    // should never traverse into them.
+    exclude: [...configDefaults.exclude, 'tests/**', '.claude/worktrees/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
