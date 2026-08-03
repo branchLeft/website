@@ -193,3 +193,57 @@ manually before the next `apis.ts` change — Pulumi still can't grant itself
 a permission it needs in order to read/manage its own dependency APIs. Any
 _new_ project-level IAM binding added to this program must likewise be
 granted via `gcloud` and then `pulumi import`ed locally, never applied by CI.
+
+## A missing project role fails the deploy _silently from the app's point of view_
+
+**Symptom:** every `pulumi up` on `main` fails, but the site stays up and
+serves correctly — so nothing alerts. The deploy log shows a 403 on a
+resource unrelated to the app itself:
+
+```
+gcp:monitoring:UptimeCheckConfig website-uptime creating error:
+Error 403: Permission 'monitoring.uptimeCheckConfigs.create' denied on
+resource 'projects/branchleft-prod' (or it may not exist).
+```
+
+**What actually happened (2026-08-02 → 2026-08-03):** the monitoring work
+added `gcp.monitoring.*` resources and a `gcp.logging.Metric` to the program.
+The deployer SA held neither `roles/monitoring.editor` nor
+`roles/logging.configWriter`, so `pulumi up` 403'd creating them — and
+because a failed resource aborts the whole update, **the Cloud Run service
+stopped picking up new images too**. Two commits merged to `main` and neither
+reached production; the site went on serving the last image that deployed
+before the monitoring change landed. Discovered incidentally two days later
+while previewing an unrelated change.
+
+**Why it hid.** The generalisable point, and the reason this has its own
+entry rather than a line in the section above:
+
+- The failing resources are **observability, not application** — nothing in
+  the request path reads them, so the site is completely healthy while the
+  deploy is completely broken.
+- The **smoke test can't catch it.** It runs after `pulumi up` in the same
+  job, so a failed `pulumi up` means it never executes. Even if it did, it
+  hits the live URL, which was serving the old image perfectly happily.
+- **A red run on `main` is the only signal**, and it's easy to read a red
+  `main` as "that flaky e2e again" when the site is demonstrably fine.
+
+**Fix:** granted manually via `gcloud`, then `pulumi import`ed, and declared
+in `serviceAccounts.ts` alongside the others:
+
+```bash
+gcloud projects add-iam-policy-binding branchleft-prod \
+  --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
+  --role="roles/monitoring.editor" --condition=None
+gcloud projects add-iam-policy-binding branchleft-prod \
+  --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
+  --role="roles/logging.configWriter" --condition=None
+```
+
+**Planning implication:** adding a resource _type_ the program has never
+created before is the moment to check the deployer SA's roles, whether or not
+the resource has anything to do with serving traffic. The three entries above
+plus this one are all the same bug, and it will recur on the next new
+resource type. Treat "does CI hold a role that can create this?" as part of
+adding any new resource, and check that `main` is green after the deploy that
+introduces it — the site being up does not mean the deploy succeeded.

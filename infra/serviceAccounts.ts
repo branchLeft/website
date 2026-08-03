@@ -60,3 +60,38 @@ new gcp.projects.IAMMember('deployer-service-usage-admin', {
   role: 'roles/serviceusage.serviceUsageAdmin',
   member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
 });
+
+// The roles below are all granted via gcloud and `pulumi import`ed, for the
+// same reason as the bindings above — CI has no project-level setIamPolicy, so
+// a binding it doesn't already hold can't be created by the deploy that needs
+// it.
+//
+// The first three are the load-balancer edge in `edge.ts`:
+// loadBalancerAdmin covers the address, serverless NEG, backend service, URL
+// maps, proxies and forwarding rules; securityAdmin covers the Cloud Armor
+// policy; certificatemanager.owner covers the DNS authorizations, certificates
+// and certificate map. securityAdmin is wider than Cloud Armor alone (it also
+// grants firewall and SSL-policy management project-wide) — accepted because
+// the project has only the unused auto-created default VPC, but it is the
+// binding to revisit first if that stops being true.
+//
+// monitoring.editor and logging.configWriter are for `monitoring.ts`, not the
+// edge — the notification channel, uptime check and alert policies added with
+// it, plus the log-based metric behind the contact-form alert. Their absence
+// broke every deploy from 2026-08-02 16:26 onwards: `pulumi up` 403'd on
+// creating them and aborted the whole update, so the Cloud Run service stopped
+// picking up new images too. Monitoring resources are only ever created, never
+// read back into the app, which is why nothing else surfaced it.
+for (const [name, role] of [
+  ['deployer-load-balancer-admin', 'roles/compute.loadBalancerAdmin'],
+  ['deployer-compute-security-admin', 'roles/compute.securityAdmin'],
+  ['deployer-certificate-manager-owner', 'roles/certificatemanager.owner'],
+  ['deployer-monitoring-editor', 'roles/monitoring.editor'],
+  ['deployer-logging-config-writer', 'roles/logging.configWriter'],
+]) {
+  new gcp.projects.IAMMember(name, {
+    project: projectId,
+    role,
+    member: pulumi.interpolate`serviceAccount:${githubActionsDeployerSa.email}`,
+  });
+}
