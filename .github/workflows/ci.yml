@@ -238,15 +238,6 @@ jobs:
           pulumi config set imageTag ${{ github.sha }}
           pulumi preview > preview-output.txt 2>&1
 
-      - name: Save preview output
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        id: preview_output
-        run: |
-          preview_text=$(cat infra/preview-output.txt)
-          echo "preview=$(echo "$preview_text" | head -c 65536)" >> $GITHUB_OUTPUT
-
       - name: Post preview as PR comment
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
@@ -261,7 +252,20 @@ jobs:
             if (fs.existsSync(previewPath)) {
               previewOutput = fs.readFileSync(previewPath, 'utf8');
             }
-            const comment = '## Pulumi Preview\n\n```\n' + previewOutput + '\n```';
+            // GitHub rejects comment bodies over 65536 characters. Keep the
+            // tail rather than the head: the resource list and the "N to
+            // create / M to update" summary are at the end, and they are the
+            // part worth reading.
+            const LIMIT = 60000;
+            let truncated = false;
+            if (previewOutput.length > LIMIT) {
+              previewOutput = previewOutput.slice(-LIMIT);
+              truncated = true;
+            }
+            const note = truncated
+              ? '\n\n_Output truncated to the last ' + LIMIT + ' characters; see the job log for the full preview._'
+              : '';
+            const comment = '## Pulumi Preview\n\n```\n' + previewOutput + '\n```' + note;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
