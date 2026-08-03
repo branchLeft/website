@@ -143,6 +143,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: [checks, e2e]
     if: github.event_name == 'pull_request'
+    # Job-level permissions replace the workflow-level block entirely — every
+    # scope this job needs must be listed here, not just the added one.
+    # Omitting packages: read fails the Docker build with a 403 fetching
+    # @branchleft/components from npm.pkg.github.com, a long way from
+    # anything that looks permissions-related.
+    #
+    # pull-requests: write is the scope actually being added; without it
+    # github.rest.issues.createComment fails with "Resource not accessible
+    # by integration". It has no effect on PRs from forks, where GITHUB_TOKEN
+    # is read-only whatever this block says — which is why the comment steps
+    # below are best-effort and the job summary is the real output.
+    permissions:
+      contents: read
+      packages: read
+      id-token: write
+      pull-requests: write
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
 
@@ -161,6 +177,9 @@ jobs:
           fi
 
       - name: Post fork comment
+        # Best-effort: a fork PR's GITHUB_TOKEN is read-only, so this is the
+        # one case where it is guaranteed to fail. Must not fail the check.
+        continue-on-error: true
         if: github.event.pull_request.head.repo.full_name != github.repository
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -238,16 +257,23 @@ jobs:
           pulumi config set imageTag ${{ github.sha }}
           pulumi preview > preview-output.txt 2>&1
 
-      - name: Save preview output
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        id: preview_output
+      # The job summary is the authoritative output: it needs no token
+      # permissions, so it works on fork PRs where the PR comment cannot.
+      - name: Write preview to job summary
+        if: steps.paths.outputs.infra == 'true'
         run: |
-          preview_text=$(cat infra/preview-output.txt)
-          echo "preview=$(echo "$preview_text" | head -c 65536)" >> $GITHUB_OUTPUT
+          {
+            echo '## Pulumi Preview'
+            echo
+            echo '```'
+            cat infra/preview-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Post preview as PR comment
+        # Best-effort: a fork PR's read-only GITHUB_TOKEN cannot comment, and
+        # that must not fail the check. The job summary above always has it.
+        continue-on-error: true
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
@@ -261,7 +287,20 @@ jobs:
             if (fs.existsSync(previewPath)) {
               previewOutput = fs.readFileSync(previewPath, 'utf8');
             }
-            const comment = '## Pulumi Preview\n\n```\n' + previewOutput + '\n```';
+            // GitHub rejects comment bodies over 65536 characters. Keep the
+            // tail rather than the head: the resource list and the "N to
+            // create / M to update" summary are at the end, and they are the
+            // part worth reading.
+            const LIMIT = 60000;
+            let truncated = false;
+            if (previewOutput.length > LIMIT) {
+              previewOutput = previewOutput.slice(-LIMIT);
+              truncated = true;
+            }
+            const note = truncated
+              ? '\n\n_Output truncated to the last ' + LIMIT + ' characters; see the job log for the full preview._'
+              : '';
+            const comment = '## Pulumi Preview\n\n```\n' + previewOutput + '\n```' + note;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -270,6 +309,7 @@ jobs:
             });
 
       - name: Post no-changes comment
+        continue-on-error: true
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'false'
