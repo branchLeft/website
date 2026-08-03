@@ -24,6 +24,11 @@ import type { Config } from '@react-router/dev/config';
  *     async prerender({ getStaticPaths }) { return getStaticPaths(); },
  *
  *   See: node_modules/react-router/docs/how-to/pre-rendering.md
+ *
+ *   DO NOT enable this without first fixing a real problem it currently
+ *   causes: prerendered pages would ship with no CSP/HSTS/X-Frame-Options
+ *   (and contact.tsx's anti-bot check would silently break). See
+ *   KNOWN_ISSUES.md for the full explanation and the fix path.
  */
 export default {
   ssr: true,

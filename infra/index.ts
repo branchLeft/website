@@ -10,14 +10,20 @@ import './monitoring';
 // The shared edge load balancer. `blog.branchleft.co.uk` and, later, tenant
 // outlets join this same LB as additional entries in this array — a hostname
 // list plus the Cloud Run service behind them.
-const edge = createEdge([
-  {
-    name: 'website',
-    hostnames: domains,
-    service,
-    region,
-  },
-]);
+//
+// Canonical domain is the apex (matches SITE_URL in app/lib/meta.ts) — www
+// redirects rather than serving duplicate content.
+const edge = createEdge(
+  [
+    {
+      name: 'website',
+      hostnames: domains,
+      service,
+      region,
+    },
+  ],
+  [{ from: 'www.branchleft.co.uk', to: 'branchleft.co.uk' }]
+);
 
 export const cloudRunUrl = service.uri;
 export const artifactRegistryRepositoryUrl = repository.name;

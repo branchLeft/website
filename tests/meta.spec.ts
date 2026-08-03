@@ -46,4 +46,31 @@ test.describe('SEO/social metadata', () => {
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   });
+
+  test('renders Organization JSON-LD with no CSP violation', async ({ page }) => {
+    const consoleErrors: string[] = [];
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+    page.on('pageerror', (error) => consoleErrors.push(error.message));
+
+    await page.goto('/');
+
+    const scriptContent = await page
+      .locator('script[type="application/ld+json"]')
+      .first()
+      .textContent();
+    expect(scriptContent).not.toBeNull();
+    const jsonLd = JSON.parse(scriptContent ?? '{}');
+    expect(jsonLd['@type']).toBe('Organization');
+    expect(jsonLd['@context']).toBe('https://schema.org');
+    expect(jsonLd.name).toBe('branchLeft');
+    expect(Array.isArray(jsonLd.sameAs)).toBe(true);
+    expect(jsonLd.sameAs.length).toBeGreaterThan(0);
+
+    const cspViolations = consoleErrors.filter((message) =>
+      /content security policy|refused to execute/i.test(message)
+    );
+    expect(cspViolations).toEqual([]);
+  });
 });

@@ -17,7 +17,16 @@ import { Footer } from './components/Footer';
 import { buildSecurityHeaders } from './lib/security-headers';
 
 export const links: Route.LinksFunction = () => [
+  // SVG favicon first — modern browsers prefer it. The PNG/manifest entries
+  // below are fallbacks for contexts that don't support SVG favicons (older
+  // Safari, PWA install surfaces).
   { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+  { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
+  { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+  // theme_color/background_color in manifest.webmanifest are hardcoded to
+  // match --color-bg (a JSON file can't reference a CSS custom property) —
+  // keep them in sync if that token ever changes.
+  { rel: 'manifest', href: '/manifest.webmanifest' },
   // Preload the two families used in the site-wide nav bar (brand wordmark +
   // nav labels), rendered above the fold on every route. The other two
   // families (heading/body) vary by route, so they're left to font-display:

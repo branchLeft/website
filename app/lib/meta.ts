@@ -1,4 +1,5 @@
 import type { MetaDescriptor } from 'react-router';
+import { SOCIAL_LINKS } from './social-links';
 
 /**
  * Shared meta-tag builder. Every route calls this from its own `meta()`
@@ -36,10 +37,38 @@ export const SITE_URL = 'https://branchleft.co.uk';
  */
 const DEFAULT_OG_IMAGE_PATH = '/og-image.png';
 
-// ALL_CAPS placeholder — see CLAUDE.md's "never write prose" rule. Alt text
-// describes image *content*, which nobody but the site owner can supply
-// once the real image above exists.
-const DEFAULT_OG_IMAGE_ALT = 'TODO_OG_IMAGE_ALT';
+// Describes the actual generated asset at public/og-image.png (see
+// scripts/generate-og-image.mjs): the branchLeft logo mark and wordmark,
+// centered on a plain black background matching --color-bg.
+const DEFAULT_OG_IMAGE_ALT = 'branchLeft logo and wordmark on a black background';
+
+/**
+ * schema.org/Organization JSON-LD, emitted on every real page (see
+ * `buildMeta` below). No LocalBusiness type/address: branchLeft has no
+ * public physical location to publish, and Organization is the correct type
+ * for a fully-remote company.
+ */
+const ORGANIZATION_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'branchLeft',
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.svg`,
+  sameAs: SOCIAL_LINKS.map((s) => s.href),
+} as const;
+
+/**
+ * Google Search Console HTML-tag verification. Left unset by default: the
+ * apex domain almost certainly already has a DNS-verified Search Console
+ * property (infra/config.ts notes GSC verification was a prerequisite for
+ * the Cloud Run Domain Mapping this site used before its LB migration), and
+ * a DNS-verified *domain* property covers every hostname/subdomain with no
+ * HTML tag needed. Only set this to a real value (from Search Console's
+ * "HTML tag" verification method) if that check comes back negative —
+ * shipping a placeholder token in a live meta tag would be worse than
+ * omitting the tag entirely.
+ */
+const GOOGLE_SITE_VERIFICATION: string | undefined = undefined;
 
 export interface PageMetaInput {
   /** Rendered verbatim as `<title>` and `og:title`/`twitter:title`. */
@@ -91,5 +120,15 @@ export function buildMeta({
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: resolvedImage },
     { name: 'twitter:image:alt', content: resolvedImageAlt },
+
+    // Structured data — every real page gets this (see the module comment
+    // on GOOGLE_SITE_VERIFICATION and ORGANIZATION_JSON_LD above for why
+    // this lives here rather than in root.tsx: root.tsx's own meta() is
+    // only reached by unmatched routes, never by a real page).
+    { 'script:ld+json': ORGANIZATION_JSON_LD },
+
+    ...(GOOGLE_SITE_VERIFICATION
+      ? [{ name: 'google-site-verification', content: GOOGLE_SITE_VERIFICATION }]
+      : []),
   ];
 }

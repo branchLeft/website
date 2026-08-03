@@ -1,30 +1,19 @@
 import { SITE_URL } from '../lib/meta';
+import { PAGE_PATHS } from '../lib/page-paths';
 
 /**
  * Resource route that serves a generated `sitemap.xml`, mirroring the
  * pattern in logo-svg.tsx (a route module that returns a non-HTML
  * `Response` instead of rendering a page).
  *
- * The path list below is maintained by hand rather than derived from
- * `app/routes.ts`: react-router's route config doesn't distinguish
- * indexable HTML pages from resource routes (like this one, or
- * `/logo.svg`) or carry per-route "should this be in the sitemap" intent,
- * so mechanically deriving one would need that bookkeeping added anyway.
- * Given how rarely routes are added to this site, keeping the two lists in
- * sync by hand is the simpler option — add new page paths to both.
+ * No `<lastmod>` per URL: a build-time timestamp would mark every page as
+ * "just changed" on every deploy regardless of real content changes — a
+ * false freshness signal that's arguably worse than omitting the field —
+ * and a git-derived per-file date is more moving parts than this low-churn
+ * static site's sitemap needs.
  */
-const PAGES: readonly string[] = [
-  '/',
-  '/about',
-  '/solutions/local-news',
-  '/solutions/affordable-websites',
-  '/contact',
-  '/privacy',
-  '/terms',
-];
-
 function buildSitemapXml(): string {
-  const urlEntries = PAGES.map(
+  const urlEntries = PAGE_PATHS.map(
     (path) => `  <url>\n    <loc>${SITE_URL}${path}</loc>\n  </url>`
   ).join('\n');
 
