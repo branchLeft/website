@@ -26,24 +26,9 @@ import type { Config } from '@react-router/dev/config';
  *   See: node_modules/react-router/docs/how-to/pre-rendering.md
  *
  *   DO NOT enable this without first fixing a real problem it currently
- *   causes: `@react-router/serve`'s server (see its `cli.js`) registers
- *   `express.static` for both `build/client` (where prerendered `.html`
- *   files land) and `public/`, and both run *before* the SSR catch-all
- *   handler that applies `root.tsx`'s `headers()` export and
- *   `entry.server.tsx`'s per-request CSP nonce. A prerendered page would
- *   therefore ship in production with no CSP, no HSTS, no X-Frame-Options,
- *   etc. — express.static serves the static file and the request never
- *   reaches the code that sets those headers. There's a second, independent
- *   problem too: a nonce baked into a prerendered page at build time is
- *   fixed forever, which defeats nonce-based CSP regardless. Separately,
- *   `contact.tsx`'s loader stamps `renderedAt: Date.now()` for its
- *   anti-bot minimum-time-on-page check — that route must never be
- *   prerendered even if the header issue above is solved, since freezing
- *   `renderedAt` at build time would silently defeat that check for the
- *   life of the deployed build. Fixing this needs its own design (e.g.
- *   LB-level header injection via infra/edge.ts's URL map `HeaderAction`,
- *   or an Express wrapper reapplying buildSecurityHeaders()/nonce-rewriting
- *   to static files) — not a drive-by config change.
+ *   causes: prerendered pages would ship with no CSP/HSTS/X-Frame-Options
+ *   (and contact.tsx's anti-bot check would silently break). See
+ *   KNOWN_ISSUES.md for the full explanation and the fix path.
  */
 export default {
   ssr: true,
