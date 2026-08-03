@@ -16,7 +16,7 @@
     "prepare": "[ \"$CI\" = \"true\" ] || pre-commit install"
   },
   "dependencies": {
-    "@branchleft/components": "0.1.1",
+    "@branchleft/components": "0.1.2",
     "@react-router/node": "^8",
     "@react-router/serve": "^8",
     "framer-motion": "^12.42.2",
