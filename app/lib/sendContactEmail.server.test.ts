@@ -91,10 +91,21 @@ describe('sendContactEmail', () => {
 
     expect(sendMail).toHaveBeenCalledWith({
       from: 'branchLeft website <info@branchleft.co.uk>',
-      to: 'info@branchleft.co.uk',
+      to: 'info+enquiry@branchleft.co.uk',
       replyTo: 'someone@example.com',
-      subject: 'New contact form enquiry: affordable-websites',
-      text: 'Category: affordable-websites\nFrom: someone@example.com\n\nPlease can you build me a site.',
+      subject: '🔔 Website enquiry: affordable-websites',
+      text: [
+        'NEW WEBSITE ENQUIRY — branchLeft',
+        '--------------------------------',
+        'Category: affordable-websites',
+        'From:     someone@example.com',
+        '',
+        'Message:',
+        'Please can you build me a site.',
+        '--------------------------------',
+        '(Reply-To is already set to the sender — hit reply.)',
+      ].join('\n'),
+      html: expect.stringContaining('someone@example.com'),
     });
   });
 
