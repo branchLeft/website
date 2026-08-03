@@ -143,6 +143,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: [checks, e2e]
     if: github.event_name == 'pull_request'
+    # Job-level permissions replace the workflow-level block entirely, so
+    # contents/id-token have to be restated. pull-requests: write is what
+    # lets this job comment; without it github.rest.issues.createComment
+    # fails with "Resource not accessible by integration".
+    #
+    # Note this has no effect on PRs from forks: GITHUB_TOKEN is read-only
+    # there whatever this block says, which is why the comment steps below
+    # are best-effort and the job summary is the real output.
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
 
@@ -161,6 +173,9 @@ jobs:
           fi
 
       - name: Post fork comment
+        # Best-effort: a fork PR's GITHUB_TOKEN is read-only, so this is the
+        # one case where it is guaranteed to fail. Must not fail the check.
+        continue-on-error: true
         if: github.event.pull_request.head.repo.full_name != github.repository
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
@@ -238,7 +253,23 @@ jobs:
           pulumi config set imageTag ${{ github.sha }}
           pulumi preview > preview-output.txt 2>&1
 
+      # The job summary is the authoritative output: it needs no token
+      # permissions, so it works on fork PRs where the PR comment cannot.
+      - name: Write preview to job summary
+        if: steps.paths.outputs.infra == 'true'
+        run: |
+          {
+            echo '## Pulumi Preview'
+            echo
+            echo '```'
+            cat infra/preview-output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Post preview as PR comment
+        # Best-effort: a fork PR's read-only GITHUB_TOKEN cannot comment, and
+        # that must not fail the check. The job summary above always has it.
+        continue-on-error: true
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
@@ -274,6 +305,7 @@ jobs:
             });
 
       - name: Post no-changes comment
+        continue-on-error: true
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'false'
