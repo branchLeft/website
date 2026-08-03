@@ -29,6 +29,14 @@ export interface EdgeSite {
   region: pulumi.Input<string>;
 }
 
+/** A host-level redirect, e.g. `www.example.com` → `example.com`. */
+export interface HostRedirect {
+  /** The hostname that should redirect rather than serve content. */
+  from: string;
+  /** The hostname to redirect to. */
+  to: string;
+}
+
 /** The DNS records a domain owner must publish before a certificate can issue. */
 export interface DnsAuthorizationRecord {
   hostname: string;
@@ -74,7 +82,7 @@ const ALL_SOURCE_IPS = {
   config: { srcIpRanges: ['*'] },
 };
 
-export function createEdge(sites: EdgeSite[]): Edge {
+export function createEdge(sites: EdgeSite[], hostRedirects: HostRedirect[] = []): Edge {
   // Anycast IPv4 the A records point at. Reserved rather than ephemeral so a
   // rebuild of the forwarding rule doesn't change the address and silently
   // break DNS that already points here.
@@ -151,6 +159,15 @@ export function createEdge(sites: EdgeSite[]): Edge {
   const pathMatchers: gcp.types.input.compute.URLMapPathMatcher[] = [];
   let defaultService: pulumi.Output<string> | undefined;
 
+  // A hostname can only appear in one URL-map host rule, so a redirect
+  // source (e.g. www.example.com) must be excluded from the serving host
+  // rule below — its own dedicated redirect host rule is added further
+  // down, after the sites loop. The certificate-issuance loop is
+  // unaffected: the redirect source still needs its own managed
+  // certificate so the TLS/SNI handshake succeeds before the URL map's
+  // host rule is ever consulted to redirect it.
+  const redirectFromHosts = new Set(hostRedirects.map((r) => r.from));
+
   // Created once, outside the loop, so every site's certificate map entry
   // points at the same map and the same target proxy serves all of them.
   const certificateMap = new gcp.certificatemanager.CertificateMap(
@@ -198,8 +215,9 @@ export function createEdge(sites: EdgeSite[]): Edge {
 
     defaultService = defaultService ?? backendService.id;
 
+    const servingHosts = site.hostnames.filter((h) => !redirectFromHosts.has(h));
     const pathMatcherName = `${site.name}-paths`;
-    hostRules.push({ hosts: site.hostnames, pathMatcher: pathMatcherName });
+    hostRules.push({ hosts: servingHosts, pathMatcher: pathMatcherName });
     pathMatchers.push({ name: pathMatcherName, defaultService: backendService.id });
 
     for (const hostname of site.hostnames) {
@@ -249,6 +267,25 @@ export function createEdge(sites: EdgeSite[]): Edge {
 
   if (defaultService === undefined) {
     throw new Error('createEdge requires at least one site');
+  }
+
+  // Canonical-domain redirects (e.g. www → apex), each on its own host rule
+  // pointing at a pathMatcher whose only job is a 301. `stripQuery: false`
+  // and no `pathRedirect` — this is a bare host swap, every path and query
+  // string carries through unchanged.
+  for (const redirect of hostRedirects) {
+    const slug = redirect.from.replaceAll('.', '-');
+    const pathMatcherName = `redirect-${slug}-paths`;
+    hostRules.push({ hosts: [redirect.from], pathMatcher: pathMatcherName });
+    pathMatchers.push({
+      name: pathMatcherName,
+      defaultUrlRedirect: {
+        hostRedirect: redirect.to,
+        httpsRedirect: true,
+        redirectResponseCode: 'MOVED_PERMANENTLY_DEFAULT',
+        stripQuery: false,
+      },
+    });
   }
 
   const urlMap = new gcp.compute.URLMap('edge-url-map', {

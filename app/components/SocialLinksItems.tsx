@@ -3,13 +3,17 @@ import { BlueskyIcon } from './icons/BlueskyIcon';
 import { GitHubIcon } from './icons/GitHubIcon';
 import { LinkedInIcon } from './icons/LinkedInIcon';
 import { MediumIcon } from './icons/MediumIcon';
+import { SOCIAL_LINKS } from '../lib/social-links';
 
-const SOCIALS = [
-  { href: 'https://bsky.app/profile/branchleft.bsky.social', label: 'Bluesky', Icon: BlueskyIcon },
-  { href: 'https://www.linkedin.com/company/branchleft', label: 'LinkedIn', Icon: LinkedInIcon },
-  { href: 'https://medium.com/@branchleft', label: 'Medium', Icon: MediumIcon },
-  { href: 'https://github.com/branchLeft', label: 'GitHub', Icon: GitHubIcon },
-] as const;
+// Icons live here, not in the shared `app/lib/social-links.ts` list, so that
+// module can stay plain data (it's also consumed by meta.ts, which has no
+// other reason to import React components).
+const ICONS: Record<string, React.ComponentType<{ readonly className?: string }>> = {
+  Bluesky: BlueskyIcon,
+  LinkedIn: LinkedInIcon,
+  Medium: MediumIcon,
+  GitHub: GitHubIcon,
+};
 
 /**
  * Renders bare `<li>`s for each social link — no `<ul>` of its own — so
@@ -26,19 +30,22 @@ export function SocialLinksItems({
 }): React.JSX.Element {
   return (
     <>
-      {SOCIALS.map(({ href, label, Icon }) => (
-        <li key={label}>
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            className={linkClassName}
-          >
-            <Icon className={iconClassName} />
-          </a>
-        </li>
-      ))}
+      {SOCIAL_LINKS.map(({ href, label }) => {
+        const Icon = ICONS[label];
+        return (
+          <li key={label}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={linkClassName}
+            >
+              <Icon className={iconClassName} />
+            </a>
+          </li>
+        );
+      })}
     </>
   );
 }

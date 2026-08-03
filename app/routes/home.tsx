@@ -5,11 +5,8 @@ import { buildMeta } from '../lib/meta';
 export function meta() {
   return buildMeta({
     title: 'branchLeft',
-    // ALL_CAPS placeholder — see CLAUDE.md's "never write prose" rule. This
-    // is the single most-linked page on the site (shared on LinkedIn,
-    // Bluesky, Slack via the footer), so it needs a real one/two-sentence
-    // description before this is content-complete.
-    description: 'TODO_HOMEPAGE_DESCRIPTION',
+    description:
+      'branchLeft is a 100% worker-owned UK company building affordable, ethical technology for people and planet — no private equity, no profit extraction.',
     path: '/',
   });
 }
