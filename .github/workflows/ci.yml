@@ -152,7 +152,7 @@ jobs:
 
       - name: Check for relevant file changes
         id: paths
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 # v2
         with:
           filters: |
             infra:
@@ -162,7 +162,7 @@ jobs:
 
       - name: Post fork comment
         if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -251,7 +251,7 @@ jobs:
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -273,7 +273,7 @@ jobs:
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'false'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
