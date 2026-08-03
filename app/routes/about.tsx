@@ -16,7 +16,7 @@ export function meta() {
   return buildMeta({
     title: 'About — branchLeft',
     description:
-      'branchLeft is a 100% worker-owned UK company committed to sustainability, environmental impact, responsible AI and societal good — meet the values and people behind our work.',
+      'branchLeft is a 100% worker-owned UK company committed to sustainability, environmental impact, responsible AI and societal good. Meet the values and people behind our work.',
     path: '/about',
   });
 }

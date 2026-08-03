@@ -14,7 +14,7 @@ export function meta() {
   return buildMeta({
     title: 'Contact — branchLeft',
     description:
-      'Get in touch with branchLeft about local news platforms, affordable websites for charities and co-ops, or bespoke technology — we would love to hear from you.',
+      'Get in touch with branchLeft about local news platforms, affordable websites for charities and co-ops, or bespoke technology. We would love to hear from you.',
     path: '/contact',
   });
 }

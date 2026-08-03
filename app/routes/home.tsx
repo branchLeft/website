@@ -6,7 +6,7 @@ export function meta() {
   return buildMeta({
     title: 'branchLeft',
     description:
-      'branchLeft is a 100% worker-owned UK company building affordable, ethical technology for people and planet — no private equity, no profit extraction.',
+      'branchLeft is a 100% worker-owned UK company building affordable, ethical technology for people and planet.',
     path: '/',
   });
 }
