@@ -18,4 +18,5 @@ test('is served as a valid sitemap listing every indexable page', async ({ reque
   expect(body).toContain('<loc>https://branchleft.co.uk/contact</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/privacy</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/terms</loc>');
+  expect(body).toContain('<lastmod>');
 });

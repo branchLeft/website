@@ -13,19 +13,25 @@ import { SITE_URL } from '../lib/meta';
  * Given how rarely routes are added to this site, keeping the two lists in
  * sync by hand is the simpler option — add new page paths to both.
  */
-const PAGES: readonly string[] = [
-  '/',
-  '/about',
-  '/solutions/local-news',
-  '/solutions/affordable-websites',
-  '/contact',
-  '/privacy',
-  '/terms',
+interface PageEntry {
+  path: string;
+  lastmod: string;
+}
+
+const PAGES: readonly PageEntry[] = [
+  { path: '/', lastmod: '2026-07-28' },
+  { path: '/about', lastmod: '2026-07-28' },
+  { path: '/solutions/local-news', lastmod: '2026-07-28' },
+  { path: '/solutions/affordable-websites', lastmod: '2026-07-28' },
+  { path: '/contact', lastmod: '2026-07-28' },
+  { path: '/privacy', lastmod: '2026-07-28' },
+  { path: '/terms', lastmod: '2026-07-28' },
 ];
 
 function buildSitemapXml(): string {
   const urlEntries = PAGES.map(
-    (path) => `  <url>\n    <loc>${SITE_URL}${path}</loc>\n  </url>`
+    ({ path, lastmod }) =>
+      `  <url>\n    <loc>${SITE_URL}${path}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`
   ).join('\n');
 
   return (
