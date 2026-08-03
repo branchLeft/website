@@ -9,7 +9,24 @@ export const service = new gcp.cloudrunv2.Service(
   {
     name: 'branchleft-website',
     location: region,
-    ingress: 'INGRESS_TRAFFIC_ALL',
+    // Only the edge load balancer (edge.ts) can reach this service. Without
+    // this, both `run.app` hostnames stay publicly reachable and bypass the
+    // load balancer, Cloud Armor and the TLS configuration entirely — the WAF
+    // would be decorative. This is the single easiest step to omit and the one
+    // that invalidates the whole edge layer.
+    //
+    // Applied by `gcloud run services update --ingress` at 03:23Z on
+    // 2026-08-03, once DNS had fully cut over to the LB and a full TTL had
+    // elapsed; this declaration brings the program back in line with reality.
+    // Setting it any earlier would have taken the site down, because Cloud Run
+    // Domain Mapping requires INGRESS_TRAFFIC_ALL.
+    //
+    // Reverting this to INGRESS_TRAFFIC_ALL does not break the site — traffic
+    // arrives via the LB either way — it silently re-opens the bypass. Verify
+    // with both hostnames, which return 404 (not 403) when correctly blocked:
+    //   branchleft-website-915502481546.europe-west1.run.app
+    //   branchleft-website-syoeiqz6mq-ew.a.run.app
+    ingress: 'INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER',
     // Service has been stable in production since 2026-08-01; no longer a
     // freely-replaceable bootstrap resource.
     deletionProtection: true,
