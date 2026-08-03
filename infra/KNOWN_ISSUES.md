@@ -1,6 +1,33 @@
 # Known issues
 
-## `gcp.cloudrun.DomainMapping` hangs or times out on `pulumi up`
+## `gcp.cloudrun.DomainMapping` hangs or times out on `pulumi up` — RESOLVED 2026-08-03
+
+> **Resolved by removing the resource, not by fixing it.** `branchleft.co.uk`
+> and `www.branchleft.co.uk` were migrated off Cloud Run Domain Mapping onto a
+> Global External Application Load Balancer with Certificate Manager on
+> 2026-08-03 (see `infra/edge.ts`). The two `DomainMapping` resources still
+> exist in `domainMapping.ts`, retained as a rollback path while the new edge
+> soaks, but they carry no traffic — DNS points at the LB and Cloud Run ingress
+> is locked to the load balancer. They will be deleted, and this becomes purely
+> historical, once the edge has proven itself over a normal traffic day.
+>
+> The replacement was driven by Cloud Armor — which cannot attach to a Cloud
+> Run service reached via Domain Mapping at all — rather than by this bug; the
+> fix was a side effect. See
+> `ghost-platform-docs/12-availability-abuse-and-tenant-exit.md` §1 for the
+> architecture, and the "Production cutover" section there for what the real
+> migration measured.
+>
+> **Kept because the reasoning still generalises.** The root-cause analysis
+> below is the clearest statement of a pattern that recurs across this program
+> (see the three bootstrap entries that follow): Pulumi blocking on a terminal
+> state that can only be reached by an action the resource itself was supposed
+> to unblock. It is also the answer to "why did we take on a fixed ~$18/month
+> forwarding-rule charge", which is not obvious from the code alone.
+>
+> Certificate Manager, by contrast, **does not** block the apply on issuance —
+> verified adversarially with the DNS-authorization record deliberately
+> withheld. That is the specific property that makes the replacement work.
 
 **Symptom:** `pulumi up` gets stuck (or times out after ~20 minutes) creating or
 replacing a `domain-*` resource, often with a status like:
@@ -57,6 +84,33 @@ the next `pulumi preview`/`up` — no import needed.
   Domain Mapping being a GCP "preview" feature with no SLA — the alternative
   (external HTTPS Load Balancer + Certificate Manager) doesn't have this
   particular problem, at the cost of a fixed monthly forwarding-rule charge.
+
+## `pulumi preview --config <k>=<v>` writes to `Pulumi.production.yaml`
+
+**Symptom:** a `git status` after what you believed was a read-only command
+shows `Pulumi.production.yaml` modified, with `imageTag` changed.
+
+**Why it matters here:** the stack pins `imageTag: bootstrap-amd64-v2`, and
+the existing warning against a local `pulumi up` assumes that pin stays put.
+`--config` is the obvious way to preview against the _live_ image rather than
+the bootstrap one — but it is not a per-invocation override, it mutates the
+stack config file, exactly the file the pin lives in. Committing that by
+accident changes what a later deploy would roll out.
+
+```bash
+# Persists imageTag to Pulumi.production.yaml as a side effect
+pulumi preview --config imageTag=<sha>
+
+# Read-only
+pulumi preview
+```
+
+**How to apply:** prefer a bare `pulumi preview` and read past the expected
+`~image` diff, which is just the local bootstrap pin against whatever CI last
+deployed. If you do use `--config`, `git checkout -- infra/Pulumi.production.yaml`
+afterwards and confirm the pin is back before committing. Note this is a
+different mechanism from the `pulumi up` footgun — that one changes production,
+this one changes the file that decides what production becomes.
 
 ## `github-actions-deployer` SA needs manual IAM on the Pulumi state bucket
 
