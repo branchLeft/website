@@ -1,5 +1,4 @@
 import { service } from './cloudRun';
-import { domainMappingDnsRecords } from './domainMapping';
 import { repository } from './artifactRegistry';
 import { workloadIdentityProvider, deployerServiceAccountEmail } from './workloadIdentity';
 import { createEdge } from './edge';
@@ -41,10 +40,6 @@ export const certificateDnsAuthorizationRecords = edge.dnsAuthorizationRecords;
 //   gcloud logging read 'jsonPayload.enforcedSecurityPolicy.name="<policy>"'
 export const certificateNames = edge.certificateNames;
 export const securityPolicyName = edge.securityPolicyName;
-
-// Superseded by `edgeIpAddress` above, and removed once the domain mappings
-// are deleted at the end of the cutover.
-export const dnsRecordsToAddAtIonos = domainMappingDnsRecords;
 
 // Feed these into GitHub Actions repo variables/secrets (see the deploy plan).
 export const githubActionsWorkloadIdentityProvider = workloadIdentityProvider;
