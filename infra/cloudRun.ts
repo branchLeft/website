@@ -4,16 +4,24 @@ import { repository } from './artifactRegistry';
 import { cloudRunRuntimeSa } from './serviceAccounts';
 import { gmailUser, gmailAppPassword } from './secrets';
 
+// Plain string, not a `pulumi.Output`, so it can be exported and hand-copied
+// into another program's config without that program taking a dependency on
+// this stack. See the comment on the exports in `index.ts`.
+export const serviceName = 'branchleft-website';
+
 export const service = new gcp.cloudrunv2.Service(
   'website',
   {
-    name: 'branchleft-website',
+    name: serviceName,
     location: region,
-    // Only the edge load balancer (edge.ts) can reach this service. Without
-    // this, both `run.app` hostnames stay publicly reachable and bypass the
-    // load balancer, Cloud Armor and the TLS configuration entirely — the WAF
-    // would be decorative. This is the single easiest step to omit and the one
-    // that invalidates the whole edge layer.
+    // Only the edge load balancer — declared in a separate private
+    // infrastructure repo, which routes to this service by plain-string name
+    // and region (see the exports at the bottom of `index.ts`) — can reach
+    // this service. Without this, both `run.app` hostnames stay publicly
+    // reachable and bypass the load balancer, Cloud Armor and the TLS
+    // configuration entirely — the WAF would be decorative. This is the
+    // single easiest step to omit and the one that invalidates the whole
+    // edge layer. DO NOT relax this to `INGRESS_TRAFFIC_ALL`; see below.
     //
     // Applied by `gcloud run services update --ingress` at 03:23Z on
     // 2026-08-03, once DNS had fully cut over to the LB and a full TTL had

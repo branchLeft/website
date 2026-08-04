@@ -66,14 +66,37 @@ new gcp.projects.IAMMember('deployer-service-usage-admin', {
 // a binding it doesn't already hold can't be created by the deploy that needs
 // it.
 //
-// The first three are the load-balancer edge in `edge.ts`:
-// loadBalancerAdmin covers the address, serverless NEG, backend service, URL
-// maps, proxies and forwarding rules; securityAdmin covers the Cloud Armor
-// policy; certificatemanager.owner covers the DNS authorizations, certificates
-// and certificate map. securityAdmin is wider than Cloud Armor alone (it also
-// grants firewall and SSL-policy management project-wide) — accepted because
-// the project has only the unused auto-created default VPC, but it is the
-// binding to revisit first if that stops being true.
+// The first three (loadBalancerAdmin, compute.securityAdmin,
+// certificatemanager.owner) were originally for the edge load balancer this
+// repo used to declare in `edge.ts` — loadBalancerAdmin for the address,
+// serverless NEG, backend service, URL maps, proxies and forwarding rules;
+// securityAdmin for the Cloud Armor policy; certificatemanager.owner for the
+// DNS authorizations, certificates and certificate map. The edge itself has
+// since moved to a separate private infrastructure repo via a Pulumi state
+// move, and that repo runs no CI deploy of its own (it's applied by hand,
+// under a human owner account), so nothing exercises these three roles
+// through *this* deployer SA today.
+//
+// They stay granted anyway — a deliberate deferral, not an oversight, and
+// NOT a settled position: moving project-level IAM for a deploy identity
+// across repos has its own bootstrap trap (see KNOWN_ISSUES.md), and there
+// was no benefit to taking that on in the same change that moved the edge
+// resources themselves.
+//
+// Be precise about what "unused" means here: Pulumi no longer *declaring*
+// the edge resources does not revoke the deployer SA's project-level GCP
+// permissions to modify them. This repo is public, and its CI workflow runs
+// with this SA's credentials — a compromised or maliciously modified
+// workflow run could call the GCP API directly (bypassing Pulumi entirely)
+// and modify the shared edge, its Cloud Armor policy, or its certificates.
+// That residual attack surface is real and currently accepted, not closed
+// by this change. Revisit — and prefer removing these three roles outright
+// — when this SA is scoped down to only what `website` itself uses.
+//
+// securityAdmin is wider than Cloud Armor alone (it also grants firewall and
+// SSL-policy management project-wide) — accepted because the project has
+// only the unused auto-created default VPC, but it is the binding to
+// revisit first if that stops being true.
 //
 // monitoring.editor and logging.configWriter are for `monitoring.ts`, not the
 // edge — the notification channel, uptime check and alert policies added with
