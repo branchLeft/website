@@ -7,9 +7,19 @@
 > Global External Application Load Balancer with Certificate Manager on
 > 2026-08-03 (see `infra/edge.ts`). The two `DomainMapping` resources still
 > exist in `domainMapping.ts`, retained as a rollback path while the new edge
-> soaks, but they carry no traffic — DNS points at the LB and Cloud Run ingress
-> is locked to the load balancer. They will be deleted, and this becomes purely
-> historical, once the edge has proven itself over a normal traffic day.
+> soaks. Cloud Run ingress is locked to the load balancer, so they carry no
+> traffic **from any DNS record the cutover checklist actually changed** —
+> but that turned out not to be the same thing as "carry no traffic" full
+> stop. A stale `AAAA` record the original mapping had published back on
+> 2026-08-01 — never part of the A-record cutover — was still live at IONOS a
+> day later, and routed real IPv6-preferring mobile traffic straight into
+> this now-blocked path, producing a genuine production 404. Fixed by
+> deleting those `AAAA` records (see
+> `ghost-platform-docs/12-availability-abuse-and-tenant-exit.md` §1 point 6
+> for the full incident writeup and the resulting DNS-audit checklist).
+> **Do not treat "retained as rollback" as synonymous with "receives no
+> traffic" for either of these mappings** — re-check `dig` for every record
+> type, not just `A`, before deleting them or trusting the soak period.
 >
 > The replacement was driven by Cloud Armor — which cannot attach to a Cloud
 > Run service reached via Domain Mapping at all — rather than by this bug; the
