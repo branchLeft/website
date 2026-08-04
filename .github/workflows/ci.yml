@@ -324,6 +324,31 @@ jobs:
               body: '## Pulumi Preview\n\nSkipped — no infrastructure or deployment files changed.'
             });
 
+      # Runs last, after the summary/comment steps above have already posted
+      # the full preview — so the failure below never hides that output. This
+      # is a real signal, not a guess: it parses the actual preview that ran
+      # against production state with real GCP credentials a few steps up.
+      # It is not a substitute for the merge gate described in the PR that
+      # introduced it (a separate private infrastructure repo now owns these
+      # resources via a Pulumi state move) — this repo's branch protection
+      # allows an admin to bypass required checks, so treat a green run here
+      # as one more piece of evidence, not a guarantee.
+      - name: Fail if the edge load balancer would be deleted
+        if: |
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          steps.paths.outputs.infra == 'true'
+        working-directory: infra
+        run: |
+          # Logical names of the 17 resources the state-move runbook moves
+          # out of this stack (runbook §6). A (delete) against any of these
+          # means this stack's state still holds them — i.e. the move hasn't
+          # completed — while this program no longer declares them.
+          EDGE_RESOURCE_NAMES='edge-ip|edge-armor|edge-cert-map|dns-auth-branchleft-co-uk|dns-auth-www-branchleft-co-uk|cert-branchleft-co-uk|cert-www-branchleft-co-uk|cert-entry-branchleft-co-uk|cert-entry-www-branchleft-co-uk|website-neg|website-backend|edge-url-map|edge-https-proxy|edge-https-rule|edge-http-redirect|edge-http-proxy|edge-http-rule'
+          if grep -B2 '(delete)' preview-output.txt | grep -qE "::($EDGE_RESOURCE_NAMES)\]"; then
+            echo "::error::This PR's pulumi preview shows the edge load balancer would be DELETED if applied right now. The Pulumi state move (see the separate private infrastructure repo's runbook) has not completed. Do not merge — see the PR description's blocking precondition."
+            exit 1
+          fi
+
   deploy:
     name: Build, push & deploy
     runs-on: ubuntu-latest
@@ -378,6 +403,24 @@ jobs:
           pulumi login gs://branchleft-pulumi-state
           pulumi stack select production
           pulumi config set imageTag ${{ github.sha }}
+
+          # Preflight: this deploy must never delete the edge load balancer.
+          # It moved to a separate private infrastructure repo via a Pulumi
+          # state move (see that repo's runbook); until that move completes,
+          # this stack's state still holds all 17 edge resources while this
+          # program no longer declares any of them, and an unguarded
+          # `pulumi up` would delete them — including the reserved anycast
+          # IP, which does not come back. This check has real, authenticated
+          # access to the same state `pulumi up` is about to act on, so a
+          # pass here is a genuine guarantee for this run, not an assumption.
+          pulumi preview > preflight-preview.txt 2>&1
+          EDGE_RESOURCE_NAMES='edge-ip|edge-armor|edge-cert-map|dns-auth-branchleft-co-uk|dns-auth-www-branchleft-co-uk|cert-branchleft-co-uk|cert-www-branchleft-co-uk|cert-entry-branchleft-co-uk|cert-entry-www-branchleft-co-uk|website-neg|website-backend|edge-url-map|edge-https-proxy|edge-https-rule|edge-http-redirect|edge-http-proxy|edge-http-rule'
+          if grep -B2 '(delete)' preflight-preview.txt | grep -qE "::($EDGE_RESOURCE_NAMES)\]"; then
+            echo "::error::pulumi preview shows this deploy would delete the edge load balancer. Aborting before pulumi up — the Pulumi state move documented in the separate private infrastructure repo has not completed. See infra/KNOWN_ISSUES.md."
+            cat preflight-preview.txt
+            exit 1
+          fi
+
           pulumi up --yes
 
       # `pulumi up` succeeding only means the API call to update the Cloud

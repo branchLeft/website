@@ -73,13 +73,25 @@ new gcp.projects.IAMMember('deployer-service-usage-admin', {
 // securityAdmin for the Cloud Armor policy; certificatemanager.owner for the
 // DNS authorizations, certificates and certificate map. The edge itself has
 // since moved to a separate private infrastructure repo via a Pulumi state
-// move, and that repo runs no CI deploy of its own, so nothing exercises
-// these three roles today. They stay granted to this deployer SA anyway —
-// a deliberate deferral, not an oversight: moving project-level IAM for a
-// deploy identity across repos has its own bootstrap trap (see
-// KNOWN_ISSUES.md), and there was no benefit to taking that on in the same
-// change that moved the edge resources themselves. Revisit if this SA is
-// ever scoped down to only what `website` itself uses.
+// move, and that repo runs no CI deploy of its own (it's applied by hand,
+// under a human owner account), so nothing exercises these three roles
+// through *this* deployer SA today.
+//
+// They stay granted anyway — a deliberate deferral, not an oversight, and
+// NOT a settled position: moving project-level IAM for a deploy identity
+// across repos has its own bootstrap trap (see KNOWN_ISSUES.md), and there
+// was no benefit to taking that on in the same change that moved the edge
+// resources themselves.
+//
+// Be precise about what "unused" means here: Pulumi no longer *declaring*
+// the edge resources does not revoke the deployer SA's project-level GCP
+// permissions to modify them. This repo is public, and its CI workflow runs
+// with this SA's credentials — a compromised or maliciously modified
+// workflow run could call the GCP API directly (bypassing Pulumi entirely)
+// and modify the shared edge, its Cloud Armor policy, or its certificates.
+// That residual attack surface is real and currently accepted, not closed
+// by this change. Revisit — and prefer removing these three roles outright
+// — when this SA is scoped down to only what `website` itself uses.
 //
 // securityAdmin is wider than Cloud Armor alone (it also grants firewall and
 // SSL-policy management project-wide) — accepted because the project has

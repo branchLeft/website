@@ -314,3 +314,35 @@ plus this one are all the same bug, and it will recur on the next new
 resource type. Treat "does CI hold a role that can create this?" as part of
 adding any new resource, and check that `main` is green after the deploy that
 introduces it — the site being up does not mean the deploy succeeded.
+
+## `github-actions-deployer` retains edge-admin IAM roles this program no longer uses — accepted risk, not closed
+
+**Symptom:** would be silent. Nothing errors; the gap is a standing
+capability, not a failure.
+
+**What's true:** since the edge load balancer moved out of this repo (see the
+"resolved" entry above and `serviceAccounts.ts`), nothing in this Pulumi
+program exercises `deployer-load-balancer-admin`
+(`roles/compute.loadBalancerAdmin`), `deployer-compute-security-admin`
+(`roles/compute.securityAdmin`) or `deployer-certificate-manager-owner`
+(`roles/certificatemanager.owner`) any more. They were deliberately left
+granted to `github-actions-deployer` regardless — moving project-level IAM
+for a deploy identity across repos has its own bootstrap trap, and there was
+no benefit to taking that on in the same change that moved the edge resources
+themselves. See `serviceAccounts.ts` for the reasoning in full.
+
+**Why this is a real, currently-accepted gap, not just leftover config:**
+Pulumi no longer _declaring_ the edge resources does not revoke the SA's
+underlying GCP permissions. This repo is public and its CI workflow runs with
+this SA's credentials on every push to `main`. A compromised or maliciously
+modified workflow run could call the GCP `compute` and `certificatemanager`
+APIs directly — bypassing Pulumi and this program entirely — and modify the
+shared edge, its Cloud Armor policy, or its certificates. Nothing in this
+repo's CI closes that path today.
+
+**How to apply:** don't treat "the edge isn't in this program any more" as
+"this repo can no longer affect the edge." When `github-actions-deployer` is
+next scoped down to only what `website` itself needs, remove these three
+roles as part of that work rather than assuming their removal was already
+handled by the resources moving out. Until then, this is unfinished business
+to revisit, not a settled architecture.
