@@ -63,8 +63,16 @@ export interface Edge {
  * this threshold currently only decides what gets *logged* as over-limit, not
  * what gets throttled. Tune it against real traffic before promoting the rule
  * to enforcing.
+ *
+ * Raised from 100 to 200 on 2026-08-04 after reviewing the first ~23h of real
+ * edge traffic: crawl-66-249-74-36.googlebot.com peaked at 92 requests in a
+ * single 60s window — 92% of the old limit — while every other observed IP
+ * stayed at or below 67. 100 was one crawl burst away from a 429 against
+ * Google's own crawler on a site that just shipped dedicated SEO work
+ * (sitemap, robots.txt, OG tags). 200 keeps roughly 2x headroom over the
+ * worst legitimate burst seen so far.
  */
-const RATE_LIMIT_REQUESTS = 100;
+const RATE_LIMIT_REQUESTS = 200;
 const RATE_LIMIT_INTERVAL_SEC = 60;
 
 /**
@@ -109,10 +117,30 @@ export function createEdge(sites: EdgeSite[], hostRedirects: HostRedirect[] = []
       name: 'branchleft-edge-armor',
       description: 'Shared Cloud Armor policy for the branchLeft edge load balancer',
       type: 'CLOUD_ARMOR',
+      // Cloud Armor evaluates rules in priority order (lowest number first)
+      // and stops at the first *match* — not the first rule that takes
+      // action. The rate-limit rule's match condition is `srcIpRanges: ['*']`,
+      // which is unconditionally true for every request, so it must sit
+      // *after* the WAF rules below. Getting this backwards (as an earlier
+      // version of this file did) makes the WAF rules permanently
+      // unreachable: the catch-all rate limiter always wins the match first,
+      // regardless of preview/enforce mode, and 23h of real traffic logs
+      // showed exactly that — zero recorded hits against any WAF rule.
       rules: [
+        ...OWASP_RULESETS.map((ruleset, i) => ({
+          action: 'deny(403)',
+          priority: 1000 + i,
+          description: `OWASP preconfigured: ${ruleset} (sensitivity 1)`,
+          match: {
+            expr: {
+              expression: `evaluatePreconfiguredWaf('${ruleset}', {'sensitivity': 1})`,
+            },
+          },
+          preview: true,
+        })),
         {
           action: 'throttle',
-          priority: 1000,
+          priority: 2000,
           description: `Per-IP rate limit: ${RATE_LIMIT_REQUESTS} requests / ${RATE_LIMIT_INTERVAL_SEC}s`,
           match: ALL_SOURCE_IPS,
           rateLimitOptions: {
@@ -131,17 +159,6 @@ export function createEdge(sites: EdgeSite[], hostRedirects: HostRedirect[] = []
           },
           preview: true,
         },
-        ...OWASP_RULESETS.map((ruleset, i) => ({
-          action: 'deny(403)',
-          priority: 1001 + i,
-          description: `OWASP preconfigured: ${ruleset} (sensitivity 1)`,
-          match: {
-            expr: {
-              expression: `evaluatePreconfiguredWaf('${ruleset}', {'sensitivity': 1})`,
-            },
-          },
-          preview: true,
-        })),
         {
           action: 'allow',
           priority: 2147483647,
