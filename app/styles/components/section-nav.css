@@ -24,8 +24,6 @@
     padding-block: 0.5rem;
     scroll-snap-type: x proximity;
     width: max-content;
-
-
   }
 
   .bl-section-nav__inner > li {

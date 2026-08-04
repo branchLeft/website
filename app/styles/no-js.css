@@ -37,28 +37,15 @@
   }
 
   /* Values cloud (About page, from @branchleft/components): the orbiting
-   * ring is entirely click-to-reveal with no native fallback, and the
-   * accordion (already the small-mobile fallback markup) is collapsed by
-   * default. Drop the ring and force the accordion fully open so all 7
-   * value descriptions are readable. */
+   * ring is entirely click-to-reveal with no native fallback, so drop it
+   * and force the accordion fallback (AccordionItem, native <details>) to
+   * show at every viewport width — no other rule needed here, each item
+   * already opens/closes natively without JS via its own shipped CSS. */
   .bl-values-cloud__stage {
     display: none !important;
   }
 
   .bl-values-cloud__accordion {
     display: flex !important;
-  }
-
-  .bl-values-cloud__accordion-panel {
-    grid-template-rows: 1fr !important;
-  }
-
-  .bl-values-cloud__accordion-panel-inner {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .bl-values-cloud__accordion-chevron {
-    display: none !important;
   }
 }

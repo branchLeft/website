@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Palette, Star, Server, Code, Plus, ChevronDown } from 'lucide-react';
-import { SectionHeading } from '@branchleft/components';
+import { Palette, Star, Server, Code, Plus } from 'lucide-react';
+import { AccordionItem, SectionHeading } from '@branchleft/components';
 import { buildMeta } from '../lib/meta';
 
 export function meta() {
@@ -14,6 +14,21 @@ export function meta() {
 }
 
 export default function AffordableWebsites(): React.JSX.Element {
+  // Any number of feature groups can be open at once — unlike a
+  // one-open-at-a-time accordion, nothing here enforces exclusivity.
+  const [openFeatureGroups, setOpenFeatureGroups] = React.useState<ReadonlySet<string>>(
+    () => new Set(['design'])
+  );
+
+  function setFeatureGroupOpen(id: string, open: boolean) {
+    setOpenFeatureGroups((current) => {
+      const next = new Set(current);
+      if (open) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }
+
   return (
     <main className="long-form article-page">
       <Link to="/about#solutions" className="directional-link back-link">
@@ -81,142 +96,119 @@ export default function AffordableWebsites(): React.JSX.Element {
           Affordable pricing doesn't mean a lesser product. Every site we build is engineered to an
           exceptionally high standard.
         </p>
-        <details className="article-page__feature-group" data-accent="design" open>
-          <summary className="article-page__feature-summary">
+        <AccordionItem
+          className="article-page__feature-group"
+          data-accent="design"
+          open={openFeatureGroups.has('design')}
+          onOpenChange={(open) => setFeatureGroupOpen('design', open)}
+          summary={
             <span className="article-page__feature-summary-label">
               <Palette className="article-page__feature-icon" aria-hidden="true" />
               <SectionHeading as="h3">Design & Development</SectionHeading>
             </span>
-            <ChevronDown
-              size="1em"
-              className="article-page__feature-chevron chevron-icon"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="article-page__feature-panel">
-            <div className="article-page__feature-panel-inner">
-              <ul>
-                <li>
-                  a complete design service, covering all functional and visual aspects of your site
-                </li>
-                <li>bring-your-own-brand, or see our branding add-on below</li>
-                <li>
-                  Strapi, an open source CMS, integrated as standard so you can log in and edit your
-                  own content
-                </li>
-                <li>bespoke integrations where your needs go beyond a standard build</li>
-              </ul>
-            </div>
-          </div>
-        </details>
-        <details className="article-page__feature-group" data-accent="quality">
-          <summary className="article-page__feature-summary">
+          }
+        >
+          <ul>
+            <li>
+              a complete design service, covering all functional and visual aspects of your site
+            </li>
+            <li>bring-your-own-brand, or see our branding add-on below</li>
+            <li>
+              Strapi, an open source CMS, integrated as standard so you can log in and edit your own
+              content
+            </li>
+            <li>bespoke integrations where your needs go beyond a standard build</li>
+          </ul>
+        </AccordionItem>
+        <AccordionItem
+          className="article-page__feature-group"
+          data-accent="quality"
+          open={openFeatureGroups.has('quality')}
+          onOpenChange={(open) => setFeatureGroupOpen('quality', open)}
+          summary={
             <span className="article-page__feature-summary-label">
               <Star className="article-page__feature-icon" aria-hidden="true" />
               <SectionHeading as="h3">Quality & Accessibility</SectionHeading>
             </span>
-            <ChevronDown
-              size="1em"
-              className="article-page__feature-chevron chevron-icon"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="article-page__feature-panel">
-            <div className="article-page__feature-panel-inner">
-              <ul>
-                <li>built to WCAG AAA, the highest level of accessibility compliance</li>
-                <li>fully responsive, tested across every screen size from phone to widescreen</li>
-                <li>comprehensive automated and manual testing before every release</li>
-                <li>
-                  a modern, actively maintained stack, built with progressive enhancement so your
-                  site still works before JavaScript loads
-                </li>
-              </ul>
-            </div>
-          </div>
-        </details>
-        <details className="article-page__feature-group" data-accent="hosting">
-          <summary className="article-page__feature-summary">
+          }
+        >
+          <ul>
+            <li>built to WCAG AAA, the highest level of accessibility compliance</li>
+            <li>fully responsive, tested across every screen size from phone to widescreen</li>
+            <li>comprehensive automated and manual testing before every release</li>
+            <li>
+              a modern, actively maintained stack, built with progressive enhancement so your site
+              still works before JavaScript loads
+            </li>
+          </ul>
+        </AccordionItem>
+        <AccordionItem
+          className="article-page__feature-group"
+          data-accent="hosting"
+          open={openFeatureGroups.has('hosting')}
+          onOpenChange={(open) => setFeatureGroupOpen('hosting', open)}
+          summary={
             <span className="article-page__feature-summary-label">
               <Server className="article-page__feature-icon" aria-hidden="true" />
               <SectionHeading as="h3">Hosting & Cost</SectionHeading>
             </span>
-            <ChevronDown
-              size="1em"
-              className="article-page__feature-chevron chevron-icon"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="article-page__feature-panel">
-            <div className="article-page__feature-panel-inner">
-              <ul>
-                <li>builds start from £500, scaling with the size of your project</li>
-                <li>hosting starts from £10/month, scaling with traffic</li>
-                <li>carbon-neutral hosting, covered as part of our environmental commitments</li>
-                <li>
-                  your monthly hosting fee includes standard maintenance: security patches and
-                  iterative improvements to the platform your site runs on
-                </li>
-                <li>
-                  anything beyond that, like new features or design changes, is separate support
-                  work, still charged at-cost
-                </li>
-              </ul>
-            </div>
-          </div>
-        </details>
-        <details className="article-page__feature-group" data-accent="ownership">
-          <summary className="article-page__feature-summary">
+          }
+        >
+          <ul>
+            <li>builds start from £500, scaling with the size of your project</li>
+            <li>hosting starts from £10/month, scaling with traffic</li>
+            <li>carbon-neutral hosting, covered as part of our environmental commitments</li>
+            <li>
+              your monthly hosting fee includes standard maintenance: security patches and iterative
+              improvements to the platform your site runs on
+            </li>
+            <li>
+              anything beyond that, like new features or design changes, is separate support work,
+              still charged at-cost
+            </li>
+          </ul>
+        </AccordionItem>
+        <AccordionItem
+          className="article-page__feature-group"
+          data-accent="ownership"
+          open={openFeatureGroups.has('ownership')}
+          onOpenChange={(open) => setFeatureGroupOpen('ownership', open)}
+          summary={
             <span className="article-page__feature-summary-label">
               <Code className="article-page__feature-icon" aria-hidden="true" />
               <SectionHeading as="h3">Ownership</SectionHeading>
             </span>
-            <ChevronDown
-              size="1em"
-              className="article-page__feature-chevron chevron-icon"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="article-page__feature-panel">
-            <div className="article-page__feature-panel-inner">
-              <ul>
-                <li>open source by default, so you're never locked into us</li>
-                <li>your content, your domain, your data</li>
-                <li>
-                  documentation clear enough that another developer could pick up where we left off
-                </li>
-              </ul>
-            </div>
-          </div>
-        </details>
-        <details className="article-page__feature-group" data-accent="addons">
-          <summary className="article-page__feature-summary">
+          }
+        >
+          <ul>
+            <li>open source by default, so you're never locked into us</li>
+            <li>your content, your domain, your data</li>
+            <li>
+              documentation clear enough that another developer could pick up where we left off
+            </li>
+          </ul>
+        </AccordionItem>
+        <AccordionItem
+          className="article-page__feature-group"
+          data-accent="addons"
+          open={openFeatureGroups.has('addons')}
+          onOpenChange={(open) => setFeatureGroupOpen('addons', open)}
+          summary={
             <span className="article-page__feature-summary-label">
               <Plus className="article-page__feature-icon" aria-hidden="true" />
               <SectionHeading as="h3">Add-ons</SectionHeading>
             </span>
-            <ChevronDown
-              size="1em"
-              className="article-page__feature-chevron chevron-icon"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="article-page__feature-panel">
-            <div className="article-page__feature-panel-inner">
-              <ul>
-                <li>
-                  optional content copywriting, so your message lands as clearly as your design
-                </li>
-                <li>
-                  a full branding consultation: a bespoke logo and complete visual theme (colours,
-                  typeface, and so on) that together form a consistent language for your brand and
-                  are yours to keep and reuse across all your organisation's content, not just your
-                  site.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </details>
+          }
+        >
+          <ul>
+            <li>optional content copywriting, so your message lands as clearly as your design</li>
+            <li>
+              a full branding consultation: a bespoke logo and complete visual theme (colours,
+              typeface, and so on) that together form a consistent language for your brand and are
+              yours to keep and reuse across all your organisation's content, not just your site.
+            </li>
+          </ul>
+        </AccordionItem>
       </section>
 
       <section className="article-page__section" aria-labelledby="our-process">

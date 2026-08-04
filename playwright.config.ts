@@ -49,7 +49,8 @@ export default defineConfig({
       // checks are intentionally out of scope for this project (see
       // tests/no-js.spec.ts header comment). Scoped to its own spec file
       // via testMatch since several assertions here are only true in a
-      // no-JS context (e.g. the values-cloud accordion being force-open).
+      // no-JS context (e.g. the solutions tabs being forced into normal
+      // flow instead of their JS-driven overlay layout).
       name: 'chromium-no-js',
       use: { ...devices['Desktop Chrome'], javaScriptEnabled: false },
       testMatch: /no-js\.spec\.ts$/,

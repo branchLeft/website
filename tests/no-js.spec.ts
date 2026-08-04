@@ -87,19 +87,25 @@ test.describe('Solutions tabs (About page)', () => {
 });
 
 test.describe('Values cloud (About page)', () => {
-  test('ring is hidden and all 7 value descriptions are visible', async ({ page }) => {
+  test('ring is hidden, accordion items are closed by default, and each opens on click', async ({
+    page,
+  }) => {
     await page.goto('/about');
 
     await expect(page.locator('.bl-values-cloud__stage')).not.toBeVisible();
 
-    const panels = page.locator('.bl-values-cloud__accordion-panel-inner');
-    await expect(panels).toHaveCount(7);
-    const count = await panels.count();
-    for (let i = 0; i < count; i++) {
-      const panel = panels.nth(i);
-      await expect(panel).toHaveCSS('opacity', '1');
-      await expect(panel.locator('.bl-values-cloud__accordion-body')).not.toHaveText('');
-    }
+    // No JS ever runs, so `openValueId` stays at its SSR default (nothing
+    // selected) — every item is a real native <details>, closed until
+    // individually clicked, rather than force-opened.
+    const items = page.locator('.bl-values-cloud__accordion-item');
+    await expect(items).toHaveCount(7);
+    const firstItem = items.first();
+    await expect(firstItem).not.toHaveAttribute('open', '');
+
+    await firstItem.locator('summary').click();
+    await expect(firstItem).toHaveAttribute('open', '');
+    await expect(firstItem.locator('.bl-values-cloud__accordion-body')).toBeVisible();
+    await expect(firstItem.locator('.bl-values-cloud__accordion-body')).not.toHaveText('');
   });
 });
 
@@ -109,12 +115,10 @@ test.describe('Affordable Websites feature accordion', () => {
   }) => {
     await page.goto('/solutions/affordable-websites');
 
-    // Server-rendered `open` attribute drives the CSS grid-rows/opacity
-    // state directly — no JS needed for the initially-open group to render
+    // Server-rendered `open` attribute drives AccordionItem's shipped CSS
+    // directly — no JS needed for the initially-open group to render
     // expanded, or for a closed group's <summary> to reveal the rest.
-    const openPanel = page.locator(
-      'details[data-accent="design"] .article-page__feature-panel-inner'
-    );
+    const openPanel = page.locator('details[data-accent="design"] .bl-accordion-item__panel-inner');
     await expect(openPanel).toHaveCSS('opacity', '1');
     await expect(openPanel.locator('li').first()).toBeVisible();
 
@@ -122,9 +126,7 @@ test.describe('Affordable Websites feature accordion', () => {
     await expect(closedGroup).not.toHaveAttribute('open', '');
     await closedGroup.locator('summary').click();
     await expect(closedGroup).toHaveAttribute('open', '');
-    await expect(
-      closedGroup.locator('.article-page__feature-panel-inner li').first()
-    ).toBeVisible();
+    await expect(closedGroup.locator('.bl-accordion-item__panel-inner li').first()).toBeVisible();
   });
 });
 
