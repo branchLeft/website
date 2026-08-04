@@ -31,6 +31,10 @@
     gap: 0.5rem;
   }
 
+  .article-page__feature-group h3 {
+    @apply text-lg pt-0;
+  }
+
   .article-page__feature-group[data-accent='design'] {
     --feature-accent: var(--color-brand-bright);
   }
