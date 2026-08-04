@@ -5,7 +5,10 @@
 > **Resolved by removing the resource, not by fixing it.** `branchleft.co.uk`
 > and `www.branchleft.co.uk` were migrated off Cloud Run Domain Mapping onto a
 > Global External Application Load Balancer with Certificate Manager on
-> 2026-08-03 (see `infra/edge.ts`). The two `DomainMapping` resources still
+> 2026-08-03 (originally `infra/edge.ts` in this repo; that program has since
+> moved to a separate private infrastructure repo via a Pulumi state move, so
+> a `website` deploy can no longer touch it — see that repo's state-move
+> runbook). The two `DomainMapping` resources still
 > exist in `domainMapping.ts`, retained as a rollback path while the new edge
 > soaks. Cloud Run ingress is locked to the load balancer, so they carry no
 > traffic **from any DNS record the cutover checklist actually changed** —
