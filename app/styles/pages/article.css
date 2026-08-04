@@ -134,51 +134,41 @@
     }
   }
 
-  /* One continuous rail drawn once behind the whole list, with the nodes
-   * painted on top of it — instead of stitching together a separate
-   * segment per gap (which kept landing a fraction off whatever the node
-   * size/gap/row-height happened to be). The first and last nodes are
-   * pinned flush to the track's own edges (see the align-self overrides
-   * below), so the rail only ever needs a single fixed inset of half a
-   * node on each end — no per-column arithmetic, no drift. */
   .article-page__process {
     --process-node-size: 2rem;
+    --process-gap: 1.25rem;
     position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: var(--process-gap);
   }
 
-  .article-page__process::before {
+  .article-page__process-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Each step draws its own rail segment down to the next node, rather
+   * than one line pinned to the container's top/bottom edges. Nodes sit
+   * flush with the first line of their own entry's text, so row heights
+   * vary with content — a single container-relative line can't assume
+   * where the first/last node will land, but a segment anchored to this
+   * row's own bottom (plus the fixed gap and half a node) always reaches
+   * the next node regardless of either row's height. */
+  .article-page__process-step:not(:last-child)::before {
     content: '';
     position: absolute;
     z-index: 0;
     background: var(--color-hairline);
     left: calc(var(--process-node-size) / 2);
     top: calc(var(--process-node-size) / 2);
-    bottom: calc(var(--process-node-size) / 2);
+    bottom: calc(-1 * (var(--process-gap) + var(--process-node-size) / 2));
     width: 1px;
-  }
-
-  .article-page__process-step {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  /* Flush the first/last node to the track's own start/end edge on mobile
-   * (top/bottom of the column). Not needed on desktop — the column layout
-   * with align-items: flex-start naturally positions them correctly. */
-  .article-page__process-step:first-child .article-page__process-index {
-    align-self: flex-start;
-  }
-
-  .article-page__process-step:last-child .article-page__process-index {
-    align-self: flex-end;
   }
 
   .article-page__process-index {
@@ -205,12 +195,21 @@
       gap: 1.5rem;
     }
 
+    /* Swap the per-step vertical segments for one continuous horizontal
+     * rail behind the whole row — desktop columns are equal-height, so a
+     * single container-relative line works here. */
+    .article-page__process-step:not(:last-child)::before {
+      content: none;
+    }
+
     .article-page__process::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      background: var(--color-hairline);
       left: calc(var(--process-node-size) / 2);
       right: calc(var(--process-node-size) / 2);
       top: calc(var(--process-node-size) / 2);
-      bottom: auto;
-      width: auto;
       height: 1px;
     }
 
@@ -220,11 +219,6 @@
       align-items: flex-start;
       gap: 0.75rem;
       padding-block: 0;
-    }
-
-    .article-page__process-step:first-child .article-page__process-index,
-    .article-page__process-step:last-child .article-page__process-index {
-      align-self: auto;
     }
   }
 
