@@ -4,6 +4,9 @@
  * .site-nav via the --nav-offset token.                                    */
 @layer components {
   .bl-section-nav {
+    @apply max-w-6xl mx-auto;
+    flex-flow: row;
+    width: 100%;
     position: sticky;
     top: var(--nav-offset);
     z-index: 40;
@@ -20,15 +23,18 @@
   .bl-section-nav__inner {
     @apply flex items-center gap-6 px-6;
     list-style: none;
-    margin-block: 0;
     padding-block: 0.5rem;
     scroll-snap-type: x proximity;
-    width: max-content;
+    scroll-behavior: smooth;
   }
 
   .bl-section-nav__inner > li {
     scroll-snap-align: start;
     flex-shrink: 0;
+  }
+
+  .bl-section-nav__inner > li:last-child > a {
+    @apply mr-6;
   }
 
   .bl-section-nav__link {
