@@ -26,8 +26,9 @@ minimum-time-on-page check. Prerendering that route would freeze
 the deployed build.
 
 **How to apply:** do not add any path to the `prerender` array until this
-is fixed. Fixing it needs its own design — e.g. LB-level header injection
-via `infra/edge.ts`'s URL map `HeaderAction`, or an Express wrapper
+is fixed. Fixing it needs its own design — e.g. LB-level header injection via
+the edge load balancer's URL map `HeaderAction` (that program now lives in a
+separate private infrastructure repo, not in this one), or an Express wrapper
 reapplying `buildSecurityHeaders()`/nonce-rewriting to static files — not a
 drive-by config change. `contact.tsx` (and any future route with
 per-request anti-bot/freshness state) must stay excluded from `prerender`
