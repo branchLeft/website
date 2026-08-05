@@ -1,0 +1,1052 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * theme.css — Single source of truth for branchLeft site styling.
+ *
+ * Everything visual lives here so TSX stays as close to bare semantic markup
+ * as possible. Do not add utility classes to route components unless the
+ * pattern is a genuine one-off; instead:
+ *
+ *   1. First choice → adjust an element default in @layer base below.
+ *   2. Second choice → add or extend a component class in @layer components.
+ *   3. Last resort  → utility class in TSX, with a comment explaining why
+ *                     it wasn't promoted here.
+ *
+ * See website/CLAUDE.md → "Styling" for the full rule set.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Self-hosted fonts ──────────────────────────────────────────────────── */
+/* Registered here so font-family strings are only
+ * defined once in this file — the @font-face names must line up with the
+ * --font-* tokens declared in @theme below.                                 */
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/Syne/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* IBM Plex Sans — reading font for body copy. Static TTFs (Google Fonts
+ * distribution does not currently ship a variable file for Plex Sans).
+ * Only the weights we actually use are loaded to keep transfer light. */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  /* Colour palette */
+  --color-brand: #b31761;
+  --color-brand-bright: #ff006e;
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+
+  /* Font stacks — family names must match the @font-face declarations above.
+   *   --font-display : headings (h1–h6)
+   *   --font-wordmark: brand mark / hero wordmark
+   *   --font-sans    : body / reading copy (humanist geometric)
+   *   --font-mono    : uppercase labels, CTAs, section-nav, code — anything
+   *                    that should read as "machine voice". */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+  /* Sticky nav offset — the height of the primary .site-nav row. Section
+   * pages use this for scroll-margin-top and for stacking the secondary
+   * .section-nav directly beneath the primary nav. Keep in sync with the
+   * primary nav padding/line-height if either changes. */
+  --nav-offset: 3.5rem;
+}
+
+/* ─── Element defaults ───────────────────────────────────────────────────── */
+/* Baked-in element styling so route markup can stay class-free. Add sizes,
+ * weights, and colours here rather than sprinkling utilities in TSX.        */
+@layer base {
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    color-scheme: dark;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+  h6 {
+    @apply text-base;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  ul {
+    @apply list-disc pl-6;
+  }
+
+  li {
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus-visible {
+    text-decoration: underline;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  label {
+    font-family: inherit;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-bright);
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Reusable component classes ─────────────────────────────────────────── */
+/* Named patterns used across routes. Route markup should reference these by
+ * name (e.g. class="page-shell") rather than repeating utility bundles.    */
+@layer components {
+  /* Full-viewport centred hero layout — the default page frame. */
+  .page-shell {
+    @apply flex flex-1 flex-col items-center justify-center gap-12 p-8;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  /* Tighter variant for utility pages (errors, 404, etc.). */
+  .page-shell--tight {
+    @apply gap-6;
+  }
+
+  /* Oversized wordmark used for the branchLeft hero on marketing routes. */
+  .hero-wordmark {
+    @apply text-6xl;
+    font-family: var(--font-wordmark);
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  /* Small brand-coloured supporting copy (taglines, meta lines). */
+  .tagline {
+    @apply text-sm;
+    font-family: var(--font-mono);
+    color: var(--color-brand);
+    letter-spacing: 0.02em;
+  }
+
+  /* Fixed square used for the logo mark on marketing routes. */
+  .brand-mark {
+    @apply w-36 h-36;
+  }
+
+  /* Long-form article layout — matches the about page structure for solution pages. */
+  .article-page {
+    @apply flex flex-col gap-8 max-w-3xl mx-auto px-6 py-16;
+    width: 100%;
+  }
+
+  .article-page__back-link {
+    @apply text-sm -mt-4 mb-4 inline-flex items-center gap-2;
+    font-family: var(--font-mono);
+    color: var(--color-brand);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  .article-page__back-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .article-page__back-link:hover .article-page__back-arrow,
+  .article-page__back-link:focus-visible .article-page__back-arrow {
+    transform: translateX(-2px);
+  }
+
+  .article-page h1 {
+    @apply text-left text-3xl font-normal;
+  }
+
+  /* Development-only stack trace block rendered by ErrorBoundary. */
+  .stack-trace {
+    @apply w-full max-w-2xl p-4 text-xs;
+    overflow-x: auto;
+    opacity: 0.5;
+  }
+
+  /* Root flex column so nav + page-shell fill exactly 100dvh */
+  .app-layout {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Site navigation ──────────────────────────────────────────────────── */
+  .site-nav {
+    background: var(--color-bg);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .site-nav__inner {
+    @apply flex flex-nowrap items-center justify-between max-w-6xl mx-auto py-3 px-6;
+  }
+
+  .site-nav__brand {
+    @apply flex items-center gap-2 text-lg;
+    font-family: var(--font-wordmark);
+    font-weight: 300;
+    color: var(--color-fg);
+    text-decoration: none;
+  }
+
+  .site-nav__logo {
+    @apply w-8 h-8 shrink-0;
+  }
+
+  .site-nav__brand:hover,
+  .site-nav__brand:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+
+  .site-nav__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 0.375rem;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--color-fg) 25%, transparent);
+    color: var(--color-fg);
+    height: 2rem;
+    padding-inline: 0.625rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .site-nav__toggle-label {
+    @apply text-[10px];
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+  }
+
+  /* Mobile: framer-motion animates height, opacity, and paddingBottom; overflow clips the content */
+  .site-nav__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.25rem;
+    overflow: hidden;
+  }
+
+  .site-nav__link {
+    @apply block py-2 text-xs;
+    font-family: var(--font-mono);
+    color: var(--color-fg);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+
+  .site-nav__link--active {
+    color: var(--color-brand-bright);
+  }
+
+  /* Desktop: horizontal links, toggle hidden */
+  @media (min-width: 768px) {
+    .site-nav__toggle {
+      display: none;
+    }
+
+    .site-nav__links {
+      /* Override framer-motion inline styles — always visible on desktop */
+      height: auto !important;
+      opacity: 1 !important;
+      overflow: visible;
+      flex-direction: row;
+      width: auto;
+      padding-bottom: 0;
+      gap: 2rem;
+    }
+
+    .site-nav__link {
+      padding: 0;
+    }
+  }
+
+  /* ── Section nav (in-page anchors, e.g. /about) ───────────────────────── */
+  .section-nav {
+    position: sticky;
+    top: var(--nav-offset);
+    z-index: 40;
+    background: var(--color-bg);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+    /* Horizontal scroll fallback on very narrow screens */
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-nav__inner {
+    @apply flex items-center gap-6 max-w-6xl mx-auto px-6;
+    list-style: none;
+    margin-block: 0;
+    padding-block: 0.5rem;
+    scroll-snap-type: x proximity;
+  }
+
+  .section-nav__inner > li {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .section-nav__link {
+    @apply block text-[11px];
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+    text-decoration: none;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-block: 0.375rem;
+    border-bottom: 2px solid transparent;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .section-nav__link:hover,
+  .section-nav__link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+    border-bottom-color: color-mix(in srgb, var(--color-brand-bright) 40%, transparent);
+  }
+
+  .section-nav__link--active {
+    color: var(--color-brand-bright);
+    border-bottom-color: var(--color-brand-bright);
+  }
+
+  /* ── About page (sectioned marketing layout) ──────────────────────────── */
+  .about-page {
+    @apply flex flex-col gap-16 max-w-3xl mx-auto px-6 py-16;
+    width: 100%;
+  }
+
+  .about-page__hero {
+    @apply flex flex-col gap-4;
+  }
+
+  .about-page__lede {
+    @apply text-lg;
+    color: color-mix(in srgb, var(--color-fg) 80%, transparent);
+    max-width: 42rem;
+  }
+
+  .about-page__section {
+    @apply flex flex-col gap-4;
+    /* Clear both nav bars when an anchor jump lands on this section. */
+    scroll-margin-top: calc(var(--nav-offset) + 3rem);
+  }
+
+  /* ── Section heading (from @branchleft/components) ───────────────────── */
+  /* SectionHeading ships zero CSS; the site owns the theming. Match the
+   * scroll-margin-top so anchor jumps clear both nav bars regardless of
+   * whether the heading or its parent section is the scroll target. */
+  .bl-section-heading {
+    @apply pt-4;
+    scroll-margin-top: calc(var(--nav-offset) + 3rem);
+  }
+
+  .bl-section-heading--linked > .bl-section-heading__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    color: inherit;
+    text-decoration: none;
+    transition: color 120ms ease-out;
+  }
+
+  .bl-section-heading__icon {
+    opacity: 0;
+    transition: opacity 120ms ease-out;
+    flex-shrink: 0;
+  }
+
+  .bl-section-heading--linked:hover > .bl-section-heading__link,
+  .bl-section-heading--linked:focus-within > .bl-section-heading__link {
+    color: var(--color-brand-bright);
+  }
+
+  .bl-section-heading--linked:hover .bl-section-heading__icon,
+  .bl-section-heading--linked:focus-within .bl-section-heading__icon {
+    opacity: 1;
+  }
+
+  /* ── Bio (People section entry) ───────────────────────────────────────── */
+  .bio {
+    @apply flex flex-row items-start gap-6;
+  }
+
+  .bio__photo {
+    @apply shrink-0;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    background: color-mix(in srgb, var(--color-fg) 10%, transparent);
+  }
+
+  .bio__body {
+    @apply flex flex-col gap-2 min-w-0;
+  }
+
+  .bio__title {
+    @apply text-sm;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-fg) 75%, transparent);
+  }
+
+  .bio__name {
+    @apply text-xl;
+    font-family: 'Syne', 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── Contact form ─────────────────────────────────────────────────────── */
+  .contact-form {
+    @apply flex flex-col gap-6 w-full max-w-md;
+  }
+
+  .contact-form__field {
+    @apply flex flex-col gap-2;
+  }
+
+  .contact-form__label {
+    @apply text-xs;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-fg) 75%, transparent);
+  }
+
+  .contact-form__input,
+  .contact-form__textarea,
+  .contact-form__select {
+    @apply w-full px-3 py-2 text-sm;
+    background: transparent;
+    color: var(--color-fg);
+    border: 1px solid color-mix(in srgb, var(--color-fg) 25%, transparent);
+    font-family: inherit;
+  }
+
+  .contact-form__textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  /* Native `<select>` styled to visually match `.contact-form__input`.
+   * Strips the platform chevron and paints our own via a CSS gradient so the
+   * control matches the flat, monochrome form language. */
+  .contact-form__select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.25rem;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--color-fg) 50%),
+      linear-gradient(135deg, var(--color-fg) 50%, transparent 50%);
+    background-position:
+      calc(100% - 1.05rem) 55%,
+      calc(100% - 0.75rem) 55%;
+    background-size:
+      0.3rem 0.3rem,
+      0.3rem 0.3rem;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  .contact-form__select:focus {
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--color-brand-bright) 50%),
+      linear-gradient(135deg, var(--color-brand-bright) 50%, transparent 50%);
+  }
+
+  /* Dropdown option list adopts the site palette (Firefox/Chromium honour
+   * these; Safari uses OS chrome regardless). */
+  .contact-form__select option {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  .contact-form__input:focus,
+  .contact-form__textarea:focus,
+  .contact-form__select:focus {
+    border-color: var(--color-brand-bright);
+    outline: none;
+  }
+
+  .contact-form__submit {
+    @apply inline-flex items-center justify-center self-start px-5 py-2 text-xs;
+    background: var(--color-brand);
+    color: var(--color-fg);
+    border: 1px solid var(--color-brand);
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+
+  .contact-form__submit:hover,
+  .contact-form__submit:focus-visible {
+    background: var(--color-brand-bright);
+    border-color: var(--color-brand-bright);
+  }
+
+  /* ── Values carousel (Embla) ──────────────────────────────────────────── */
+  /* Auto-scrolling, looping, draggable strip of value cards.
+   * Breaks out of the .about-page max-width so the strip spans the viewport
+   * while the surrounding copy stays within the reading column. */
+  .values-carousel {
+    @apply relative;
+    /* Break out of the parent's max-w-3xl reading column. */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    /* Soft edge fade so slides feel infinite. */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  }
+
+  .values-carousel__viewport {
+    @apply overflow-hidden;
+  }
+
+  .values-carousel__track {
+    @apply flex items-stretch gap-6 px-6;
+    list-style: none;
+    margin: 0;
+    padding-block: 0.5rem;
+  }
+
+  .values-carousel__slide {
+    /* On mobile: ~72vw so cards are wide enough for body text to wrap
+     * comfortably (≈1.3 cards visible). On desktop: cap at 20rem for a
+     * multi-card layout (~3–4 cards). */
+    flex: 0 0 clamp(16rem, 72vw, 20rem);
+    min-width: 0;
+  }
+
+  .values-carousel__card {
+    @apply relative flex flex-col justify-between gap-3 h-full p-6;
+    /* No aspect-ratio — height is driven by the tallest card's content so
+     * content never overflows. The flex track's items-stretch equalises all
+     * slide heights to match the tallest. */
+    min-height: 16rem;
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .values-carousel__card:hover {
+    background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+    border-color: var(--color-brand-bright);
+  }
+
+  .values-carousel__index {
+    @apply text-xs;
+    font-family: var(--font-mono);
+    letter-spacing: 0.16em;
+    color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .values-carousel__title {
+    @apply text-2xl leading-tight flex items-center gap-2;
+    font-family: var(--font-wordmark);
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .values-carousel__title-icon {
+    @apply shrink-0;
+    color: inherit;
+  }
+
+  .values-carousel__top {
+    @apply flex flex-col gap-3;
+  }
+
+  .values-carousel__body {
+    @apply text-sm leading-relaxed flex-1;
+    color: color-mix(in srgb, var(--color-fg) 80%, transparent);
+  }
+
+  /* ── Solutions tabbed panel (About page) ─────────────────────────────── */
+  /* Vertical tabs on desktop / horizontal-scroll tabs on mobile, with a
+   * single animated panel body. Stays inside the `.about-page` reading
+   * column at every viewport — no breakout. */
+  .solutions-tabs {
+    @apply flex flex-col gap-6;
+    width: 100%;
+  }
+
+  .solutions-tabs__tablist {
+    /* Mobile default: full-width stacked buttons. Each tab is its own row so
+     * long titles wrap naturally and every tab stays fully clickable at any
+     * viewport width — no horizontal scroll. */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .solutions-tabs__tab {
+    @apply flex items-center py-3 px-1 text-left w-full;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+    cursor: pointer;
+    font-family: inherit;
+    padding-left: 1rem;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .solutions-tabs__tab:hover,
+  .solutions-tabs__tab:focus-visible {
+    color: var(--color-fg);
+    outline: none;
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+  }
+
+  .solutions-tabs__tab[aria-selected='true'] {
+    color: var(--color-brand-bright);
+    border-left-color: var(--color-brand-bright);
+  }
+
+  .solutions-tabs__tab-title {
+    @apply text-sm;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* Panel frame: CSS grid overlay so all panels occupy the same cell.
+   * The cell height is determined by the tallest panel — no layout shift
+   * when switching tabs. */
+  .solutions-tabs__panel-frame {
+    display: grid;
+    overflow: hidden;
+  }
+
+  .solutions-tabs__panel {
+    @apply flex flex-col gap-6 py-2;
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+    outline: none;
+  }
+
+  .solutions-tabs__panel-body {
+    @apply text-base;
+    color: color-mix(in srgb, var(--color-fg) 88%, transparent);
+    line-height: 1.65;
+    max-width: 42rem;
+  }
+
+  /* Desktop: two-column layout — vertical tablist on the left, animated
+   * panel on the right. The tab accent (left border) already matches this
+   * orientation, so no extra rules needed for the accent side. */
+  @media (min-width: 768px) {
+    .solutions-tabs {
+      display: grid;
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .solutions-tabs__panel {
+      padding-top: 0.5rem;
+    }
+  }
+
+  /* CTA styling used by both the tabbed panel and legacy card layouts. */
+  .solution-card__cta {
+    @apply inline-flex items-center gap-2 text-xs;
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    color: var(--color-fg);
+    text-decoration: none;
+    letter-spacing: 0.14em;
+    padding-block: 0.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      gap 0.2s ease;
+  }
+
+  .solution-card__cta:hover,
+  .solution-card__cta:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+    border-bottom-color: var(--color-brand-bright);
+    gap: 0.625rem;
+  }
+
+  .solution-card__cta-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .solution-card__cta:hover .solution-card__cta-arrow,
+  .solution-card__cta:focus-visible .solution-card__cta-arrow {
+    transform: translateX(2px);
+  }
+
+  /* ── Hero-style inline link (home page "learn more →") ────────────────── */
+  /* Same interaction language as `.solution-card__cta` (small caps, arrow
+   * slides on hover) but sized for the hero. Split the arrow into its own
+   * `.link__arrow` span so we can animate its transform independently. */
+  .link {
+    @apply inline-flex items-center gap-2 text-sm;
+    font-family: var(--font-mono);
+    color: var(--color-fg);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    padding-block: 0.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 30%, transparent);
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      gap 0.2s ease;
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+    border-bottom-color: var(--color-brand-bright);
+    gap: 0.625rem;
+  }
+
+  .link__arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .link:hover .link__arrow,
+  .link:focus-visible .link__arrow {
+    transform: translateX(2px);
+  }
+
+  /* ── Site footer ──────────────────────────────────────────────────────── */
+  /* Deliberately recessive: thin top rule, small uppercase mono type,
+   * heavily muted text. Sits below page content in the root flex column. */
+  .site-footer {
+    margin-top: auto;
+    background: var(--color-bg);
+    border-top: 1px solid color-mix(in srgb, var(--color-fg) 10%, transparent);
+  }
+
+  .site-footer__inner {
+    @apply flex flex-col items-start gap-3 max-w-6xl mx-auto px-6 py-3;
+  }
+
+  .site-footer__copy {
+    @apply text-[10px];
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-fg) 45%, transparent);
+  }
+
+  .site-footer__links {
+    @apply flex items-center gap-6;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer__link {
+    @apply text-[10px];
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+    text-decoration: none;
+  }
+
+  .site-footer__link:hover,
+  .site-footer__link:focus-visible {
+    color: var(--color-brand-bright);
+    text-decoration: none;
+  }
+
+  @media (min-width: 640px) {
+    .site-footer__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  /* ── Legal pages (privacy, terms) ─────────────────────────────────────── */
+  /* Long-form document layout. Wider than a hero page-shell, narrower than
+   * a marketing section, with clear vertical rhythm for headings and lists. */
+  .legal-page {
+    @apply flex flex-col gap-8 max-w-3xl mx-auto px-6 py-16;
+    width: 100%;
+  }
+
+  .legal-page__meta {
+    @apply text-xs;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-fg) 55%, transparent);
+  }
+
+  .legal-page section {
+    @apply flex flex-col gap-3;
+  }
+
+  .legal-page h2 {
+    @apply text-2xl mt-4;
+  }
+
+  .legal-page h3 {
+    @apply text-lg mt-2;
+  }
+
+  .legal-page ul,
+  .legal-page ol {
+    @apply flex flex-col gap-1 pl-6;
+    list-style: disc;
+  }
+
+  .legal-page ol {
+    list-style: decimal;
+  }
+
+  .legal-page li {
+    line-height: 1.55;
+  }
+
+  /* Placeholder tokens visible in the DOM so unresolved owner-input is
+   * obviously synthetic (e.g. COMPANY_NUMBER, REGISTERED_OFFICE_ADDRESS). */
+  .legal-page__token {
+    font-family: var(--font-mono);
+    padding: 0 0.25em;
+    color: var(--color-brand-bright);
+    background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+    border: 1px dashed color-mix(in srgb, var(--color-brand-bright) 40%, transparent);
+  }
+
+  /* Retention schedule table. */
+  .legal-page__table {
+    @apply w-full text-sm;
+    border-collapse: collapse;
+  }
+
+  .legal-page__table th,
+  .legal-page__table td {
+    @apply py-2.5 px-3 text-left align-top;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-fg) 12%, transparent);
+  }
+
+  .legal-page__table th {
+    @apply text-xs font-medium;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: color-mix(in srgb, var(--color-fg) 70%, transparent);
+  }
+
+  .wordmark-font {
+    font-family: var(--font-wordmark);
+  }
+
+  .hover-green {
+    &:hover {
+      transition: color 0.5s ease;
+      color: #00aa00;
+    }
+  }
+
+  .article-page__section {
+    @apply flex flex-col gap-4;
+    scroll-margin-top: calc(var(--nav-offset) + 3rem);
+  }
+
+  .article-page h2 {
+    @apply text-xl font-normal;
+    margin-top: 0.5rem;
+  }
+
+  .article-page__feature-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h3 {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-brand);
+      font-weight: 400;
+    }
+  }
+
+  .article-page__callout {
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--color-brand);
+    background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .article-page__callout-label {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+}
