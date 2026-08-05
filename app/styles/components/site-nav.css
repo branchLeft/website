@@ -78,6 +78,13 @@
       width: 100%;
     }
 
+    /* Closed state must stay flex-nowrap (see .site-nav__inner) so the bar
+       never grows past the height .bl-section-nav's sticky offset assumes.
+       Only the open state needs to wrap onto its own line. */
+    .site-nav__inner:has(.site-nav__mobile-details[open]) {
+      flex-wrap: wrap;
+    }
+
     .site-nav__mobile-details[open] {
       flex-basis: 100%;
       padding-block: 0.75rem;

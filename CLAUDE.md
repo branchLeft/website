@@ -103,23 +103,26 @@ Update the relevant route file AND the corresponding note in this section whenev
 
 ### Styling
 
-**All visual decisions live in `app/theme.css` — nowhere else.** Route TSX must stay as close to bare semantic markup as possible. If you find yourself typing more than one utility class on an element, stop and promote the pattern to the theme.
+**All visual decisions live in `app/styles/` — nowhere else.** Route TSX must stay as close to bare semantic markup as possible. If you find yourself typing more than one utility class on an element, stop and promote the pattern to the theme.
 
 #### File layout
 
 - `app/app.css` — Tailwind v4 entry. Two `@import` lines; do not add rules here.
-- `app/theme.css` — the single source of truth:
-  - `@font-face` → self-hosted font registrations. Family names must match the `--font-*` tokens.
-  - `@theme` → design tokens (colours, font stacks, spacing/scale extensions).
-  - `@layer base` → element defaults (`html`, `body`, `h1`–`h6`, `p`, `a`, `img`, form controls, `code`, `pre`, focus ring).
-  - `@layer components` → named reusable patterns (`.page-shell`, `.hero-wordmark`, `.tagline`, `.brand-mark`, `.stack-trace`, …).
+- `app/styles/theme.css` — entry point for the split styling system. Imports in order:
+  - `fonts.css` → `@font-face` declarations. Family names must match the `--font-*` tokens.
+  - `base.css` → `@layer base` element defaults (`html`, `body`, `h1`–`h6`, `p`, `a`, `img`, form controls, `code`, `pre`, focus ring).
+  - `primitives.css` → `@layer components` cross-page utilities.
+  - `components/*.css` — component-specific patterns: `site-nav.css`, `page-transition.css`, `section-nav.css`, `section-heading.css`, `bio.css`, `back-link.css`, `call-to-action.css`, `values-cloud.css`, `solutions-showcase.css`, `site-footer.css`.
+  - `pages/*.css` — page-specific overrides: `home.css`, `about.css`, `contact.css`, `article.css`, `legal.css`.
+  - **Import order is authoritative for cascade** — later files override earlier ones.
+- `app/styles/no-js.css` — **not imported** in the main bundle. Loaded only via `<noscript><link>` in `root.tsx` to provide fallback styling for users with JavaScript disabled. See file header for what it overrides.
 
 #### The styling hierarchy (strict order)
 
 When you need to style something, work down this list and stop at the first level that fits:
 
-1. **Element default (`@layer base` in `theme.css`).** If every `h2` on the site should look the same, style `h2` directly — no class in TSX.
-2. **Component class (`@layer components` in `theme.css`).** If a pattern repeats or needs a variant (`.page-shell`, `.page-shell--tight`), define it once and reference it by name. Use BEM-style modifiers (`.name--variant`) rather than utility stacks.
+1. **Element default (`@layer base` in `app/styles/`).** If every `h2` on the site should look the same, style `h2` directly — no class in TSX.
+2. **Component class (`@layer components` in `app/styles/`).** If a pattern repeats or needs a variant (`.page-shell`, `.page-shell--tight`), define it once and reference it by name. Use BEM-style modifiers (`.name--variant`) rather than utility stacks.
 3. **Tailwind utility on the element.** Escape hatch only. Requires a code comment on the line above explaining why the pattern isn't promoted to the theme.
 
 #### Hard rules
@@ -128,14 +131,14 @@ When you need to style something, work down this list and stop at the first leve
 - **Never** use arbitrary Tailwind values (`w-[137px]`, `text-[13px]`) in TSX. If you need a new size, add it as a token or component class.
 - **Never** stack more than one Tailwind utility on a single element in TSX without a justifying comment. Two utilities = you owe the theme a new component class.
 - **Never** re-declare tokens, `@font-face` blocks, or element defaults in `app.css` or route files.
-- **Never** duplicate a Tailwind token as a raw literal in `theme.css` (`font-size: 1.125rem; /* text-lg */`). Use `@apply text-lg;` so the scale stays single-sourced in Tailwind's theme. Only fall back to raw CSS when no utility maps cleanly (`color-mix()`, `letter-spacing`, custom `--font-*` families, one-off `text-[10px]`).
+- **Never** duplicate a Tailwind token as a raw literal in `app/styles/` (`font-size: 1.125rem; /* text-lg */`). Use `@apply text-lg;` so the scale stays single-sourced in Tailwind's theme. Only fall back to raw CSS when no utility maps cleanly (`color-mix()`, `letter-spacing`, custom `--font-*` families, one-off `text-[10px]`).
 - `className` values in route TSX should be a single component-class token (`className="page-shell"`) or absent entirely. A grep for `className="` in `app/` is a quick health check.
 
 #### Recipes
 
-**Add a new colour or font.** Edit the `@theme` block in `theme.css`. Tailwind auto-generates `bg-*`, `text-*`, `border-*`, `font-*` utilities from it — but you should still consume the token through a base rule or component class, not a utility in TSX.
+**Add a new colour or font.** Edit the `@theme` block in `app/styles/theme.css`. Tailwind auto-generates `bg-*`, `text-*`, `border-*`, `font-*` utilities from it — but you should still consume the token through a base rule or component class, not a utility in TSX.
 
-**Change how all `h1`s look.** Edit the `h1` rule in `@layer base` in `theme.css`. Do not add per-page overrides.
+**Change how all `h1`s look.** Edit the `h1` rule in `@layer base` in `app/styles/base.css`. Do not add per-page overrides.
 
 **Introduce a new page layout.** Add a component class in `@layer components` (`.page-shell-*`, `.section-*`) and reference it from the route with a single `className`.
 

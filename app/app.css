@@ -1,7 +1,7 @@
 /* Tailwind v4 entry.
  *
  * All design tokens, element defaults, reusable component classes, and
- * @font-face declarations live in ./theme.css — do not add rules to this file.
+ * @font-face declarations live in ./styles/theme.css — do not add rules to this file.
  *
  * See website/CLAUDE.md → "Styling" for the styling hierarchy.
  */
