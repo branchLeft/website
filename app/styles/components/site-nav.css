@@ -10,7 +10,7 @@
   }
 
   .site-nav__inner {
-    @apply flex flex-wrap items-center justify-between max-w-6xl mx-auto py-3 px-6;
+    @apply flex flex-nowrap items-center justify-between max-w-6xl mx-auto py-3 px-6 gap-3;
   }
 
   .site-nav__brand {

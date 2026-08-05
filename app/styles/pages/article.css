@@ -20,8 +20,11 @@
   }
 
   .article-page__feature-group {
+    /* Bridges this page's own accent system onto the generic variable
+     * AccordionItem's shipped CSS reads for its chevron colour. */
+    @apply px-4 pt-4;
+    --bl-accordion-accent: var(--feature-accent);
     border: 1px solid var(--color-hairline);
-    padding: 0.875rem 1rem;
   }
 
   .article-page__feature-group ul {
@@ -29,6 +32,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .article-page__feature-group h3 {
+    @apply text-lg pt-0;
   }
 
   .article-page__feature-group[data-accent='design'] {
@@ -51,19 +58,10 @@
     --feature-accent: var(--color-value-agility);
   }
 
-  .article-page__feature-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .article-page__feature-summary::-webkit-details-marker {
-    display: none;
-  }
-
+  /* The summary layout (flex, marker-hiding, cursor), chevron, and reveal
+   * animation are all owned by AccordionItem's own shipped CSS now — this
+   * file only supplies the article-specific label layout and typography
+   * composed into the `summary` prop. */
   .article-page__feature-summary-label {
     display: flex;
     align-items: center;
@@ -76,62 +74,13 @@
     flex-shrink: 0;
   }
 
-  .article-page__feature-summary h3 {
+  .article-page__feature-summary-label h3 {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--feature-accent);
     padding-top: 0;
-  }
-
-  .article-page__feature-chevron {
-    @apply text-2xl;
-    color: var(--feature-accent);
-  }
-
-  /* Fade+drop reveal for the feature groups above, matching the accordion
-   * treatment used by the values cloud (see ValuesCloud.css). The native
-   * <details>/<summary> element hides non-summary children via a
-   * UA-stylesheet `display: none` rule when closed; author-origin rules
-   * always beat UA-origin rules regardless of specificity, so forcing
-   * `display: grid` here overrides that without touching the element's
-   * open/closed accessibility semantics (still driven by the `open`
-   * attribute, not by computed display). The grid-rows 0fr/1fr collapse
-   * animates height without a JS-measured pixel value; the inner element
-   * carries the actual opacity/transform fade+drop on its own transition
-   * so the two effects run concurrently rather than fighting over one
-   * `transition` declaration. */
-  .article-page__feature-panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease-out;
-  }
-
-  details[open] > .article-page__feature-panel {
-    grid-template-rows: 1fr;
-  }
-
-  .article-page__feature-panel-inner {
-    min-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 0.3s ease-out,
-      transform 0.3s ease-out;
-  }
-
-  details[open] > .article-page__feature-panel .article-page__feature-panel-inner {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .article-page__feature-panel,
-    .article-page__feature-panel-inner {
-      transition: none;
-    }
   }
 
   .article-page__process {
