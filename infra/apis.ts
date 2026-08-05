@@ -10,12 +10,16 @@ const requiredServices = [
   'cloudkms.googleapis.com',
   'monitoring.googleapis.com',
   'logging.googleapis.com',
-  // The edge load balancer (edge.ts): compute for the LB, NEG, forwarding
-  // rules and Cloud Armor policy; certificatemanager for the managed
-  // certificates and certificate map. All three were already enabled on the
-  // project before edge.ts existed, so they are declared here for
-  // completeness rather than to turn anything on — but declaring them means
-  // a rebuilt project provisions in one pass.
+  // Not consumed by anything in this program any more — the edge load
+  // balancer that needed them (compute for the LB, NEG, forwarding rules and
+  // Cloud Armor policy; certificatemanager for the managed certificates and
+  // certificate map) has moved to a separate private infrastructure repo via
+  // a Pulumi state move. Deliberately kept declared *here* regardless: that
+  // repo's program explicitly does not enable these APIs itself, precisely
+  // so that a post-move `pulumi preview` there shows a zero diff rather than
+  // two stacks fighting over the same `gcp.projects.Service` resource. If
+  // this repo's declaration is ever removed, the other repo needs its own
+  // enablement resource added first, or a rebuilt project can't provision.
   'compute.googleapis.com',
   'certificatemanager.googleapis.com',
   // Not used yet: DNS for branchleft.co.uk is manual at IONOS. Declared
