@@ -1,6 +1,6 @@
 # CLAUDE.md — branchLeft Website
 
-Cross-repo standards (Node/nvm, non-interactive commands, pre-commit, comment style, ways of working) live in the workspace root CLAUDE.md.
+branchLeft-internal: cross-repo standards (Node/nvm, non-interactive commands, pre-commit, comment style) live in the local workspace root CLAUDE.md (not part of this repo).
 
 ## Stack
 
