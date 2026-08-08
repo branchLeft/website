@@ -1,0 +1,38 @@
+{
+  "nodes": [
+    {
+      "id": "public_og_image_social_card",
+      "label": "Social Share Card (og-image: logo + wordmark on black)",
+      "file_type": "image",
+      "source_file": "public/og-image.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "public_og_image_social_card",
+      "target": "brand_branchleft_logo_logo",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/og-image.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_og_image_social_card",
+      "target": "brand_branchleft_wordmark_wordmark",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/og-image.png",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

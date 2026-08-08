@@ -1,0 +1,50 @@
+{
+  "nodes": [
+    {
+      "id": "_pre_commit_config_pre_commit_hooks_repo",
+      "label": "pre-commit-hooks (trailing-whitespace, EOF, YAML, large-file, merge-conflict)",
+      "file_type": "document",
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_pre_commit_config_prettier_hook",
+      "label": "prettier hook",
+      "file_type": "document",
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_pre_commit_config_eslint_hook",
+      "label": "eslint hook",
+      "file_type": "document",
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_pre_commit_config_vitest_hook",
+      "label": "vitest hook",
+      "file_type": "document",
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}

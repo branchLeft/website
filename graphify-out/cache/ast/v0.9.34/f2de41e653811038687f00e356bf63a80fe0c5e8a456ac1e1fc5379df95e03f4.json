@@ -1,0 +1,240 @@
+{
+  "nodes": [
+    {
+      "id": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "label": "assert-no-edge-deletes.py",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "label": "edge_deletes()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L54",
+      "_callable": true
+    },
+    {
+      "id": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "label": "self_test()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L98",
+      "_callable": true
+    },
+    {
+      "id": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L118",
+      "_callable": true
+    },
+    {
+      "id": "$graphify-root$_infra_scripts_assert_no_edge_deletes_rationale_55",
+      "label": "Return the edge resources `text` plans to delete. Pairs each `(delete)` line\u2026",
+      "file_type": "rationale",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L55"
+    }
+  ],
+  "edges": [
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_py",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "$graphify-root$_infra_scripts_assert_no_edge_deletes_rationale_55",
+      "target": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L55",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "splitlines",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L63",
+      "receiver": "text"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "search",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L64",
+      "receiver": "_DELETE"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "search",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L67",
+      "receiver": "_URN"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "group",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L69",
+      "receiver": "match"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L70",
+      "receiver": "found"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_edge_deletes",
+      "callee": "group",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L70",
+      "receiver": "match"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "callee": "_FIXTURE_DELETE",
+      "is_member_call": false,
+      "indirect": true,
+      "context": "collection",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L100"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "callee": "_FIXTURE_UNRELATED",
+      "is_member_call": false,
+      "indirect": true,
+      "context": "collection",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L101"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_self_test",
+      "callee": "_FIXTURE_UPDATE",
+      "is_member_call": false,
+      "indirect": true,
+      "context": "collection",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L102"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "callee": "__doc__",
+      "is_member_call": false,
+      "indirect": true,
+      "context": "argument",
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L120"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "callee": "read",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L127",
+      "receiver": "handle"
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "callee": "join",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L138",
+      "receiver": null
+    },
+    {
+      "caller_nid": "$graphify-root$_infra_scripts_assert_no_edge_deletes_main",
+      "callee": "splitlines",
+      "is_member_call": true,
+      "source_file": "infra/scripts/assert-no-edge-deletes.py",
+      "source_location": "L143",
+      "receiver": "text"
+    }
+  ]
+}

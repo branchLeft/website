@@ -1,0 +1,52 @@
+{
+  "nodes": [
+    {
+      "id": "known_issues_prerendering_security_headers",
+      "label": "Pre-rendering disabled \u2014 security headers gap",
+      "file_type": "rationale",
+      "source_file": "KNOWN_ISSUES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "known_issues_prerendering_security_headers",
+      "target": "claude_contact_form",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "KNOWN_ISSUES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "known_issues_prerendering_security_headers",
+      "target": "claude_routing_strategy",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "KNOWN_ISSUES.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "prerendering_safety_constraint",
+      "label": "Pre-rendering Safety Constraint (why prerender stays off)",
+      "nodes": [
+        "known_issues_prerendering_security_headers",
+        "claude_routing_strategy",
+        "_agents_skills_react_router_references_framework_mode_committed_strategy"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "KNOWN_ISSUES.md"
+    }
+  ]
+}
