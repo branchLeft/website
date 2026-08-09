@@ -3,8 +3,8 @@
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@pulumi/pulumi": "^3.255.0",
-    "@pulumi/gcp": "^9.32.1"
+    "@pulumi/pulumi": "^3.256.0",
+    "@pulumi/gcp": "^9.33.0"
   },
   "devDependencies": {
     "typescript": "^5.9.0",
