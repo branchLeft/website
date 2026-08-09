@@ -1,0 +1,81 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_react_router_skill_react_router_v7_framework_mode",
+      "label": "React Router v7 Framework Mode (Locked)",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
+      "label": "Legacy Patterns to Migrate",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_skill_rsc_future_path",
+      "label": "RSC (Future Path, Not Active)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_skill_skill_references_table",
+      "label": "Skill References Table",
+      "file_type": "document",
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_react_router_skill_react_router_v7_framework_mode",
+      "target": "_agents_skills_react_router_references_framework_mode_committed_strategy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
+      "target": "_agents_skills_react_router_references_framework_mode_committed_strategy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_react_router_skill_skill_references_table",
+      "target": "_agents_skills_react_router_references_framework_mode_committed_strategy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/react-router/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "pnpm_workspace_allow_builds",
+      "label": "pnpm-workspace allowBuilds",
+      "file_type": "document",
+      "source_file": "pnpm-workspace.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pnpm_workspace_minimum_release_age_exclude",
+      "label": "minimumReleaseAgeExclude (@branchleft/*)",
+      "file_type": "document",
+      "source_file": "pnpm-workspace.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pnpm_workspace_minimum_release_age_exclude",
+      "target": "_github_dependabot_npm_root_updates",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "pnpm-workspace.yaml",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

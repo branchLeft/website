@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "id": "public_favicon_32_favicon_set",
+      "label": "Favicon Set (32/192/512px + apple-touch-icon, same lightning-bolt mark)",
+      "file_type": "image",
+      "source_file": "public/favicon-32.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "public_favicon_32_favicon_set",
+      "target": "brand_branchleft_logo_logo",
+      "relation": "semantically_similar_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/favicon-32.png",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

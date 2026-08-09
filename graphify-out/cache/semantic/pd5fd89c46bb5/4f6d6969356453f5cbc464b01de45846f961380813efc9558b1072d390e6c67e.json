@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_committed_strategy",
+      "label": "Framework Mode Committed Strategy",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_route_configuration",
+      "label": "Route Configuration (app/routes.ts)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_route_modules",
+      "label": "Route Modules",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_data_and_mutations",
+      "label": "Data and Mutations (loader/action)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui",
+      "label": "Forms, Fetchers, and Pending UI",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_type_safety",
+      "label": "Type Safety (Route.* generated types)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_rendering_strategy",
+      "label": "Rendering Strategy (SSR/SPA/pre-render)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth",
+      "label": "Middleware, Sessions, and Auth",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_react_router_references_framework_mode_rsc_framework",
+      "label": "RSC Framework (Future Path)",
+      "file_type": "concept",
+      "source_file": ".agents/skills/react-router/references/framework-mode.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}
