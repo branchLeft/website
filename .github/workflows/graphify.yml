@@ -9,5 +9,5 @@ on:
 
 jobs:
   graphify:
-    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1
+    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.1
     secrets: inherit
