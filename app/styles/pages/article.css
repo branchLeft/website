@@ -22,7 +22,7 @@
   .article-page__feature-group {
     /* Bridges this page's own accent system onto the generic variable
      * AccordionItem's shipped CSS reads for its chevron colour. */
-    @apply px-4 pt-4;
+    @apply px-4 pt-4 pb-2;
     --bl-accordion-accent: var(--feature-accent);
     border: 1px solid var(--color-hairline);
   }
