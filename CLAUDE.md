@@ -168,3 +168,12 @@ VS Code's built-in CSS validator does not recognise `@apply`/`@theme`/`@layer`. 
   3. Covers at least one critical user interaction (if applicable).
 - Tests live in `tests/` at the repo root.
 - Accessibility failures are treated as build-blocking errors.
+
+## graphify
+
+`graphify-out/` holds a knowledge graph of this repo, rebuilt and committed by CI on every push to `main`.
+
+- Answer codebase and architecture questions with `graphify query "<question>"` first — `graphify path "<A>" "<B>"` for a relationship, `graphify explain "<concept>"` for a concept. Each returns a scoped subgraph, far smaller than the equivalent grep.
+- `graphify-out/GRAPH_REPORT.md` is the broad-navigation entry point. The payload files behind it are read-blocked in `.claude/settings.json` and listed in `.claudignore` — go through the query commands instead.
+- After changing code, `graphify update .` refreshes the graph locally. AST-only, no API cost.
+- `graphify-out/.graphify_root` and `.graphify_python` are never committed: they record absolute paths on the machine that built the graph, and a foreign value in either one is worse than its absence.
