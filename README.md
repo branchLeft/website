@@ -16,3 +16,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 MIT — see [LICENSE](LICENSE). The branchLeft name and brand assets are excluded from that grant; see [NOTICE.md](NOTICE.md).
+
+<!-- codeowners-verification-marker -->
