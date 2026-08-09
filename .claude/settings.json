@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./graphify-out/graph.json)",
+      "Read(./graphify-out/graph.html)",
+      "Read(./graphify-out/manifest.json)",
+      "Read(./graphify-out/cost.json)",
+      "Read(./graphify-out/cache/**)",
+      "Read(./graphify-out/.graphify_*.json)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v graphify >/dev/null 2>&1 && graphify hook-guard search || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v graphify >/dev/null 2>&1 && graphify hook-guard read || true"
+          }
+        ]
+      }
+    ]
+  }
+}
