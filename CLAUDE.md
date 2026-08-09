@@ -1,5 +1,7 @@
 # CLAUDE.md — branchLeft Website
 
+branchLeft-internal: cross-repo standards (Node/nvm, non-interactive commands, pre-commit, comment style) live in the local workspace root CLAUDE.md (not part of this repo).
+
 ## Stack
 
 - **Runtime/Package manager:** Node.js, pnpm
@@ -21,53 +23,17 @@ This app is locked to **React Router v7 Framework Mode + SSR**. These decisions 
 
 For detailed patterns and doc pointers, see `.agents/skills/react-router/`.
 
-## Node Version
-
-This repo has an `.nvmrc`. Always run `nvm use` before any commands to activate the correct Node version. Do not hardcode version paths or manipulate `$PATH` manually.
-
-```bash
-nvm use
-```
-
 ## Commands
-
-### Non-interactive (safe to run directly)
 
 ```bash
 pnpm build               # production build
 pnpm typecheck           # react-router typegen + tsc
-pnpm test:unit --run     # single Vitest pass — ALWAYS use --run to avoid watch mode
+pnpm test:unit --run     # single Vitest pass
 pnpm lint                # eslint --fix
 pnpm format              # prettier --write
+pnpm dev                 # React Router dev server (HMR) — async terminal only
+pnpm start               # serve production build — async terminal only
 ```
-
-### Long-running servers — async terminal mode only
-
-These commands block indefinitely. Only start them in a background/async terminal; never `await` them in a script or agent task.
-
-```bash
-pnpm dev     # React Router dev server (HMR)
-pnpm start   # serve production build
-```
-
-### Installing dependencies
-
-```bash
-pnpm install --frozen-lockfile   # CI-safe install; never prompts
-```
-
-## Pre-Commit Hooks
-
-Hooks are managed by [pre-commit](https://pre-commit.com) and defined in `.pre-commit-config.yaml`.
-
-### What runs on commit
-
-1. **pre-commit-hooks** — trailing whitespace, end-of-file fixer, YAML check, large-file guard, merge-conflict check
-2. **Prettier** — formats `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, `.yml`, `.yaml`, `.md`
-3. **ESLint** — lints `.js`, `.jsx`, `.ts`, `.tsx`
-4. **Vitest** — runs `pnpm test:unit` (single pass) against any changed source files
-
-If a commit is blocked, fix the reported issues and re-commit.
 
 ## Project Conventions
 
@@ -202,9 +168,3 @@ VS Code's built-in CSS validator does not recognise `@apply`/`@theme`/`@layer`. 
   3. Covers at least one critical user interaction (if applicable).
 - Tests live in `tests/` at the repo root.
 - Accessibility failures are treated as build-blocking errors.
-
-## Open Source
-
-- All code in this repo is public. Do not commit secrets, credentials, or personally identifying information.
-- Use environment variables (`.env`, never committed) for any runtime config.
-- Keep dependencies minimal and well-maintained.
