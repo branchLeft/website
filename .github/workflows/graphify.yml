@@ -9,5 +9,7 @@ on:
 
 jobs:
   graphify:
+    permissions:
+      contents: write
     uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1
     secrets: inherit
