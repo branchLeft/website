@@ -9,5 +9,9 @@ on:
 
 jobs:
   graphify:
-    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1
+    # The org default caps a reusable workflow at contents: read, and it cannot
+    # grant itself more than the caller allows.
+    permissions:
+      contents: write
+    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.3
     secrets: inherit
