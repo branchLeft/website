@@ -171,8 +171,8 @@ itself access to the key it needs in order to decrypt the stack config it
 would use to run `pulumi up` in the first place. So the keyring
 (`pulumi`), key (`pulumi-secrets`, location `europe-west1`), and the two
 `roles/cloudkms.cryptoKeyEncrypterDecrypter` IAM bindings (for
-`github-actions-deployer@branchleft-prod.iam.gserviceaccount.com` and
-`rob@branchleft.co.uk`) were created manually via `gcloud`, then adopted
+`github-actions-deployer@branchleft-prod.iam.gserviceaccount.com` and the
+project owner) were created manually via `gcloud`, then adopted
 into the Pulumi program (`infra/kms.ts`) with `pulumi import` afterward —
 never `pulumi up` for the initial creation.
 
@@ -188,9 +188,14 @@ gcloud kms keys add-iam-policy-binding pulumi-secrets \
   --keyring=pulumi --location=europe-west1 --project=branchleft-prod \
   --member="serviceAccount:github-actions-deployer@branchleft-prod.iam.gserviceaccount.com" \
   --role="roles/cloudkms.cryptoKeyEncrypterDecrypter"
+# Second binding, for the human who runs the bootstrap. Resolve the account
+# from the project's owner binding rather than hardcoding it:
+#   gcloud projects get-iam-policy branchleft-prod \
+#     --flatten="bindings[].members" --filter="bindings.role:roles/owner" \
+#     --format="value(bindings.members)"
 gcloud kms keys add-iam-policy-binding pulumi-secrets \
   --keyring=pulumi --location=europe-west1 --project=branchleft-prod \
-  --member="user:rob@branchleft.co.uk" \
+  --member="user:PROJECT_OWNER_EMAIL" \
   --role="roles/cloudkms.cryptoKeyEncrypterDecrypter"
 ```
 
@@ -228,7 +233,7 @@ error: 1 error occurred:
 
 **Root cause:** same bootstrap chicken-and-egg as the state bucket IAM and
 KMS key issues above. The original entries in `requiredServices`
-(`apis.ts`) were enabled the first time under `rob@branchleft.co.uk`'s
+(`apis.ts`) were enabled the first time under the project owner's
 `roles/owner` account during initial setup, so CI's `github-actions-deployer`
 SA — which only ever holds `artifactregistry.writer`, `run.developer`, and
 `iam.serviceAccountUser` — never had to exercise the `gcp:projects:Service`
