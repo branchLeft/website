@@ -1,0 +1,7 @@
+# graphify rewrites these with absolute paths describing whichever machine
+# built the graph, so a committed copy is wrong on every other machine.
+/.graphify_root
+/.graphify_python
+
+# Pre-overwrite snapshots of the previous graph. Git already holds that history.
+/20??-??-??/
