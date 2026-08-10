@@ -13,5 +13,9 @@ jobs:
     # grant itself more than the caller allows.
     permissions:
       contents: write
-    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.3
+      pull-requests: write
+    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.4
+    with:
+      # A ruleset blocks direct pushes to main; the graph lands as a PR instead.
+      publish: pull-request
     secrets: inherit
