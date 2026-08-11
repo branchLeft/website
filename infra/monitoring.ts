@@ -55,7 +55,14 @@ export const uptimeAlertPolicy = new gcp.monitoring.AlertPolicy(
         displayName: 'Uptime check failing',
         conditionThreshold: {
           filter: pulumi.interpolate`metric.type="monitoring.googleapis.com/uptime_check/check_passed" resource.type="uptime_url" metric.label."check_id"="${uptimeCheck.uptimeCheckId}"`,
-          comparison: 'COMPARISON_LT',
+          // REDUCE_COUNT_FALSE reduces to the number of checker locations
+          // reporting a *failed* probe, so the healthy value is 0 and this must
+          // be GT. Reading the metric name alone suggests LT ("check_passed
+          // below 1"), which inverts the policy into firing whenever the site
+          // is up and going silent when it is down. A threshold of 1 rather
+          // than 0 requires two locations to agree before alerting, so a single
+          // flaky region does not page.
+          comparison: 'COMPARISON_GT',
           thresholdValue: 1,
           duration: '60s',
           aggregations: [
