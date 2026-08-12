@@ -22,4 +22,9 @@ export const imageUrl = pulumi.interpolate`${region}-docker.pkg.dev/${projectId}
 // Workload Identity Federation, as "owner/repo".
 export const githubRepo = config.require('githubRepo');
 
+// Host/port for the contact form's outbound SMTP submission. Not secret —
+// the credential that authenticates against this host is (see secrets.ts).
+export const contactSmtpHost = config.require('contactSmtpHost');
+export const contactSmtpPort = config.get('contactSmtpPort') ?? '587';
+
 export const project = pulumi.output(gcp.organizations.getProject({ projectId }));

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { checkA11y } from './a11y';
 
-// The form action sends a real email via Gmail SMTP (see
+// The form action sends a real email over SMTP (see
 // app/lib/sendContactEmail.server.ts), so these tests exercise the category
 // pre-selection and manual selection without ever submitting.
 

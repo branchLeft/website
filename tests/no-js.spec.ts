@@ -131,7 +131,7 @@ test.describe('Affordable Websites feature accordion', () => {
 });
 
 test.describe('contact form', () => {
-  // Never submit — the form sends a real email via Gmail SMTP (see
+  // Never submit — the form sends a real email over SMTP (see
   // tests/contact.spec.ts), and CI has no credentials configured.
   test('is a plain postable HTML form with visible fields', async ({ page }) => {
     await page.goto('/contact');

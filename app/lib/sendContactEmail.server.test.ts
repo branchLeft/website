@@ -14,18 +14,32 @@ import { sendContactEmail } from './sendContactEmail.server';
 
 const ORIGINAL_ENV = { ...process.env };
 
-function setEnv(user: string | undefined, pass: string | undefined) {
-  if (user === undefined) {
-    delete process.env.GMAIL_USER;
-  } else {
-    process.env.GMAIL_USER = user;
-  }
-  if (pass === undefined) {
-    delete process.env.GMAIL_APP_PASSWORD;
-  } else {
-    process.env.GMAIL_APP_PASSWORD = pass;
+function setEnv(
+  host: string | undefined,
+  port: string | undefined,
+  user: string | undefined,
+  pass: string | undefined
+) {
+  for (const [key, value] of [
+    ['CONTACT_SMTP_HOST', host],
+    ['CONTACT_SMTP_PORT', port],
+    ['CONTACT_SMTP_USER', user],
+    ['CONTACT_SMTP_PASSWORD', pass],
+  ] as const) {
+    if (value === undefined) {
+      delete process.env[key];
+    } else {
+      process.env[key] = value;
+    }
   }
 }
+
+const VALID_ENV = [
+  'smtp.example.branchleft.co.uk',
+  '587',
+  'website-submission@branchleft.co.uk',
+  'super-secret',
+] as const;
 
 describe('sendContactEmail', () => {
   beforeEach(() => {
@@ -37,8 +51,8 @@ describe('sendContactEmail', () => {
     process.env = { ...ORIGINAL_ENV };
   });
 
-  it('throws without sending when GMAIL_USER is not set', async () => {
-    setEnv(undefined, 'app-password');
+  it('throws without sending when CONTACT_SMTP_HOST is not set', async () => {
+    setEnv(undefined, VALID_ENV[1], VALID_ENV[2], VALID_ENV[3]);
 
     await expect(
       sendContactEmail({
@@ -46,13 +60,15 @@ describe('sendContactEmail', () => {
         email: 'person@example.com',
         message: 'hello there',
       })
-    ).rejects.toThrow('GMAIL_USER and GMAIL_APP_PASSWORD must be set to send contact form email.');
+    ).rejects.toThrow(
+      'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
+    );
     expect(createTransport).not.toHaveBeenCalled();
     expect(sendMail).not.toHaveBeenCalled();
   });
 
-  it('throws without sending when GMAIL_APP_PASSWORD is not set', async () => {
-    setEnv('info@branchleft.co.uk', undefined);
+  it('throws without sending when CONTACT_SMTP_PORT is not set', async () => {
+    setEnv(VALID_ENV[0], undefined, VALID_ENV[2], VALID_ENV[3]);
 
     await expect(
       sendContactEmail({
@@ -60,13 +76,47 @@ describe('sendContactEmail', () => {
         email: 'person@example.com',
         message: 'hello there',
       })
-    ).rejects.toThrow('GMAIL_USER and GMAIL_APP_PASSWORD must be set to send contact form email.');
+    ).rejects.toThrow(
+      'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
+    );
     expect(createTransport).not.toHaveBeenCalled();
     expect(sendMail).not.toHaveBeenCalled();
   });
 
-  it('builds a gmail transport from the configured credentials', async () => {
-    setEnv('info@branchleft.co.uk', 'super-secret-app-password');
+  it('throws without sending when CONTACT_SMTP_USER is not set', async () => {
+    setEnv(VALID_ENV[0], VALID_ENV[1], undefined, VALID_ENV[3]);
+
+    await expect(
+      sendContactEmail({
+        category: 'general',
+        email: 'person@example.com',
+        message: 'hello there',
+      })
+    ).rejects.toThrow(
+      'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
+    );
+    expect(createTransport).not.toHaveBeenCalled();
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it('throws without sending when CONTACT_SMTP_PASSWORD is not set', async () => {
+    setEnv(VALID_ENV[0], VALID_ENV[1], VALID_ENV[2], undefined);
+
+    await expect(
+      sendContactEmail({
+        category: 'general',
+        email: 'person@example.com',
+        message: 'hello there',
+      })
+    ).rejects.toThrow(
+      'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
+    );
+    expect(createTransport).not.toHaveBeenCalled();
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it('builds an SMTP transport from the configured credentials, forcing STARTTLS on the submission port', async () => {
+    setEnv(...VALID_ENV);
 
     await sendContactEmail({
       category: 'general',
@@ -75,13 +125,16 @@ describe('sendContactEmail', () => {
     });
 
     expect(createTransport).toHaveBeenCalledWith({
-      service: 'gmail',
-      auth: { user: 'info@branchleft.co.uk', pass: 'super-secret-app-password' },
+      host: 'smtp.example.branchleft.co.uk',
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: { user: 'website-submission@branchleft.co.uk', pass: 'super-secret' },
     });
   });
 
   it('sends to the fixed inbox with the submitter wired up as replyTo', async () => {
-    setEnv('info@branchleft.co.uk', 'super-secret-app-password');
+    setEnv(...VALID_ENV);
 
     await sendContactEmail({
       category: 'affordable-websites',
@@ -90,8 +143,8 @@ describe('sendContactEmail', () => {
     });
 
     expect(sendMail).toHaveBeenCalledWith({
-      from: 'branchLeft website <info@branchleft.co.uk>',
-      to: 'info+enquiry@branchleft.co.uk',
+      from: 'branchLeft website <website-submission@branchleft.co.uk>',
+      to: 'info@branchleft.co.uk',
       replyTo: 'someone@example.com',
       subject: '🔔 Website enquiry: affordable-websites',
       text: [
@@ -110,7 +163,7 @@ describe('sendContactEmail', () => {
   });
 
   it('propagates a rejection from the transport instead of swallowing it', async () => {
-    setEnv('info@branchleft.co.uk', 'super-secret-app-password');
+    setEnv(...VALID_ENV);
     sendMail.mockRejectedValueOnce(new Error('SMTP connection refused'));
 
     await expect(
