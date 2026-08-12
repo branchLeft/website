@@ -22,14 +22,14 @@ function secretWithValue(name: string, secretId: string, value: pulumi.Output<st
   return { secret, version };
 }
 
-export const gmailUser = secretWithValue(
-  'gmail-user',
-  'gmail-user',
-  config.requireSecret('gmailUser')
+export const contactSmtpUser = secretWithValue(
+  'contact-smtp-user',
+  'contact-smtp-user',
+  config.requireSecret('contactSmtpUser')
 );
 
-export const gmailAppPassword = secretWithValue(
-  'gmail-app-password',
-  'gmail-app-password',
-  config.requireSecret('gmailAppPassword')
+export const contactSmtpPassword = secretWithValue(
+  'contact-smtp-password',
+  'contact-smtp-password',
+  config.requireSecret('contactSmtpPassword')
 );

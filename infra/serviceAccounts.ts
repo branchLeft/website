@@ -1,7 +1,7 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as gcp from '@pulumi/gcp';
 import { projectId } from './config';
-import { gmailUser, gmailAppPassword } from './secrets';
+import { contactSmtpUser, contactSmtpPassword } from './secrets';
 
 export const cloudRunRuntimeSa = new gcp.serviceaccount.Account('cloud-run-runtime-sa', {
   accountId: 'cloud-run-runtime',
@@ -9,8 +9,8 @@ export const cloudRunRuntimeSa = new gcp.serviceaccount.Account('cloud-run-runti
 });
 
 for (const [label, { secret }] of Object.entries({
-  gmailUser,
-  gmailAppPassword,
+  contactSmtpUser,
+  contactSmtpPassword,
 })) {
   new gcp.secretmanager.SecretIamMember(`runtime-sa-access-${label}`, {
     secretId: secret.id,

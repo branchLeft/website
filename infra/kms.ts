@@ -11,7 +11,7 @@ export const pulumiKeyRing = new gcp.kms.KeyRing('pulumi-keyring', {
 });
 
 // **Shared across every Pulumi stack in this project, not just this one.**
-// This stack's own config secrets (gmailUser, gmailAppPassword) are the
+// This stack's own config secrets (contactSmtpUser, contactSmtpPassword) are the
 // smallest part of what depends on it: shared-infra, the Ghost platform
 // stack and every per-tenant stack name this exact key as their
 // `secretsprovider`, by hardcoded URI, because a stack file has to name its

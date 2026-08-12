@@ -6,21 +6,30 @@ export type ContactSubmission = {
   readonly message: string;
 };
 
-// Plus-addressed so the recipient is a distinct string from the GMAIL_USER
-// sender. Gmail delivers it to the same info@ mailbox, but because it's a
-// self-to-self send over Gmail's SMTP, an identical from/to gets filed
-// straight into Sent and skipped from Inbox delivery. The distinct address
-// also gives a stable target for the Gmail filter mentioned below.
-const TO_ADDRESS = 'info+enquiry@branchleft.co.uk';
+const TO_ADDRESS = 'info@branchleft.co.uk';
 
 function getTransport() {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  if (!user || !pass) {
-    throw new Error('GMAIL_USER and GMAIL_APP_PASSWORD must be set to send contact form email.');
+  const host = process.env.CONTACT_SMTP_HOST;
+  const port = process.env.CONTACT_SMTP_PORT;
+  const user = process.env.CONTACT_SMTP_USER;
+  const pass = process.env.CONTACT_SMTP_PASSWORD;
+  if (!host || !port || !user || !pass) {
+    throw new Error(
+      'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
+    );
+  }
+  const portNumber = Number(port);
+  if (Number.isNaN(portNumber)) {
+    throw new TypeError(`CONTACT_SMTP_PORT must be a number, got: ${port}`);
   }
   return nodemailer.createTransport({
-    service: 'gmail',
+    host,
+    port: portNumber,
+    // Submission ports (587) negotiate encryption via STARTTLS rather than
+    // starting TLS immediately, unlike 465's implicit TLS. requireTLS
+    // forces that upgrade instead of silently falling back to plaintext.
+    secure: false,
+    requireTLS: true,
     auth: { user, pass },
   });
 }
@@ -81,7 +90,12 @@ function buildHtml(submission: ContactSubmission): string {
 export async function sendContactEmail(submission: ContactSubmission): Promise<void> {
   const transport = getTransport();
   await transport.sendMail({
-    from: `branchLeft website <${process.env.GMAIL_USER}>`,
+    // CONTACT_SMTP_USER doubles as the visible From identity. It must be
+    // provisioned as a distinct, sender-login-mapped submission account —
+    // never TO_ADDRESS's own credential — or this both defeats the
+    // credential isolation the submission user exists for and reintroduces
+    // a from == to self-send.
+    from: `branchLeft website <${process.env.CONTACT_SMTP_USER}>`,
     to: TO_ADDRESS,
     replyTo: submission.email,
     subject: `🔔 Website enquiry: ${submission.category}`,

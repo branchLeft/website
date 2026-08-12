@@ -64,8 +64,8 @@ Update the relevant route file AND the corresponding note in this section whenev
 
 **Contact form**
 
-- `/contact` submits via a route `action` in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`) over Gmail SMTP as `info@branchleft.co.uk` — the mailbox already disclosed as a processor above, so no separate third-party entry is needed.
-- Requires `GMAIL_USER` and `GMAIL_APP_PASSWORD` environment variables (see `.env.example`). Not committed; set as real env vars/secrets on the hosting platform in production.
+- `/contact` submits via a route `action` in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`) over SMTP AUTH submission (port 587, STARTTLS) against branchLeft's own self-hosted mail platform, sending to `info@branchleft.co.uk`. The submission credential is a dedicated, send-as-only account distinct from that mailbox's own password — a leaked website secret can't be used to read mail. No third-party mail processor is involved in sending.
+- Requires `CONTACT_SMTP_HOST`, `CONTACT_SMTP_PORT`, `CONTACT_SMTP_USER` and `CONTACT_SMTP_PASSWORD` environment variables (see `.env.example`). Not committed; set as real env vars/secrets on the hosting platform in production.
 
 ### Styling
 

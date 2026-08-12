@@ -1,8 +1,8 @@
 import * as gcp from '@pulumi/gcp';
-import { imageUrl, region } from './config';
+import { contactSmtpHost, contactSmtpPort, imageUrl, region } from './config';
 import { repository } from './artifactRegistry';
 import { cloudRunRuntimeSa } from './serviceAccounts';
-import { gmailUser, gmailAppPassword } from './secrets';
+import { contactSmtpUser, contactSmtpPassword } from './secrets';
 
 // Plain string, not a `pulumi.Output`, so it can be exported and hand-copied
 // into another program's config without that program taking a dependency on
@@ -64,15 +64,23 @@ export const service = new gcp.cloudrunv2.Service(
           },
           envs: [
             {
-              name: 'GMAIL_USER',
+              name: 'CONTACT_SMTP_HOST',
+              value: contactSmtpHost,
+            },
+            {
+              name: 'CONTACT_SMTP_PORT',
+              value: contactSmtpPort,
+            },
+            {
+              name: 'CONTACT_SMTP_USER',
               valueSource: {
-                secretKeyRef: { secret: gmailUser.secret.secretId, version: 'latest' },
+                secretKeyRef: { secret: contactSmtpUser.secret.secretId, version: 'latest' },
               },
             },
             {
-              name: 'GMAIL_APP_PASSWORD',
+              name: 'CONTACT_SMTP_PASSWORD',
               valueSource: {
-                secretKeyRef: { secret: gmailAppPassword.secret.secretId, version: 'latest' },
+                secretKeyRef: { secret: contactSmtpPassword.secret.secretId, version: 'latest' },
               },
             },
           ],
@@ -104,7 +112,7 @@ export const service = new gcp.cloudrunv2.Service(
       ],
     },
   },
-  { dependsOn: [repository, gmailUser.version, gmailAppPassword.version] }
+  { dependsOn: [repository, contactSmtpUser.version, contactSmtpPassword.version] }
 );
 
 new gcp.cloudrunv2.ServiceIamMember('website-public-invoker', {

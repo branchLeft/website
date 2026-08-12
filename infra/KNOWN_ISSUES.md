@@ -161,8 +161,8 @@ the `gcloud` grant above manually before the next deploy.
 
 ## Pulumi stack secrets are encrypted with a Cloud KMS key — bootstrap it via `gcloud`, not Pulumi
 
-**Context:** the `production` stack's secret config values (`gmailUser`,
-`gmailAppPassword`) use a `gcpkms://` secrets provider instead of a shared
+**Context:** the `production` stack's secret config values (`contactSmtpUser`,
+`contactSmtpPassword`) use a `gcpkms://` secrets provider instead of a shared
 passphrase, so decrypt access is a normal, revocable IAM grant rather than a
 single `PULUMI_CONFIG_PASSPHRASE` GitHub secret.
 
