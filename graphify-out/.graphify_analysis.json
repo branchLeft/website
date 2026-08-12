@@ -104,6 +104,43 @@
       "vitest_ui"
     ],
     "2": [
+      "app_lib_meta",
+      "app_lib_meta_buildmeta",
+      "app_lib_meta_organization_json_ld",
+      "app_lib_meta_pagemetainput",
+      "app_lib_meta_site_url",
+      "app_lib_meta_test",
+      "app_lib_meta_test_findbykey",
+      "app_lib_meta_test_findbykeyvalue",
+      "app_lib_meta_test_metaentries",
+      "app_lib_meta_test_metaentry",
+      "app_lib_page_paths",
+      "app_lib_page_paths_page_paths",
+      "app_lib_page_paths_test",
+      "app_lib_page_paths_test_resource_route_paths",
+      "app_lib_page_paths_test_routeconfigpaths",
+      "app_routes",
+      "app_routes_contact_meta",
+      "app_routes_home",
+      "app_routes_home_home",
+      "app_routes_home_meta",
+      "app_routes_privacy",
+      "app_routes_privacy_meta",
+      "app_routes_privacy_privacy",
+      "app_routes_sitemap_xml",
+      "app_routes_sitemap_xml_buildsitemapxml",
+      "app_routes_sitemap_xml_loader",
+      "app_routes_solutions_affordable_websites",
+      "app_routes_solutions_affordable_websites_affordablewebsites",
+      "app_routes_solutions_affordable_websites_meta",
+      "app_routes_solutions_local_news",
+      "app_routes_solutions_local_news_localnews",
+      "app_routes_solutions_local_news_meta",
+      "app_routes_terms",
+      "app_routes_terms_meta",
+      "app_routes_terms_terms"
+    ],
+    "3": [
       "app_lib_sendcontactemail_server",
       "app_lib_sendcontactemail_server_buildhtml",
       "app_lib_sendcontactemail_server_buildtext",
@@ -140,7 +177,7 @@
       "app_routes_contact_test_makerequest",
       "app_routes_contact_test_nextip"
     ],
-    "3": [
+    "4": [
       "branchleft_components",
       "framer_motion",
       "isbot",
@@ -176,42 +213,6 @@
       "react_router",
       "react_router_node",
       "react_router_serve"
-    ],
-    "4": [
-      "app_lib_meta",
-      "app_lib_meta_buildmeta",
-      "app_lib_meta_organization_json_ld",
-      "app_lib_meta_pagemetainput",
-      "app_lib_meta_site_url",
-      "app_lib_meta_test",
-      "app_lib_meta_test_findbykey",
-      "app_lib_meta_test_findbykeyvalue",
-      "app_lib_meta_test_metaentries",
-      "app_lib_meta_test_metaentry",
-      "app_lib_page_paths",
-      "app_lib_page_paths_page_paths",
-      "app_lib_page_paths_test",
-      "app_lib_page_paths_test_resource_route_paths",
-      "app_lib_page_paths_test_routeconfigpaths",
-      "app_routes",
-      "app_routes_contact_meta",
-      "app_routes_home",
-      "app_routes_home_home",
-      "app_routes_home_meta",
-      "app_routes_privacy",
-      "app_routes_privacy_meta",
-      "app_routes_privacy_privacy",
-      "app_routes_sitemap_xml",
-      "app_routes_sitemap_xml_buildsitemapxml",
-      "app_routes_sitemap_xml_loader",
-      "app_routes_solutions_affordable_websites",
-      "app_routes_solutions_affordable_websites_meta",
-      "app_routes_solutions_local_news",
-      "app_routes_solutions_local_news_localnews",
-      "app_routes_solutions_local_news_meta",
-      "app_routes_terms",
-      "app_routes_terms_meta",
-      "app_routes_terms_terms"
     ],
     "5": [
       "app_components_footer",
@@ -298,7 +299,6 @@
       "app_routes_about_meta",
       "app_routes_about_sections",
       "app_routes_about_values",
-      "app_routes_solutions_affordable_websites_affordablewebsites",
       "package_dependencies_react",
       "react"
     ],
@@ -353,19 +353,6 @@
       "tests_terms_spec"
     ],
     "11": [
-      "_github_dependabot_github_actions_updates",
-      "_github_workflows_ci_checks_job",
-      "_github_workflows_ci_deploy_job",
-      "_github_workflows_ci_e2e_job",
-      "_github_workflows_ci_edge_load_balancer_guard",
-      "_github_workflows_ci_pulumi_preview_job",
-      "_github_workflows_ci_smoke_test",
-      "_github_workflows_ci_workflow",
-      "_github_workflows_codeql_analyze_job",
-      "_github_workflows_codeql_workflow",
-      "contributing_checks_ci_runs"
-    ],
-    "12": [
       "local_eslint",
       "local_prettier",
       "local_vitest",
@@ -375,6 +362,14 @@
       "pre_commit_hooks_check_yaml",
       "pre_commit_hooks_end_of_file_fixer",
       "pre_commit_hooks_trailing_whitespace"
+    ],
+    "12": [
+      "gcp_artifact_registry",
+      "github_workflows_ci_checks",
+      "github_workflows_ci_deploy",
+      "github_workflows_ci_e2e",
+      "github_workflows_ci_pulumi_preview",
+      "pulumi_state"
     ],
     "13": [
       "brand_readme_brand_source_assets",
@@ -449,110 +444,122 @@
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
     "30": [
-      "claude"
+      "_github_dependabot_github_actions_updates"
     ],
     "31": [
-      "contributing_accessibility"
+      "claude"
     ],
     "32": [
-      "contributing_content_and_copy"
+      "contributing_accessibility"
     ],
     "33": [
-      "contributing_pre_commit_hooks"
+      "contributing_checks_ci_runs"
     ],
     "34": [
-      "contributing_prerequisites"
+      "contributing_content_and_copy"
     ],
     "35": [
-      "eslint_config"
+      "contributing_pre_commit_hooks"
     ],
     "36": [
-      "github_workflows_graphify_workflow"
+      "contributing_prerequisites"
     ],
     "37": [
-      "infra_known_issues"
+      "eslint_config"
     ],
     "38": [
-      "known_issues_prerendering_security_headers"
+      "github_workflows_ci"
     ],
     "39": [
-      "notice_license_scope"
+      "github_workflows_codeql"
     ],
     "40": [
-      "notice_third_party_fonts"
+      "github_workflows_graphify_workflow"
     ],
     "41": [
-      "playwright_config"
+      "infra_known_issues"
     ],
     "42": [
-      "public_apple_touch_icon"
+      "known_issues_prerendering_security_headers"
     ],
     "43": [
-      "public_favicon_192"
+      "notice_license_scope"
     ],
     "44": [
-      "public_favicon_512"
+      "notice_third_party_fonts"
     ],
     "45": [
-      "public_people_headshot_160_jpg"
+      "playwright_config"
     ],
     "46": [
-      "public_people_headshot_160_webp"
+      "public_apple_touch_icon"
     ],
     "47": [
-      "public_people_headshot_320_jpg"
+      "public_favicon_192"
     ],
     "48": [
-      "public_people_headshot_320_webp"
+      "public_favicon_512"
     ],
     "49": [
-      "public_people_headshot_480_headshot"
+      "public_people_headshot_160_jpg"
     ],
     "50": [
-      "public_people_headshot_480_webp"
+      "public_people_headshot_160_webp"
     ],
     "51": [
-      "react_router_config"
+      "public_people_headshot_320_jpg"
     ],
     "52": [
-      "tests_favicon_spec"
+      "public_people_headshot_320_webp"
     ],
     "53": [
-      "tests_logo_svg_spec"
+      "public_people_headshot_480_headshot"
     ],
     "54": [
-      "tests_meta_spec"
+      "public_people_headshot_480_webp"
     ],
     "55": [
-      "tests_no_js_spec"
+      "react_router_config"
     ],
     "56": [
-      "tests_og_image_spec"
+      "tests_favicon_spec"
     ],
     "57": [
-      "tests_robots_txt_spec"
+      "tests_logo_svg_spec"
     ],
     "58": [
-      "tests_sitemap_xml_spec"
+      "tests_meta_spec"
     ],
     "59": [
+      "tests_no_js_spec"
+    ],
+    "60": [
+      "tests_og_image_spec"
+    ],
+    "61": [
+      "tests_robots_txt_spec"
+    ],
+    "62": [
+      "tests_sitemap_xml_spec"
+    ],
+    "63": [
       "vitest_config"
     ]
   },
   "cohesion": {
     "0": 0.07346938775510205,
     "1": 0.04081632653061224,
-    "2": 0.09411764705882353,
-    "3": 0.05714285714285714,
-    "4": 0.09269162210338681,
+    "2": 0.08907563025210084,
+    "3": 0.09411764705882353,
+    "4": 0.05714285714285714,
     "5": 0.09195402298850575,
     "6": 0.07671957671957672,
-    "7": 0.11666666666666667,
+    "7": 0.12318840579710146,
     "8": 0.125,
     "9": 0.125,
     "10": 0.3181818181818182,
-    "11": 0.2545454545454545,
-    "12": 0.2222222222222222,
+    "11": 0.2222222222222222,
+    "12": 0.4,
     "13": 0.4,
     "14": 0.7,
     "15": 0.5,
@@ -599,7 +606,11 @@
     "56": 1.0,
     "57": 1.0,
     "58": 1.0,
-    "59": 1.0
+    "59": 1.0,
+    "60": 1.0,
+    "61": 1.0,
+    "62": 1.0,
+    "63": 1.0
   },
   "gods": [
     {
@@ -648,12 +659,23 @@
       "degree": 7
     },
     {
-      "id": "_github_workflows_ci_workflow",
-      "label": "CI Workflow",
-      "degree": 6
+      "id": "infra_apis_enabledapis",
+      "label": "enabledApis",
+      "degree": 5
     }
   ],
   "surprises": [
+    {
+      "source": "AffordableWebsites()",
+      "target": "react",
+      "source_files": [
+        "app/routes/solutions.affordable-websites.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
+    },
     {
       "source": "NavDropdown()",
       "target": "react",
@@ -675,17 +697,6 @@
       "confidence": "EXTRACTED",
       "relation": "references",
       "why": "connects across different repos/directories; peripheral node `About()` unexpectedly reaches hub `react`"
-    },
-    {
-      "source": "AffordableWebsites()",
-      "target": "react",
-      "source_files": [
-        "app/routes/solutions.affordable-websites.tsx",
-        "package.json"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "connects across different repos/directories; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
     },
     {
       "source": "Dependabot: npm root updates",
@@ -711,7 +722,7 @@
     }
   ],
   "tokens": {
-    "input": 1143,
-    "output": 1241
+    "input": 6737,
+    "output": 1227
   }
 }
