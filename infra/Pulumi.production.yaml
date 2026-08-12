@@ -3,5 +3,11 @@ config:
   branchleft-website-infra:region: europe-west1
   branchleft-website-infra:githubRepo: branchLeft/website
   branchleft-website-infra:imageTag: bootstrap-amd64-v2
+  branchleft-website-infra:contactSmtpHost: mx1.branchleft.co.uk
+  branchleft-website-infra:contactSmtpPort: '587'
+  branchleft-website-infra:contactSmtpUser:
+    secure: v1:nkV4a8vPa8hqONIg:a8rbcvkIOpDagRGnw09zmt7WatZ2F/UsQ2St03gQWwG5xqy90A==
+  branchleft-website-infra:contactSmtpPassword:
+    secure: v1:yk5VhPbVhnngI1JZ:w1TJ8qGC2UWYE8H8lhXdMPbs7Ubm8qrQdHz3oUR2j2bqM/YFMEKvNxb89Qjrgp4nKKCOzD3C8DU=
 secretsprovider: gcpkms://projects/branchleft-prod/locations/europe-west1/keyRings/pulumi/cryptoKeys/pulumi-secrets
 encryptedkey: CiQAefexUiGtT/EVJf7moGIQITcVH1XG6Y+z0AK38B9KrIUlIE0SSQBxixxQ2JkM9W0Bla0e6wCJNRkN3NmeO0Z4WIiWcqaVUqsZDygjdfhy83uS++Vhx2BAzHCg3pK0J/b0TChp6jSNh8gXM6xspTM=
