@@ -4,6 +4,20 @@
   "graph": {
     "hyperedges": [
       {
+        "id": "ci_cd_pipeline",
+        "label": "CI/CD Pipeline",
+        "nodes": [
+          "github_workflows_ci_checks",
+          "github_workflows_ci_e2e",
+          "github_workflows_ci_pulumi_preview",
+          "github_workflows_ci_deploy"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".github/workflows/ci.yml"
+      },
+      {
         "id": "pre_commit_pipeline",
         "label": "Pre-commit Quality Pipeline",
         "nodes": [
@@ -20,20 +34,6 @@
         "confidence": "INFERRED",
         "confidence_score": 0.9,
         "source_file": ".pre-commit-config.yaml"
-      },
-      {
-        "id": "ci_cd_pipeline_flow",
-        "label": "CI/CD Pipeline Flow (checks/e2e gate pulumi-preview/deploy)",
-        "nodes": [
-          "_github_workflows_ci_checks_job",
-          "_github_workflows_ci_e2e_job",
-          "_github_workflows_ci_pulumi_preview_job",
-          "_github_workflows_ci_deploy_job"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".github/workflows/ci.yml"
       },
       {
         "id": "prerendering_safety_constraint",
@@ -394,7 +394,7 @@
       "source_file": "app/lib/meta.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.test.ts",
       "id": "app_lib_meta_test"
@@ -407,7 +407,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentries",
       "id": "app_lib_meta_test_metaentries"
@@ -420,7 +420,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentry",
       "id": "app_lib_meta_test_metaentry"
@@ -432,7 +432,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykey()",
       "id": "app_lib_meta_test_findbykey"
@@ -444,7 +444,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykeyvalue()",
       "id": "app_lib_meta_test_findbykeyvalue"
@@ -455,7 +455,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.ts",
       "id": "app_lib_meta"
@@ -466,7 +466,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "site_url",
       "id": "app_lib_meta_site_url"
@@ -477,7 +477,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "organization_json_ld",
       "id": "app_lib_meta_organization_json_ld"
@@ -490,7 +490,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "pagemetainput",
       "id": "app_lib_meta_pagemetainput"
@@ -502,7 +502,7 @@
       "source_location": "L90",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildmeta()",
       "id": "app_lib_meta_buildmeta"
@@ -513,7 +513,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.test.ts",
       "id": "app_lib_page_paths_test"
@@ -524,7 +524,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "resource_route_paths",
       "id": "app_lib_page_paths_test_resource_route_paths"
@@ -536,7 +536,7 @@
       "source_location": "L9",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routeconfigpaths()",
       "id": "app_lib_page_paths_test_routeconfigpaths"
@@ -547,7 +547,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.ts",
       "id": "app_lib_page_paths"
@@ -558,7 +558,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page_paths",
       "id": "app_lib_page_paths_page_paths"
@@ -615,7 +615,7 @@
       "source_file": "app/lib/sendContactEmail.server.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "sendcontactemail.server.test.ts",
       "id": "app_lib_sendcontactemail_server_test"
@@ -626,7 +626,7 @@
       "source_file": "app/lib/sendContactEmail.server.test.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "{ sendmail, createtransport }",
       "id": "app_lib_sendcontactemail_server_test_sendmail_createtransport"
@@ -637,7 +637,7 @@
       "source_file": "app/lib/sendContactEmail.server.test.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "original_env",
       "id": "app_lib_sendcontactemail_server_test_original_env"
@@ -649,7 +649,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "setenv()",
       "id": "app_lib_sendcontactemail_server_test_setenv"
@@ -660,7 +660,7 @@
       "source_file": "app/lib/sendContactEmail.server.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "sendcontactemail.server.ts",
       "id": "app_lib_sendcontactemail_server"
@@ -673,7 +673,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contactsubmission",
       "id": "app_lib_sendcontactemail_server_contactsubmission"
@@ -685,7 +685,7 @@
       "source_location": "L16",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "gettransport()",
       "id": "app_lib_sendcontactemail_server_gettransport"
@@ -697,7 +697,7 @@
       "source_location": "L28",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "escapehtml()",
       "id": "app_lib_sendcontactemail_server_escapehtml"
@@ -709,7 +709,7 @@
       "source_location": "L37",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "buildtext()",
       "id": "app_lib_sendcontactemail_server_buildtext"
@@ -721,7 +721,7 @@
       "source_location": "L51",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "buildhtml()",
       "id": "app_lib_sendcontactemail_server_buildhtml"
@@ -733,7 +733,7 @@
       "source_location": "L81",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "sendcontactemail()",
       "id": "app_lib_sendcontactemail_server_sendcontactemail"
@@ -907,7 +907,7 @@
       "source_file": "app/routes.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routes.ts",
       "id": "app_routes"
@@ -975,7 +975,7 @@
       "source_file": "app/routes/contact.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact.test.ts",
       "id": "app_routes_contact_test"
@@ -987,7 +987,7 @@
       "source_location": "L48",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "buildformdata()",
       "id": "app_routes_contact_test_buildformdata"
@@ -999,7 +999,7 @@
       "source_location": "L64",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "makerequest()",
       "id": "app_routes_contact_test_makerequest"
@@ -1011,7 +1011,7 @@
       "source_location": "L74",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "actionargs()",
       "id": "app_routes_contact_test_actionargs"
@@ -1023,7 +1023,7 @@
       "source_location": "L79",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "nextip()",
       "id": "app_routes_contact_test_nextip"
@@ -1034,7 +1034,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact.tsx",
       "id": "app_routes_contact"
@@ -1046,7 +1046,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_contact_meta"
@@ -1057,7 +1057,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "categories",
       "id": "app_routes_contact_categories"
@@ -1070,7 +1070,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "categoryvalue",
       "id": "app_routes_contact_categoryvalue"
@@ -1081,7 +1081,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "category_values",
       "id": "app_routes_contact_category_values"
@@ -1093,7 +1093,7 @@
       "source_location": "L39",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "isknowncategory()",
       "id": "app_routes_contact_isknowncategory"
@@ -1104,7 +1104,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "email_max_length",
       "id": "app_routes_contact_email_max_length"
@@ -1115,7 +1115,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "message_max_length",
       "id": "app_routes_contact_message_max_length"
@@ -1126,7 +1126,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "honeypot_field_name",
       "id": "app_routes_contact_honeypot_field_name"
@@ -1137,7 +1137,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L62",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "min_submit_delay_ms",
       "id": "app_routes_contact_min_submit_delay_ms"
@@ -1148,7 +1148,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "rate_limit_window_ms",
       "id": "app_routes_contact_rate_limit_window_ms"
@@ -1159,7 +1159,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L68",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "rate_limit_max_submissions",
       "id": "app_routes_contact_rate_limit_max_submissions"
@@ -1170,7 +1170,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L70",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "submissionsbyip",
       "id": "app_routes_contact_submissionsbyip"
@@ -1182,7 +1182,7 @@
       "source_location": "L72",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "getclientip()",
       "id": "app_routes_contact_getclientip"
@@ -1194,7 +1194,7 @@
       "source_location": "L80",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "isratelimited()",
       "id": "app_routes_contact_isratelimited"
@@ -1207,7 +1207,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "actionresult",
       "id": "app_routes_contact_actionresult"
@@ -1219,7 +1219,7 @@
       "source_location": "L101",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "formstring()",
       "id": "app_routes_contact_formstring"
@@ -1231,7 +1231,7 @@
       "source_location": "L106",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "loader()",
       "id": "app_routes_contact_loader"
@@ -1243,7 +1243,7 @@
       "source_location": "L110",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "action()",
       "id": "app_routes_contact_action"
@@ -1255,7 +1255,7 @@
       "source_location": "L166",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact()",
       "id": "app_routes_contact_contact"
@@ -1266,7 +1266,7 @@
       "source_file": "app/routes/home.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home.tsx",
       "id": "app_routes_home"
@@ -1278,7 +1278,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_home_meta"
@@ -1290,7 +1290,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home()",
       "id": "app_routes_home_home"
@@ -1324,7 +1324,7 @@
       "source_file": "app/routes/privacy.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "privacy.tsx",
       "id": "app_routes_privacy"
@@ -1336,7 +1336,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_privacy_meta"
@@ -1348,7 +1348,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "privacy()",
       "id": "app_routes_privacy_privacy"
@@ -1359,7 +1359,7 @@
       "source_file": "app/routes/sitemap-xml.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "sitemap-xml.tsx",
       "id": "app_routes_sitemap_xml"
@@ -1371,7 +1371,7 @@
       "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildsitemapxml()",
       "id": "app_routes_sitemap_xml_buildsitemapxml"
@@ -1383,7 +1383,7 @@
       "source_location": "L28",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "loader()",
       "id": "app_routes_sitemap_xml_loader"
@@ -1394,7 +1394,7 @@
       "source_file": "app/routes/solutions.affordable-websites.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "solutions.affordable-websites.tsx",
       "id": "app_routes_solutions_affordable_websites"
@@ -1406,7 +1406,7 @@
       "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_solutions_affordable_websites_meta"
@@ -1418,7 +1418,7 @@
       "source_location": "L16",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "affordablewebsites()",
       "id": "app_routes_solutions_affordable_websites_affordablewebsites"
@@ -1429,7 +1429,7 @@
       "source_file": "app/routes/solutions.local-news.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "solutions.local-news.tsx",
       "id": "app_routes_solutions_local_news"
@@ -1441,7 +1441,7 @@
       "source_location": "L6",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_solutions_local_news_meta"
@@ -1453,7 +1453,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "localnews()",
       "id": "app_routes_solutions_local_news_localnews"
@@ -1464,7 +1464,7 @@
       "source_file": "app/routes/terms.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms.tsx",
       "id": "app_routes_terms"
@@ -1476,7 +1476,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_terms_meta"
@@ -1488,7 +1488,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms()",
       "id": "app_routes_terms_terms"
@@ -1499,7 +1499,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 35,
+      "community": 37,
       "community_name": "ESLint Config",
       "norm_label": "eslint.config.js",
       "id": "eslint_config"
@@ -2174,7 +2174,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "package.json",
       "id": "package"
@@ -2185,7 +2185,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "name",
       "id": "package_name"
@@ -2196,7 +2196,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "private",
       "id": "package_private"
@@ -2207,7 +2207,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "type",
       "id": "package_type"
@@ -2218,7 +2218,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "packagemanager",
       "id": "package_packagemanager"
@@ -2229,7 +2229,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "scripts",
       "id": "package_scripts"
@@ -2240,7 +2240,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "build",
       "id": "package_scripts_build"
@@ -2251,7 +2251,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "dev",
       "id": "package_scripts_dev"
@@ -2262,7 +2262,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "start",
       "id": "package_scripts_start"
@@ -2273,7 +2273,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "typecheck",
       "id": "package_scripts_typecheck"
@@ -2284,7 +2284,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:unit",
       "id": "package_scripts_test_unit"
@@ -2295,7 +2295,7 @@
       "source_file": "package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:ui",
       "id": "package_scripts_test_ui"
@@ -2306,7 +2306,7 @@
       "source_file": "package.json",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:e2e",
       "id": "package_scripts_test_e2e"
@@ -2317,7 +2317,7 @@
       "source_file": "package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "lint",
       "id": "package_scripts_lint"
@@ -2328,7 +2328,7 @@
       "source_file": "package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "format",
       "id": "package_scripts_format"
@@ -2339,7 +2339,7 @@
       "source_file": "package.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "prepare",
       "id": "package_scripts_prepare"
@@ -2350,7 +2350,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "dependencies",
       "id": "package_dependencies"
@@ -2361,7 +2361,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@branchleft/components",
       "id": "package_dependencies_branchleft_components"
@@ -2372,7 +2372,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@branchleft/components",
       "id": "branchleft_components"
@@ -2383,7 +2383,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/node",
       "id": "package_dependencies_react_router_node"
@@ -2394,7 +2394,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/node",
       "id": "react_router_node"
@@ -2405,7 +2405,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/serve",
       "id": "package_dependencies_react_router_serve"
@@ -2416,7 +2416,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/serve",
       "id": "react_router_serve"
@@ -2427,7 +2427,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "framer-motion",
       "id": "package_dependencies_framer_motion"
@@ -2438,7 +2438,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "framer-motion",
       "id": "framer_motion"
@@ -2449,7 +2449,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "isbot",
       "id": "package_dependencies_isbot"
@@ -2460,7 +2460,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "isbot",
       "id": "isbot"
@@ -2471,7 +2471,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "lucide-react",
       "id": "package_dependencies_lucide_react"
@@ -2482,7 +2482,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "lucide-react",
       "id": "lucide_react"
@@ -2493,7 +2493,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "nodemailer",
       "id": "package_dependencies_nodemailer"
@@ -2504,7 +2504,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "nodemailer",
       "id": "nodemailer"
@@ -2537,7 +2537,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-dom",
       "id": "package_dependencies_react_dom"
@@ -2548,7 +2548,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-dom",
       "id": "react_dom"
@@ -2559,7 +2559,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-router",
       "id": "package_dependencies_react_router"
@@ -2570,7 +2570,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-router",
       "id": "react_router"
@@ -3142,7 +3142,7 @@
       "source_file": "playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 41,
+      "community": 45,
       "community_name": "Playwright Config",
       "norm_label": "playwright.config.ts",
       "id": "playwright_config"
@@ -3153,7 +3153,7 @@
       "source_file": "react-router.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 51,
+      "community": 55,
       "community_name": "React Router Config",
       "norm_label": "react-router.config.ts",
       "id": "react_router_config"
@@ -3232,7 +3232,7 @@
       "source_file": "tests/favicon.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 52,
+      "community": 56,
       "community_name": "Favicon Test",
       "norm_label": "favicon.spec.ts",
       "id": "tests_favicon_spec"
@@ -3254,7 +3254,7 @@
       "source_file": "tests/logo-svg.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 53,
+      "community": 57,
       "community_name": "Logo SVG Test",
       "norm_label": "logo-svg.spec.ts",
       "id": "tests_logo_svg_spec"
@@ -3265,7 +3265,7 @@
       "source_file": "tests/meta.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 54,
+      "community": 58,
       "community_name": "Meta Tags Test",
       "norm_label": "meta.spec.ts",
       "id": "tests_meta_spec"
@@ -3287,7 +3287,7 @@
       "source_file": "tests/no-js.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 55,
+      "community": 59,
       "community_name": "No-JS Fallback Test",
       "norm_label": "no-js.spec.ts",
       "id": "tests_no_js_spec"
@@ -3298,7 +3298,7 @@
       "source_file": "tests/og-image.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 56,
+      "community": 60,
       "community_name": "OG Image Test",
       "norm_label": "og-image.spec.ts",
       "id": "tests_og_image_spec"
@@ -3320,7 +3320,7 @@
       "source_file": "tests/robots-txt.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 57,
+      "community": 61,
       "community_name": "Robots.txt Test",
       "norm_label": "robots-txt.spec.ts",
       "id": "tests_robots_txt_spec"
@@ -3331,7 +3331,7 @@
       "source_file": "tests/sitemap-xml.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 58,
+      "community": 62,
       "community_name": "Sitemap Test",
       "norm_label": "sitemap-xml.spec.ts",
       "id": "tests_sitemap_xml_spec"
@@ -3706,7 +3706,7 @@
       "source_file": "vitest.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 59,
+      "community": 63,
       "community_name": "Vitest Config",
       "norm_label": "vitest.config.ts",
       "id": "vitest_config"
@@ -3945,146 +3945,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 30,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: github actions updates",
       "_origin": "semantic",
       "id": "_github_dependabot_github_actions_updates"
-    },
-    {
-      "label": "CI Workflow",
-      "file_type": "document",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "ci workflow",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_workflow"
-    },
-    {
-      "label": "CI: checks job (Typecheck, Pre-commit & Coverage)",
-      "file_type": "document",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "ci: checks job (typecheck, pre-commit & coverage)",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_checks_job"
-    },
-    {
-      "label": "CI: e2e job",
-      "file_type": "document",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "ci: e2e job",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_e2e_job"
-    },
-    {
-      "label": "CI: pulumi-preview job",
-      "file_type": "document",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "ci: pulumi-preview job",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_pulumi_preview_job"
-    },
-    {
-      "label": "CI: deploy job",
-      "file_type": "document",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "ci: deploy job",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_deploy_job"
-    },
-    {
-      "label": "Fail if edge load balancer would be deleted (preflight)",
-      "file_type": "rationale",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "fail if edge load balancer would be deleted (preflight)",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_edge_load_balancer_guard"
-    },
-    {
-      "label": "Smoke test deployed site",
-      "file_type": "rationale",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "smoke test deployed site",
-      "_origin": "semantic",
-      "id": "_github_workflows_ci_smoke_test"
-    },
-    {
-      "label": "CodeQL Workflow",
-      "file_type": "document",
-      "source_file": ".github/workflows/codeql.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "codeql workflow",
-      "_origin": "semantic",
-      "id": "_github_workflows_codeql_workflow"
-    },
-    {
-      "label": "CodeQL: analyze job",
-      "file_type": "document",
-      "source_file": ".github/workflows/codeql.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 11,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "codeql: analyze job",
-      "_origin": "semantic",
-      "id": "_github_workflows_codeql_analyze_job"
     },
     {
       "label": "Prerequisites (.nvmrc, pnpm)",
@@ -4095,7 +3960,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 36,
       "community_name": "Contributing Prerequisites",
       "norm_label": "prerequisites (.nvmrc, pnpm)",
       "_origin": "semantic",
@@ -4125,7 +3990,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 33,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "checks ci runs on every pr",
       "_origin": "semantic",
@@ -4140,7 +4005,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
+      "community": 35,
       "community_name": "Pre-commit Hook Config",
       "norm_label": "pre-commit hooks setup",
       "_origin": "semantic",
@@ -4155,7 +4020,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 32,
       "community_name": "Testing & Accessibility Conventions",
       "norm_label": "accessibility requirement",
       "_origin": "semantic",
@@ -4170,7 +4035,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 34,
       "community_name": "Content & Copy Guidelines",
       "norm_label": "content & copy note",
       "_origin": "semantic",
@@ -4200,7 +4065,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 38,
+      "community": 42,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "pre-rendering disabled \u2014 security headers gap",
       "_origin": "semantic",
@@ -4215,7 +4080,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
+      "community": 43,
       "community_name": "Open Source Licensing",
       "norm_label": "license scope (mit excludes brand/fonts)",
       "_origin": "semantic",
@@ -4245,7 +4110,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
+      "community": 44,
       "community_name": "Third-Party Fonts Notice",
       "norm_label": "third-party fonts (sil ofl 1.1)",
       "_origin": "semantic",
@@ -4425,7 +4290,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 49,
+      "community": 53,
       "community_name": "Team Headshot",
       "norm_label": "person headshot (portrait, 3 sizes x jpg/webp)",
       "_origin": "semantic",
@@ -4686,7 +4551,7 @@
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": null,
-      "community": 30,
+      "community": 31,
       "norm_label": "claude.md",
       "_origin": "semantic",
       "id": "claude"
@@ -4696,7 +4561,7 @@
       "file_type": "document",
       "source_file": "infra/KNOWN_ISSUES.md",
       "source_location": null,
-      "community": 37,
+      "community": 41,
       "norm_label": "known issues",
       "_origin": "semantic",
       "id": "infra_known_issues"
@@ -4706,7 +4571,7 @@
       "file_type": "image",
       "source_file": "public/apple-touch-icon.png",
       "source_location": null,
-      "community": 42,
+      "community": 46,
       "norm_label": "apple touch icon",
       "_origin": "semantic",
       "id": "public_apple_touch_icon"
@@ -4716,7 +4581,7 @@
       "file_type": "image",
       "source_file": "public/favicon-192.png",
       "source_location": null,
-      "community": 43,
+      "community": 47,
       "norm_label": "favicon 192",
       "_origin": "semantic",
       "id": "public_favicon_192"
@@ -4726,7 +4591,7 @@
       "file_type": "image",
       "source_file": "public/favicon-512.png",
       "source_location": null,
-      "community": 44,
+      "community": 48,
       "norm_label": "favicon 512",
       "_origin": "semantic",
       "id": "public_favicon_512"
@@ -4736,7 +4601,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.jpg",
       "source_location": null,
-      "community": 45,
+      "community": 49,
       "norm_label": "headshot 160px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_jpg"
@@ -4746,7 +4611,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.webp",
       "source_location": null,
-      "community": 46,
+      "community": 50,
       "norm_label": "headshot 160px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_webp"
@@ -4756,7 +4621,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.jpg",
       "source_location": null,
-      "community": 47,
+      "community": 51,
       "norm_label": "headshot 320px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_jpg"
@@ -4766,7 +4631,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.webp",
       "source_location": null,
-      "community": 48,
+      "community": 52,
       "norm_label": "headshot 320px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_webp"
@@ -4776,7 +4641,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-480.webp",
       "source_location": null,
-      "community": 50,
+      "community": 54,
       "norm_label": "headshot 480px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_480_webp"
@@ -4790,7 +4655,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 40,
       "norm_label": "graphify workflow",
       "_origin": "semantic",
       "id": "github_workflows_graphify_workflow"
@@ -4804,9 +4669,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_config_yaml",
-      "community": 12,
-      "norm_label": ".pre-commit-config.yaml"
+      "community": 11,
+      "norm_label": ".pre-commit-config.yaml",
+      "_origin": "semantic",
+      "id": "pre_commit_config_yaml"
     },
     {
       "label": "trailing-whitespace",
@@ -4817,9 +4683,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_hooks_trailing_whitespace",
-      "community": 12,
-      "norm_label": "trailing-whitespace"
+      "community": 11,
+      "norm_label": "trailing-whitespace",
+      "_origin": "semantic",
+      "id": "pre_commit_hooks_trailing_whitespace"
     },
     {
       "label": "end-of-file-fixer",
@@ -4830,9 +4697,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_hooks_end_of_file_fixer",
-      "community": 12,
-      "norm_label": "end-of-file-fixer"
+      "community": 11,
+      "norm_label": "end-of-file-fixer",
+      "_origin": "semantic",
+      "id": "pre_commit_hooks_end_of_file_fixer"
     },
     {
       "label": "check-yaml",
@@ -4843,9 +4711,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_hooks_check_yaml",
-      "community": 12,
-      "norm_label": "check-yaml"
+      "community": 11,
+      "norm_label": "check-yaml",
+      "_origin": "semantic",
+      "id": "pre_commit_hooks_check_yaml"
     },
     {
       "label": "check-added-large-files",
@@ -4856,9 +4725,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_hooks_check_added_large_files",
-      "community": 12,
-      "norm_label": "check-added-large-files"
+      "community": 11,
+      "norm_label": "check-added-large-files",
+      "_origin": "semantic",
+      "id": "pre_commit_hooks_check_added_large_files"
     },
     {
       "label": "check-merge-conflict",
@@ -4869,9 +4739,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pre_commit_hooks_check_merge_conflict",
-      "community": 12,
-      "norm_label": "check-merge-conflict"
+      "community": 11,
+      "norm_label": "check-merge-conflict",
+      "_origin": "semantic",
+      "id": "pre_commit_hooks_check_merge_conflict"
     },
     {
       "label": "prettier",
@@ -4882,9 +4753,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "local_prettier",
-      "community": 12,
-      "norm_label": "prettier"
+      "community": 11,
+      "norm_label": "prettier",
+      "_origin": "semantic",
+      "id": "local_prettier"
     },
     {
       "label": "eslint",
@@ -4895,9 +4767,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "local_eslint",
-      "community": 12,
-      "norm_label": "eslint"
+      "community": 11,
+      "norm_label": "eslint",
+      "_origin": "semantic",
+      "id": "local_eslint"
     },
     {
       "label": "vitest",
@@ -4908,9 +4781,74 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "local_vitest",
+      "community": 11,
+      "norm_label": "vitest",
+      "_origin": "semantic",
+      "id": "local_vitest"
+    },
+    {
+      "label": "CI Workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "github_workflows_ci",
+      "community": 38,
+      "norm_label": "ci workflow"
+    },
+    {
+      "label": "Checks Job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "github_workflows_ci_checks",
       "community": 12,
-      "norm_label": "vitest"
+      "norm_label": "checks job"
+    },
+    {
+      "label": "E2E Job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "github_workflows_ci_e2e",
+      "community": 12,
+      "norm_label": "e2e job"
+    },
+    {
+      "label": "Pulumi Preview Job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "github_workflows_ci_pulumi_preview",
+      "community": 12,
+      "norm_label": "pulumi preview job"
+    },
+    {
+      "label": "Deploy Job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "github_workflows_ci_deploy",
+      "community": 12,
+      "norm_label": "deploy job"
+    },
+    {
+      "label": "CodeQL Workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/codeql.yml",
+      "id": "github_workflows_codeql",
+      "community": 39,
+      "norm_label": "codeql workflow"
+    },
+    {
+      "label": "Pulumi State (GCS)",
+      "file_type": "concept",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "pulumi_state",
+      "community": 12,
+      "norm_label": "pulumi state (gcs)"
+    },
+    {
+      "label": "GCP Artifact Registry",
+      "file_type": "concept",
+      "source_file": ".github/workflows/ci.yml",
+      "id": "gcp_artifact_registry",
+      "community": 12,
+      "norm_label": "gcp artifact registry"
     }
   ],
   "links": [
@@ -10059,160 +9997,6 @@
       "target": "infra_pulumi_project"
     },
     {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": ".github/dependabot.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_dependabot_github_actions_updates",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": ".github/dependabot.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_dependabot_github_actions_updates",
-      "target": "_github_workflows_codeql_workflow"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_checks_job",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_deploy_job",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_e2e_job",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_pulumi_preview_job",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTRIBUTING.md",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "contributing_checks_ci_runs",
-      "target": "_github_workflows_ci_workflow"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_deploy_job",
-      "target": "_github_workflows_ci_checks_job"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_pulumi_preview_job",
-      "target": "_github_workflows_ci_checks_job"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_deploy_job",
-      "target": "_github_workflows_ci_e2e_job"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_pulumi_preview_job",
-      "target": "_github_workflows_ci_e2e_job"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_pulumi_preview_job",
-      "target": "_github_workflows_ci_edge_load_balancer_guard"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_ci_deploy_job",
-      "target": "_github_workflows_ci_smoke_test"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/codeql.yml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "_github_workflows_codeql_analyze_job",
-      "target": "_github_workflows_codeql_workflow"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -10575,6 +10359,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "local_eslint"
     },
@@ -10585,6 +10370,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "local_prettier"
     },
@@ -10595,6 +10381,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "local_vitest"
     },
@@ -10605,6 +10392,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "pre_commit_hooks_check_added_large_files"
     },
@@ -10615,6 +10403,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "pre_commit_hooks_check_merge_conflict"
     },
@@ -10625,6 +10414,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "pre_commit_hooks_check_yaml"
     },
@@ -10635,6 +10425,7 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "pre_commit_hooks_end_of_file_fixer"
     },
@@ -10645,11 +10436,74 @@
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "pre_commit_config_yaml",
       "target": "pre_commit_hooks_trailing_whitespace"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "github_workflows_ci_checks"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_pulumi_preview",
+      "target": "github_workflows_ci_checks"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "github_workflows_ci_e2e"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_pulumi_preview",
+      "target": "github_workflows_ci_e2e"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "gcp_artifact_registry"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "pulumi_state"
     }
   ],
   "hyperedges": [
+    {
+      "id": "ci_cd_pipeline",
+      "label": "CI/CD Pipeline",
+      "nodes": [
+        "github_workflows_ci_checks",
+        "github_workflows_ci_e2e",
+        "github_workflows_ci_pulumi_preview",
+        "github_workflows_ci_deploy"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml"
+    },
     {
       "id": "pre_commit_pipeline",
       "label": "Pre-commit Quality Pipeline",
@@ -10669,20 +10523,6 @@
       "source_file": ".pre-commit-config.yaml"
     },
     {
-      "id": "ci_cd_pipeline_flow",
-      "label": "CI/CD Pipeline Flow (checks/e2e gate pulumi-preview/deploy)",
-      "nodes": [
-        "_github_workflows_ci_checks_job",
-        "_github_workflows_ci_e2e_job",
-        "_github_workflows_ci_pulumi_preview_job",
-        "_github_workflows_ci_deploy_job"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml"
-    },
-    {
       "id": "prerendering_safety_constraint",
       "label": "Pre-rendering Safety Constraint (why prerender stays off)",
       "nodes": [
@@ -10696,5 +10536,5 @@
       "source_file": "KNOWN_ISSUES.md"
     }
   ],
-  "built_at_commit": "a48cc19a126bf2a8dd8b35e79956ac114dd12d43"
+  "built_at_commit": "0b6a3afe7eb254146d7a3d690317cb7beba164c5"
 }
