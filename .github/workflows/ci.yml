@@ -168,9 +168,12 @@ jobs:
 
       - name: Check for relevant file changes
         id: paths
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
         run: |
-          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
-          if git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" -- infra Dockerfile .github/workflows/ci.yml | grep -q .; then
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          if git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- infra Dockerfile .github/workflows/ci.yml | grep -q .; then
             echo "infra=true" >> "$GITHUB_OUTPUT"
           else
             echo "infra=false" >> "$GITHUB_OUTPUT"
@@ -213,7 +216,9 @@ jobs:
         if: |
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
-        run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
+        env:
+          GCP_REGION: ${{ vars.GCP_REGION }}
+        run: gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
 
       - name: Set up Docker Buildx
         if: |
@@ -251,10 +256,12 @@ jobs:
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
         working-directory: infra
+        env:
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           pulumi login gs://branchleft-pulumi-state
           pulumi stack select production
-          pulumi config set imageTag ${{ github.sha }}
+          pulumi config set imageTag "$IMAGE_TAG"
           pulumi preview > preview-output.txt 2>&1
 
       # The job summary is the authoritative output: it needs no token
@@ -372,7 +379,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
 
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
+        env:
+          GCP_REGION: ${{ vars.GCP_REGION }}
+        run: gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
@@ -395,10 +404,12 @@ jobs:
 
       - name: Deploy with Pulumi
         working-directory: infra
+        env:
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           pulumi login gs://branchleft-pulumi-state
           pulumi stack select production
-          pulumi config set imageTag ${{ github.sha }}
+          pulumi config set imageTag "$IMAGE_TAG"
 
           # Preflight: this deploy must never delete the edge load balancer.
           # It moved to a separate private infrastructure repo via a Pulumi
