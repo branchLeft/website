@@ -161,6 +161,12 @@ export default function Privacy(): React.JSX.Element {
             safeguards above.
           </li>
           <li>
+            <strong>Hetzner Online GmbH</strong> — hosts the mail server that relays messages
+            submitted through our contact form on to the inbox listed above. Hetzner is a German
+            company and this server operates from a Germany-based data centre, so no international
+            transfer applies to this step.
+          </li>
+          <li>
             <strong>IONOS</strong> — our domain registrar. IONOS processes only the registration
             information required to operate the <code>branchleft.co.uk</code> domain, not the
             content of enquiries.
@@ -171,8 +177,9 @@ export default function Privacy(): React.JSX.Element {
           </li>
         </ul>
         <p>
-          The contact form does not currently submit anywhere — it is a no-op until a form processor
-          is chosen. This section will be updated when that changes.
+          Contact form submissions are sent over an authenticated, encrypted connection directly
+          from this website to the mail server above; no third-party form-processing service is
+          involved.
         </p>
       </section>
 
