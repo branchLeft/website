@@ -1,2 +1,30 @@
+# Prettier 3 does not read .gitignore, so everything ignored there has to be
+# repeated here. The paths are unanchored on purpose: .gitignore anchors its
+# entries to the repo root with a leading slash, which does not reach the same
+# directories inside a nested checkout.
+
+node_modules/
+build/
+.react-router/
+
+# Test and coverage output
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
 # Generated knowledge graph, rebuilt and committed by CI.
 graphify-out/
+
+# Agent worktrees are full checkouts of this repo living inside it. The
+# pre-commit hook runs `pnpm format` (prettier --write .) with
+# pass_filenames: false, so without these a commit here reformats files inside
+# a sibling branch's checkout.
+.claude/
+.worktrees/
+
+# Lockfiles are pnpm's format, not ours.
+pnpm-lock.yaml
+
+*.min.js
+*.min.css
