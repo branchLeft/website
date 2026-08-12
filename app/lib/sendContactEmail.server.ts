@@ -18,9 +18,13 @@ function getTransport() {
       'CONTACT_SMTP_HOST, CONTACT_SMTP_PORT, CONTACT_SMTP_USER and CONTACT_SMTP_PASSWORD must all be set to send contact form email.'
     );
   }
+  const portNumber = Number(port);
+  if (Number.isNaN(portNumber)) {
+    throw new TypeError(`CONTACT_SMTP_PORT must be a number, got: ${port}`);
+  }
   return nodemailer.createTransport({
     host,
-    port: Number(port),
+    port: portNumber,
     // Submission ports (587) negotiate encryption via STARTTLS rather than
     // starting TLS immediately, unlike 465's implicit TLS. requireTLS
     // forces that upgrade instead of silently falling back to plaintext.
@@ -86,6 +90,11 @@ function buildHtml(submission: ContactSubmission): string {
 export async function sendContactEmail(submission: ContactSubmission): Promise<void> {
   const transport = getTransport();
   await transport.sendMail({
+    // CONTACT_SMTP_USER doubles as the visible From identity. It must be
+    // provisioned as a distinct, sender-login-mapped submission account —
+    // never TO_ADDRESS's own credential — or this both defeats the
+    // credential isolation the submission user exists for and reintroduces
+    // a from == to self-send.
     from: `branchLeft website <${process.env.CONTACT_SMTP_USER}>`,
     to: TO_ADDRESS,
     replyTo: submission.email,

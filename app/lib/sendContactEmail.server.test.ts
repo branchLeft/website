@@ -115,6 +115,20 @@ describe('sendContactEmail', () => {
     expect(sendMail).not.toHaveBeenCalled();
   });
 
+  it('throws without sending when CONTACT_SMTP_PORT is not a number', async () => {
+    setEnv(VALID_ENV[0], 'not-a-port', VALID_ENV[2], VALID_ENV[3]);
+
+    await expect(
+      sendContactEmail({
+        category: 'general',
+        email: 'person@example.com',
+        message: 'hello there',
+      })
+    ).rejects.toThrow('CONTACT_SMTP_PORT must be a number, got: not-a-port');
+    expect(createTransport).not.toHaveBeenCalled();
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
   it('builds an SMTP transport from the configured credentials, forcing STARTTLS on the submission port', async () => {
     setEnv(...VALID_ENV);
 
