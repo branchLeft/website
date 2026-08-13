@@ -7,8 +7,10 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      # Stated rather than inherited: the hook's own default has moved before,
+      # and this threshold is meant to be the same number in every repo.
       - id: check-added-large-files
-        args: ['--maxkb=2000']
+        args: ['--maxkb=500']
       - id: check-merge-conflict
 
   - repo: local
