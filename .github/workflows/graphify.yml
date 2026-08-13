@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.5
+    uses: branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.6
     with:
       # A ruleset blocks direct pushes to main; the graph lands as a PR instead.
       publish: pull-request
