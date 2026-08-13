@@ -12,6 +12,8 @@
       "infra_config",
       "infra_config_artifactregistryrepoid",
       "infra_config_config",
+      "infra_config_contactsmtphost",
+      "infra_config_contactsmtpport",
       "infra_config_gcpconfig",
       "infra_config_githubrepo",
       "infra_config_imagetag",
@@ -40,8 +42,8 @@
       "infra_monitoring_uptimecheck",
       "infra_secrets",
       "infra_secrets_config",
-      "infra_secrets_gmailapppassword",
-      "infra_secrets_gmailuser",
+      "infra_secrets_contactsmtppassword",
+      "infra_secrets_contactsmtpuser",
       "infra_secrets_secretwithvalue",
       "infra_serviceaccounts",
       "infra_serviceaccounts_cloudrunruntimesa",
@@ -104,6 +106,44 @@
       "vitest_ui"
     ],
     "2": [
+      "app_lib_sendcontactemail_server",
+      "app_lib_sendcontactemail_server_buildhtml",
+      "app_lib_sendcontactemail_server_buildtext",
+      "app_lib_sendcontactemail_server_contactsubmission",
+      "app_lib_sendcontactemail_server_escapehtml",
+      "app_lib_sendcontactemail_server_gettransport",
+      "app_lib_sendcontactemail_server_sendcontactemail",
+      "app_lib_sendcontactemail_server_test",
+      "app_lib_sendcontactemail_server_test_original_env",
+      "app_lib_sendcontactemail_server_test_sendmail_createtransport",
+      "app_lib_sendcontactemail_server_test_setenv",
+      "app_lib_sendcontactemail_server_test_valid_env",
+      "app_routes_contact",
+      "app_routes_contact_action",
+      "app_routes_contact_actionresult",
+      "app_routes_contact_categories",
+      "app_routes_contact_category_values",
+      "app_routes_contact_categoryvalue",
+      "app_routes_contact_contact",
+      "app_routes_contact_email_max_length",
+      "app_routes_contact_formstring",
+      "app_routes_contact_getclientip",
+      "app_routes_contact_honeypot_field_name",
+      "app_routes_contact_isknowncategory",
+      "app_routes_contact_isratelimited",
+      "app_routes_contact_loader",
+      "app_routes_contact_message_max_length",
+      "app_routes_contact_min_submit_delay_ms",
+      "app_routes_contact_rate_limit_max_submissions",
+      "app_routes_contact_rate_limit_window_ms",
+      "app_routes_contact_submissionsbyip",
+      "app_routes_contact_test",
+      "app_routes_contact_test_actionargs",
+      "app_routes_contact_test_buildformdata",
+      "app_routes_contact_test_makerequest",
+      "app_routes_contact_test_nextip"
+    ],
+    "3": [
       "app_lib_meta",
       "app_lib_meta_buildmeta",
       "app_lib_meta_organization_json_ld",
@@ -140,113 +180,7 @@
       "app_routes_terms_meta",
       "app_routes_terms_terms"
     ],
-    "3": [
-      "app_lib_sendcontactemail_server",
-      "app_lib_sendcontactemail_server_buildhtml",
-      "app_lib_sendcontactemail_server_buildtext",
-      "app_lib_sendcontactemail_server_contactsubmission",
-      "app_lib_sendcontactemail_server_escapehtml",
-      "app_lib_sendcontactemail_server_gettransport",
-      "app_lib_sendcontactemail_server_sendcontactemail",
-      "app_lib_sendcontactemail_server_test",
-      "app_lib_sendcontactemail_server_test_original_env",
-      "app_lib_sendcontactemail_server_test_sendmail_createtransport",
-      "app_lib_sendcontactemail_server_test_setenv",
-      "app_routes_contact",
-      "app_routes_contact_action",
-      "app_routes_contact_actionresult",
-      "app_routes_contact_categories",
-      "app_routes_contact_category_values",
-      "app_routes_contact_categoryvalue",
-      "app_routes_contact_contact",
-      "app_routes_contact_email_max_length",
-      "app_routes_contact_formstring",
-      "app_routes_contact_getclientip",
-      "app_routes_contact_honeypot_field_name",
-      "app_routes_contact_isknowncategory",
-      "app_routes_contact_isratelimited",
-      "app_routes_contact_loader",
-      "app_routes_contact_message_max_length",
-      "app_routes_contact_min_submit_delay_ms",
-      "app_routes_contact_rate_limit_max_submissions",
-      "app_routes_contact_rate_limit_window_ms",
-      "app_routes_contact_submissionsbyip",
-      "app_routes_contact_test",
-      "app_routes_contact_test_actionargs",
-      "app_routes_contact_test_buildformdata",
-      "app_routes_contact_test_makerequest",
-      "app_routes_contact_test_nextip"
-    ],
     "4": [
-      "branchleft_components",
-      "framer_motion",
-      "isbot",
-      "lucide_react",
-      "nodemailer",
-      "package",
-      "package_dependencies",
-      "package_dependencies_branchleft_components",
-      "package_dependencies_framer_motion",
-      "package_dependencies_isbot",
-      "package_dependencies_lucide_react",
-      "package_dependencies_nodemailer",
-      "package_dependencies_react_dom",
-      "package_dependencies_react_router",
-      "package_dependencies_react_router_node",
-      "package_dependencies_react_router_serve",
-      "package_name",
-      "package_packagemanager",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_format",
-      "package_scripts_lint",
-      "package_scripts_prepare",
-      "package_scripts_start",
-      "package_scripts_test_e2e",
-      "package_scripts_test_ui",
-      "package_scripts_test_unit",
-      "package_scripts_typecheck",
-      "package_type",
-      "react_dom",
-      "react_router",
-      "react_router_node",
-      "react_router_serve"
-    ],
-    "5": [
-      "app_components_footer",
-      "app_components_footer_footer",
-      "app_components_icons_blueskyicon",
-      "app_components_icons_blueskyicon_blueskyicon",
-      "app_components_icons_githubicon",
-      "app_components_icons_githubicon_githubicon",
-      "app_components_icons_linkedinicon",
-      "app_components_icons_linkedinicon_linkedinicon",
-      "app_components_icons_mediumicon",
-      "app_components_icons_mediumicon_mediumicon",
-      "app_components_sociallinksitems",
-      "app_components_sociallinksitems_icons",
-      "app_components_sociallinksitems_sociallinksitems",
-      "app_entry_server",
-      "app_entry_server_handlerequest",
-      "app_entry_server_streamtimeout",
-      "app_lib_security_headers",
-      "app_lib_security_headers_buildcontentsecuritypolicy",
-      "app_lib_security_headers_buildsecurityheaders",
-      "app_lib_security_headers_permissions_policy",
-      "app_lib_social_links",
-      "app_lib_social_links_social_links",
-      "app_root",
-      "app_root_app",
-      "app_root_errorboundary",
-      "app_root_headers",
-      "app_root_layout",
-      "app_root_links",
-      "app_root_meta",
-      "docref_rfc_9110"
-    ],
-    "6": [
       "ref",
       "ref_client",
       "ref_dom",
@@ -276,15 +210,74 @@
       "tsconfig_include",
       "tsconfig_json_ref_es2022"
     ],
-    "7": [
+    "5": [
       "app_components_navbar",
       "app_components_navbar_isdropdown",
       "app_components_navbar_nav_links",
       "app_components_navbar_navbar",
-      "app_components_navbar_navdropdown",
       "app_components_navbar_navdropdownitem",
       "app_components_navbar_navlinkitem",
       "app_components_navbar_navlinksitems",
+      "app_entry_server",
+      "app_entry_server_handlerequest",
+      "app_entry_server_streamtimeout",
+      "app_lib_security_headers",
+      "app_lib_security_headers_buildcontentsecuritypolicy",
+      "app_lib_security_headers_buildsecurityheaders",
+      "app_lib_security_headers_permissions_policy",
+      "app_root",
+      "app_root_app",
+      "app_root_errorboundary",
+      "app_root_headers",
+      "app_root_layout",
+      "app_root_links",
+      "app_root_meta",
+      "docref_rfc_9110"
+    ],
+    "6": [
+      "branchleft_components",
+      "framer_motion",
+      "isbot",
+      "lucide_react",
+      "nodemailer",
+      "package_dependencies",
+      "package_dependencies_branchleft_components",
+      "package_dependencies_framer_motion",
+      "package_dependencies_isbot",
+      "package_dependencies_lucide_react",
+      "package_dependencies_nodemailer",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_router",
+      "package_dependencies_react_router_node",
+      "package_dependencies_react_router_serve",
+      "react_dom",
+      "react_router",
+      "react_router_node",
+      "react_router_serve"
+    ],
+    "7": [
+      "infra_tsconfig",
+      "infra_tsconfig_compileroptions",
+      "infra_tsconfig_compileroptions_experimentaldecorators",
+      "infra_tsconfig_compileroptions_lib",
+      "infra_tsconfig_compileroptions_module",
+      "infra_tsconfig_compileroptions_moduleresolution",
+      "infra_tsconfig_compileroptions_nofallthroughcasesinswitch",
+      "infra_tsconfig_compileroptions_outdir",
+      "infra_tsconfig_compileroptions_pretty",
+      "infra_tsconfig_compileroptions_skiplibcheck",
+      "infra_tsconfig_compileroptions_sourcemap",
+      "infra_tsconfig_compileroptions_strict",
+      "infra_tsconfig_compileroptions_target",
+      "infra_tsconfig_exclude",
+      "infra_tsconfig_include",
+      "ref_bin",
+      "ref_es2022",
+      "ref_node_modules",
+      "ref_ts"
+    ],
+    "8": [
+      "app_components_navbar_navdropdown",
       "app_components_solutionsshowcase",
       "app_components_solutionsshowcase_solution",
       "app_components_solutionsshowcase_solutions",
@@ -302,7 +295,7 @@
       "package_dependencies_react",
       "react"
     ],
-    "8": [
+    "9": [
       "infra_package",
       "infra_package_dependencies",
       "infra_package_dependencies_pulumi_gcp",
@@ -320,25 +313,42 @@
       "types_node",
       "typescript"
     ],
-    "9": [
-      "infra_tsconfig",
-      "infra_tsconfig_compileroptions",
-      "infra_tsconfig_compileroptions_experimentaldecorators",
-      "infra_tsconfig_compileroptions_lib",
-      "infra_tsconfig_compileroptions_module",
-      "infra_tsconfig_compileroptions_moduleresolution",
-      "infra_tsconfig_compileroptions_nofallthroughcasesinswitch",
-      "infra_tsconfig_compileroptions_outdir",
-      "infra_tsconfig_compileroptions_pretty",
-      "infra_tsconfig_compileroptions_skiplibcheck",
-      "infra_tsconfig_compileroptions_sourcemap",
-      "infra_tsconfig_compileroptions_strict",
-      "infra_tsconfig_compileroptions_target",
-      "infra_tsconfig_include",
-      "infra_tsconfig_json_ref_es2022",
-      "ref_ts"
-    ],
     "10": [
+      "package",
+      "package_name",
+      "package_packagemanager",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_format",
+      "package_scripts_lint",
+      "package_scripts_prepare",
+      "package_scripts_start",
+      "package_scripts_test_e2e",
+      "package_scripts_test_ui",
+      "package_scripts_test_unit",
+      "package_scripts_typecheck",
+      "package_type"
+    ],
+    "11": [
+      "app_components_footer",
+      "app_components_footer_footer",
+      "app_components_icons_blueskyicon",
+      "app_components_icons_blueskyicon_blueskyicon",
+      "app_components_icons_githubicon",
+      "app_components_icons_githubicon_githubicon",
+      "app_components_icons_linkedinicon",
+      "app_components_icons_linkedinicon_linkedinicon",
+      "app_components_icons_mediumicon",
+      "app_components_icons_mediumicon_mediumicon",
+      "app_components_sociallinksitems",
+      "app_components_sociallinksitems_icons",
+      "app_components_sociallinksitems_sociallinksitems",
+      "app_lib_social_links",
+      "app_lib_social_links_social_links"
+    ],
+    "12": [
       "tests_404_spec",
       "tests_a11y",
       "tests_a11y_checka11y",
@@ -352,221 +362,230 @@
       "tests_solutions_local_news_spec",
       "tests_terms_spec"
     ],
-    "11": [
-      "local_eslint",
-      "local_prettier",
-      "local_vitest",
-      "pre_commit_config_yaml",
-      "pre_commit_hooks_check_added_large_files",
-      "pre_commit_hooks_check_merge_conflict",
-      "pre_commit_hooks_check_yaml",
-      "pre_commit_hooks_end_of_file_fixer",
-      "pre_commit_hooks_trailing_whitespace"
-    ],
-    "12": [
-      "gcp_artifact_registry",
-      "github_workflows_ci_checks",
-      "github_workflows_ci_deploy",
-      "github_workflows_ci_e2e",
-      "github_workflows_ci_pulumi_preview",
-      "pulumi_state"
-    ],
     "13": [
+      "pre_commit_config_check_added_large_files",
+      "pre_commit_config_check_merge_conflict",
+      "pre_commit_config_check_yaml",
+      "pre_commit_config_end_of_file_fixer",
+      "pre_commit_config_pre_commit_hooks",
+      "pre_commit_config_trailing_whitespace"
+    ],
+    "14": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "14": [
+    "15": [
+      "github_workflows_ci_yml_checks",
+      "github_workflows_ci_yml_deploy",
+      "github_workflows_ci_yml_e2e",
+      "github_workflows_ci_yml_pulumi_preview",
+      "pulumi_state"
+    ],
+    "16": [
       "infra_scripts_assert_no_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_main",
       "infra_scripts_assert_no_edge_deletes_rationale_55",
       "infra_scripts_assert_no_edge_deletes_self_test"
     ],
-    "15": [
+    "17": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "16": [
+    "18": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "17": [
+    "19": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "18": [
+    "20": [
       "_github_dependabot_infra_npm_updates",
-      "infra_pulumi_production_stack_config",
       "infra_pulumi_project"
     ],
-    "19": [
+    "21": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
     ],
-    "20": [
+    "22": [
+      "branchleft_github_workflows_graphify_workflow",
+      "github_workflows_graphify_workflow"
+    ],
+    "23": [
+      "github_actions_deployer",
+      "infra_known_issues"
+    ],
+    "24": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "21": [
+    "25": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "22": [
+    "26": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "23": [
+    "27": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "24": [
+    "28": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "25": [
+    "29": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "26": [
+    "30": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "27": [
+    "31": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "28": [
+    "32": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "29": [
+    "33": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "30": [
+    "34": [
       "_github_dependabot_github_actions_updates"
     ],
-    "31": [
-      "claude"
-    ],
-    "32": [
-      "contributing_accessibility"
-    ],
-    "33": [
-      "contributing_checks_ci_runs"
-    ],
-    "34": [
-      "contributing_content_and_copy"
-    ],
     "35": [
-      "contributing_pre_commit_hooks"
+      "claude_md"
     ],
     "36": [
-      "contributing_prerequisites"
+      "contributing_accessibility"
     ],
     "37": [
-      "eslint_config"
+      "contributing_checks_ci_runs"
     ],
     "38": [
-      "github_workflows_ci"
+      "contributing_content_and_copy"
     ],
     "39": [
-      "github_workflows_codeql"
+      "contributing_pre_commit_hooks"
     ],
     "40": [
-      "github_workflows_graphify_workflow"
+      "contributing_prerequisites"
     ],
     "41": [
-      "infra_known_issues"
+      "eslint_config"
     ],
     "42": [
-      "known_issues_prerendering_security_headers"
+      "github_workflows_ci_yml"
     ],
     "43": [
-      "notice_license_scope"
+      "github_workflows_codeql"
     ],
     "44": [
-      "notice_third_party_fonts"
+      "infra_pulumi_production"
     ],
     "45": [
-      "playwright_config"
+      "known_issues_prerendering_security_headers"
     ],
     "46": [
-      "public_apple_touch_icon"
+      "notice_license_scope"
     ],
     "47": [
-      "public_favicon_192"
+      "notice_third_party_fonts"
     ],
     "48": [
-      "public_favicon_512"
+      "playwright_config"
     ],
     "49": [
-      "public_people_headshot_160_jpg"
+      "pre_commit_config_eslint"
     ],
     "50": [
-      "public_people_headshot_160_webp"
+      "pre_commit_config_prettier"
     ],
     "51": [
-      "public_people_headshot_320_jpg"
+      "pre_commit_config_vitest"
     ],
     "52": [
-      "public_people_headshot_320_webp"
+      "public_apple_touch_icon"
     ],
     "53": [
-      "public_people_headshot_480_headshot"
+      "public_favicon_192"
     ],
     "54": [
-      "public_people_headshot_480_webp"
+      "public_favicon_512"
     ],
     "55": [
-      "react_router_config"
+      "public_people_headshot_160_jpg"
     ],
     "56": [
-      "tests_favicon_spec"
+      "public_people_headshot_160_webp"
     ],
     "57": [
-      "tests_logo_svg_spec"
+      "public_people_headshot_320_jpg"
     ],
     "58": [
-      "tests_meta_spec"
+      "public_people_headshot_320_webp"
     ],
     "59": [
-      "tests_no_js_spec"
+      "public_people_headshot_480_headshot"
     ],
     "60": [
-      "tests_og_image_spec"
+      "public_people_headshot_480_webp"
     ],
     "61": [
-      "tests_robots_txt_spec"
+      "react_router_config"
     ],
     "62": [
-      "tests_sitemap_xml_spec"
+      "tests_favicon_spec"
     ],
     "63": [
+      "tests_logo_svg_spec"
+    ],
+    "64": [
+      "tests_meta_spec"
+    ],
+    "65": [
+      "tests_no_js_spec"
+    ],
+    "66": [
+      "tests_og_image_spec"
+    ],
+    "67": [
+      "tests_robots_txt_spec"
+    ],
+    "68": [
+      "tests_sitemap_xml_spec"
+    ],
+    "69": [
       "vitest_config"
     ]
   },
   "cohesion": {
-    "0": 0.07346938775510205,
+    "0": 0.07088989441930618,
     "1": 0.04081632653061224,
-    "2": 0.08907563025210084,
-    "3": 0.09411764705882353,
-    "4": 0.05714285714285714,
-    "5": 0.09195402298850575,
-    "6": 0.07671957671957672,
-    "7": 0.12318840579710146,
-    "8": 0.125,
+    "2": 0.09047619047619047,
+    "3": 0.08907563025210084,
+    "4": 0.07671957671957672,
+    "5": 0.11688311688311688,
+    "6": 0.10526315789473684,
+    "7": 0.10526315789473684,
+    "8": 0.18382352941176472,
     "9": 0.125,
-    "10": 0.3181818181818182,
-    "11": 0.2222222222222222,
-    "12": 0.4,
-    "13": 0.4,
-    "14": 0.7,
+    "10": 0.125,
+    "11": 0.19047619047619047,
+    "12": 0.3181818181818182,
+    "13": 0.3333333333333333,
+    "14": 0.4,
     "15": 0.5,
-    "16": 0.5,
-    "17": 0.6666666666666666,
-    "18": 0.6666666666666666,
-    "19": 1.0,
+    "16": 0.7,
+    "17": 0.5,
+    "18": 0.5,
+    "19": 0.6666666666666666,
     "20": 1.0,
     "21": 1.0,
     "22": 1.0,
@@ -610,7 +629,13 @@
     "60": 1.0,
     "61": 1.0,
     "62": 1.0,
-    "63": 1.0
+    "63": 1.0,
+    "64": 1.0,
+    "65": 1.0,
+    "66": 1.0,
+    "67": 1.0,
+    "68": 1.0,
+    "69": 1.0
   },
   "gods": [
     {
@@ -688,6 +713,17 @@
       "why": "connects across different repos/directories; peripheral node `NavDropdown()` unexpectedly reaches hub `react`"
     },
     {
+      "source": "NavBar()",
+      "target": "react",
+      "source_files": [
+        "app/components/NavBar.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
       "source": "About()",
       "target": "react",
       "source_files": [
@@ -708,21 +744,10 @@
       "confidence": "INFERRED",
       "relation": "shares_data_with",
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
-    },
-    {
-      "source": "minimumReleaseAgeExclude (@branchleft/*)",
-      "target": "Dependabot: npm root updates",
-      "source_files": [
-        "pnpm-workspace.yaml",
-        ".github/dependabot.yml"
-      ],
-      "confidence": "INFERRED",
-      "relation": "shares_data_with",
-      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
     }
   ],
   "tokens": {
-    "input": 6737,
-    "output": 1227
+    "input": 988,
+    "output": 237
   }
 }
