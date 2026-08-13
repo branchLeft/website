@@ -4,36 +4,31 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "ci_cd_pipeline",
-        "label": "CI/CD Pipeline",
+        "id": "local_pnpm_hooks",
+        "label": "Local PNPM Hooks",
         "nodes": [
-          "github_workflows_ci_checks",
-          "github_workflows_ci_e2e",
-          "github_workflows_ci_pulumi_preview",
-          "github_workflows_ci_deploy"
+          "pre_commit_config_prettier",
+          "pre_commit_config_eslint",
+          "pre_commit_config_vitest"
         ],
         "relation": "participate_in",
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
-        "source_file": ".github/workflows/ci.yml"
+        "source_file": ".pre-commit-config.yaml"
       },
       {
-        "id": "pre_commit_pipeline",
-        "label": "Pre-commit Quality Pipeline",
+        "id": "ci_cd_pipeline",
+        "label": "CI/CD Pipeline Flow",
         "nodes": [
-          "pre_commit_hooks_trailing_whitespace",
-          "pre_commit_hooks_end_of_file_fixer",
-          "pre_commit_hooks_check_yaml",
-          "pre_commit_hooks_check_added_large_files",
-          "pre_commit_hooks_check_merge_conflict",
-          "local_prettier",
-          "local_eslint",
-          "local_vitest"
+          "github_workflows_ci_yml_checks",
+          "github_workflows_ci_yml_e2e",
+          "github_workflows_ci_yml_pulumi_preview",
+          "github_workflows_ci_yml_deploy"
         ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.9,
-        "source_file": ".pre-commit-config.yaml"
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".github/workflows/ci.yml"
       },
       {
         "id": "prerendering_safety_constraint",
@@ -57,7 +52,7 @@
       "source_file": "app/components/Footer.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "footer.tsx",
       "id": "app_components_footer"
@@ -69,7 +64,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "footer()",
       "id": "app_components_footer_footer"
@@ -80,7 +75,7 @@
       "source_file": "app/components/NavBar.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navbar.tsx",
       "id": "app_components_navbar"
@@ -93,7 +88,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navlinkitem",
       "id": "app_components_navbar_navlinkitem"
@@ -106,7 +101,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navdropdownitem",
       "id": "app_components_navbar_navdropdownitem"
@@ -117,7 +112,7 @@
       "source_file": "app/components/NavBar.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "nav_links",
       "id": "app_components_navbar_nav_links"
@@ -129,7 +124,7 @@
       "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "isdropdown()",
       "id": "app_components_navbar_isdropdown"
@@ -141,7 +136,7 @@
       "source_location": "L26",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navdropdown()",
       "id": "app_components_navbar_navdropdown"
@@ -153,7 +148,7 @@
       "source_location": "L107",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navlinksitems()",
       "id": "app_components_navbar_navlinksitems"
@@ -165,7 +160,7 @@
       "source_location": "L132",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 5,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navbar()",
       "id": "app_components_navbar_navbar"
@@ -176,7 +171,7 @@
       "source_file": "app/components/SocialLinksItems.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "sociallinksitems.tsx",
       "id": "app_components_sociallinksitems"
@@ -187,7 +182,7 @@
       "source_file": "app/components/SocialLinksItems.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "icons",
       "id": "app_components_sociallinksitems_icons"
@@ -199,7 +194,7 @@
       "source_location": "L24",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "sociallinksitems()",
       "id": "app_components_sociallinksitems_sociallinksitems"
@@ -210,7 +205,7 @@
       "source_file": "app/components/SolutionsShowcase.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutionsshowcase.tsx",
       "id": "app_components_solutionsshowcase"
@@ -223,7 +218,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solution",
       "id": "app_components_solutionsshowcase_solution"
@@ -234,7 +229,7 @@
       "source_file": "app/components/SolutionsShowcase.tsx",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutions",
       "id": "app_components_solutionsshowcase_solutions"
@@ -246,7 +241,7 @@
       "source_location": "L61",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutionsshowcase()",
       "id": "app_components_solutionsshowcase_solutionsshowcase"
@@ -257,7 +252,7 @@
       "source_file": "app/components/icons/BlueskyIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "blueskyicon.tsx",
       "id": "app_components_icons_blueskyicon"
@@ -269,7 +264,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "blueskyicon()",
       "id": "app_components_icons_blueskyicon_blueskyicon"
@@ -280,7 +275,7 @@
       "source_file": "app/components/icons/GitHubIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "githubicon.tsx",
       "id": "app_components_icons_githubicon"
@@ -292,7 +287,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "githubicon()",
       "id": "app_components_icons_githubicon_githubicon"
@@ -303,7 +298,7 @@
       "source_file": "app/components/icons/LinkedInIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Navbar & Social Icons",
       "norm_label": "linkedinicon.tsx",
       "id": "app_components_icons_linkedinicon"
@@ -315,7 +310,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Navbar & Social Icons",
       "norm_label": "linkedinicon()",
       "id": "app_components_icons_linkedinicon_linkedinicon"
@@ -326,7 +321,7 @@
       "source_file": "app/components/icons/MediumIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "mediumicon.tsx",
       "id": "app_components_icons_mediumicon"
@@ -338,7 +333,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "mediumicon()",
       "id": "app_components_icons_mediumicon_mediumicon"
@@ -394,7 +389,7 @@
       "source_file": "app/lib/meta.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.test.ts",
       "id": "app_lib_meta_test"
@@ -407,7 +402,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentries",
       "id": "app_lib_meta_test_metaentries"
@@ -420,7 +415,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentry",
       "id": "app_lib_meta_test_metaentry"
@@ -432,7 +427,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykey()",
       "id": "app_lib_meta_test_findbykey"
@@ -444,7 +439,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykeyvalue()",
       "id": "app_lib_meta_test_findbykeyvalue"
@@ -455,7 +450,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.ts",
       "id": "app_lib_meta"
@@ -466,7 +461,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "site_url",
       "id": "app_lib_meta_site_url"
@@ -477,7 +472,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "organization_json_ld",
       "id": "app_lib_meta_organization_json_ld"
@@ -490,7 +485,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "pagemetainput",
       "id": "app_lib_meta_pagemetainput"
@@ -502,7 +497,7 @@
       "source_location": "L90",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildmeta()",
       "id": "app_lib_meta_buildmeta"
@@ -513,7 +508,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.test.ts",
       "id": "app_lib_page_paths_test"
@@ -524,7 +519,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "resource_route_paths",
       "id": "app_lib_page_paths_test_resource_route_paths"
@@ -536,7 +531,7 @@
       "source_location": "L9",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routeconfigpaths()",
       "id": "app_lib_page_paths_test_routeconfigpaths"
@@ -547,7 +542,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.ts",
       "id": "app_lib_page_paths"
@@ -558,7 +553,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page_paths",
       "id": "app_lib_page_paths_page_paths"
@@ -610,141 +605,12 @@
       "id": "app_lib_security_headers_buildsecurityheaders"
     },
     {
-      "label": "sendContactEmail.server.test.ts",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "sendcontactemail.server.test.ts",
-      "id": "app_lib_sendcontactemail_server_test"
-    },
-    {
-      "label": "{ sendMail, createTransport }",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L3",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "{ sendmail, createtransport }",
-      "id": "app_lib_sendcontactemail_server_test_sendmail_createtransport"
-    },
-    {
-      "label": "ORIGINAL_ENV",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "original_env",
-      "id": "app_lib_sendcontactemail_server_test_original_env"
-    },
-    {
-      "label": "setEnv()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L17",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "setenv()",
-      "id": "app_lib_sendcontactemail_server_test_setenv"
-    },
-    {
-      "label": "sendContactEmail.server.ts",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "sendcontactemail.server.ts",
-      "id": "app_lib_sendcontactemail_server"
-    },
-    {
-      "label": "ContactSubmission",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L3",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "contactsubmission",
-      "id": "app_lib_sendcontactemail_server_contactsubmission"
-    },
-    {
-      "label": "getTransport()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "gettransport()",
-      "id": "app_lib_sendcontactemail_server_gettransport"
-    },
-    {
-      "label": "escapeHtml()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L28",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "escapehtml()",
-      "id": "app_lib_sendcontactemail_server_escapehtml"
-    },
-    {
-      "label": "buildText()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "buildtext()",
-      "id": "app_lib_sendcontactemail_server_buildtext"
-    },
-    {
-      "label": "buildHtml()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L51",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "buildhtml()",
-      "id": "app_lib_sendcontactemail_server_buildhtml"
-    },
-    {
-      "label": "sendContactEmail()",
-      "file_type": "code",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L81",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Contact Form Email Handler",
-      "norm_label": "sendcontactemail()",
-      "id": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
       "label": "social-links.ts",
       "file_type": "code",
       "source_file": "app/lib/social-links.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "social-links.ts",
       "id": "app_lib_social_links"
@@ -755,7 +621,7 @@
       "source_file": "app/lib/social-links.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 5,
+      "community": 11,
       "community_name": "Footer & Icon Components",
       "norm_label": "social_links",
       "id": "app_lib_social_links_social_links"
@@ -766,7 +632,7 @@
       "source_file": "app/lib/useHasMounted.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted.test.ts",
       "id": "app_lib_usehasmounted_test"
@@ -778,7 +644,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "probe()",
       "id": "app_lib_usehasmounted_test_probe"
@@ -789,7 +655,7 @@
       "source_file": "app/lib/useHasMounted.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted.ts",
       "id": "app_lib_usehasmounted"
@@ -801,7 +667,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "subscribenoop()",
       "id": "app_lib_usehasmounted_subscribenoop"
@@ -813,7 +679,7 @@
       "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted()",
       "id": "app_lib_usehasmounted_usehasmounted"
@@ -907,7 +773,7 @@
       "source_file": "app/routes.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routes.ts",
       "id": "app_routes"
@@ -918,7 +784,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "about.tsx",
       "id": "app_routes_about"
@@ -930,7 +796,7 @@
       "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "meta()",
       "id": "app_routes_about_meta"
@@ -941,7 +807,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "sections",
       "id": "app_routes_about_sections"
@@ -952,7 +818,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "values",
       "id": "app_routes_about_values"
@@ -964,7 +830,7 @@
       "source_location": "L76",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "about()",
       "id": "app_routes_about_about"
@@ -975,7 +841,7 @@
       "source_file": "app/routes/contact.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact.test.ts",
       "id": "app_routes_contact_test"
@@ -987,7 +853,7 @@
       "source_location": "L48",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "buildformdata()",
       "id": "app_routes_contact_test_buildformdata"
@@ -999,7 +865,7 @@
       "source_location": "L64",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "makerequest()",
       "id": "app_routes_contact_test_makerequest"
@@ -1011,7 +877,7 @@
       "source_location": "L74",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "actionargs()",
       "id": "app_routes_contact_test_actionargs"
@@ -1023,7 +889,7 @@
       "source_location": "L79",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "nextip()",
       "id": "app_routes_contact_test_nextip"
@@ -1034,7 +900,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact.tsx",
       "id": "app_routes_contact"
@@ -1046,7 +912,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_contact_meta"
@@ -1057,7 +923,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "categories",
       "id": "app_routes_contact_categories"
@@ -1070,7 +936,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "categoryvalue",
       "id": "app_routes_contact_categoryvalue"
@@ -1081,7 +947,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "category_values",
       "id": "app_routes_contact_category_values"
@@ -1093,7 +959,7 @@
       "source_location": "L39",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "isknowncategory()",
       "id": "app_routes_contact_isknowncategory"
@@ -1104,7 +970,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "email_max_length",
       "id": "app_routes_contact_email_max_length"
@@ -1115,7 +981,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "message_max_length",
       "id": "app_routes_contact_message_max_length"
@@ -1126,7 +992,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "honeypot_field_name",
       "id": "app_routes_contact_honeypot_field_name"
@@ -1137,7 +1003,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L62",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "min_submit_delay_ms",
       "id": "app_routes_contact_min_submit_delay_ms"
@@ -1148,7 +1014,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "rate_limit_window_ms",
       "id": "app_routes_contact_rate_limit_window_ms"
@@ -1159,7 +1025,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L68",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "rate_limit_max_submissions",
       "id": "app_routes_contact_rate_limit_max_submissions"
@@ -1170,7 +1036,7 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L70",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "submissionsbyip",
       "id": "app_routes_contact_submissionsbyip"
@@ -1182,7 +1048,7 @@
       "source_location": "L72",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "getclientip()",
       "id": "app_routes_contact_getclientip"
@@ -1194,7 +1060,7 @@
       "source_location": "L80",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "isratelimited()",
       "id": "app_routes_contact_isratelimited"
@@ -1207,7 +1073,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "actionresult",
       "id": "app_routes_contact_actionresult"
@@ -1219,7 +1085,7 @@
       "source_location": "L101",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "formstring()",
       "id": "app_routes_contact_formstring"
@@ -1231,7 +1097,7 @@
       "source_location": "L106",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "loader()",
       "id": "app_routes_contact_loader"
@@ -1243,7 +1109,7 @@
       "source_location": "L110",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "action()",
       "id": "app_routes_contact_action"
@@ -1255,7 +1121,7 @@
       "source_location": "L166",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Contact Form Email Handler",
       "norm_label": "contact()",
       "id": "app_routes_contact_contact"
@@ -1266,7 +1132,7 @@
       "source_file": "app/routes/home.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home.tsx",
       "id": "app_routes_home"
@@ -1278,7 +1144,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_home_meta"
@@ -1290,7 +1156,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home()",
       "id": "app_routes_home_home"
@@ -1301,7 +1167,7 @@
       "source_file": "app/routes/logo-svg.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 19,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "logo-svg.tsx",
       "id": "app_routes_logo_svg"
@@ -1313,45 +1179,10 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 19,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "loader()",
       "id": "app_routes_logo_svg_loader"
-    },
-    {
-      "label": "privacy.tsx",
-      "file_type": "code",
-      "source_file": "app/routes/privacy.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Page Metadata & SEO",
-      "norm_label": "privacy.tsx",
-      "id": "app_routes_privacy"
-    },
-    {
-      "label": "meta()",
-      "file_type": "code",
-      "source_file": "app/routes/privacy.tsx",
-      "source_location": "L5",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Page Metadata & SEO",
-      "norm_label": "meta()",
-      "id": "app_routes_privacy_meta"
-    },
-    {
-      "label": "Privacy()",
-      "file_type": "code",
-      "source_file": "app/routes/privacy.tsx",
-      "source_location": "L13",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Page Metadata & SEO",
-      "norm_label": "privacy()",
-      "id": "app_routes_privacy_privacy"
     },
     {
       "label": "sitemap-xml.tsx",
@@ -1359,7 +1190,7 @@
       "source_file": "app/routes/sitemap-xml.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "sitemap-xml.tsx",
       "id": "app_routes_sitemap_xml"
@@ -1371,7 +1202,7 @@
       "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildsitemapxml()",
       "id": "app_routes_sitemap_xml_buildsitemapxml"
@@ -1383,7 +1214,7 @@
       "source_location": "L28",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "loader()",
       "id": "app_routes_sitemap_xml_loader"
@@ -1394,7 +1225,7 @@
       "source_file": "app/routes/solutions.affordable-websites.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "solutions.affordable-websites.tsx",
       "id": "app_routes_solutions_affordable_websites"
@@ -1406,7 +1237,7 @@
       "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_solutions_affordable_websites_meta"
@@ -1418,7 +1249,7 @@
       "source_location": "L16",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "affordablewebsites()",
       "id": "app_routes_solutions_affordable_websites_affordablewebsites"
@@ -1429,7 +1260,7 @@
       "source_file": "app/routes/solutions.local-news.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "solutions.local-news.tsx",
       "id": "app_routes_solutions_local_news"
@@ -1441,7 +1272,7 @@
       "source_location": "L6",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_solutions_local_news_meta"
@@ -1453,7 +1284,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "localnews()",
       "id": "app_routes_solutions_local_news_localnews"
@@ -1464,7 +1295,7 @@
       "source_file": "app/routes/terms.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms.tsx",
       "id": "app_routes_terms"
@@ -1476,7 +1307,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_terms_meta"
@@ -1488,7 +1319,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms()",
       "id": "app_routes_terms_terms"
@@ -1499,7 +1330,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 37,
+      "community": 41,
       "community_name": "ESLint Config",
       "norm_label": "eslint.config.js",
       "id": "eslint_config"
@@ -1558,149 +1389,6 @@
       "community_name": "GCP Infra Provisioning",
       "norm_label": "repository",
       "id": "infra_artifactregistry_repository"
-    },
-    {
-      "label": "cloudRun.ts",
-      "file_type": "code",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "cloudrun.ts",
-      "id": "infra_cloudrun"
-    },
-    {
-      "label": "serviceName",
-      "file_type": "code",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "servicename",
-      "id": "infra_cloudrun_servicename"
-    },
-    {
-      "label": "service",
-      "file_type": "code",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "service",
-      "id": "infra_cloudrun_service"
-    },
-    {
-      "label": "config.ts",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "config.ts",
-      "id": "infra_config"
-    },
-    {
-      "label": "config",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L4",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "config",
-      "id": "infra_config_config"
-    },
-    {
-      "label": "gcpConfig",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "gcpconfig",
-      "id": "infra_config_gcpconfig"
-    },
-    {
-      "label": "projectId",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L7",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "projectid",
-      "id": "infra_config_projectid"
-    },
-    {
-      "label": "region",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "region",
-      "id": "infra_config_region"
-    },
-    {
-      "label": "imageTag",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "imagetag",
-      "id": "infra_config_imagetag"
-    },
-    {
-      "label": "artifactRegistryRepoId",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L17",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "artifactregistryrepoid",
-      "id": "infra_config_artifactregistryrepoid"
-    },
-    {
-      "label": "imageUrl",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L19",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "imageurl",
-      "id": "infra_config_imageurl"
-    },
-    {
-      "label": "githubRepo",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L23",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "githubrepo",
-      "id": "infra_config_githubrepo"
-    },
-    {
-      "label": "project",
-      "file_type": "code",
-      "source_file": "infra/config.ts",
-      "source_location": "L25",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "project",
-      "id": "infra_config_project"
     },
     {
       "label": "index.ts",
@@ -1796,7 +1484,7 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 14,
+      "community": 16,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "assert-no-edge-deletes.py",
       "id": "infra_scripts_assert_no_edge_deletes"
@@ -1808,7 +1496,7 @@
       "source_location": "L54",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
+      "community": 16,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "edge_deletes()",
       "id": "infra_scripts_assert_no_edge_deletes_edge_deletes"
@@ -1820,7 +1508,7 @@
       "source_location": "L98",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
+      "community": 16,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "self_test()",
       "id": "infra_scripts_assert_no_edge_deletes_self_test"
@@ -1832,7 +1520,7 @@
       "source_location": "L118",
       "_callable": true,
       "_origin": "ast",
-      "community": 14,
+      "community": 16,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "main()",
       "id": "infra_scripts_assert_no_edge_deletes_main"
@@ -1843,275 +1531,10 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 14,
+      "community": 16,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "return the edge resources `text` plans to delete. pairs each `(delete)` line...",
       "id": "infra_scripts_assert_no_edge_deletes_rationale_55"
-    },
-    {
-      "label": "secrets.ts",
-      "file_type": "code",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "secrets.ts",
-      "id": "infra_secrets"
-    },
-    {
-      "label": "config",
-      "file_type": "code",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "config",
-      "id": "infra_secrets_config"
-    },
-    {
-      "label": "secretWithValue()",
-      "file_type": "code",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "secretwithvalue()",
-      "id": "infra_secrets_secretwithvalue"
-    },
-    {
-      "label": "gmailUser",
-      "file_type": "code",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L25",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "gmailuser",
-      "id": "infra_secrets_gmailuser"
-    },
-    {
-      "label": "gmailAppPassword",
-      "file_type": "code",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L31",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "gmailapppassword",
-      "id": "infra_secrets_gmailapppassword"
-    },
-    {
-      "label": "serviceAccounts.ts",
-      "file_type": "code",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "serviceaccounts.ts",
-      "id": "infra_serviceaccounts"
-    },
-    {
-      "label": "cloudRunRuntimeSa",
-      "file_type": "code",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "cloudrunruntimesa",
-      "id": "infra_serviceaccounts_cloudrunruntimesa"
-    },
-    {
-      "label": "githubActionsDeployerSa",
-      "file_type": "code",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L22",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "GCP Infra Provisioning",
-      "norm_label": "githubactionsdeployersa",
-      "id": "infra_serviceaccounts_githubactionsdeployersa"
-    },
-    {
-      "label": "infra/tsconfig.json",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "infra/tsconfig.json",
-      "id": "infra_tsconfig"
-    },
-    {
-      "label": "compilerOptions",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "compileroptions",
-      "id": "infra_tsconfig_compileroptions"
-    },
-    {
-      "label": "target",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "target",
-      "id": "infra_tsconfig_compileroptions_target"
-    },
-    {
-      "label": "module",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "module",
-      "id": "infra_tsconfig_compileroptions_module"
-    },
-    {
-      "label": "moduleResolution",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "moduleresolution",
-      "id": "infra_tsconfig_compileroptions_moduleresolution"
-    },
-    {
-      "label": "lib",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "lib",
-      "id": "infra_tsconfig_compileroptions_lib"
-    },
-    {
-      "label": "ES2022",
-      "file_type": "concept",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "es2022",
-      "id": "infra_tsconfig_json_ref_es2022"
-    },
-    {
-      "label": "strict",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "strict",
-      "id": "infra_tsconfig_compileroptions_strict"
-    },
-    {
-      "label": "outDir",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "outdir",
-      "id": "infra_tsconfig_compileroptions_outdir"
-    },
-    {
-      "label": "sourceMap",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L9",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "sourcemap",
-      "id": "infra_tsconfig_compileroptions_sourcemap"
-    },
-    {
-      "label": "experimentalDecorators",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "experimentaldecorators",
-      "id": "infra_tsconfig_compileroptions_experimentaldecorators"
-    },
-    {
-      "label": "pretty",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L11",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "pretty",
-      "id": "infra_tsconfig_compileroptions_pretty"
-    },
-    {
-      "label": "noFallthroughCasesInSwitch",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "nofallthroughcasesinswitch",
-      "id": "infra_tsconfig_compileroptions_nofallthroughcasesinswitch"
-    },
-    {
-      "label": "skipLibCheck",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L13",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "skiplibcheck",
-      "id": "infra_tsconfig_compileroptions_skiplibcheck"
-    },
-    {
-      "label": "include",
-      "file_type": "code",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "include",
-      "id": "infra_tsconfig_include"
-    },
-    {
-      "label": "*.ts",
-      "file_type": "concept",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "Infra TypeScript Config",
-      "norm_label": "*.ts",
-      "id": "ref_ts"
     },
     {
       "label": "workloadIdentity.ts",
@@ -2174,7 +1597,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "package.json",
       "id": "package"
@@ -2185,7 +1608,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "name",
       "id": "package_name"
@@ -2196,7 +1619,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "private",
       "id": "package_private"
@@ -2207,7 +1630,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "type",
       "id": "package_type"
@@ -2218,7 +1641,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "packagemanager",
       "id": "package_packagemanager"
@@ -2229,7 +1652,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "scripts",
       "id": "package_scripts"
@@ -2240,7 +1663,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "build",
       "id": "package_scripts_build"
@@ -2251,7 +1674,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "dev",
       "id": "package_scripts_dev"
@@ -2262,7 +1685,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "start",
       "id": "package_scripts_start"
@@ -2273,7 +1696,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "typecheck",
       "id": "package_scripts_typecheck"
@@ -2284,7 +1707,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:unit",
       "id": "package_scripts_test_unit"
@@ -2295,7 +1718,7 @@
       "source_file": "package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:ui",
       "id": "package_scripts_test_ui"
@@ -2306,7 +1729,7 @@
       "source_file": "package.json",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "test:e2e",
       "id": "package_scripts_test_e2e"
@@ -2317,7 +1740,7 @@
       "source_file": "package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "lint",
       "id": "package_scripts_lint"
@@ -2328,7 +1751,7 @@
       "source_file": "package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "format",
       "id": "package_scripts_format"
@@ -2339,7 +1762,7 @@
       "source_file": "package.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 4,
+      "community": 10,
       "community_name": "Runtime Dependencies",
       "norm_label": "prepare",
       "id": "package_scripts_prepare"
@@ -2350,7 +1773,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "dependencies",
       "id": "package_dependencies"
@@ -2361,7 +1784,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@branchleft/components",
       "id": "package_dependencies_branchleft_components"
@@ -2372,7 +1795,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@branchleft/components",
       "id": "branchleft_components"
@@ -2383,7 +1806,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/node",
       "id": "package_dependencies_react_router_node"
@@ -2394,7 +1817,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/node",
       "id": "react_router_node"
@@ -2405,7 +1828,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/serve",
       "id": "package_dependencies_react_router_serve"
@@ -2416,7 +1839,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "@react-router/serve",
       "id": "react_router_serve"
@@ -2427,7 +1850,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "framer-motion",
       "id": "package_dependencies_framer_motion"
@@ -2438,7 +1861,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "framer-motion",
       "id": "framer_motion"
@@ -2449,7 +1872,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "isbot",
       "id": "package_dependencies_isbot"
@@ -2460,7 +1883,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "isbot",
       "id": "isbot"
@@ -2471,7 +1894,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "lucide-react",
       "id": "package_dependencies_lucide_react"
@@ -2482,7 +1905,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "lucide-react",
       "id": "lucide_react"
@@ -2493,7 +1916,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "nodemailer",
       "id": "package_dependencies_nodemailer"
@@ -2504,7 +1927,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "nodemailer",
       "id": "nodemailer"
@@ -2515,7 +1938,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "react",
       "id": "package_dependencies_react"
@@ -2526,7 +1949,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "react",
       "id": "react"
@@ -2537,7 +1960,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-dom",
       "id": "package_dependencies_react_dom"
@@ -2548,7 +1971,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-dom",
       "id": "react_dom"
@@ -2559,7 +1982,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-router",
       "id": "package_dependencies_react_router"
@@ -2570,7 +1993,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 4,
+      "community": 6,
       "community_name": "Runtime Dependencies",
       "norm_label": "react-router",
       "id": "react_router"
@@ -2702,7 +2125,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "community_name": "types-node Dependency",
       "norm_label": "@types/node",
       "id": "package_devdependencies_types_node"
@@ -3065,7 +2488,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "community_name": "typescript Dependency",
       "norm_label": "typescript",
       "id": "package_devdependencies_typescript"
@@ -3142,7 +2565,7 @@
       "source_file": "playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 45,
+      "community": 48,
       "community_name": "Playwright Config",
       "norm_label": "playwright.config.ts",
       "id": "playwright_config"
@@ -3153,7 +2576,7 @@
       "source_file": "react-router.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 55,
+      "community": 61,
       "community_name": "React Router Config",
       "norm_label": "react-router.config.ts",
       "id": "react_router_config"
@@ -3164,7 +2587,7 @@
       "source_file": "tests/404.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "404.spec.ts",
       "id": "tests_404_spec"
@@ -3175,7 +2598,7 @@
       "source_file": "tests/a11y.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "a11y.ts",
       "id": "tests_a11y"
@@ -3187,7 +2610,7 @@
       "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "waitforanimationssettled()",
       "id": "tests_a11y_waitforanimationssettled"
@@ -3199,7 +2622,7 @@
       "source_location": "L36",
       "_callable": true,
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "checka11y()",
       "id": "tests_a11y_checka11y"
@@ -3210,21 +2633,10 @@
       "source_file": "tests/about.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "about.spec.ts",
       "id": "tests_about_spec"
-    },
-    {
-      "label": "contact.spec.ts",
-      "file_type": "code",
-      "source_file": "tests/contact.spec.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "Playwright E2E & A11y Tests",
-      "norm_label": "contact.spec.ts",
-      "id": "tests_contact_spec"
     },
     {
       "label": "favicon.spec.ts",
@@ -3232,7 +2644,7 @@
       "source_file": "tests/favicon.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 56,
+      "community": 62,
       "community_name": "Favicon Test",
       "norm_label": "favicon.spec.ts",
       "id": "tests_favicon_spec"
@@ -3243,7 +2655,7 @@
       "source_file": "tests/home.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "home.spec.ts",
       "id": "tests_home_spec"
@@ -3254,7 +2666,7 @@
       "source_file": "tests/logo-svg.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 57,
+      "community": 63,
       "community_name": "Logo SVG Test",
       "norm_label": "logo-svg.spec.ts",
       "id": "tests_logo_svg_spec"
@@ -3265,7 +2677,7 @@
       "source_file": "tests/meta.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 58,
+      "community": 64,
       "community_name": "Meta Tags Test",
       "norm_label": "meta.spec.ts",
       "id": "tests_meta_spec"
@@ -3276,21 +2688,10 @@
       "source_file": "tests/nav.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "nav.spec.ts",
       "id": "tests_nav_spec"
-    },
-    {
-      "label": "no-js.spec.ts",
-      "file_type": "code",
-      "source_file": "tests/no-js.spec.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "No-JS Fallback Test",
-      "norm_label": "no-js.spec.ts",
-      "id": "tests_no_js_spec"
     },
     {
       "label": "og-image.spec.ts",
@@ -3298,7 +2699,7 @@
       "source_file": "tests/og-image.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 60,
+      "community": 66,
       "community_name": "OG Image Test",
       "norm_label": "og-image.spec.ts",
       "id": "tests_og_image_spec"
@@ -3309,7 +2710,7 @@
       "source_file": "tests/privacy.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "privacy.spec.ts",
       "id": "tests_privacy_spec"
@@ -3320,7 +2721,7 @@
       "source_file": "tests/robots-txt.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 61,
+      "community": 67,
       "community_name": "Robots.txt Test",
       "norm_label": "robots-txt.spec.ts",
       "id": "tests_robots_txt_spec"
@@ -3331,7 +2732,7 @@
       "source_file": "tests/sitemap-xml.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 62,
+      "community": 68,
       "community_name": "Sitemap Test",
       "norm_label": "sitemap-xml.spec.ts",
       "id": "tests_sitemap_xml_spec"
@@ -3342,7 +2743,7 @@
       "source_file": "tests/solutions-affordable-websites.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-affordable-websites.spec.ts",
       "id": "tests_solutions_affordable_websites_spec"
@@ -3353,7 +2754,7 @@
       "source_file": "tests/solutions-local-news.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-local-news.spec.ts",
       "id": "tests_solutions_local_news_spec"
@@ -3364,7 +2765,7 @@
       "source_file": "tests/terms.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 10,
+      "community": 12,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "terms.spec.ts",
       "id": "tests_terms_spec"
@@ -3375,7 +2776,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "tsconfig.json",
       "id": "tsconfig"
@@ -3386,7 +2787,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "include",
       "id": "tsconfig_include"
@@ -3397,7 +2798,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "**/*",
       "id": "ref"
@@ -3408,7 +2809,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "**/.server/**/*",
       "id": "ref_server"
@@ -3419,7 +2820,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "**/.client/**/*",
       "id": "ref_client"
@@ -3430,7 +2831,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": ".react-router/types/**/*",
       "id": "ref_react_router_types"
@@ -3441,7 +2842,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "exclude",
       "id": "tsconfig_exclude"
@@ -3452,7 +2853,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "infra",
       "id": "ref_infra"
@@ -3463,7 +2864,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "compileroptions",
       "id": "tsconfig_compileroptions"
@@ -3474,7 +2875,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "lib",
       "id": "tsconfig_compileroptions_lib"
@@ -3485,7 +2886,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "dom",
       "id": "ref_dom"
@@ -3496,7 +2897,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "dom.iterable",
       "id": "ref_dom_iterable"
@@ -3507,7 +2908,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "es2022",
       "id": "tsconfig_json_ref_es2022"
@@ -3518,7 +2919,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "types",
       "id": "tsconfig_compileroptions_types"
@@ -3529,7 +2930,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "node",
       "id": "ref_node"
@@ -3540,7 +2941,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "vite/client",
       "id": "ref_vite_client"
@@ -3551,7 +2952,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "target",
       "id": "tsconfig_compileroptions_target"
@@ -3562,7 +2963,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "module",
       "id": "tsconfig_compileroptions_module"
@@ -3573,7 +2974,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "moduleresolution",
       "id": "tsconfig_compileroptions_moduleresolution"
@@ -3584,7 +2985,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "jsx",
       "id": "tsconfig_compileroptions_jsx"
@@ -3595,7 +2996,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "rootdirs",
       "id": "tsconfig_compileroptions_rootdirs"
@@ -3606,7 +3007,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "paths",
       "id": "tsconfig_compileroptions_paths"
@@ -3617,7 +3018,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "esmoduleinterop",
       "id": "tsconfig_compileroptions_esmoduleinterop"
@@ -3628,7 +3029,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "verbatimmodulesyntax",
       "id": "tsconfig_compileroptions_verbatimmodulesyntax"
@@ -3639,7 +3040,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "noemit",
       "id": "tsconfig_compileroptions_noemit"
@@ -3650,7 +3051,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "resolvejsonmodule",
       "id": "tsconfig_compileroptions_resolvejsonmodule"
@@ -3661,7 +3062,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "skiplibcheck",
       "id": "tsconfig_compileroptions_skiplibcheck"
@@ -3672,7 +3073,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 6,
+      "community": 4,
       "community_name": "TypeScript Ambient Refs",
       "norm_label": "strict",
       "id": "tsconfig_compileroptions_strict"
@@ -3683,7 +3084,7 @@
       "source_file": "vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 20,
+      "community": 24,
       "community_name": "vite-config Dependency",
       "norm_label": "vite.config.ts",
       "id": "vite_config"
@@ -3695,7 +3096,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 20,
+      "community": 24,
       "community_name": "vite-config Dependency",
       "norm_label": "stripcssbanners()",
       "id": "vite_config_stripcssbanners"
@@ -3706,7 +3107,7 @@
       "source_file": "vitest.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 63,
+      "community": 69,
       "community_name": "Vitest Config",
       "norm_label": "vitest.config.ts",
       "id": "vitest_config"
@@ -3720,7 +3121,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "react router v7 framework mode (locked)",
       "_origin": "semantic",
@@ -3735,7 +3136,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "legacy patterns to migrate",
       "_origin": "semantic",
@@ -3750,7 +3151,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 33,
       "community_name": "React Router: RSC Future Path",
       "norm_label": "rsc (future path, not active)",
       "_origin": "semantic",
@@ -3765,7 +3166,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "skill references table",
       "_origin": "semantic",
@@ -3780,7 +3181,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "framework mode committed strategy",
       "_origin": "semantic",
@@ -3795,7 +3196,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 25,
+      "community": 29,
       "community_name": "React Router: Route Configuration",
       "norm_label": "route configuration (app/routes.ts)",
       "_origin": "semantic",
@@ -3810,7 +3211,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 30,
       "community_name": "React Router: Route Modules",
       "norm_label": "route modules",
       "_origin": "semantic",
@@ -3825,7 +3226,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 25,
       "community_name": "React Router: Data & Mutations",
       "norm_label": "data and mutations (loader/action)",
       "_origin": "semantic",
@@ -3840,7 +3241,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 22,
+      "community": 26,
       "community_name": "React Router: Forms & Pending UI",
       "norm_label": "forms, fetchers, and pending ui",
       "_origin": "semantic",
@@ -3855,7 +3256,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 32,
       "community_name": "React Router: Type Safety",
       "norm_label": "type safety (route.* generated types)",
       "_origin": "semantic",
@@ -3870,7 +3271,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 28,
       "community_name": "React Router: Rendering Strategy",
       "norm_label": "rendering strategy (ssr/spa/pre-render)",
       "_origin": "semantic",
@@ -3885,7 +3286,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
+      "community": 27,
       "community_name": "React Router: Middleware & Sessions",
       "norm_label": "middleware, sessions, and auth",
       "_origin": "semantic",
@@ -3900,7 +3301,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 31,
       "community_name": "React Router: RSC Framework",
       "norm_label": "rsc framework (future path)",
       "_origin": "semantic",
@@ -3915,7 +3316,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "dependabot: npm root updates",
       "_origin": "semantic",
@@ -3930,7 +3331,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: infra/ npm updates",
       "_origin": "semantic",
@@ -3945,7 +3346,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 34,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: github actions updates",
       "_origin": "semantic",
@@ -3960,7 +3361,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 40,
       "community_name": "Contributing Prerequisites",
       "norm_label": "prerequisites (.nvmrc, pnpm)",
       "_origin": "semantic",
@@ -3975,7 +3376,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "setup steps",
       "_origin": "semantic",
@@ -3990,7 +3391,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
+      "community": 37,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "checks ci runs on every pr",
       "_origin": "semantic",
@@ -4005,7 +3406,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 39,
       "community_name": "Pre-commit Hook Config",
       "norm_label": "pre-commit hooks setup",
       "_origin": "semantic",
@@ -4020,7 +3421,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 36,
       "community_name": "Testing & Accessibility Conventions",
       "norm_label": "accessibility requirement",
       "_origin": "semantic",
@@ -4035,7 +3436,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 38,
       "community_name": "Content & Copy Guidelines",
       "norm_label": "content & copy note",
       "_origin": "semantic",
@@ -4050,7 +3451,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "fork pr install failure (missing github pat)",
       "_origin": "semantic",
@@ -4065,7 +3466,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 42,
+      "community": 45,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "pre-rendering disabled \u2014 security headers gap",
       "_origin": "semantic",
@@ -4080,7 +3481,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 43,
+      "community": 46,
       "community_name": "Open Source Licensing",
       "norm_label": "license scope (mit excludes brand/fonts)",
       "_origin": "semantic",
@@ -4095,7 +3496,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "trademarks and brand assets",
       "_origin": "semantic",
@@ -4110,7 +3511,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 44,
+      "community": 47,
       "community_name": "Third-Party Fonts Notice",
       "norm_label": "third-party fonts (sil ofl 1.1)",
       "_origin": "semantic",
@@ -4125,7 +3526,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "branchleft website overview",
       "_origin": "semantic",
@@ -4140,26 +3541,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "brand source assets (logo/wordmark)",
       "_origin": "semantic",
       "id": "brand_readme_brand_source_assets"
-    },
-    {
-      "label": "production stack config (Pulumi.production.yaml)",
-      "file_type": "document",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 18,
-      "community_name": "React Router Skill & Dependabot Config",
-      "norm_label": "production stack config (pulumi.production.yaml)",
-      "_origin": "semantic",
-      "id": "infra_pulumi_production_stack_config"
     },
     {
       "label": "branchleft-website-infra project (Pulumi.yaml)",
@@ -4170,7 +3556,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "branchleft-website-infra project (pulumi.yaml)",
       "_origin": "semantic",
@@ -4185,7 +3571,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "pnpm-workspace allowbuilds",
       "_origin": "semantic",
@@ -4200,7 +3586,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "minimumreleaseageexclude (@branchleft/*)",
       "_origin": "semantic",
@@ -4215,7 +3601,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "robots.txt rules",
       "_origin": "semantic",
@@ -4230,7 +3616,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft logo (lightning-bolt mark)",
       "_origin": "semantic",
@@ -4245,7 +3631,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft wordmark (icon + \"branchleft\" text lockup)",
       "_origin": "semantic",
@@ -4260,7 +3646,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "favicon set (32/192/512px + apple-touch-icon, same lightning-bolt mark)",
       "_origin": "semantic",
@@ -4275,7 +3661,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "social share card (og-image: logo + wordmark on black)",
       "_origin": "semantic",
@@ -4290,51 +3676,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 59,
       "community_name": "Team Headshot",
       "norm_label": "person headshot (portrait, 3 sizes x jpg/webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_480_headshot"
-    },
-    {
-      "label": "kms.ts",
-      "file_type": "code",
-      "source_file": "infra/kms.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 0,
-      "norm_label": "kms.ts",
-      "id": "infra_kms"
-    },
-    {
-      "label": "pulumiKeyRing",
-      "file_type": "code",
-      "source_file": "infra/kms.ts",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 0,
-      "norm_label": "pulumikeyring",
-      "id": "infra_kms_pulumikeyring"
-    },
-    {
-      "label": "pulumiSecretsKey",
-      "file_type": "code",
-      "source_file": "infra/kms.ts",
-      "source_location": "L26",
-      "_origin": "ast",
-      "community": 0,
-      "norm_label": "pulumisecretskey",
-      "id": "infra_kms_pulumisecretskey"
-    },
-    {
-      "label": "NOTE: this key's IAM bindings (cryptoKeyEncrypterDecrypter for the",
-      "file_type": "rationale",
-      "source_file": "infra/kms.ts",
-      "source_location": "L36",
-      "_origin": "ast",
-      "community": 0,
-      "norm_label": "note: this key's iam bindings (cryptokeyencrypterdecrypter for the",
-      "id": "infra_kms_rationale_36"
     },
     {
       "label": "monitoring.ts",
@@ -4412,7 +3758,7 @@
       "source_file": "infra/package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "infra/package.json",
       "id": "infra_package"
     },
@@ -4422,7 +3768,7 @@
       "source_file": "infra/package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "name",
       "id": "infra_package_name"
     },
@@ -4432,7 +3778,7 @@
       "source_file": "infra/package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "private",
       "id": "infra_package_private"
     },
@@ -4442,7 +3788,7 @@
       "source_file": "infra/package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "main",
       "id": "infra_package_main"
     },
@@ -4452,7 +3798,7 @@
       "source_file": "infra/package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "dependencies",
       "id": "infra_package_dependencies"
     },
@@ -4462,7 +3808,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@pulumi/pulumi",
       "id": "infra_package_dependencies_pulumi_pulumi"
     },
@@ -4472,7 +3818,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@pulumi/pulumi",
       "id": "pulumi_pulumi"
     },
@@ -4482,7 +3828,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@pulumi/gcp",
       "id": "infra_package_dependencies_pulumi_gcp"
     },
@@ -4492,7 +3838,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@pulumi/gcp",
       "id": "pulumi_gcp"
     },
@@ -4502,7 +3848,7 @@
       "source_file": "infra/package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "devdependencies",
       "id": "infra_package_devdependencies"
     },
@@ -4512,7 +3858,7 @@
       "source_file": "infra/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "typescript",
       "id": "infra_package_devdependencies_typescript"
     },
@@ -4522,7 +3868,7 @@
       "source_file": "infra/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "typescript",
       "id": "typescript"
     },
@@ -4532,7 +3878,7 @@
       "source_file": "infra/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@types/node",
       "id": "infra_package_devdependencies_types_node"
     },
@@ -4542,36 +3888,16 @@
       "source_file": "infra/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "@types/node",
       "id": "types_node"
-    },
-    {
-      "label": "CLAUDE.md",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": null,
-      "community": 31,
-      "norm_label": "claude.md",
-      "_origin": "semantic",
-      "id": "claude"
-    },
-    {
-      "label": "Known Issues",
-      "file_type": "document",
-      "source_file": "infra/KNOWN_ISSUES.md",
-      "source_location": null,
-      "community": 41,
-      "norm_label": "known issues",
-      "_origin": "semantic",
-      "id": "infra_known_issues"
     },
     {
       "label": "Apple Touch Icon",
       "file_type": "image",
       "source_file": "public/apple-touch-icon.png",
       "source_location": null,
-      "community": 46,
+      "community": 52,
       "norm_label": "apple touch icon",
       "_origin": "semantic",
       "id": "public_apple_touch_icon"
@@ -4581,7 +3907,7 @@
       "file_type": "image",
       "source_file": "public/favicon-192.png",
       "source_location": null,
-      "community": 47,
+      "community": 53,
       "norm_label": "favicon 192",
       "_origin": "semantic",
       "id": "public_favicon_192"
@@ -4591,7 +3917,7 @@
       "file_type": "image",
       "source_file": "public/favicon-512.png",
       "source_location": null,
-      "community": 48,
+      "community": 54,
       "norm_label": "favicon 512",
       "_origin": "semantic",
       "id": "public_favicon_512"
@@ -4601,7 +3927,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.jpg",
       "source_location": null,
-      "community": 49,
+      "community": 55,
       "norm_label": "headshot 160px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_jpg"
@@ -4611,7 +3937,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.webp",
       "source_location": null,
-      "community": 50,
+      "community": 56,
       "norm_label": "headshot 160px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_webp"
@@ -4621,7 +3947,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.jpg",
       "source_location": null,
-      "community": 51,
+      "community": 57,
       "norm_label": "headshot 320px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_jpg"
@@ -4631,7 +3957,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.webp",
       "source_location": null,
-      "community": 52,
+      "community": 58,
       "norm_label": "headshot 320px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_webp"
@@ -4641,38 +3967,764 @@
       "file_type": "image",
       "source_file": "public/people/headshot-480.webp",
       "source_location": null,
-      "community": 54,
+      "community": 60,
       "norm_label": "headshot 480px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_480_webp"
     },
     {
-      "label": "Graphify Workflow",
+      "label": "CodeQL Workflow",
       "file_type": "code",
-      "source_file": ".github/workflows/graphify.yml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 40,
-      "norm_label": "graphify workflow",
+      "source_file": ".github/workflows/codeql.yml",
+      "community": 43,
+      "norm_label": "codeql workflow",
       "_origin": "semantic",
-      "id": "github_workflows_graphify_workflow"
+      "id": "github_workflows_codeql"
     },
     {
-      "label": ".pre-commit-config.yaml",
+      "label": "sendContactEmail.server.test.ts",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "sendcontactemail.server.test.ts",
+      "id": "app_lib_sendcontactemail_server_test"
+    },
+    {
+      "label": "{ sendMail, createTransport }",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "{ sendmail, createtransport }",
+      "id": "app_lib_sendcontactemail_server_test_sendmail_createtransport"
+    },
+    {
+      "label": "ORIGINAL_ENV",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "original_env",
+      "id": "app_lib_sendcontactemail_server_test_original_env"
+    },
+    {
+      "label": "setEnv()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "setenv()",
+      "id": "app_lib_sendcontactemail_server_test_setenv"
+    },
+    {
+      "label": "VALID_ENV",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L37",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "valid_env",
+      "id": "app_lib_sendcontactemail_server_test_valid_env"
+    },
+    {
+      "label": "sendContactEmail.server.ts",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "sendcontactemail.server.ts",
+      "id": "app_lib_sendcontactemail_server"
+    },
+    {
+      "label": "ContactSubmission",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "contactsubmission",
+      "id": "app_lib_sendcontactemail_server_contactsubmission"
+    },
+    {
+      "label": "getTransport()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "gettransport()",
+      "id": "app_lib_sendcontactemail_server_gettransport"
+    },
+    {
+      "label": "escapeHtml()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "escapehtml()",
+      "id": "app_lib_sendcontactemail_server_escapehtml"
+    },
+    {
+      "label": "buildText()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "buildtext()",
+      "id": "app_lib_sendcontactemail_server_buildtext"
+    },
+    {
+      "label": "buildHtml()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L60",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "buildhtml()",
+      "id": "app_lib_sendcontactemail_server_buildhtml"
+    },
+    {
+      "label": "sendContactEmail()",
+      "file_type": "code",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L90",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "sendcontactemail()",
+      "id": "app_lib_sendcontactemail_server_sendcontactemail"
+    },
+    {
+      "label": "cloudRun.ts",
+      "file_type": "code",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "cloudrun.ts",
+      "id": "infra_cloudrun"
+    },
+    {
+      "label": "serviceName",
+      "file_type": "code",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "servicename",
+      "id": "infra_cloudrun_servicename"
+    },
+    {
+      "label": "service",
+      "file_type": "code",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "service",
+      "id": "infra_cloudrun_service"
+    },
+    {
+      "label": "config.ts",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "config.ts",
+      "id": "infra_config"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "config",
+      "id": "infra_config_config"
+    },
+    {
+      "label": "gcpConfig",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "gcpconfig",
+      "id": "infra_config_gcpconfig"
+    },
+    {
+      "label": "projectId",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "projectid",
+      "id": "infra_config_projectid"
+    },
+    {
+      "label": "region",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "region",
+      "id": "infra_config_region"
+    },
+    {
+      "label": "imageTag",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "imagetag",
+      "id": "infra_config_imagetag"
+    },
+    {
+      "label": "artifactRegistryRepoId",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "artifactregistryrepoid",
+      "id": "infra_config_artifactregistryrepoid"
+    },
+    {
+      "label": "imageUrl",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "imageurl",
+      "id": "infra_config_imageurl"
+    },
+    {
+      "label": "githubRepo",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "githubrepo",
+      "id": "infra_config_githubrepo"
+    },
+    {
+      "label": "contactSmtpHost",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "contactsmtphost",
+      "id": "infra_config_contactsmtphost"
+    },
+    {
+      "label": "contactSmtpPort",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "contactsmtpport",
+      "id": "infra_config_contactsmtpport"
+    },
+    {
+      "label": "project",
+      "file_type": "code",
+      "source_file": "infra/config.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "project",
+      "id": "infra_config_project"
+    },
+    {
+      "label": "kms.ts",
+      "file_type": "code",
+      "source_file": "infra/kms.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "kms.ts",
+      "id": "infra_kms"
+    },
+    {
+      "label": "pulumiKeyRing",
+      "file_type": "code",
+      "source_file": "infra/kms.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "pulumikeyring",
+      "id": "infra_kms_pulumikeyring"
+    },
+    {
+      "label": "pulumiSecretsKey",
+      "file_type": "code",
+      "source_file": "infra/kms.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "pulumisecretskey",
+      "id": "infra_kms_pulumisecretskey"
+    },
+    {
+      "label": "NOTE: this key's IAM bindings (cryptoKeyEncrypterDecrypter for the",
+      "file_type": "rationale",
+      "source_file": "infra/kms.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "note: this key's iam bindings (cryptokeyencrypterdecrypter for the",
+      "id": "infra_kms_rationale_36"
+    },
+    {
+      "label": "secrets.ts",
+      "file_type": "code",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "secrets.ts",
+      "id": "infra_secrets"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "config",
+      "id": "infra_secrets_config"
+    },
+    {
+      "label": "secretWithValue()",
+      "file_type": "code",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L7",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "secretwithvalue()",
+      "id": "infra_secrets_secretwithvalue"
+    },
+    {
+      "label": "contactSmtpUser",
+      "file_type": "code",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "contactsmtpuser",
+      "id": "infra_secrets_contactsmtpuser"
+    },
+    {
+      "label": "contactSmtpPassword",
+      "file_type": "code",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "contactsmtppassword",
+      "id": "infra_secrets_contactsmtppassword"
+    },
+    {
+      "label": "serviceAccounts.ts",
+      "file_type": "code",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "serviceaccounts.ts",
+      "id": "infra_serviceaccounts"
+    },
+    {
+      "label": "cloudRunRuntimeSa",
+      "file_type": "code",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "cloudrunruntimesa",
+      "id": "infra_serviceaccounts_cloudrunruntimesa"
+    },
+    {
+      "label": "githubActionsDeployerSa",
+      "file_type": "code",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "githubactionsdeployersa",
+      "id": "infra_serviceaccounts_githubactionsdeployersa"
+    },
+    {
+      "label": "contact.spec.ts",
+      "file_type": "code",
+      "source_file": "tests/contact.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 12,
+      "norm_label": "contact.spec.ts",
+      "id": "tests_contact_spec"
+    },
+    {
+      "label": "no-js.spec.ts",
+      "file_type": "code",
+      "source_file": "tests/no-js.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 65,
+      "norm_label": "no-js.spec.ts",
+      "id": "tests_no_js_spec"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "community": 35,
+      "norm_label": "claude.md",
+      "_origin": "semantic",
+      "id": "claude_md"
+    },
+    {
+      "label": "Known Issues",
+      "file_type": "document",
+      "source_file": "infra/KNOWN_ISSUES.md",
+      "community": 23,
+      "norm_label": "known issues",
+      "_origin": "semantic",
+      "id": "infra_known_issues"
+    },
+    {
+      "label": "Pulumi Production Config",
+      "file_type": "code",
+      "source_file": "infra/Pulumi.production.yaml",
+      "community": 44,
+      "norm_label": "pulumi production config",
+      "_origin": "semantic",
+      "id": "infra_pulumi_production"
+    },
+    {
+      "label": "GitHub Actions Deployer SA",
+      "file_type": "concept",
+      "source_file": "infra/KNOWN_ISSUES.md",
+      "community": 23,
+      "norm_label": "github actions deployer sa",
+      "_origin": "semantic",
+      "id": "github_actions_deployer"
+    },
+    {
+      "label": "privacy.tsx",
+      "file_type": "code",
+      "source_file": "app/routes/privacy.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "privacy.tsx",
+      "id": "app_routes_privacy"
+    },
+    {
+      "label": "meta()",
+      "file_type": "code",
+      "source_file": "app/routes/privacy.tsx",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "meta()",
+      "id": "app_routes_privacy_meta"
+    },
+    {
+      "label": "Privacy()",
+      "file_type": "code",
+      "source_file": "app/routes/privacy.tsx",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "privacy()",
+      "id": "app_routes_privacy_privacy"
+    },
+    {
+      "label": "CI Workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 42,
+      "norm_label": "ci workflow",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_yml"
+    },
+    {
+      "label": "checks job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 15,
+      "norm_label": "checks job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_yml_checks"
+    },
+    {
+      "label": "e2e job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 15,
+      "norm_label": "e2e job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_yml_e2e"
+    },
+    {
+      "label": "pulumi-preview job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 15,
+      "norm_label": "pulumi-preview job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_yml_pulumi_preview"
+    },
+    {
+      "label": "deploy job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 15,
+      "norm_label": "deploy job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_yml_deploy"
+    },
+    {
+      "label": "Pulumi State (GCS)",
+      "file_type": "concept",
+      "source_file": ".github/workflows/ci.yml",
+      "community": 15,
+      "norm_label": "pulumi state (gcs)",
+      "_origin": "semantic",
+      "id": "pulumi_state"
+    },
+    {
+      "label": "infra/tsconfig.json",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "infra/tsconfig.json",
+      "id": "infra_tsconfig"
+    },
+    {
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "compileroptions",
+      "id": "infra_tsconfig_compileroptions"
+    },
+    {
+      "label": "target",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "target",
+      "id": "infra_tsconfig_compileroptions_target"
+    },
+    {
+      "label": "module",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "module",
+      "id": "infra_tsconfig_compileroptions_module"
+    },
+    {
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "moduleresolution",
+      "id": "infra_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "lib",
+      "id": "infra_tsconfig_compileroptions_lib"
+    },
+    {
+      "label": "ES2022",
+      "file_type": "concept",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "es2022",
+      "id": "ref_es2022"
+    },
+    {
+      "label": "strict",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "strict",
+      "id": "infra_tsconfig_compileroptions_strict"
+    },
+    {
+      "label": "outDir",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "outdir",
+      "id": "infra_tsconfig_compileroptions_outdir"
+    },
+    {
+      "label": "sourceMap",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "sourcemap",
+      "id": "infra_tsconfig_compileroptions_sourcemap"
+    },
+    {
+      "label": "experimentalDecorators",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "experimentaldecorators",
+      "id": "infra_tsconfig_compileroptions_experimentaldecorators"
+    },
+    {
+      "label": "pretty",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "pretty",
+      "id": "infra_tsconfig_compileroptions_pretty"
+    },
+    {
+      "label": "noFallthroughCasesInSwitch",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "nofallthroughcasesinswitch",
+      "id": "infra_tsconfig_compileroptions_nofallthroughcasesinswitch"
+    },
+    {
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "skiplibcheck",
+      "id": "infra_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "label": "include",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "include",
+      "id": "infra_tsconfig_include"
+    },
+    {
+      "label": "**/*.ts",
+      "file_type": "concept",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "**/*.ts",
+      "id": "ref_ts"
+    },
+    {
+      "label": "exclude",
+      "file_type": "code",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "exclude",
+      "id": "infra_tsconfig_exclude"
+    },
+    {
+      "label": "node_modules",
+      "file_type": "concept",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "node_modules",
+      "id": "ref_node_modules"
+    },
+    {
+      "label": "bin",
+      "file_type": "concept",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "bin",
+      "id": "ref_bin"
+    },
+    {
+      "label": "pre-commit-hooks",
       "file_type": "code",
       "source_file": ".pre-commit-config.yaml",
       "source_location": null,
-      "source_url": null,
+      "source_url": "https://github.com/pre-commit/pre-commit-hooks",
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
-      "norm_label": ".pre-commit-config.yaml",
+      "community": 13,
+      "norm_label": "pre-commit-hooks",
       "_origin": "semantic",
-      "id": "pre_commit_config_yaml"
+      "id": "pre_commit_config_pre_commit_hooks"
     },
     {
       "label": "trailing-whitespace",
@@ -4683,10 +4735,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 13,
       "norm_label": "trailing-whitespace",
       "_origin": "semantic",
-      "id": "pre_commit_hooks_trailing_whitespace"
+      "id": "pre_commit_config_trailing_whitespace"
     },
     {
       "label": "end-of-file-fixer",
@@ -4697,10 +4749,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 13,
       "norm_label": "end-of-file-fixer",
       "_origin": "semantic",
-      "id": "pre_commit_hooks_end_of_file_fixer"
+      "id": "pre_commit_config_end_of_file_fixer"
     },
     {
       "label": "check-yaml",
@@ -4711,10 +4763,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 13,
       "norm_label": "check-yaml",
       "_origin": "semantic",
-      "id": "pre_commit_hooks_check_yaml"
+      "id": "pre_commit_config_check_yaml"
     },
     {
       "label": "check-added-large-files",
@@ -4725,10 +4777,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 13,
       "norm_label": "check-added-large-files",
       "_origin": "semantic",
-      "id": "pre_commit_hooks_check_added_large_files"
+      "id": "pre_commit_config_check_added_large_files"
     },
     {
       "label": "check-merge-conflict",
@@ -4739,10 +4791,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 13,
       "norm_label": "check-merge-conflict",
       "_origin": "semantic",
-      "id": "pre_commit_hooks_check_merge_conflict"
+      "id": "pre_commit_config_check_merge_conflict"
     },
     {
       "label": "prettier",
@@ -4753,10 +4805,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 50,
       "norm_label": "prettier",
       "_origin": "semantic",
-      "id": "local_prettier"
+      "id": "pre_commit_config_prettier"
     },
     {
       "label": "eslint",
@@ -4767,10 +4819,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 49,
       "norm_label": "eslint",
       "_origin": "semantic",
-      "id": "local_eslint"
+      "id": "pre_commit_config_eslint"
     },
     {
       "label": "vitest",
@@ -4781,74 +4833,36 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 51,
       "norm_label": "vitest",
       "_origin": "semantic",
-      "id": "local_vitest"
+      "id": "pre_commit_config_vitest"
     },
     {
-      "label": "CI Workflow",
+      "label": "Graphify Workflow",
       "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci",
-      "community": 38,
-      "norm_label": "ci workflow"
+      "source_file": ".github/workflows/graphify.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_graphify_workflow",
+      "community": 22,
+      "norm_label": "graphify workflow"
     },
     {
-      "label": "Checks Job",
+      "label": "Reusable Graphify Workflow",
       "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci_checks",
-      "community": 12,
-      "norm_label": "checks job"
-    },
-    {
-      "label": "E2E Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci_e2e",
-      "community": 12,
-      "norm_label": "e2e job"
-    },
-    {
-      "label": "Pulumi Preview Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci_pulumi_preview",
-      "community": 12,
-      "norm_label": "pulumi preview job"
-    },
-    {
-      "label": "Deploy Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci_deploy",
-      "community": 12,
-      "norm_label": "deploy job"
-    },
-    {
-      "label": "CodeQL Workflow",
-      "file_type": "code",
-      "source_file": ".github/workflows/codeql.yml",
-      "id": "github_workflows_codeql",
-      "community": 39,
-      "norm_label": "codeql workflow"
-    },
-    {
-      "label": "Pulumi State (GCS)",
-      "file_type": "concept",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "pulumi_state",
-      "community": 12,
-      "norm_label": "pulumi state (gcs)"
-    },
-    {
-      "label": "GCP Artifact Registry",
-      "file_type": "concept",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "gcp_artifact_registry",
-      "community": 12,
-      "norm_label": "gcp artifact registry"
+      "source_file": "branchLeft/github-workflows/.github/workflows/graphify.yml@v1.0.6",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_github_workflows_graphify_workflow",
+      "community": 22,
+      "norm_label": "reusable graphify workflow"
     }
   ],
   "links": [
@@ -6079,237 +6093,6 @@
       "target": "app_lib_security_headers_buildsecurityheaders"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_test",
-      "target": "app_lib_sendcontactemail_server"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_test",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_test",
-      "target": "app_lib_sendcontactemail_server_test_original_env"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_test",
-      "target": "app_lib_sendcontactemail_server_test_sendmail_createtransport"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.test.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_test",
-      "target": "app_lib_sendcontactemail_server_test_setenv"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L51",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_buildhtml"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L37",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_buildtext"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_contactsubmission"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L28",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_escapehtml"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_gettransport"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L81",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/contact.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_contact",
-      "target": "app_lib_sendcontactemail_server"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/contact.test.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_contact_test",
-      "target": "app_lib_sendcontactemail_server"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_sendcontactemail",
-      "target": "app_lib_sendcontactemail_server_gettransport"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L52",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_buildhtml",
-      "target": "app_lib_sendcontactemail_server_escapehtml"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L88",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_sendcontactemail",
-      "target": "app_lib_sendcontactemail_server_buildtext"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "app/lib/sendContactEmail.server.ts",
-      "source_location": "L89",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_lib_sendcontactemail_server_sendcontactemail",
-      "target": "app_lib_sendcontactemail_server_buildhtml"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/contact.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_contact",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/routes/contact.tsx",
-      "source_location": "L149",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_routes_contact_action",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/contact.test.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_contact_test",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/lib/social-links.ts",
@@ -6552,6 +6335,30 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/routes/contact.test.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_contact_test",
+      "target": "app_lib_sendcontactemail_server"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/contact.test.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_contact_test",
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/contact.test.ts",
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
@@ -6698,6 +6505,30 @@
       "confidence_score": 1.0,
       "source": "app_routes_contact_test",
       "target": "app_routes_contact_test_nextip"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/contact.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_contact",
+      "target": "app_lib_sendcontactemail_server"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/contact.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_contact",
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
     },
     {
       "relation": "contains",
@@ -6969,6 +6800,18 @@
       "target": "app_routes_contact_formstring"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/routes/contact.tsx",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_routes_contact_action",
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/routes/home.tsx",
@@ -7000,28 +6843,6 @@
       "confidence_score": 1.0,
       "source": "app_routes_logo_svg",
       "target": "app_routes_logo_svg_loader"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/privacy.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_privacy",
-      "target": "app_routes_privacy_meta"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/routes/privacy.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "app_routes_privacy",
-      "target": "app_routes_privacy_privacy"
     },
     {
       "relation": "contains",
@@ -7349,124 +7170,6 @@
       "target": "infra_artifactregistry_repository"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_cloudrun_service"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_cloudrun_servicename"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_config"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_config_imageurl"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_config_region"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_secrets"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_secrets_gmailapppassword"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_secrets_gmailuser"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_serviceaccounts"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/cloudRun.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_cloudrun",
-      "target": "infra_serviceaccounts_cloudrunruntimesa"
-    },
-    {
       "relation": "re_exports",
       "context": "export",
       "confidence": "EXTRACTED",
@@ -7479,16 +7182,16 @@
       "target": "infra_cloudrun"
     },
     {
-      "relation": "imports_from",
+      "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/monitoring.ts",
-      "source_location": "L4",
+      "source_file": "infra/index.ts",
+      "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_monitoring",
-      "target": "infra_cloudrun"
+      "source": "infra_index",
+      "target": "infra_cloudrun_service"
     },
     {
       "relation": "imports",
@@ -7501,129 +7204,6 @@
       "confidence_score": 1.0,
       "source": "infra_index",
       "target": "infra_cloudrun_servicename"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_index",
-      "target": "infra_cloudrun_service"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/monitoring.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_monitoring",
-      "target": "infra_cloudrun_service"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_artifactregistryrepoid"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_config"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_gcpconfig"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L23",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_githubrepo"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_imagetag"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_imageurl"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_project"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_projectid"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/config.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_config",
-      "target": "infra_config_region"
     },
     {
       "relation": "re_exports",
@@ -7638,114 +7218,6 @@
       "target": "infra_config"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/kms.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_kms",
-      "target": "infra_config"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/monitoring.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_monitoring",
-      "target": "infra_config"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_config"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/workloadIdentity.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_workloadidentity",
-      "target": "infra_config"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_index",
-      "target": "infra_config_projectid"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/monitoring.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_monitoring",
-      "target": "infra_config_projectid"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_config_projectid"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_index",
-      "target": "infra_config_region"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/kms.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_kms",
-      "target": "infra_config_region"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -7761,13 +7233,25 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/workloadIdentity.ts",
-      "source_location": "L3",
+      "source_file": "infra/index.ts",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_workloadidentity",
-      "target": "infra_config_githubrepo"
+      "source": "infra_index",
+      "target": "infra_config_projectid"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_index",
+      "target": "infra_config_region"
     },
     {
       "relation": "contains",
@@ -7987,106 +7471,28 @@
       "target": "infra_scripts_assert_no_edge_deletes_self_test"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_secrets",
-      "target": "infra_secrets_config"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_secrets",
-      "target": "infra_secrets_gmailapppassword"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_secrets",
-      "target": "infra_secrets_gmailuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/secrets.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_secrets",
-      "target": "infra_secrets_secretwithvalue"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L4",
+      "source_file": "infra/workloadIdentity.ts",
+      "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_secrets"
+      "source": "infra_workloadidentity",
+      "target": "infra_config"
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L4",
+      "source_file": "infra/workloadIdentity.ts",
+      "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_secrets_gmailuser"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_secrets_gmailapppassword"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_serviceaccounts_cloudrunruntimesa"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/serviceAccounts.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_serviceaccounts",
-      "target": "infra_serviceaccounts_githubactionsdeployersa"
+      "source": "infra_workloadidentity",
+      "target": "infra_config_githubrepo"
     },
     {
       "relation": "imports_from",
@@ -8111,173 +7517,6 @@
       "confidence_score": 1.0,
       "source": "infra_workloadidentity",
       "target": "infra_serviceaccounts_githubactionsdeployersa"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig",
-      "target": "infra_tsconfig_compileroptions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig",
-      "target": "infra_tsconfig_include"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_experimentaldecorators"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_lib"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_module"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_moduleresolution"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_nofallthroughcasesinswitch"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_outdir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_pretty"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_skiplibcheck"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_sourcemap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_strict"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions",
-      "target": "infra_tsconfig_compileroptions_target"
-    },
-    {
-      "relation": "extends",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "context": "import",
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_compileroptions_lib",
-      "target": "infra_tsconfig_json_ref_es2022"
-    },
-    {
-      "relation": "extends",
-      "confidence": "EXTRACTED",
-      "source_file": "infra/tsconfig.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "context": "import",
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "infra_tsconfig_include",
-      "target": "ref_ts"
     },
     {
       "relation": "contains",
@@ -10052,17 +9291,6 @@
       "target": "readme_overview"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "infra_pulumi_production_stack_config",
-      "target": "infra_pulumi_project"
-    },
-    {
       "relation": "semantically_similar_to",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
@@ -10107,37 +9335,52 @@
       "target": "brand_branchleft_wordmark_wordmark"
     },
     {
-      "relation": "contains",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/kms.ts",
-      "source_location": "L8",
+      "source_file": "infra/monitoring.ts",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_kms",
-      "target": "infra_kms_pulumikeyring"
+      "source": "infra_monitoring",
+      "target": "infra_cloudrun"
     },
     {
-      "relation": "contains",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/kms.ts",
-      "source_location": "L26",
+      "source_file": "infra/monitoring.ts",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_kms",
-      "target": "infra_kms_pulumisecretskey"
+      "source": "infra_monitoring",
+      "target": "infra_cloudrun_service"
     },
     {
-      "relation": "rationale_for",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "infra/kms.ts",
-      "source_location": "L36",
+      "source_file": "infra/monitoring.ts",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "confidence_score": 1.0,
-      "source": "infra_kms_rationale_36",
-      "target": "infra_kms"
+      "source": "infra_monitoring",
+      "target": "infra_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/monitoring.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_monitoring",
+      "target": "infra_config_projectid"
     },
     {
       "relation": "contains",
@@ -10353,174 +9596,1004 @@
       "target": "types_node"
     },
     {
-      "relation": "references",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L13",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "local_eslint"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server"
     },
     {
-      "relation": "references",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L13",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "local_prettier"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L15",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "local_vitest"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server_test_original_env"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L3",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "pre_commit_hooks_check_added_large_files"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server_test_sendmail_createtransport"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L17",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "pre_commit_hooks_check_merge_conflict"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server_test_setenv"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.test.ts",
+      "source_location": "L37",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "pre_commit_hooks_check_yaml"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_test",
+      "target": "app_lib_sendcontactemail_server_test_valid_env"
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L60",
       "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "pre_commit_hooks_end_of_file_fixer"
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_buildhtml"
     },
     {
-      "relation": "references",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_buildtext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_contactsubmission"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_escapehtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_gettransport"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server",
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_sendcontactemail",
+      "target": "app_lib_sendcontactemail_server_gettransport"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_buildhtml",
+      "target": "app_lib_sendcontactemail_server_escapehtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_sendcontactemail",
+      "target": "app_lib_sendcontactemail_server_buildtext"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/lib/sendContactEmail.server.ts",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_lib_sendcontactemail_server_sendcontactemail",
+      "target": "app_lib_sendcontactemail_server_buildhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_cloudrun_service"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_cloudrun_servicename"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_config_contactsmtphost"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_config_contactsmtpport"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_config_imageurl"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_config_region"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_secrets"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_secrets_contactsmtppassword"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_secrets_contactsmtpuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_serviceaccounts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/cloudRun.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_cloudrun",
+      "target": "infra_serviceaccounts_cloudrunruntimesa"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_artifactregistryrepoid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_config"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_contactsmtphost"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_contactsmtpport"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_gcpconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_githubrepo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_imagetag"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_imageurl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_project"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_projectid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/config.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_config",
+      "target": "infra_config_region"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/kms.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_kms",
+      "target": "infra_config"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_config"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_config_projectid"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/kms.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_kms",
+      "target": "infra_config_region"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/kms.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_kms",
+      "target": "infra_kms_pulumikeyring"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/kms.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_kms",
+      "target": "infra_kms_pulumisecretskey"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/kms.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_kms_rationale_36",
+      "target": "infra_kms"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_secrets",
+      "target": "infra_secrets_config"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_secrets",
+      "target": "infra_secrets_contactsmtppassword"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_secrets",
+      "target": "infra_secrets_contactsmtpuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/secrets.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_secrets",
+      "target": "infra_secrets_secretwithvalue"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_secrets"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_secrets_contactsmtpuser"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_secrets_contactsmtppassword"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_serviceaccounts_cloudrunruntimesa"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/serviceAccounts.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_serviceaccounts",
+      "target": "infra_serviceaccounts_githubactionsdeployersa"
+    },
+    {
+      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
+      "source_file": "infra/KNOWN_ISSUES.md",
       "_origin": "semantic",
-      "source": "pre_commit_config_yaml",
-      "target": "pre_commit_hooks_trailing_whitespace"
+      "source": "infra_known_issues",
+      "target": "github_actions_deployer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/privacy.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_privacy",
+      "target": "app_routes_privacy_meta"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/routes/privacy.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "app_routes_privacy",
+      "target": "app_routes_privacy_privacy"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_deploy",
-      "target": "github_workflows_ci_checks"
+      "_origin": "semantic",
+      "source": "github_workflows_ci_yml_deploy",
+      "target": "github_workflows_ci_yml_checks"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_pulumi_preview",
-      "target": "github_workflows_ci_checks"
+      "_origin": "semantic",
+      "source": "github_workflows_ci_yml_pulumi_preview",
+      "target": "github_workflows_ci_yml_checks"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_deploy",
-      "target": "github_workflows_ci_e2e"
+      "_origin": "semantic",
+      "source": "github_workflows_ci_yml_deploy",
+      "target": "github_workflows_ci_yml_e2e"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_pulumi_preview",
-      "target": "github_workflows_ci_e2e"
+      "_origin": "semantic",
+      "source": "github_workflows_ci_yml_pulumi_preview",
+      "target": "github_workflows_ci_yml_e2e"
     },
     {
-      "relation": "references",
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_deploy",
-      "target": "gcp_artifact_registry"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_deploy",
+      "_origin": "semantic",
+      "source": "github_workflows_ci_yml_deploy",
       "target": "pulumi_state"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig",
+      "target": "infra_tsconfig_compileroptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig",
+      "target": "infra_tsconfig_exclude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig",
+      "target": "infra_tsconfig_include"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_experimentaldecorators"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_lib"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_module"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_nofallthroughcasesinswitch"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_outdir"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_pretty"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_sourcemap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_strict"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions",
+      "target": "infra_tsconfig_compileroptions_target"
+    },
+    {
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_compileroptions_lib",
+      "target": "ref_es2022"
+    },
+    {
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_include",
+      "target": "ref_ts"
+    },
+    {
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_exclude",
+      "target": "ref_bin"
+    },
+    {
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/tsconfig.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "infra_tsconfig_exclude",
+      "target": "ref_node_modules"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "semantic",
+      "source": "pre_commit_config_pre_commit_hooks",
+      "target": "pre_commit_config_check_added_large_files"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "semantic",
+      "source": "pre_commit_config_pre_commit_hooks",
+      "target": "pre_commit_config_check_merge_conflict"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "semantic",
+      "source": "pre_commit_config_pre_commit_hooks",
+      "target": "pre_commit_config_check_yaml"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "semantic",
+      "source": "pre_commit_config_pre_commit_hooks",
+      "target": "pre_commit_config_end_of_file_fixer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".pre-commit-config.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "semantic",
+      "source": "pre_commit_config_pre_commit_hooks",
+      "target": "pre_commit_config_trailing_whitespace"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/graphify.yml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "github_workflows_graphify_workflow",
+      "target": "branchleft_github_workflows_graphify_workflow"
     }
   ],
   "hyperedges": [
     {
-      "id": "ci_cd_pipeline",
-      "label": "CI/CD Pipeline",
+      "id": "local_pnpm_hooks",
+      "label": "Local PNPM Hooks",
       "nodes": [
-        "github_workflows_ci_checks",
-        "github_workflows_ci_e2e",
-        "github_workflows_ci_pulumi_preview",
-        "github_workflows_ci_deploy"
+        "pre_commit_config_prettier",
+        "pre_commit_config_eslint",
+        "pre_commit_config_vitest"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml"
+      "source_file": ".pre-commit-config.yaml"
     },
     {
-      "id": "pre_commit_pipeline",
-      "label": "Pre-commit Quality Pipeline",
+      "id": "ci_cd_pipeline",
+      "label": "CI/CD Pipeline Flow",
       "nodes": [
-        "pre_commit_hooks_trailing_whitespace",
-        "pre_commit_hooks_end_of_file_fixer",
-        "pre_commit_hooks_check_yaml",
-        "pre_commit_hooks_check_added_large_files",
-        "pre_commit_hooks_check_merge_conflict",
-        "local_prettier",
-        "local_eslint",
-        "local_vitest"
+        "github_workflows_ci_yml_checks",
+        "github_workflows_ci_yml_e2e",
+        "github_workflows_ci_yml_pulumi_preview",
+        "github_workflows_ci_yml_deploy"
       ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.9,
-      "source_file": ".pre-commit-config.yaml"
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml"
     },
     {
       "id": "prerendering_safety_constraint",
@@ -10536,5 +10609,5 @@
       "source_file": "KNOWN_ISSUES.md"
     }
   ],
-  "built_at_commit": "0b6a3afe7eb254146d7a3d690317cb7beba164c5"
+  "built_at_commit": "3336460d86b3302e8e1732173c3c2b5f6d725bc4"
 }
