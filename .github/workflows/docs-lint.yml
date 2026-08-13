@@ -1,0 +1,10 @@
+name: docs-lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  docs-lint:
+    uses: branchLeft/github-workflows/.github/workflows/docs-lint.yml@v1.0.6
