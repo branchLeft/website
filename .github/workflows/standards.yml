@@ -1,0 +1,13 @@
+name: Standards
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  standards:
+    uses: branchLeft/standards/.github/workflows/standards.yml@v0.3.1
