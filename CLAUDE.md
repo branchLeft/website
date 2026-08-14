@@ -31,6 +31,7 @@ pnpm typecheck           # react-router typegen + tsc
 pnpm test:unit --run     # single Vitest pass
 pnpm lint                # eslint --fix
 pnpm format              # prettier --write
+pnpm format:check        # prettier --check, no writes
 pnpm dev                 # React Router dev server (HMR) — async terminal only
 pnpm start               # serve production build — async terminal only
 ```
