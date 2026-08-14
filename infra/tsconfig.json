@@ -1,17 +1,10 @@
 {
+  "extends": ["@branchleft/tsconfig/strict-1.json", "@branchleft/tsconfig/pulumi.json"],
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
-    "strict": true,
-    "outDir": "bin",
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "pretty": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true
+    "pretty": true
   },
+  // Recursive rather than a flat `*.ts` glob, which matches root-level files
+  // only and drops a subdirectory's sources with no error.
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "bin"]
 }

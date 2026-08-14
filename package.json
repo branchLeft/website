@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.17.0",
+  "prettier": "@branchleft/prettier-config",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
@@ -12,7 +13,8 @@
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
     "lint": "eslint app --ext .ts,.tsx --fix",
-    "format": "prettier --write .",
+    "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore --ignore-path node_modules/@branchleft/prettier-config/prettierignore",
+    "format:check": "prettier --check . --ignore-path .gitignore --ignore-path .prettierignore --ignore-path node_modules/@branchleft/prettier-config/prettierignore",
     "prepare": "[ \"$CI\" = \"true\" ] || pre-commit install"
   },
   "dependencies": {
@@ -29,6 +31,8 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
+    "@branchleft/prettier-config": "^0.3.1",
+    "@branchleft/tsconfig": "^0.3.1",
     "@eslint/js": "^9.0.0",
     "@playwright/test": "^1.62.1",
     "@react-router/dev": "^8",
