@@ -55,55 +55,43 @@
       "infra_workloadidentity_workloadidentityprovider"
     ],
     "1": [
-      "axe_core_playwright",
-      "eslint",
-      "eslint_config_prettier",
-      "eslint_js",
-      "eslint_plugin_react",
-      "eslint_plugin_react_hooks",
-      "globals",
-      "jsdom",
-      "package_devdependencies",
-      "package_devdependencies_axe_core_playwright",
-      "package_devdependencies_eslint",
-      "package_devdependencies_eslint_config_prettier",
-      "package_devdependencies_eslint_js",
-      "package_devdependencies_eslint_plugin_react",
-      "package_devdependencies_eslint_plugin_react_hooks",
-      "package_devdependencies_globals",
-      "package_devdependencies_jsdom",
-      "package_devdependencies_playwright_test",
-      "package_devdependencies_prettier",
-      "package_devdependencies_react_router_dev",
-      "package_devdependencies_tailwindcss",
-      "package_devdependencies_tailwindcss_vite",
-      "package_devdependencies_types_nodemailer",
-      "package_devdependencies_types_react",
-      "package_devdependencies_types_react_dom",
-      "package_devdependencies_typescript_eslint",
-      "package_devdependencies_typescript_eslint_eslint_plugin",
-      "package_devdependencies_typescript_eslint_parser",
-      "package_devdependencies_vite",
-      "package_devdependencies_vitejs_plugin_react",
-      "package_devdependencies_vitest",
-      "package_devdependencies_vitest_coverage_v8",
-      "package_devdependencies_vitest_ui",
-      "playwright_test",
-      "prettier",
-      "react_router_dev",
-      "tailwindcss",
-      "tailwindcss_vite",
-      "types_nodemailer",
-      "types_react",
-      "types_react_dom",
-      "typescript_eslint",
-      "typescript_eslint_eslint_plugin",
-      "typescript_eslint_parser",
-      "vite",
-      "vitejs_plugin_react",
-      "vitest",
-      "vitest_coverage_v8",
-      "vitest_ui"
+      "branchleft_components",
+      "framer_motion",
+      "isbot",
+      "lucide_react",
+      "nodemailer",
+      "package",
+      "package_dependencies",
+      "package_dependencies_branchleft_components",
+      "package_dependencies_framer_motion",
+      "package_dependencies_isbot",
+      "package_dependencies_lucide_react",
+      "package_dependencies_nodemailer",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_router",
+      "package_dependencies_react_router_node",
+      "package_dependencies_react_router_serve",
+      "package_name",
+      "package_packagemanager",
+      "package_prettier",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_format",
+      "package_scripts_format_check",
+      "package_scripts_lint",
+      "package_scripts_prepare",
+      "package_scripts_start",
+      "package_scripts_test_e2e",
+      "package_scripts_test_ui",
+      "package_scripts_test_unit",
+      "package_scripts_typecheck",
+      "package_type",
+      "react_dom",
+      "react_router",
+      "react_router_node",
+      "react_router_serve"
     ],
     "2": [
       "app_lib_sendcontactemail_server",
@@ -181,43 +169,19 @@
       "app_routes_terms_terms"
     ],
     "4": [
-      "ref",
-      "ref_client",
-      "ref_dom",
-      "ref_dom_iterable",
-      "ref_infra",
-      "ref_node",
-      "ref_react_router_types",
-      "ref_server",
-      "ref_vite_client",
-      "tsconfig",
-      "tsconfig_compileroptions",
-      "tsconfig_compileroptions_esmoduleinterop",
-      "tsconfig_compileroptions_jsx",
-      "tsconfig_compileroptions_lib",
-      "tsconfig_compileroptions_module",
-      "tsconfig_compileroptions_moduleresolution",
-      "tsconfig_compileroptions_noemit",
-      "tsconfig_compileroptions_paths",
-      "tsconfig_compileroptions_resolvejsonmodule",
-      "tsconfig_compileroptions_rootdirs",
-      "tsconfig_compileroptions_skiplibcheck",
-      "tsconfig_compileroptions_strict",
-      "tsconfig_compileroptions_target",
-      "tsconfig_compileroptions_types",
-      "tsconfig_compileroptions_verbatimmodulesyntax",
-      "tsconfig_exclude",
-      "tsconfig_include",
-      "tsconfig_json_ref_es2022"
-    ],
-    "5": [
-      "app_components_navbar",
-      "app_components_navbar_isdropdown",
-      "app_components_navbar_nav_links",
-      "app_components_navbar_navbar",
-      "app_components_navbar_navdropdownitem",
-      "app_components_navbar_navlinkitem",
-      "app_components_navbar_navlinksitems",
+      "app_components_footer",
+      "app_components_footer_footer",
+      "app_components_icons_blueskyicon",
+      "app_components_icons_blueskyicon_blueskyicon",
+      "app_components_icons_githubicon",
+      "app_components_icons_githubicon_githubicon",
+      "app_components_icons_linkedinicon",
+      "app_components_icons_linkedinicon_linkedinicon",
+      "app_components_icons_mediumicon",
+      "app_components_icons_mediumicon_mediumicon",
+      "app_components_sociallinksitems",
+      "app_components_sociallinksitems_icons",
+      "app_components_sociallinksitems_sociallinksitems",
       "app_entry_server",
       "app_entry_server_handlerequest",
       "app_entry_server_streamtimeout",
@@ -225,6 +189,8 @@
       "app_lib_security_headers_buildcontentsecuritypolicy",
       "app_lib_security_headers_buildsecurityheaders",
       "app_lib_security_headers_permissions_policy",
+      "app_lib_social_links",
+      "app_lib_social_links_social_links",
       "app_root",
       "app_root_app",
       "app_root_errorboundary",
@@ -234,50 +200,44 @@
       "app_root_meta",
       "docref_rfc_9110"
     ],
-    "6": [
-      "branchleft_components",
-      "framer_motion",
-      "isbot",
-      "lucide_react",
-      "nodemailer",
-      "package_dependencies",
-      "package_dependencies_branchleft_components",
-      "package_dependencies_framer_motion",
-      "package_dependencies_isbot",
-      "package_dependencies_lucide_react",
-      "package_dependencies_nodemailer",
-      "package_dependencies_react_dom",
-      "package_dependencies_react_router",
-      "package_dependencies_react_router_node",
-      "package_dependencies_react_router_serve",
-      "react_dom",
-      "react_router",
-      "react_router_node",
-      "react_router_serve"
-    ],
-    "7": [
+    "5": [
       "infra_tsconfig",
       "infra_tsconfig_compileroptions",
-      "infra_tsconfig_compileroptions_experimentaldecorators",
-      "infra_tsconfig_compileroptions_lib",
-      "infra_tsconfig_compileroptions_module",
-      "infra_tsconfig_compileroptions_moduleresolution",
-      "infra_tsconfig_compileroptions_nofallthroughcasesinswitch",
-      "infra_tsconfig_compileroptions_outdir",
       "infra_tsconfig_compileroptions_pretty",
-      "infra_tsconfig_compileroptions_skiplibcheck",
-      "infra_tsconfig_compileroptions_sourcemap",
-      "infra_tsconfig_compileroptions_strict",
-      "infra_tsconfig_compileroptions_target",
       "infra_tsconfig_exclude",
+      "infra_tsconfig_extends",
       "infra_tsconfig_include",
+      "ref",
       "ref_bin",
-      "ref_es2022",
+      "ref_branchleft_tsconfig_pulumi_json",
+      "ref_branchleft_tsconfig_react_app_json",
+      "ref_client",
+      "ref_infra",
+      "ref_node",
       "ref_node_modules",
-      "ref_ts"
+      "ref_react_router_types",
+      "ref_server",
+      "ref_ts",
+      "ref_vite_client",
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_paths",
+      "tsconfig_compileroptions_rootdirs",
+      "tsconfig_compileroptions_types",
+      "tsconfig_exclude",
+      "tsconfig_extends",
+      "tsconfig_include",
+      "tsconfig_json_ref_branchleft_tsconfig_strict_1_json"
     ],
-    "8": [
+    "6": [
+      "app_components_navbar",
+      "app_components_navbar_isdropdown",
+      "app_components_navbar_nav_links",
+      "app_components_navbar_navbar",
       "app_components_navbar_navdropdown",
+      "app_components_navbar_navdropdownitem",
+      "app_components_navbar_navlinkitem",
+      "app_components_navbar_navlinksitems",
       "app_components_solutionsshowcase",
       "app_components_solutionsshowcase_solution",
       "app_components_solutionsshowcase_solutions",
@@ -295,60 +255,7 @@
       "package_dependencies_react",
       "react"
     ],
-    "9": [
-      "infra_package",
-      "infra_package_dependencies",
-      "infra_package_dependencies_pulumi_gcp",
-      "infra_package_dependencies_pulumi_pulumi",
-      "infra_package_devdependencies",
-      "infra_package_devdependencies_types_node",
-      "infra_package_devdependencies_typescript",
-      "infra_package_main",
-      "infra_package_name",
-      "infra_package_private",
-      "package_devdependencies_types_node",
-      "package_devdependencies_typescript",
-      "pulumi_gcp",
-      "pulumi_pulumi",
-      "types_node",
-      "typescript"
-    ],
-    "10": [
-      "package",
-      "package_name",
-      "package_packagemanager",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_format",
-      "package_scripts_lint",
-      "package_scripts_prepare",
-      "package_scripts_start",
-      "package_scripts_test_e2e",
-      "package_scripts_test_ui",
-      "package_scripts_test_unit",
-      "package_scripts_typecheck",
-      "package_type"
-    ],
-    "11": [
-      "app_components_footer",
-      "app_components_footer_footer",
-      "app_components_icons_blueskyicon",
-      "app_components_icons_blueskyicon_blueskyicon",
-      "app_components_icons_githubicon",
-      "app_components_icons_githubicon_githubicon",
-      "app_components_icons_linkedinicon",
-      "app_components_icons_linkedinicon_linkedinicon",
-      "app_components_icons_mediumicon",
-      "app_components_icons_mediumicon_mediumicon",
-      "app_components_sociallinksitems",
-      "app_components_sociallinksitems_icons",
-      "app_components_sociallinksitems_sociallinksitems",
-      "app_lib_social_links",
-      "app_lib_social_links_social_links"
-    ],
-    "12": [
+    "7": [
       "tests_404_spec",
       "tests_a11y",
       "tests_a11y_checka11y",
@@ -362,7 +269,43 @@
       "tests_solutions_local_news_spec",
       "tests_terms_spec"
     ],
-    "13": [
+    "8": [
+      "branchleft_prettier_config",
+      "package_devdependencies",
+      "package_devdependencies_branchleft_prettier_config",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript_eslint_parser",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitest_coverage_v8",
+      "types_react_dom",
+      "typescript_eslint_parser",
+      "vite",
+      "vitest_coverage_v8"
+    ],
+    "9": [
+      "infra_package_devdependencies",
+      "infra_package_devdependencies_branchleft_tsconfig",
+      "infra_package_devdependencies_types_node",
+      "infra_package_devdependencies_typescript",
+      "package_devdependencies_branchleft_tsconfig",
+      "package_devdependencies_types_node",
+      "package_devdependencies_typescript",
+      "package_json_branchleft_tsconfig",
+      "package_json_types_node",
+      "package_json_typescript"
+    ],
+    "10": [
+      "infra_package",
+      "infra_package_dependencies",
+      "infra_package_dependencies_pulumi_gcp",
+      "infra_package_dependencies_pulumi_pulumi",
+      "infra_package_main",
+      "infra_package_name",
+      "infra_package_private",
+      "pulumi_gcp",
+      "pulumi_pulumi"
+    ],
+    "11": [
       "pre_commit_config_check_added_large_files",
       "pre_commit_config_check_merge_conflict",
       "pre_commit_config_check_yaml",
@@ -370,222 +313,304 @@
       "pre_commit_config_pre_commit_hooks",
       "pre_commit_config_trailing_whitespace"
     ],
-    "14": [
+    "12": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "15": [
-      "github_workflows_ci_yml_checks",
-      "github_workflows_ci_yml_deploy",
-      "github_workflows_ci_yml_e2e",
-      "github_workflows_ci_yml_pulumi_preview",
-      "pulumi_state"
-    ],
-    "16": [
+    "13": [
       "infra_scripts_assert_no_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_main",
       "infra_scripts_assert_no_edge_deletes_rationale_55",
       "infra_scripts_assert_no_edge_deletes_self_test"
     ],
-    "17": [
+    "14": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "18": [
+    "15": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "19": [
+    "16": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "20": [
+    "17": [
       "_github_dependabot_infra_npm_updates",
       "infra_pulumi_project"
     ],
-    "21": [
+    "18": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
     ],
+    "19": [
+      "axe_core_playwright",
+      "package_devdependencies_axe_core_playwright"
+    ],
+    "20": [
+      "branchleft_github_workflows_docs_lint",
+      "github_workflows_docs_lint_docs_lint"
+    ],
+    "21": [
+      "branchleft_standards_standards",
+      "github_workflows_standards_standards"
+    ],
     "22": [
-      "branchleft_github_workflows_graphify_workflow",
-      "github_workflows_graphify_workflow"
+      "claude_md",
+      "react_router_v7"
     ],
     "23": [
+      "eslint",
+      "package_devdependencies_eslint"
+    ],
+    "24": [
+      "eslint_config_prettier",
+      "package_devdependencies_eslint_config_prettier"
+    ],
+    "25": [
+      "eslint_js",
+      "package_devdependencies_eslint_js"
+    ],
+    "26": [
+      "eslint_plugin_react",
+      "package_devdependencies_eslint_plugin_react"
+    ],
+    "27": [
+      "eslint_plugin_react_hooks",
+      "package_devdependencies_eslint_plugin_react_hooks"
+    ],
+    "28": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "24": [
+    "29": [
+      "github_workflows_ci_yml",
+      "pulumi"
+    ],
+    "30": [
+      "globals",
+      "package_devdependencies_globals"
+    ],
+    "31": [
+      "jsdom",
+      "package_devdependencies_jsdom"
+    ],
+    "32": [
+      "package_devdependencies_playwright_test",
+      "playwright_test"
+    ],
+    "33": [
+      "package_devdependencies_prettier",
+      "prettier"
+    ],
+    "34": [
+      "package_devdependencies_react_router_dev",
+      "react_router_dev"
+    ],
+    "35": [
+      "package_devdependencies_tailwindcss",
+      "tailwindcss"
+    ],
+    "36": [
+      "package_devdependencies_tailwindcss_vite",
+      "tailwindcss_vite"
+    ],
+    "37": [
+      "package_devdependencies_types_nodemailer",
+      "types_nodemailer"
+    ],
+    "38": [
+      "package_devdependencies_types_react",
+      "types_react"
+    ],
+    "39": [
+      "package_devdependencies_typescript_eslint",
+      "typescript_eslint"
+    ],
+    "40": [
+      "package_devdependencies_typescript_eslint_eslint_plugin",
+      "typescript_eslint_eslint_plugin"
+    ],
+    "41": [
+      "package_devdependencies_vitejs_plugin_react",
+      "vitejs_plugin_react"
+    ],
+    "42": [
+      "package_devdependencies_vitest",
+      "vitest"
+    ],
+    "43": [
+      "package_devdependencies_vitest_ui",
+      "vitest_ui"
+    ],
+    "44": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "25": [
+    "45": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "26": [
+    "46": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "27": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "28": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "29": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "30": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "31": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "32": [
+    "52": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "33": [
+    "53": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "34": [
+    "54": [
       "_github_dependabot_github_actions_updates"
     ],
-    "35": [
-      "claude_md"
-    ],
-    "36": [
+    "55": [
       "contributing_accessibility"
     ],
-    "37": [
+    "56": [
       "contributing_checks_ci_runs"
     ],
-    "38": [
+    "57": [
       "contributing_content_and_copy"
     ],
-    "39": [
+    "58": [
       "contributing_pre_commit_hooks"
     ],
-    "40": [
+    "59": [
       "contributing_prerequisites"
     ],
-    "41": [
+    "60": [
       "eslint_config"
     ],
-    "42": [
-      "github_workflows_ci_yml"
-    ],
-    "43": [
+    "61": [
       "github_workflows_codeql"
     ],
-    "44": [
-      "infra_pulumi_production"
-    ],
-    "45": [
-      "known_issues_prerendering_security_headers"
-    ],
-    "46": [
-      "notice_license_scope"
-    ],
-    "47": [
-      "notice_third_party_fonts"
-    ],
-    "48": [
-      "playwright_config"
-    ],
-    "49": [
-      "pre_commit_config_eslint"
-    ],
-    "50": [
-      "pre_commit_config_prettier"
-    ],
-    "51": [
-      "pre_commit_config_vitest"
-    ],
-    "52": [
-      "public_apple_touch_icon"
-    ],
-    "53": [
-      "public_favicon_192"
-    ],
-    "54": [
-      "public_favicon_512"
-    ],
-    "55": [
-      "public_people_headshot_160_jpg"
-    ],
-    "56": [
-      "public_people_headshot_160_webp"
-    ],
-    "57": [
-      "public_people_headshot_320_jpg"
-    ],
-    "58": [
-      "public_people_headshot_320_webp"
-    ],
-    "59": [
-      "public_people_headshot_480_headshot"
-    ],
-    "60": [
-      "public_people_headshot_480_webp"
-    ],
-    "61": [
-      "react_router_config"
-    ],
     "62": [
-      "tests_favicon_spec"
+      "github_workflows_graphify_workflow"
     ],
     "63": [
-      "tests_logo_svg_spec"
+      "infra_pulumi_production"
     ],
     "64": [
-      "tests_meta_spec"
+      "known_issues_prerendering_security_headers"
     ],
     "65": [
-      "tests_no_js_spec"
+      "notice_license_scope"
     ],
     "66": [
-      "tests_og_image_spec"
+      "notice_third_party_fonts"
     ],
     "67": [
-      "tests_robots_txt_spec"
+      "playwright_config"
     ],
     "68": [
-      "tests_sitemap_xml_spec"
+      "pre_commit_config_eslint"
     ],
     "69": [
+      "pre_commit_config_prettier"
+    ],
+    "70": [
+      "pre_commit_config_vitest"
+    ],
+    "71": [
+      "public_apple_touch_icon"
+    ],
+    "72": [
+      "public_favicon_192"
+    ],
+    "73": [
+      "public_favicon_512"
+    ],
+    "74": [
+      "public_people_headshot_160_jpg"
+    ],
+    "75": [
+      "public_people_headshot_160_webp"
+    ],
+    "76": [
+      "public_people_headshot_320_jpg"
+    ],
+    "77": [
+      "public_people_headshot_320_webp"
+    ],
+    "78": [
+      "public_people_headshot_480_headshot"
+    ],
+    "79": [
+      "public_people_headshot_480_webp"
+    ],
+    "80": [
+      "react_router_config"
+    ],
+    "81": [
+      "tests_favicon_spec"
+    ],
+    "82": [
+      "tests_logo_svg_spec"
+    ],
+    "83": [
+      "tests_meta_spec"
+    ],
+    "84": [
+      "tests_no_js_spec"
+    ],
+    "85": [
+      "tests_og_image_spec"
+    ],
+    "86": [
+      "tests_robots_txt_spec"
+    ],
+    "87": [
+      "tests_sitemap_xml_spec"
+    ],
+    "88": [
       "vitest_config"
     ]
   },
   "cohesion": {
     "0": 0.07088989441930618,
-    "1": 0.04081632653061224,
+    "1": 0.05405405405405406,
     "2": 0.09047619047619047,
     "3": 0.08907563025210084,
-    "4": 0.07671957671957672,
-    "5": 0.11688311688311688,
-    "6": 0.10526315789473684,
-    "7": 0.10526315789473684,
-    "8": 0.18382352941176472,
-    "9": 0.125,
-    "10": 0.125,
-    "11": 0.19047619047619047,
-    "12": 0.3181818181818182,
-    "13": 0.3333333333333333,
-    "14": 0.4,
+    "4": 0.09195402298850575,
+    "5": 0.07977207977207977,
+    "6": 0.12318840579710146,
+    "7": 0.3181818181818182,
+    "8": 0.18181818181818182,
+    "9": 0.2,
+    "10": 0.2222222222222222,
+    "11": 0.3333333333333333,
+    "12": 0.4,
+    "13": 0.7,
+    "14": 0.5,
     "15": 0.5,
-    "16": 0.7,
-    "17": 0.5,
-    "18": 0.5,
-    "19": 0.6666666666666666,
+    "16": 0.6666666666666666,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
     "20": 1.0,
     "21": 1.0,
     "22": 1.0,
@@ -635,7 +660,26 @@
     "66": 1.0,
     "67": 1.0,
     "68": 1.0,
-    "69": 1.0
+    "69": 1.0,
+    "70": 1.0,
+    "71": 1.0,
+    "72": 1.0,
+    "73": 1.0,
+    "74": 1.0,
+    "75": 1.0,
+    "76": 1.0,
+    "77": 1.0,
+    "78": 1.0,
+    "79": 1.0,
+    "80": 1.0,
+    "81": 1.0,
+    "82": 1.0,
+    "83": 1.0,
+    "84": 1.0,
+    "85": 1.0,
+    "86": 1.0,
+    "87": 1.0,
+    "88": 1.0
   },
   "gods": [
     {
@@ -644,19 +688,9 @@
       "degree": 16
     },
     {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
-      "degree": 15
-    },
-    {
-      "id": "infra_tsconfig_compileroptions",
-      "label": "compilerOptions",
-      "degree": 12
-    },
-    {
       "id": "package_scripts",
       "label": "scripts",
-      "degree": 11
+      "degree": 12
     },
     {
       "id": "tests_a11y_checka11y",
@@ -687,6 +721,16 @@
       "id": "infra_apis_enabledapis",
       "label": "enabledApis",
       "degree": 5
+    },
+    {
+      "id": "infra_config_region",
+      "label": "region",
+      "degree": 5
+    },
+    {
+      "id": "pre_commit_config_pre_commit_hooks",
+      "label": "pre-commit-hooks",
+      "degree": 5
     }
   ],
   "surprises": [
@@ -713,17 +757,6 @@
       "why": "connects across different repos/directories; peripheral node `NavDropdown()` unexpectedly reaches hub `react`"
     },
     {
-      "source": "NavBar()",
-      "target": "react",
-      "source_files": [
-        "app/components/NavBar.tsx",
-        "package.json"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "connects across different repos/directories; bridges separate communities"
-    },
-    {
       "source": "About()",
       "target": "react",
       "source_files": [
@@ -744,10 +777,21 @@
       "confidence": "INFERRED",
       "relation": "shares_data_with",
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "minimumReleaseAgeExclude (@branchleft/*)",
+      "target": "Dependabot: npm root updates",
+      "source_files": [
+        "pnpm-workspace.yaml",
+        ".github/dependabot.yml"
+      ],
+      "confidence": "INFERRED",
+      "relation": "shares_data_with",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
     }
   ],
   "tokens": {
-    "input": 988,
-    "output": 237
+    "input": 9937,
+    "output": 1144
   }
 }
