@@ -270,14 +270,14 @@
       "tests_terms_spec"
     ],
     "8": [
+      "axe_core_playwright",
       "branchleft_prettier_config",
       "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_types_react_dom",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
-      "types_react_dom",
       "typescript_eslint_parser",
       "vite",
       "vitest_coverage_v8"
@@ -354,84 +354,84 @@
       "app_routes_logo_svg_loader"
     ],
     "19": [
-      "axe_core_playwright",
-      "package_devdependencies_axe_core_playwright"
-    ],
-    "20": [
       "branchleft_github_workflows_docs_lint",
       "github_workflows_docs_lint_docs_lint"
     ],
-    "21": [
-      "branchleft_standards_standards",
-      "github_workflows_standards_standards"
+    "20": [
+      "branchleft_standards_workflow",
+      "github_workflows_standards_workflow"
     ],
-    "22": [
+    "21": [
       "claude_md",
       "react_router_v7"
     ],
-    "23": [
+    "22": [
       "eslint",
       "package_devdependencies_eslint"
     ],
-    "24": [
+    "23": [
       "eslint_config_prettier",
       "package_devdependencies_eslint_config_prettier"
     ],
-    "25": [
+    "24": [
       "eslint_js",
       "package_devdependencies_eslint_js"
     ],
-    "26": [
+    "25": [
       "eslint_plugin_react",
       "package_devdependencies_eslint_plugin_react"
     ],
-    "27": [
+    "26": [
       "eslint_plugin_react_hooks",
       "package_devdependencies_eslint_plugin_react_hooks"
     ],
-    "28": [
+    "27": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "29": [
+    "28": [
       "github_workflows_ci_yml",
       "pulumi"
     ],
-    "30": [
+    "29": [
       "globals",
       "package_devdependencies_globals"
     ],
-    "31": [
+    "30": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "32": [
+    "31": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "33": [
+    "32": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "34": [
+    "33": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "35": [
+    "34": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "36": [
+    "35": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "37": [
+    "36": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "38": [
+    "37": [
       "package_devdependencies_types_react",
       "types_react"
+    ],
+    "38": [
+      "package_devdependencies_types_react_dom",
+      "types_react_dom"
     ],
     "39": [
       "package_devdependencies_typescript_eslint",
@@ -791,7 +791,7 @@
     }
   ],
   "tokens": {
-    "input": 9937,
-    "output": 1144
+    "input": 898,
+    "output": 221
   }
 }
