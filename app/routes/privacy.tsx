@@ -16,7 +16,7 @@ export default function Privacy(): React.JSX.Element {
       <header>
         <h1>Privacy Notice</h1>
         <p className="eyebrow legal-page__meta">
-          Effective: 29 July 2026 · Last updated: 29 July 2026
+          Effective: 13 August 2026 · Last updated: 15 August 2026
         </p>
       </header>
 
@@ -145,20 +145,22 @@ export default function Privacy(): React.JSX.Element {
         <SectionHeading as="h2" anchor="processors">
           Who we share it with
         </SectionHeading>
-        <p>We do not sell personal information. We share it only with:</p>
+        <p>
+          We do not sell personal information. We process some information on our own
+          infrastructure, and we share other information only with:
+        </p>
         <ul>
           <li>
-            <strong>Google (Google Workspace / Gmail)</strong> — hosts our{' '}
-            <code>@branchleft.co.uk</code> email inboxes and therefore processes the content of any
-            email correspondence with us, including messages submitted through our contact form.
-            Google is a US company; transfers of personal data to Google are covered by the UK
-            extension to the EU-US Data Privacy Framework and/or the UK International Data Transfer
-            Addendum.
+            <strong>branchLeft's self-hosted mail platform</strong> (processed on our own
+            infrastructure) — processes the content of our <code>@branchleft.co.uk</code> email
+            inboxes and any email correspondence with us, including messages submitted through our
+            contact form.
           </li>
           <li>
             <strong>Google Cloud Platform (GCP)</strong> — hosts this website. Where possible we
             serve from UK/EEA regions; where processing occurs outside the UK it is covered by the
-            safeguards above.
+            UK extension to the EU-US Data Privacy Framework and/or the UK International Data
+            Transfer Addendum.
           </li>
           <li>
             <strong>Hetzner Online GmbH</strong> — hosts the mail server that relays messages
