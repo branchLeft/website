@@ -148,12 +148,9 @@ export default function Privacy(): React.JSX.Element {
         <p>We do not sell personal information. We share it only with:</p>
         <ul>
           <li>
-            <strong>Google (Google Workspace / Gmail)</strong> — hosts our{' '}
-            <code>@branchleft.co.uk</code> email inboxes and therefore processes the content of any
-            email correspondence with us, including messages submitted through our contact form.
-            Google is a US company; transfers of personal data to Google are covered by the UK
-            extension to the EU-US Data Privacy Framework and/or the UK International Data Transfer
-            Addendum.
+            <strong>branchLeft's self-hosted mail platform</strong> — processes the content of our{' '}
+            <code>@branchleft.co.uk</code> email inboxes and any email correspondence with us,
+            including messages submitted through our contact form.
           </li>
           <li>
             <strong>Google Cloud Platform (GCP)</strong> — hosts this website. Where possible we
