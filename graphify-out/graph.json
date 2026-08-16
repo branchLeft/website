@@ -4,6 +4,21 @@
   "graph": {
     "hyperedges": [
       {
+        "id": "production_environment_config",
+        "label": "Production Environment Configuration",
+        "nodes": [
+          "gcp_project_branchleft_prod",
+          "branchleft_website_infra_region",
+          "branchleft_website_infra_github_repo",
+          "branchleft_website_infra_image_tag",
+          "branchleft_website_infra_smtp_config"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.9,
+        "source_file": "infra/Pulumi.production.yaml"
+      },
+      {
         "id": "ci_test_suite",
         "label": "CI Test Suite",
         "nodes": [
@@ -1177,7 +1192,7 @@
       "source_file": "app/routes/logo-svg.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 21,
+      "community": 22,
       "community_name": "Logo SVG Route",
       "norm_label": "logo-svg.tsx",
       "id": "app_routes_logo_svg"
@@ -1189,7 +1204,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 21,
+      "community": 22,
       "community_name": "Logo SVG Route",
       "norm_label": "loader()",
       "id": "app_routes_logo_svg_loader"
@@ -1340,7 +1355,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 61,
+      "community": 62,
       "community_name": "ESLint Config",
       "norm_label": "eslint.config.js",
       "id": "eslint_config"
@@ -1494,7 +1509,7 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "assert-no-edge-deletes.py",
       "id": "infra_scripts_assert_no_edge_deletes"
@@ -1506,7 +1521,7 @@
       "source_location": "L54",
       "_callable": true,
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "edge_deletes()",
       "id": "infra_scripts_assert_no_edge_deletes_edge_deletes"
@@ -1518,7 +1533,7 @@
       "source_location": "L98",
       "_callable": true,
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "self_test()",
       "id": "infra_scripts_assert_no_edge_deletes_self_test"
@@ -1530,7 +1545,7 @@
       "source_location": "L118",
       "_callable": true,
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "main()",
       "id": "infra_scripts_assert_no_edge_deletes_main"
@@ -1541,7 +1556,7 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "return the edge resources `text` plans to delete. pairs each `(delete)` line...",
       "id": "infra_scripts_assert_no_edge_deletes_rationale_55"
@@ -1818,7 +1833,7 @@
       "source_file": "vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 45,
+      "community": 46,
       "community_name": "vite-config Dependency",
       "norm_label": "vite.config.ts",
       "id": "vite_config"
@@ -1830,7 +1845,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 45,
+      "community": 46,
       "community_name": "vite-config Dependency",
       "norm_label": "stripcssbanners()",
       "id": "vite_config_stripcssbanners"
@@ -1855,7 +1870,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "react router v7 framework mode (locked)",
       "_origin": "semantic",
@@ -1870,7 +1885,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "legacy patterns to migrate",
       "_origin": "semantic",
@@ -1885,7 +1900,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 54,
+      "community": 55,
       "community_name": "React Router: RSC Future Path",
       "norm_label": "rsc (future path, not active)",
       "_origin": "semantic",
@@ -1900,7 +1915,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "skill references table",
       "_origin": "semantic",
@@ -1915,7 +1930,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "framework mode committed strategy",
       "_origin": "semantic",
@@ -1930,7 +1945,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
+      "community": 51,
       "community_name": "React Router: Route Configuration",
       "norm_label": "route configuration (app/routes.ts)",
       "_origin": "semantic",
@@ -1945,7 +1960,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 51,
+      "community": 52,
       "community_name": "React Router: Route Modules",
       "norm_label": "route modules",
       "_origin": "semantic",
@@ -1960,7 +1975,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 46,
+      "community": 47,
       "community_name": "React Router: Data & Mutations",
       "norm_label": "data and mutations (loader/action)",
       "_origin": "semantic",
@@ -1975,7 +1990,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 48,
       "community_name": "React Router: Forms & Pending UI",
       "norm_label": "forms, fetchers, and pending ui",
       "_origin": "semantic",
@@ -1990,7 +2005,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 54,
       "community_name": "React Router: Type Safety",
       "norm_label": "type safety (route.* generated types)",
       "_origin": "semantic",
@@ -2005,7 +2020,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 49,
+      "community": 50,
       "community_name": "React Router: Rendering Strategy",
       "norm_label": "rendering strategy (ssr/spa/pre-render)",
       "_origin": "semantic",
@@ -2020,7 +2035,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 48,
+      "community": 49,
       "community_name": "React Router: Middleware & Sessions",
       "norm_label": "middleware, sessions, and auth",
       "_origin": "semantic",
@@ -2035,7 +2050,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 52,
+      "community": 53,
       "community_name": "React Router: RSC Framework",
       "norm_label": "rsc framework (future path)",
       "_origin": "semantic",
@@ -2050,7 +2065,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Dependency Update Policy",
       "norm_label": "dependabot: npm root updates",
       "_origin": "semantic",
@@ -2065,7 +2080,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 21,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: infra/ npm updates",
       "_origin": "semantic",
@@ -2080,7 +2095,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 56,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: github actions updates",
       "_origin": "semantic",
@@ -2095,7 +2110,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 60,
+      "community": 61,
       "community_name": "Contributing Prerequisites",
       "norm_label": "prerequisites (.nvmrc, pnpm)",
       "_origin": "semantic",
@@ -2110,7 +2125,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "setup steps",
       "_origin": "semantic",
@@ -2125,7 +2140,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 58,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "checks ci runs on every pr",
       "_origin": "semantic",
@@ -2140,7 +2155,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 60,
       "community_name": "Pre-commit Hook Config",
       "norm_label": "pre-commit hooks setup",
       "_origin": "semantic",
@@ -2155,7 +2170,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 57,
       "community_name": "Testing & Accessibility Conventions",
       "norm_label": "accessibility requirement",
       "_origin": "semantic",
@@ -2170,7 +2185,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 59,
       "community_name": "Content & Copy Guidelines",
       "norm_label": "content & copy note",
       "_origin": "semantic",
@@ -2185,7 +2200,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Dependency Update Policy",
       "norm_label": "fork pr install failure (missing github pat)",
       "_origin": "semantic",
@@ -2230,7 +2245,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "trademarks and brand assets",
       "_origin": "semantic",
@@ -2260,7 +2275,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "branchleft website overview",
       "_origin": "semantic",
@@ -2275,7 +2290,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "brand source assets (logo/wordmark)",
       "_origin": "semantic",
@@ -2290,7 +2305,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 21,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "branchleft-website-infra project (pulumi.yaml)",
       "_origin": "semantic",
@@ -2305,7 +2320,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Dependency Update Policy",
       "norm_label": "pnpm-workspace allowbuilds",
       "_origin": "semantic",
@@ -2320,7 +2335,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Dependency Update Policy",
       "norm_label": "minimumreleaseageexclude (@branchleft/*)",
       "_origin": "semantic",
@@ -2335,7 +2350,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "robots.txt rules",
       "_origin": "semantic",
@@ -2350,7 +2365,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft logo (lightning-bolt mark)",
       "_origin": "semantic",
@@ -2365,7 +2380,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft wordmark (icon + \"branchleft\" text lockup)",
       "_origin": "semantic",
@@ -2380,7 +2395,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "Brand & Social Assets",
       "norm_label": "favicon set (32/192/512px + apple-touch-icon, same lightning-bolt mark)",
       "_origin": "semantic",
@@ -2395,7 +2410,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "Brand & Social Assets",
       "norm_label": "social share card (og-image: logo + wordmark on black)",
       "_origin": "semantic",
@@ -2570,7 +2585,7 @@
       "label": "CodeQL Workflow",
       "file_type": "code",
       "source_file": ".github/workflows/codeql.yml",
-      "community": 62,
+      "community": 63,
       "norm_label": "codeql workflow",
       "_origin": "semantic",
       "id": "github_workflows_codeql"
@@ -2998,25 +3013,16 @@
       "label": "Known Issues",
       "file_type": "document",
       "source_file": "infra/KNOWN_ISSUES.md",
-      "community": 29,
+      "community": 31,
       "norm_label": "known issues",
       "_origin": "semantic",
       "id": "infra_known_issues"
     },
     {
-      "label": "Pulumi Production Config",
-      "file_type": "code",
-      "source_file": "infra/Pulumi.production.yaml",
-      "community": 65,
-      "norm_label": "pulumi production config",
-      "_origin": "semantic",
-      "id": "infra_pulumi_production"
-    },
-    {
       "label": "GitHub Actions Deployer SA",
       "file_type": "concept",
       "source_file": "infra/KNOWN_ISSUES.md",
-      "community": 29,
+      "community": 31,
       "norm_label": "github actions deployer sa",
       "_origin": "semantic",
       "id": "github_actions_deployer"
@@ -3030,7 +3036,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "pre-commit-hooks",
       "_origin": "semantic",
       "id": "pre_commit_config_pre_commit_hooks"
@@ -3044,7 +3050,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "trailing-whitespace",
       "_origin": "semantic",
       "id": "pre_commit_config_trailing_whitespace"
@@ -3058,7 +3064,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "end-of-file-fixer",
       "_origin": "semantic",
       "id": "pre_commit_config_end_of_file_fixer"
@@ -3072,7 +3078,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "check-yaml",
       "_origin": "semantic",
       "id": "pre_commit_config_check_yaml"
@@ -3086,7 +3092,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "check-added-large-files",
       "_origin": "semantic",
       "id": "pre_commit_config_check_added_large_files"
@@ -3100,7 +3106,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "check-merge-conflict",
       "_origin": "semantic",
       "id": "pre_commit_config_check_merge_conflict"
@@ -3156,7 +3162,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 63,
+      "community": 64,
       "norm_label": "graphify workflow",
       "_origin": "semantic",
       "id": "github_workflows_graphify_workflow"
@@ -3170,7 +3176,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
+      "community": 24,
       "norm_label": "docs-lint workflow",
       "_origin": "semantic",
       "id": "github_workflows_docs_lint_docs_lint"
@@ -3184,7 +3190,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
+      "community": 24,
       "norm_label": "branchleft/github-workflows docs-lint",
       "_origin": "semantic",
       "id": "branchleft_github_workflows_docs_lint"
@@ -3825,7 +3831,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 22,
+      "community": 23,
       "norm_label": "@axe-core/playwright",
       "id": "package_devdependencies_axe_core_playwright"
     },
@@ -3835,7 +3841,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 22,
+      "community": 23,
       "norm_label": "@axe-core/playwright",
       "id": "axe_core_playwright"
     },
@@ -3885,7 +3891,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 10,
+      "community": 28,
       "norm_label": "@eslint/js",
       "id": "package_devdependencies_eslint_js"
     },
@@ -3895,7 +3901,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 10,
+      "community": 28,
       "norm_label": "@eslint/js",
       "id": "eslint_js"
     },
@@ -3905,7 +3911,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 32,
+      "community": 34,
       "norm_label": "@playwright/test",
       "id": "package_devdependencies_playwright_test"
     },
@@ -3915,7 +3921,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 32,
+      "community": 34,
       "norm_label": "@playwright/test",
       "id": "playwright_test"
     },
@@ -3925,7 +3931,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 34,
+      "community": 36,
       "norm_label": "@react-router/dev",
       "id": "package_devdependencies_react_router_dev"
     },
@@ -3935,7 +3941,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 34,
+      "community": 36,
       "norm_label": "@react-router/dev",
       "id": "react_router_dev"
     },
@@ -3945,7 +3951,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 36,
+      "community": 38,
       "norm_label": "@tailwindcss/vite",
       "id": "package_devdependencies_tailwindcss_vite"
     },
@@ -3955,7 +3961,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 36,
+      "community": 38,
       "norm_label": "@tailwindcss/vite",
       "id": "tailwindcss_vite"
     },
@@ -3985,7 +3991,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 37,
+      "community": 39,
       "norm_label": "@types/nodemailer",
       "id": "package_devdependencies_types_nodemailer"
     },
@@ -3995,7 +4001,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 37,
+      "community": 39,
       "norm_label": "@types/nodemailer",
       "id": "types_nodemailer"
     },
@@ -4005,7 +4011,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 38,
+      "community": 40,
       "norm_label": "@types/react",
       "id": "package_devdependencies_types_react"
     },
@@ -4015,7 +4021,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 38,
+      "community": 40,
       "norm_label": "@types/react",
       "id": "types_react"
     },
@@ -4025,7 +4031,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 39,
+      "community": 10,
       "norm_label": "@types/react-dom",
       "id": "package_devdependencies_types_react_dom"
     },
@@ -4035,7 +4041,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 39,
+      "community": 10,
       "norm_label": "@types/react-dom",
       "id": "types_react_dom"
     },
@@ -4045,7 +4051,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 41,
+      "community": 42,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "package_devdependencies_typescript_eslint_eslint_plugin"
     },
@@ -4055,7 +4061,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 41,
+      "community": 42,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "typescript_eslint_eslint_plugin"
     },
@@ -4085,7 +4091,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 42,
+      "community": 43,
       "norm_label": "@vitejs/plugin-react",
       "id": "package_devdependencies_vitejs_plugin_react"
     },
@@ -4095,7 +4101,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 42,
+      "community": 43,
       "norm_label": "@vitejs/plugin-react",
       "id": "vitejs_plugin_react"
     },
@@ -4125,7 +4131,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 44,
+      "community": 45,
       "norm_label": "@vitest/ui",
       "id": "package_devdependencies_vitest_ui"
     },
@@ -4135,7 +4141,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 44,
+      "community": 45,
       "norm_label": "@vitest/ui",
       "id": "vitest_ui"
     },
@@ -4145,7 +4151,7 @@
       "source_file": "package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 25,
+      "community": 26,
       "norm_label": "eslint",
       "id": "package_devdependencies_eslint"
     },
@@ -4155,7 +4161,7 @@
       "source_file": "package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 25,
+      "community": 26,
       "norm_label": "eslint",
       "id": "eslint"
     },
@@ -4165,7 +4171,7 @@
       "source_file": "package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 26,
+      "community": 27,
       "norm_label": "eslint-config-prettier",
       "id": "package_devdependencies_eslint_config_prettier"
     },
@@ -4175,7 +4181,7 @@
       "source_file": "package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 26,
+      "community": 27,
       "norm_label": "eslint-config-prettier",
       "id": "eslint_config_prettier"
     },
@@ -4185,7 +4191,7 @@
       "source_file": "package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 27,
+      "community": 29,
       "norm_label": "eslint-plugin-react",
       "id": "package_devdependencies_eslint_plugin_react"
     },
@@ -4195,7 +4201,7 @@
       "source_file": "package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 27,
+      "community": 29,
       "norm_label": "eslint-plugin-react",
       "id": "eslint_plugin_react"
     },
@@ -4205,7 +4211,7 @@
       "source_file": "package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 28,
+      "community": 30,
       "norm_label": "eslint-plugin-react-hooks",
       "id": "package_devdependencies_eslint_plugin_react_hooks"
     },
@@ -4215,7 +4221,7 @@
       "source_file": "package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 28,
+      "community": 30,
       "norm_label": "eslint-plugin-react-hooks",
       "id": "eslint_plugin_react_hooks"
     },
@@ -4225,7 +4231,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 30,
+      "community": 32,
       "norm_label": "globals",
       "id": "package_devdependencies_globals"
     },
@@ -4235,7 +4241,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 30,
+      "community": 32,
       "norm_label": "globals",
       "id": "globals"
     },
@@ -4245,7 +4251,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 31,
+      "community": 33,
       "norm_label": "jsdom",
       "id": "package_devdependencies_jsdom"
     },
@@ -4255,7 +4261,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 31,
+      "community": 33,
       "norm_label": "jsdom",
       "id": "jsdom"
     },
@@ -4265,7 +4271,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 33,
+      "community": 35,
       "norm_label": "prettier",
       "id": "package_devdependencies_prettier"
     },
@@ -4275,7 +4281,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 33,
+      "community": 35,
       "norm_label": "prettier",
       "id": "prettier"
     },
@@ -4285,7 +4291,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 35,
+      "community": 37,
       "norm_label": "tailwindcss",
       "id": "package_devdependencies_tailwindcss"
     },
@@ -4295,7 +4301,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 35,
+      "community": 37,
       "norm_label": "tailwindcss",
       "id": "tailwindcss"
     },
@@ -4325,7 +4331,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 40,
+      "community": 41,
       "norm_label": "typescript-eslint",
       "id": "package_devdependencies_typescript_eslint"
     },
@@ -4335,7 +4341,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 40,
+      "community": 41,
       "norm_label": "typescript-eslint",
       "id": "typescript_eslint"
     },
@@ -4365,7 +4371,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 43,
+      "community": 44,
       "norm_label": "vitest",
       "id": "package_devdependencies_vitest"
     },
@@ -4375,7 +4381,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 43,
+      "community": 44,
       "norm_label": "vitest",
       "id": "vitest"
     },
@@ -4558,7 +4564,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "claude.md",
       "_origin": "semantic",
       "id": "claude_md"
@@ -4586,7 +4592,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "react router v7",
       "_origin": "semantic",
       "id": "react_router_v7"
@@ -4600,7 +4606,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
+      "community": 65,
       "norm_label": "standards workflow",
       "_origin": "semantic",
       "id": "github_workflows_standards_workflow"
@@ -4727,45 +4733,129 @@
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
       "source_location": null,
-      "id": "github_workflows_ci",
-      "community": 15,
-      "norm_label": "ci workflow"
+      "community": 16,
+      "norm_label": "ci workflow",
+      "_origin": "semantic",
+      "id": "github_workflows_ci"
     },
     {
       "label": "Checks Job",
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
       "source_location": null,
-      "id": "github_workflows_ci_checks",
-      "community": 15,
-      "norm_label": "checks job"
+      "community": 16,
+      "norm_label": "checks job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_checks"
     },
     {
       "label": "E2E Job",
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
       "source_location": null,
-      "id": "github_workflows_ci_e2e",
-      "community": 15,
-      "norm_label": "e2e job"
+      "community": 16,
+      "norm_label": "e2e job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_e2e"
     },
     {
       "label": "Pulumi Preview Job",
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
       "source_location": null,
-      "id": "github_workflows_ci_pulumi_preview",
-      "community": 15,
-      "norm_label": "pulumi preview job"
+      "community": 16,
+      "norm_label": "pulumi preview job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_pulumi_preview"
     },
     {
       "label": "Deploy Job",
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
       "source_location": null,
-      "id": "github_workflows_ci_deploy",
-      "community": 15,
-      "norm_label": "deploy job"
+      "community": 16,
+      "norm_label": "deploy job",
+      "_origin": "semantic",
+      "id": "github_workflows_ci_deploy"
+    },
+    {
+      "label": "Pulumi Production Configuration",
+      "file_type": "code",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "verification": "unverified",
+      "id": "infra_pulumi_production_yaml",
+      "community": 13,
+      "norm_label": "pulumi production configuration"
+    },
+    {
+      "label": "GCP Project: branchleft-prod",
+      "file_type": "concept",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "gcp_project_branchleft_prod",
+      "community": 13,
+      "norm_label": "gcp project: branchleft-prod"
+    },
+    {
+      "label": "Region: europe-west1",
+      "file_type": "concept",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_website_infra_region",
+      "community": 13,
+      "norm_label": "region: europe-west1"
+    },
+    {
+      "label": "GitHub Repo: branchLeft/website",
+      "file_type": "concept",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_website_infra_github_repo",
+      "community": 13,
+      "norm_label": "github repo: branchleft/website"
+    },
+    {
+      "label": "Image Tag: bootstrap-amd64-v2",
+      "file_type": "concept",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_website_infra_image_tag",
+      "community": 13,
+      "norm_label": "image tag: bootstrap-amd64-v2"
+    },
+    {
+      "label": "SMTP Configuration",
+      "file_type": "concept",
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_website_infra_smtp_config",
+      "community": 13,
+      "norm_label": "smtp configuration"
     }
   ],
   "links": [
@@ -10471,6 +10561,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_checks",
       "target": "github_workflows_ci"
     },
@@ -10479,6 +10570,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_deploy",
       "target": "github_workflows_ci"
     },
@@ -10487,6 +10579,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_e2e",
       "target": "github_workflows_ci"
     },
@@ -10495,6 +10588,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_pulumi_preview",
       "target": "github_workflows_ci"
     },
@@ -10503,6 +10597,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_deploy",
       "target": "github_workflows_ci_checks"
     },
@@ -10511,6 +10606,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_pulumi_preview",
       "target": "github_workflows_ci_checks"
     },
@@ -10519,6 +10615,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_deploy",
       "target": "github_workflows_ci_e2e"
     },
@@ -10527,11 +10624,77 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
+      "_origin": "semantic",
       "source": "github_workflows_ci_pulumi_preview",
       "target": "github_workflows_ci_e2e"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "infra_pulumi_production_yaml",
+      "target": "branchleft_website_infra_github_repo"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "infra_pulumi_production_yaml",
+      "target": "branchleft_website_infra_image_tag"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "infra_pulumi_production_yaml",
+      "target": "branchleft_website_infra_region"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "infra_pulumi_production_yaml",
+      "target": "branchleft_website_infra_smtp_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "infra/Pulumi.production.yaml",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "infra_pulumi_production_yaml",
+      "target": "gcp_project_branchleft_prod"
     }
   ],
   "hyperedges": [
+    {
+      "id": "production_environment_config",
+      "label": "Production Environment Configuration",
+      "nodes": [
+        "gcp_project_branchleft_prod",
+        "branchleft_website_infra_region",
+        "branchleft_website_infra_github_repo",
+        "branchleft_website_infra_image_tag",
+        "branchleft_website_infra_smtp_config"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "infra/Pulumi.production.yaml"
+    },
     {
       "id": "ci_test_suite",
       "label": "CI Test Suite",
@@ -10583,5 +10746,5 @@
       "source_file": "KNOWN_ISSUES.md"
     }
   ],
-  "built_at_commit": "9e0b6099a6176fab3ca5c95559d7f8b03b9479d9"
+  "built_at_commit": "adbfe6b16c263fe6765d880e385dd757762ad771"
 }
