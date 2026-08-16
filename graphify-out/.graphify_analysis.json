@@ -283,13 +283,13 @@
     ],
     "10": [
       "branchleft_prettier_config",
-      "eslint_js",
       "package_devdependencies",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_eslint_js",
+      "package_devdependencies_types_react_dom",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
+      "types_react_dom",
       "typescript_eslint_parser",
       "vite",
       "vitest_coverage_v8"
@@ -318,6 +318,14 @@
       "pulumi_pulumi"
     ],
     "13": [
+      "branchleft_website_infra_github_repo",
+      "branchleft_website_infra_image_tag",
+      "branchleft_website_infra_region",
+      "branchleft_website_infra_smtp_config",
+      "gcp_project_branchleft_prod",
+      "infra_pulumi_production_yaml"
+    ],
+    "14": [
       "pre_commit_config_check_added_large_files",
       "pre_commit_config_check_merge_conflict",
       "pre_commit_config_check_yaml",
@@ -325,208 +333,205 @@
       "pre_commit_config_pre_commit_hooks",
       "pre_commit_config_trailing_whitespace"
     ],
-    "14": [
+    "15": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "15": [
+    "16": [
       "github_workflows_ci",
       "github_workflows_ci_checks",
       "github_workflows_ci_deploy",
       "github_workflows_ci_e2e",
       "github_workflows_ci_pulumi_preview"
     ],
-    "16": [
+    "17": [
       "infra_scripts_assert_no_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_main",
       "infra_scripts_assert_no_edge_deletes_rationale_55",
       "infra_scripts_assert_no_edge_deletes_self_test"
     ],
-    "17": [
+    "18": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "18": [
+    "19": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "19": [
+    "20": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "20": [
+    "21": [
       "_github_dependabot_infra_npm_updates",
       "infra_pulumi_project"
     ],
-    "21": [
+    "22": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
     ],
-    "22": [
+    "23": [
       "axe_core_playwright",
       "package_devdependencies_axe_core_playwright"
     ],
-    "23": [
+    "24": [
       "branchleft_github_workflows_docs_lint",
       "github_workflows_docs_lint_docs_lint"
     ],
-    "24": [
+    "25": [
       "claude_md",
       "react_router_v7"
     ],
-    "25": [
+    "26": [
       "eslint",
       "package_devdependencies_eslint"
     ],
-    "26": [
+    "27": [
       "eslint_config_prettier",
       "package_devdependencies_eslint_config_prettier"
     ],
-    "27": [
+    "28": [
+      "eslint_js",
+      "package_devdependencies_eslint_js"
+    ],
+    "29": [
       "eslint_plugin_react",
       "package_devdependencies_eslint_plugin_react"
     ],
-    "28": [
+    "30": [
       "eslint_plugin_react_hooks",
       "package_devdependencies_eslint_plugin_react_hooks"
     ],
-    "29": [
+    "31": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "30": [
+    "32": [
       "globals",
       "package_devdependencies_globals"
     ],
-    "31": [
+    "33": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "32": [
+    "34": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "33": [
+    "35": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "34": [
+    "36": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "35": [
+    "37": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "36": [
+    "38": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "37": [
+    "39": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "38": [
+    "40": [
       "package_devdependencies_types_react",
       "types_react"
     ],
-    "39": [
-      "package_devdependencies_types_react_dom",
-      "types_react_dom"
-    ],
-    "40": [
+    "41": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "41": [
+    "42": [
       "package_devdependencies_typescript_eslint_eslint_plugin",
       "typescript_eslint_eslint_plugin"
     ],
-    "42": [
+    "43": [
       "package_devdependencies_vitejs_plugin_react",
       "vitejs_plugin_react"
     ],
-    "43": [
+    "44": [
       "package_devdependencies_vitest",
       "vitest"
     ],
-    "44": [
+    "45": [
       "package_devdependencies_vitest_ui",
       "vitest_ui"
     ],
-    "45": [
+    "46": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "46": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "47": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "48": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "49": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "50": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "51": [
+    "52": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "52": [
+    "53": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "53": [
+    "54": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "54": [
+    "55": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "55": [
+    "56": [
       "_github_dependabot_github_actions_updates"
     ],
-    "56": [
+    "57": [
       "contributing_accessibility"
     ],
-    "57": [
+    "58": [
       "contributing_checks_ci_runs"
     ],
-    "58": [
+    "59": [
       "contributing_content_and_copy"
     ],
-    "59": [
+    "60": [
       "contributing_pre_commit_hooks"
     ],
-    "60": [
+    "61": [
       "contributing_prerequisites"
     ],
-    "61": [
+    "62": [
       "eslint_config"
     ],
-    "62": [
+    "63": [
       "github_workflows_codeql"
     ],
-    "63": [
+    "64": [
       "github_workflows_graphify_workflow"
     ],
-    "64": [
-      "github_workflows_standards_workflow"
-    ],
     "65": [
-      "infra_pulumi_production"
+      "github_workflows_standards_workflow"
     ],
     "66": [
       "known_issues_prerendering_security_headers"
@@ -622,13 +627,13 @@
     "11": 0.2,
     "12": 0.2222222222222222,
     "13": 0.3333333333333333,
-    "14": 0.4,
-    "15": 0.8,
-    "16": 0.7,
-    "17": 0.5,
+    "14": 0.3333333333333333,
+    "15": 0.4,
+    "16": 0.8,
+    "17": 0.7,
     "18": 0.5,
-    "19": 0.6666666666666666,
-    "20": 1.0,
+    "19": 0.5,
+    "20": 0.6666666666666666,
     "21": 1.0,
     "22": 1.0,
     "23": 1.0,
@@ -811,7 +816,7 @@
     }
   ],
   "tokens": {
-    "input": 6861,
-    "output": 1321
+    "input": 1161,
+    "output": 855
   }
 }
