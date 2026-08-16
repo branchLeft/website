@@ -6,8 +6,7 @@ config:
   branchleft-website-infra:contactSmtpHost: mx1.branchleft.co.uk
   branchleft-website-infra:contactSmtpPort: '587'
   branchleft-website-infra:contactSmtpUser:
-    secure: v1:nkV4a8vPa8hqONIg:a8rbcvkIOpDagRGnw09zmt7WatZ2F/UsQ2St03gQWwG5xqy90A==
+    secure: v1:neVP7/Q07Xtj5Sn0:dAuIsEC4KjGTjJYJeJa74ZctpIC7ENIqF9mtl8Ih2jAXqFoLag==
   branchleft-website-infra:contactSmtpPassword:
-    secure: v1:yk5VhPbVhnngI1JZ:w1TJ8qGC2UWYE8H8lhXdMPbs7Ubm8qrQdHz3oUR2j2bqM/YFMEKvNxb89Qjrgp4nKKCOzD3C8DU=
-secretsprovider: gcpkms://projects/branchleft-prod/locations/europe-west1/keyRings/pulumi/cryptoKeys/pulumi-secrets
-encryptedkey: CiQAefexUiGtT/EVJf7moGIQITcVH1XG6Y+z0AK38B9KrIUlIE0SSQBxixxQ2JkM9W0Bla0e6wCJNRkN3NmeO0Z4WIiWcqaVUqsZDygjdfhy83uS++Vhx2BAzHCg3pK0J/b0TChp6jSNh8gXM6xspTM=
+    secure: v1:xHIFIxALsbyKOSqM:sqZvPAf0SdvcBpE99rTq6vjId+04TpWrObVMTI9KFjbK0vaZMb4eb9cR31csbeWbczjDZUQ2L4s=
+encryptionsalt: v1:1fH2ykUlr8Q=:v1:E2uidSrHEvJKQN0q:Q+iUMPiwCjGmtIq5E0HDHwU+KFrWoA==
