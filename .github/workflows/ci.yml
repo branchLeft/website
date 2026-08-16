@@ -163,6 +163,9 @@ jobs:
       pull-requests: write
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
+      # Required to decrypt stack state once the stack is passphrase-wrapped;
+      # ignored while it is KMS-wrapped.
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
 
     steps:
       - name: Checkout
@@ -376,6 +379,9 @@ jobs:
       cancel-in-progress: false
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
+      # Required to decrypt stack state once the stack is passphrase-wrapped;
+      # ignored while it is KMS-wrapped.
+      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
 
     steps:
       - name: Checkout
