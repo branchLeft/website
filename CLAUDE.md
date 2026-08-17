@@ -36,6 +36,19 @@ pnpm dev                 # React Router dev server (HMR) — async terminal only
 pnpm start               # serve production build — async terminal only
 ```
 
+## Infrastructure
+
+`infra/` is the Pulumi program for the `branchleft-website-infra/production` stack. CI applies it on merge to `main` (`.github/workflows/ci.yml`) — that merge **is** the production deploy.
+
+- **`infra/Pulumi.production.yaml` carries no `encryptionsalt`.** The salt is an offline verifier for the stack passphrase, so a public tree must not hold one. CI appends it from the `PULUMI_SALT_WEBSITE` repository secret immediately before the first `pulumi` command, in both the preview and the deploy job. An operator applying by hand appends it the same way from their own copy, and does not commit the result:
+
+  ```bash
+  printf '\nencryptionsalt: %s\n' "$SALT" >> infra/Pulumi.production.yaml
+  ```
+
+- **The `secure:` config values stay committed.** Without the salt beside them they are ciphertext with no oracle attached — nothing in the file lets an attacker derive the key or verify a passphrase guess offline. `branchLeft/standards` PUL-12 bans the salt and only the salt, for exactly that reason.
+- `infra/scripts/assert-no-committed-pulumi-secrets.py` enforces the above locally (pre-commit) and in CI. It ships with a `--self-test` that runs on every edit to it, because a matcher that has quietly stopped matching passes every file.
+
 ## Project Conventions
 
 ### Content & Copy

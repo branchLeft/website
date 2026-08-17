@@ -33,6 +33,29 @@ repos:
 
   - repo: local
     hooks:
+      # Split in two, deliberately. The self-test is hermetic — fixtures in the
+      # script and a temp directory — so it must pass in every state of the
+      # tree and can run on every edit to the checker. The real check has a
+      # verdict about this checkout's files and runs when one of them changes.
+      # The matcher is the whole guard here: an over-broad pattern flags a key
+      # that merely contains the word, an over-anchored one stops flagging
+      # anything, and either failure is silent without a test asserting both
+      # directions.
+      - id: pulumi-secrets-guard-selftest
+        name: committed-secret guard self-test
+        entry: python3 infra/scripts/assert-no-committed-pulumi-secrets.py --self-test
+        language: system
+        files: '^infra/scripts/assert-no-committed-pulumi-secrets\.py$'
+        pass_filenames: false
+
+      - id: no-committed-pulumi-secrets
+        name: 'no encryptionsalt in a committed stack config'
+        entry: python3 infra/scripts/assert-no-committed-pulumi-secrets.py
+        language: system
+        files: '^(.*/)?Pulumi\.[^/]+\.yaml$'
+
+  - repo: local
+    hooks:
       - id: vitest
         name: vitest
         entry: sh -c 'CI=true pnpm test:unit'
