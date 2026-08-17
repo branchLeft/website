@@ -8,9 +8,14 @@
 #
 #     printf '\nencryptionsalt: %s\n' "$SALT" >> infra/Pulumi.production.yaml
 #
-# The `secure:` values below stay committed. Without the salt beside them they
-# are ciphertext with no oracle attached, which is the shape the standard asks
-# for.
+# The `secure:` values below stay committed: from this revision on, nothing in
+# this file verifies a passphrase guess, which is the shape the standard asks
+# for. Earlier revisions of this path do carry the salt, and deleting a line
+# does not remove it from a repository's history, so the salt and these
+# ciphertexts stay pairable until the stack passphrase is rotated and these
+# values are re-encrypted under the new one. The passphrase is a long random
+# string, so that pairing is not a practical attack — the rotation is still
+# outstanding, and this file is not evidence that it happened.
 config:
   gcp:project: branchleft-prod
   branchleft-website-infra:region: europe-west1

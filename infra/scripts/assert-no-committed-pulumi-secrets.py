@@ -32,10 +32,20 @@ file from this one.
 
 **What it does not see.** It reads lines, not YAML: a real parser is not
 available here, the same stdlib-only constraint the other script beside this
-one works under. A key written inside an inline flow mapping
-(`config: {encryptionsalt: x}`) is therefore missed. Pulumi has never emitted
-that shape -- it writes block style throughout -- so the gap is between what
-Pulumi writes and what YAML permits, not a case anything here produces.
+one works under. Three shapes are therefore missed:
+
+- a key inside an inline flow mapping (`config: {encryptionsalt: x}`);
+- a quoted key (`"encryptionsalt": v1:...`), which every YAML parser reads as
+  the same key this one is looking for;
+- a stack config named `Pulumi.<stack>.yml` or `Pulumi.<stack>.json`, both of
+  which Pulumi accepts and `STACK_CONFIG` below does not match. The standards
+  gate's own scope regex has the same shape, so widening one without the other
+  would only move the gap.
+
+Pulumi emits none of them -- it writes block style, unquoted keys and `.yaml`
+throughout -- so each gap is between what Pulumi writes and what Pulumi would
+accept, not a case anything here produces. They are listed because an
+undisclosed gap in a security check is indistinguishable from an absent one.
 """
 
 from __future__ import annotations
@@ -56,6 +66,16 @@ import tempfile
 # --no-verify to, so it matches nothing wider than that.
 FORBIDDEN_KEY = re.compile(r"^\s*(?:-\s+)?encryptionsalt\s*:", re.IGNORECASE)
 
+# Written as an escape, never as the literal character, which is invisible in
+# every diff and editor that would have to review it.
+#
+# U+FEFF is not whitespace to Python -- `"\ufeff".isspace()` is False -- so a
+# leading BOM puts a character in front of the anchor above that `^\s*` will
+# never cross, and a BOM-prefixed salt reads as clean while Pulumi, whose
+# parser drops the BOM, decrypts with it exactly as before. Nobody types one:
+# a "UTF-8 with BOM" editor save produces it by accident.
+BOM = "\ufeff"
+
 # A stack config, not a project file: `Pulumi.yaml` declares the project and
 # never holds the salt, while `Pulumi.<stack>.yaml` does.
 STACK_CONFIG = re.compile(r"^Pulumi\.[^/]+\.yaml$")
@@ -75,6 +95,10 @@ def is_commented(line: str) -> bool:
 def offending_lines(text: str) -> list[tuple[int, str]]:
     """Every (1-based line number, line) that commits a secret."""
     found = []
+    # Stripped from the document, not from each line: U+FEFF is only a byte
+    # order mark in the first position, and anywhere else it is a zero-width
+    # no-break space that belongs to whatever value contains it.
+    text = text[len(BOM) :] if text.startswith(BOM) else text
     for number, line in enumerate(text.splitlines(), start=1):
         if is_commented(line):
             continue
@@ -146,6 +170,11 @@ COMMENTED = (
 SALT_SUFFIX_KEY = "config:\n  proj:noencryptionsalt: x\n  proj:encryptionsaltish: y\n"
 CLEAN = "config:\n  gcp:project: branchleft-prod\n  proj:region: europe-west1\n"
 SALT_WITH_HASH = "encryptionsalt: v1:AAA=#notacomment\n"
+# A "UTF-8 with BOM" save of a salted file. The salt has to be on line 1 for
+# these to test anything: that is the only line the BOM can hide behind.
+BOM_SALT = BOM + "encryptionsalt: v1:AAA=\nconfig:\n  a: b\n"
+BOM_COMMENTED = BOM + COMMENTED
+BOM_CLEAN = BOM + CLEAN
 
 
 def _quiet_check(paths: list[pathlib.Path]) -> tuple[int, str]:
@@ -169,6 +198,9 @@ def _self_test() -> int:
         ("a key merely containing the word is not flagged", SALT_SUFFIX_KEY, []),
         ("a clean stack config passes", CLEAN, []),
         ("a # inside a value does not make the line a comment", SALT_WITH_HASH, [1]),
+        ("a BOM does not hide a salt on line 1", BOM_SALT, [1]),
+        ("a BOM does not turn a comment into a finding", BOM_COMMENTED, []),
+        ("a BOM on a clean file is not a finding", BOM_CLEAN, []),
     ]
 
     failures = 0
@@ -228,6 +260,18 @@ def _self_test() -> int:
         else:
             print("FAIL: a salt-free tree did not exit 0", file=sys.stderr)
             failures += 1
+
+        # The string fixtures above prove the matcher; this proves the read
+        # path hands it a BOM to strip rather than swallowing one silently.
+        bom_file = root / "infra" / "Pulumi.bom.yaml"
+        bom_file.write_bytes(b"\xef\xbb\xbf" + BOM_SALT[len(BOM) :].encode("utf-8"))
+        code, report = _quiet_check([bom_file])
+        if code == 1:
+            print("PASS: a real BOM-prefixed file on disk fails")
+        else:
+            print(f"FAIL: BOM-prefixed file -> exit {code}, report {report!r}", file=sys.stderr)
+            failures += 1
+        bom_file.unlink()
 
         code, _ = _quiet_check([root / "Pulumi.missing.yaml"])
         if code == 1:
