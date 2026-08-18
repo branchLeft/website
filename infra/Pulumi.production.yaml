@@ -1,3 +1,21 @@
+# `encryptionsalt` is deliberately absent from this committed file. It is a
+# passphrase verifier: anyone holding it can test candidate passphrases offline,
+# at their own rate, with no service in the loop and nothing to notice. The
+# stack still needs it to decrypt, so CI appends it from a repository secret
+# immediately before the first `pulumi` command (.github/workflows/ci.yml), and
+# an operator applying by hand appends it the same way from their own copy and
+# does not commit the result:
+#
+#     printf '\nencryptionsalt: %s\n' "$SALT" >> infra/Pulumi.production.yaml
+#
+# The `secure:` values below stay committed: from this revision on, nothing in
+# this file verifies a passphrase guess, which is the shape the standard asks
+# for. Earlier revisions of this path do carry the salt, and deleting a line
+# does not remove it from a repository's history, so the salt and these
+# ciphertexts stay pairable until the stack passphrase is rotated and these
+# values are re-encrypted under the new one. The passphrase is a long random
+# string, so that pairing is not a practical attack — the rotation is still
+# outstanding, and this file is not evidence that it happened.
 config:
   gcp:project: branchleft-prod
   branchleft-website-infra:region: europe-west1
@@ -9,4 +27,3 @@ config:
     secure: v1:neVP7/Q07Xtj5Sn0:dAuIsEC4KjGTjJYJeJa74ZctpIC7ENIqF9mtl8Ih2jAXqFoLag==
   branchleft-website-infra:contactSmtpPassword:
     secure: v1:xHIFIxALsbyKOSqM:sqZvPAf0SdvcBpE99rTq6vjId+04TpWrObVMTI9KFjbK0vaZMb4eb9cR31csbeWbczjDZUQ2L4s=
-encryptionsalt: v1:1fH2ykUlr8Q=:v1:E2uidSrHEvJKQN0q:Q+iUMPiwCjGmtIq5E0HDHwU+KFrWoA==
