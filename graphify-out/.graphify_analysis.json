@@ -55,6 +55,45 @@
       "infra_workloadidentity_workloadidentityprovider"
     ],
     "1": [
+      "branchleft_components",
+      "framer_motion",
+      "isbot",
+      "lucide_react",
+      "nodemailer",
+      "package",
+      "package_dependencies",
+      "package_dependencies_branchleft_components",
+      "package_dependencies_framer_motion",
+      "package_dependencies_isbot",
+      "package_dependencies_lucide_react",
+      "package_dependencies_nodemailer",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_router",
+      "package_dependencies_react_router_node",
+      "package_dependencies_react_router_serve",
+      "package_name",
+      "package_packagemanager",
+      "package_prettier",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_format",
+      "package_scripts_format_check",
+      "package_scripts_lint",
+      "package_scripts_prepare",
+      "package_scripts_start",
+      "package_scripts_test_e2e",
+      "package_scripts_test_ui",
+      "package_scripts_test_unit",
+      "package_scripts_typecheck",
+      "package_type",
+      "react_dom",
+      "react_router",
+      "react_router_node",
+      "react_router_serve"
+    ],
+    "2": [
       "app_lib_sendcontactemail_server",
       "app_lib_sendcontactemail_server_buildhtml",
       "app_lib_sendcontactemail_server_buildtext",
@@ -92,7 +131,7 @@
       "app_routes_contact_test_makerequest",
       "app_routes_contact_test_nextip"
     ],
-    "2": [
+    "3": [
       "app_lib_meta",
       "app_lib_meta_buildmeta",
       "app_lib_meta_organization_json_ld",
@@ -129,7 +168,7 @@
       "app_routes_terms_meta",
       "app_routes_terms_terms"
     ],
-    "3": [
+    "4": [
       "infra_tsconfig",
       "infra_tsconfig_compileroptions",
       "infra_tsconfig_compileroptions_pretty",
@@ -158,7 +197,7 @@
       "tsconfig_include",
       "tsconfig_json_ref_branchleft_tsconfig_strict_1_json"
     ],
-    "4": [
+    "5": [
       "app_components_navbar",
       "app_components_navbar_isdropdown",
       "app_components_navbar_nav_links",
@@ -184,7 +223,7 @@
       "package_dependencies_react",
       "react"
     ],
-    "5": [
+    "6": [
       "app_entry_server",
       "app_entry_server_handlerequest",
       "app_entry_server_streamtimeout",
@@ -209,48 +248,7 @@
       "app_root_meta",
       "docref_rfc_9110"
     ],
-    "6": [
-      "branchleft_components",
-      "framer_motion",
-      "isbot",
-      "lucide_react",
-      "nodemailer",
-      "package_dependencies",
-      "package_dependencies_branchleft_components",
-      "package_dependencies_framer_motion",
-      "package_dependencies_isbot",
-      "package_dependencies_lucide_react",
-      "package_dependencies_nodemailer",
-      "package_dependencies_react_dom",
-      "package_dependencies_react_router",
-      "package_dependencies_react_router_node",
-      "package_dependencies_react_router_serve",
-      "react_dom",
-      "react_router",
-      "react_router_node",
-      "react_router_serve"
-    ],
     "7": [
-      "package",
-      "package_name",
-      "package_packagemanager",
-      "package_prettier",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_format",
-      "package_scripts_format_check",
-      "package_scripts_lint",
-      "package_scripts_prepare",
-      "package_scripts_start",
-      "package_scripts_test_e2e",
-      "package_scripts_test_ui",
-      "package_scripts_test_unit",
-      "package_scripts_typecheck",
-      "package_type"
-    ],
-    "8": [
       "app_components_footer",
       "app_components_footer_footer",
       "app_components_icons_blueskyicon",
@@ -267,7 +265,7 @@
       "app_lib_social_links",
       "app_lib_social_links_social_links"
     ],
-    "9": [
+    "8": [
       "infra_scripts_assert_no_committed_pulumi_secrets",
       "infra_scripts_assert_no_committed_pulumi_secrets_check",
       "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
@@ -282,7 +280,7 @@
       "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
       "path"
     ],
-    "10": [
+    "9": [
       "tests_404_spec",
       "tests_a11y",
       "tests_a11y_checka11y",
@@ -296,12 +294,12 @@
       "tests_solutions_local_news_spec",
       "tests_terms_spec"
     ],
-    "11": [
-      "axe_core_playwright",
+    "10": [
       "branchleft_prettier_config",
+      "eslint_plugin_react",
       "package_devdependencies",
-      "package_devdependencies_axe_core_playwright",
       "package_devdependencies_branchleft_prettier_config",
+      "package_devdependencies_eslint_plugin_react",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
@@ -309,7 +307,7 @@
       "vite",
       "vitest_coverage_v8"
     ],
-    "12": [
+    "11": [
       "infra_package_devdependencies",
       "infra_package_devdependencies_branchleft_tsconfig",
       "infra_package_devdependencies_types_node",
@@ -321,7 +319,7 @@
       "package_json_types_node",
       "package_json_typescript"
     ],
-    "13": [
+    "12": [
       "infra_package",
       "infra_package_dependencies",
       "infra_package_dependencies_pulumi_gcp",
@@ -332,70 +330,75 @@
       "pulumi_gcp",
       "pulumi_pulumi"
     ],
-    "14": [
+    "13": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "15": [
+    "14": [
       "infra_scripts_assert_no_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_main",
       "infra_scripts_assert_no_edge_deletes_rationale_55",
       "infra_scripts_assert_no_edge_deletes_self_test"
     ],
-    "16": [
+    "15": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "17": [
+    "16": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "18": [
+    "17": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "19": [
-      "claude_md",
-      "github_workflows_ci",
-      "infra_pulumi_production"
+    "18": [
+      "github_workflows_ci_checks",
+      "github_workflows_ci_deploy",
+      "github_workflows_ci_e2e",
+      "github_workflows_ci_pulumi_preview"
     ],
-    "20": [
+    "19": [
       "_github_dependabot_infra_npm_updates",
       "infra_pulumi_project"
     ],
-    "21": [
+    "20": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
+    ],
+    "21": [
+      "axe_core_playwright",
+      "package_devdependencies_axe_core_playwright"
     ],
     "22": [
       "branchleft_github_workflows_docs_lint",
       "github_workflows_docs_lint_docs_lint"
     ],
     "23": [
+      "claude_md",
+      "infra_pulumi_production"
+    ],
+    "24": [
       "eslint",
       "package_devdependencies_eslint"
     ],
-    "24": [
+    "25": [
       "eslint_config_prettier",
       "package_devdependencies_eslint_config_prettier"
     ],
-    "25": [
+    "26": [
       "eslint_js",
       "package_devdependencies_eslint_js"
-    ],
-    "26": [
-      "eslint_plugin_react",
-      "package_devdependencies_eslint_plugin_react"
     ],
     "27": [
       "eslint_plugin_react_hooks",
@@ -518,111 +521,114 @@
       "eslint_config"
     ],
     "61": [
-      "github_workflows_codeql"
+      "github_workflows_ci"
     ],
     "62": [
-      "github_workflows_graphify_workflow"
+      "github_workflows_codeql"
     ],
     "63": [
-      "github_workflows_standards_workflow"
+      "github_workflows_graphify_workflow"
     ],
     "64": [
-      "known_issues_prerendering_security_headers"
+      "github_workflows_standards_workflow"
     ],
     "65": [
-      "notice_license_scope"
+      "known_issues_prerendering_security_headers"
     ],
     "66": [
-      "notice_third_party_fonts"
+      "notice_license_scope"
     ],
     "67": [
-      "playwright_config"
+      "notice_third_party_fonts"
     ],
     "68": [
-      "pre_commit_config"
+      "playwright_config"
     ],
     "69": [
-      "public_apple_touch_icon"
+      "pre_commit_config"
     ],
     "70": [
-      "public_favicon_192"
+      "public_apple_touch_icon"
     ],
     "71": [
-      "public_favicon_512"
+      "public_favicon_192"
     ],
     "72": [
-      "public_people_headshot_160_jpg"
+      "public_favicon_512"
     ],
     "73": [
-      "public_people_headshot_160_webp"
+      "public_people_headshot_160_jpg"
     ],
     "74": [
-      "public_people_headshot_320_jpg"
+      "public_people_headshot_160_webp"
     ],
     "75": [
-      "public_people_headshot_320_webp"
+      "public_people_headshot_320_jpg"
     ],
     "76": [
-      "public_people_headshot_480_headshot"
+      "public_people_headshot_320_webp"
     ],
     "77": [
-      "public_people_headshot_480_webp"
+      "public_people_headshot_480_headshot"
     ],
     "78": [
-      "pulumi"
+      "public_people_headshot_480_webp"
     ],
     "79": [
-      "react_router_config"
+      "pulumi"
     ],
     "80": [
-      "react_router_v7"
+      "react_router_config"
     ],
     "81": [
-      "tests_favicon_spec"
+      "react_router_v7"
     ],
     "82": [
-      "tests_logo_svg_spec"
+      "tests_favicon_spec"
     ],
     "83": [
-      "tests_meta_spec"
+      "tests_logo_svg_spec"
     ],
     "84": [
-      "tests_no_js_spec"
+      "tests_meta_spec"
     ],
     "85": [
-      "tests_og_image_spec"
+      "tests_no_js_spec"
     ],
     "86": [
-      "tests_robots_txt_spec"
+      "tests_og_image_spec"
     ],
     "87": [
-      "tests_sitemap_xml_spec"
+      "tests_robots_txt_spec"
     ],
     "88": [
+      "tests_sitemap_xml_spec"
+    ],
+    "89": [
       "vitest_config"
     ]
   },
   "cohesion": {
     "0": 0.07088989441930618,
-    "1": 0.09047619047619047,
-    "2": 0.08907563025210084,
-    "3": 0.07977207977207977,
-    "4": 0.12318840579710146,
-    "5": 0.1225296442687747,
-    "6": 0.10526315789473684,
-    "7": 0.1111111111111111,
-    "8": 0.19047619047619047,
-    "9": 0.358974358974359,
-    "10": 0.3181818181818182,
-    "11": 0.18181818181818182,
-    "12": 0.2,
-    "13": 0.2222222222222222,
-    "14": 0.4,
-    "15": 0.7,
+    "1": 0.05405405405405406,
+    "2": 0.09047619047619047,
+    "3": 0.08907563025210084,
+    "4": 0.07977207977207977,
+    "5": 0.12318840579710146,
+    "6": 0.1225296442687747,
+    "7": 0.19047619047619047,
+    "8": 0.358974358974359,
+    "9": 0.3181818181818182,
+    "10": 0.18181818181818182,
+    "11": 0.2,
+    "12": 0.2222222222222222,
+    "13": 0.4,
+    "14": 0.7,
+    "15": 0.5,
     "16": 0.5,
-    "17": 0.5,
+    "17": 0.6666666666666666,
     "18": 0.6666666666666666,
-    "19": 0.6666666666666666,
+    "19": 1.0,
     "20": 1.0,
     "21": 1.0,
     "22": 1.0,
@@ -691,7 +697,8 @@
     "85": 1.0,
     "86": 1.0,
     "87": 1.0,
-    "88": 1.0
+    "88": 1.0,
+    "89": 1.0
   },
   "gods": [
     {
@@ -803,7 +810,7 @@
     }
   ],
   "tokens": {
-    "input": 12060,
-    "output": 1030
+    "input": 7075,
+    "output": 937
   }
 }
