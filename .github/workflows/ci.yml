@@ -174,10 +174,6 @@ jobs:
       pull-requests: write
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
-      # Required to decrypt stack state once the stack is passphrase-wrapped;
-      # ignored while it is KMS-wrapped.
-      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
-      PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
 
     steps:
       - name: Checkout
@@ -281,18 +277,25 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # The stack's `encryptionsalt` is not committed: it is an offline
-      # verifier for the passphrase above, so a repository that anyone can
-      # clone must not carry it. Pulumi still needs it in the file to decrypt,
-      # so it is appended here, on the runner, for this job only.
+      # verifier for the passphrase, so a repository that anyone can clone
+      # must not carry it. Pulumi still needs it in the file to decrypt, so
+      # it is appended here, on the runner, for this job only.
       #
-      # Read from the job-level `env:` block above rather than interpolated
-      # here: a `${{ }}` inside `run` is substituted before the shell parses
-      # the line, so a value containing shell metacharacters would be executed.
+      # Both secrets are bound in this step's own `env:`, not the job's --
+      # scoped to the steps that actually run a `pulumi` command, not to the
+      # dependency install earlier in the job. Read from `env:` rather than
+      # interpolated as `${{ }}` inside `run`: an expression in `run` is
+      # substituted before the shell parses the line, so a value containing
+      # shell metacharacters would execute.
       #
-      # Fails closed on an empty value. Without the check, Pulumi reads a file
-      # whose salt line is blank, reports the stack's secrets as corrupt, and
-      # sends whoever debugs it at the passphrase rather than at a repository
-      # secret nobody set.
+      # Fails closed on an empty salt, an empty passphrase, or a salt missing
+      # its `v1:` prefix. Pulumi's own passphrase lookup does not distinguish
+      # "unset" from "set to the empty string", so a missing
+      # PULUMI_CONFIG_PASSPHRASE would otherwise reach `pulumi preview` and be
+      # treated as a valid passphrase rather than failing here. A malformed
+      # salt is the realistic failure mode for a hand-pasted secret and
+      # otherwise surfaces as an opaque Pulumi decryption error rather than as
+      # the malformed secret it actually is.
       #
       # Carries the same guard as the steps around it: a fork PR has no
       # repository secrets at all, so an ungated fail-closed here would turn
@@ -302,11 +305,25 @@ jobs:
           github.event.pull_request.head.repo.full_name == github.repository &&
           steps.paths.outputs.infra == 'true'
         working-directory: infra
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+          PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
         run: |
           if [ -z "$PULUMI_SALT_WEBSITE" ]; then
             echo "PULUMI_SALT_WEBSITE is empty or unset -- set the repository secret before deploying" >&2
             exit 1
           fi
+          if [ -z "$PULUMI_CONFIG_PASSPHRASE" ]; then
+            echo "PULUMI_CONFIG_PASSPHRASE is empty or unset -- set the repository secret before deploying" >&2
+            exit 1
+          fi
+          case "$PULUMI_SALT_WEBSITE" in
+            v1:*) ;;
+            *)
+              echo "PULUMI_SALT_WEBSITE does not look like a Pulumi-generated salt (expected a 'v1:' prefix) -- check the repository secret was pasted in full" >&2
+              exit 1
+              ;;
+          esac
           printf '\nencryptionsalt: %s\n' "$PULUMI_SALT_WEBSITE" >> Pulumi.production.yaml
 
       - name: Run Pulumi preview
@@ -316,6 +333,7 @@ jobs:
         working-directory: infra
         env:
           IMAGE_TAG: ${{ github.sha }}
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
         run: |
           pulumi login gs://branchleft-pulumi-state
           pulumi stack select production
@@ -420,10 +438,6 @@ jobs:
       cancel-in-progress: false
     env:
       IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
-      # Required to decrypt stack state once the stack is passphrase-wrapped;
-      # ignored while it is KMS-wrapped.
-      PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
-      PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
 
     steps:
       - name: Checkout
@@ -477,33 +491,55 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # The stack's `encryptionsalt` is not committed: it is an offline
-      # verifier for the passphrase above, so a repository that anyone can
-      # clone must not carry it. Pulumi still needs it in the file to decrypt,
-      # so it is appended here, on the runner, for this job only.
+      # verifier for the passphrase, so a repository that anyone can clone
+      # must not carry it. Pulumi still needs it in the file to decrypt, so
+      # it is appended here, on the runner, for this job only.
       #
-      # Read from the job-level `env:` block above rather than interpolated
-      # here: a `${{ }}` inside `run` is substituted before the shell parses
-      # the line, so a value containing shell metacharacters would be executed.
+      # Both secrets are bound in this step's own `env:`, not the job's --
+      # scoped to the steps that actually run a `pulumi` command, not to the
+      # dependency install earlier in the job. Read from `env:` rather than
+      # interpolated as `${{ }}` inside `run`: an expression in `run` is
+      # substituted before the shell parses the line, so a value containing
+      # shell metacharacters would execute.
       #
-      # Fails closed on an empty value. Without the check, Pulumi reads a file
-      # whose salt line is blank, reports the stack's secrets as corrupt, and
-      # sends whoever debugs it at the passphrase rather than at a repository
-      # secret nobody set. This job is the production deploy, so failing here
-      # is also the only thing standing between an unset secret and a stack
-      # update computed from config Pulumi could not read.
+      # Fails closed on an empty salt, an empty passphrase, or a salt missing
+      # its `v1:` prefix. Pulumi's own passphrase lookup does not distinguish
+      # "unset" from "set to the empty string", so a missing
+      # PULUMI_CONFIG_PASSPHRASE would otherwise reach `pulumi up` and be
+      # treated as a valid passphrase rather than failing here -- this job is
+      # the production deploy, so that failure mode is a stack update
+      # computed against config Pulumi could not read. A malformed salt is
+      # the realistic failure mode for a hand-pasted secret and otherwise
+      # surfaces as an opaque Pulumi decryption error rather than as the
+      # malformed secret it actually is.
       - name: Restore the stack's encryption salt
         working-directory: infra
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+          PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
         run: |
           if [ -z "$PULUMI_SALT_WEBSITE" ]; then
             echo "PULUMI_SALT_WEBSITE is empty or unset -- set the repository secret before deploying" >&2
             exit 1
           fi
+          if [ -z "$PULUMI_CONFIG_PASSPHRASE" ]; then
+            echo "PULUMI_CONFIG_PASSPHRASE is empty or unset -- set the repository secret before deploying" >&2
+            exit 1
+          fi
+          case "$PULUMI_SALT_WEBSITE" in
+            v1:*) ;;
+            *)
+              echo "PULUMI_SALT_WEBSITE does not look like a Pulumi-generated salt (expected a 'v1:' prefix) -- check the repository secret was pasted in full" >&2
+              exit 1
+              ;;
+          esac
           printf '\nencryptionsalt: %s\n' "$PULUMI_SALT_WEBSITE" >> Pulumi.production.yaml
 
       - name: Deploy with Pulumi
         working-directory: infra
         env:
           IMAGE_TAG: ${{ github.sha }}
+          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
         run: |
           pulumi login gs://branchleft-pulumi-state
           pulumi stack select production
