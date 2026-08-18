@@ -1,0 +1,1 @@
+{"nodes": [{"id": "github_workflows_ci", "label": ".github/workflows/ci.yml", "file_type": "code", "source_file": ".github/workflows/ci.yml"}], "edges": [{"source": "github_workflows_ci", "target": "infra_pulumi_production", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": ".github/workflows/ci.yml"}], "hyperedges": []}
