@@ -268,6 +268,21 @@
       "app_lib_social_links_social_links"
     ],
     "9": [
+      "infra_scripts_assert_no_committed_pulumi_secrets",
+      "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "infra_scripts_assert_no_committed_pulumi_secrets_is_commented",
+      "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "infra_scripts_assert_no_committed_pulumi_secrets_rationale_181",
+      "infra_scripts_assert_no_committed_pulumi_secrets_rationale_87",
+      "infra_scripts_assert_no_committed_pulumi_secrets_rationale_96",
+      "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "path"
+    ],
+    "10": [
       "tests_404_spec",
       "tests_a11y",
       "tests_a11y_checka11y",
@@ -281,20 +296,20 @@
       "tests_solutions_local_news_spec",
       "tests_terms_spec"
     ],
-    "10": [
+    "11": [
+      "axe_core_playwright",
       "branchleft_prettier_config",
       "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_types_react_dom",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
-      "types_react_dom",
       "typescript_eslint_parser",
       "vite",
       "vitest_coverage_v8"
     ],
-    "11": [
+    "12": [
       "infra_package_devdependencies",
       "infra_package_devdependencies_branchleft_tsconfig",
       "infra_package_devdependencies_types_node",
@@ -306,7 +321,7 @@
       "package_json_types_node",
       "package_json_typescript"
     ],
-    "12": [
+    "13": [
       "infra_package",
       "infra_package_dependencies",
       "infra_package_dependencies_pulumi_gcp",
@@ -317,298 +332,273 @@
       "pulumi_gcp",
       "pulumi_pulumi"
     ],
-    "13": [
-      "branchleft_website_infra_github_repo",
-      "branchleft_website_infra_image_tag",
-      "branchleft_website_infra_region",
-      "branchleft_website_infra_smtp_config",
-      "gcp_project_branchleft_prod",
-      "infra_pulumi_production_yaml"
-    ],
     "14": [
-      "pre_commit_config_check_added_large_files",
-      "pre_commit_config_check_merge_conflict",
-      "pre_commit_config_check_yaml",
-      "pre_commit_config_end_of_file_fixer",
-      "pre_commit_config_pre_commit_hooks",
-      "pre_commit_config_trailing_whitespace"
-    ],
-    "15": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "16": [
-      "github_workflows_ci",
-      "github_workflows_ci_checks",
-      "github_workflows_ci_deploy",
-      "github_workflows_ci_e2e",
-      "github_workflows_ci_pulumi_preview"
-    ],
-    "17": [
+    "15": [
       "infra_scripts_assert_no_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_edge_deletes",
       "infra_scripts_assert_no_edge_deletes_main",
       "infra_scripts_assert_no_edge_deletes_rationale_55",
       "infra_scripts_assert_no_edge_deletes_self_test"
     ],
-    "18": [
+    "16": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "19": [
+    "17": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "20": [
+    "18": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "21": [
+    "19": [
+      "claude_md",
+      "github_workflows_ci",
+      "infra_pulumi_production"
+    ],
+    "20": [
       "_github_dependabot_infra_npm_updates",
       "infra_pulumi_project"
     ],
-    "22": [
+    "21": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
     ],
-    "23": [
-      "axe_core_playwright",
-      "package_devdependencies_axe_core_playwright"
-    ],
-    "24": [
+    "22": [
       "branchleft_github_workflows_docs_lint",
       "github_workflows_docs_lint_docs_lint"
     ],
-    "25": [
-      "claude_md",
-      "react_router_v7"
-    ],
-    "26": [
+    "23": [
       "eslint",
       "package_devdependencies_eslint"
     ],
-    "27": [
+    "24": [
       "eslint_config_prettier",
       "package_devdependencies_eslint_config_prettier"
     ],
-    "28": [
+    "25": [
       "eslint_js",
       "package_devdependencies_eslint_js"
     ],
-    "29": [
+    "26": [
       "eslint_plugin_react",
       "package_devdependencies_eslint_plugin_react"
     ],
-    "30": [
+    "27": [
       "eslint_plugin_react_hooks",
       "package_devdependencies_eslint_plugin_react_hooks"
     ],
-    "31": [
+    "28": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "32": [
+    "29": [
       "globals",
       "package_devdependencies_globals"
     ],
-    "33": [
+    "30": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "34": [
+    "31": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "35": [
+    "32": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "36": [
+    "33": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "37": [
+    "34": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "38": [
+    "35": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "39": [
+    "36": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "40": [
+    "37": [
       "package_devdependencies_types_react",
       "types_react"
     ],
-    "41": [
+    "38": [
+      "package_devdependencies_types_react_dom",
+      "types_react_dom"
+    ],
+    "39": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "42": [
+    "40": [
       "package_devdependencies_typescript_eslint_eslint_plugin",
       "typescript_eslint_eslint_plugin"
     ],
-    "43": [
+    "41": [
       "package_devdependencies_vitejs_plugin_react",
       "vitejs_plugin_react"
     ],
-    "44": [
+    "42": [
       "package_devdependencies_vitest",
       "vitest"
     ],
-    "45": [
+    "43": [
       "package_devdependencies_vitest_ui",
       "vitest_ui"
     ],
-    "46": [
+    "44": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "47": [
+    "45": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "48": [
+    "46": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "49": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "50": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "51": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "52": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "53": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "54": [
+    "52": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "55": [
+    "53": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "56": [
+    "54": [
       "_github_dependabot_github_actions_updates"
     ],
-    "57": [
+    "55": [
       "contributing_accessibility"
     ],
-    "58": [
+    "56": [
       "contributing_checks_ci_runs"
     ],
-    "59": [
+    "57": [
       "contributing_content_and_copy"
     ],
-    "60": [
+    "58": [
       "contributing_pre_commit_hooks"
     ],
-    "61": [
+    "59": [
       "contributing_prerequisites"
     ],
-    "62": [
+    "60": [
       "eslint_config"
     ],
-    "63": [
+    "61": [
       "github_workflows_codeql"
     ],
-    "64": [
+    "62": [
       "github_workflows_graphify_workflow"
     ],
-    "65": [
+    "63": [
       "github_workflows_standards_workflow"
     ],
-    "66": [
+    "64": [
       "known_issues_prerendering_security_headers"
     ],
-    "67": [
+    "65": [
       "notice_license_scope"
     ],
-    "68": [
+    "66": [
       "notice_third_party_fonts"
     ],
-    "69": [
+    "67": [
       "playwright_config"
     ],
-    "70": [
-      "pre_commit_config_eslint"
+    "68": [
+      "pre_commit_config"
     ],
-    "71": [
-      "pre_commit_config_prettier"
-    ],
-    "72": [
-      "pre_commit_config_vitest"
-    ],
-    "73": [
+    "69": [
       "public_apple_touch_icon"
     ],
-    "74": [
+    "70": [
       "public_favicon_192"
     ],
-    "75": [
+    "71": [
       "public_favicon_512"
     ],
-    "76": [
+    "72": [
       "public_people_headshot_160_jpg"
     ],
-    "77": [
+    "73": [
       "public_people_headshot_160_webp"
     ],
-    "78": [
+    "74": [
       "public_people_headshot_320_jpg"
     ],
-    "79": [
+    "75": [
       "public_people_headshot_320_webp"
     ],
-    "80": [
+    "76": [
       "public_people_headshot_480_headshot"
     ],
-    "81": [
+    "77": [
       "public_people_headshot_480_webp"
     ],
-    "82": [
+    "78": [
       "pulumi"
     ],
-    "83": [
+    "79": [
       "react_router_config"
     ],
-    "84": [
+    "80": [
+      "react_router_v7"
+    ],
+    "81": [
       "tests_favicon_spec"
     ],
-    "85": [
+    "82": [
       "tests_logo_svg_spec"
     ],
-    "86": [
+    "83": [
       "tests_meta_spec"
     ],
-    "87": [
+    "84": [
       "tests_no_js_spec"
     ],
-    "88": [
+    "85": [
       "tests_og_image_spec"
     ],
-    "89": [
+    "86": [
       "tests_robots_txt_spec"
     ],
-    "90": [
+    "87": [
       "tests_sitemap_xml_spec"
     ],
-    "91": [
+    "88": [
       "vitest_config"
     ]
   },
@@ -622,18 +612,18 @@
     "6": 0.10526315789473684,
     "7": 0.1111111111111111,
     "8": 0.19047619047619047,
-    "9": 0.3181818181818182,
-    "10": 0.18181818181818182,
-    "11": 0.2,
-    "12": 0.2222222222222222,
-    "13": 0.3333333333333333,
-    "14": 0.3333333333333333,
-    "15": 0.4,
-    "16": 0.8,
-    "17": 0.7,
-    "18": 0.5,
-    "19": 0.5,
-    "20": 0.6666666666666666,
+    "9": 0.358974358974359,
+    "10": 0.3181818181818182,
+    "11": 0.18181818181818182,
+    "12": 0.2,
+    "13": 0.2222222222222222,
+    "14": 0.4,
+    "15": 0.7,
+    "16": 0.5,
+    "17": 0.5,
+    "18": 0.6666666666666666,
+    "19": 0.6666666666666666,
+    "20": 1.0,
     "21": 1.0,
     "22": 1.0,
     "23": 1.0,
@@ -701,10 +691,7 @@
     "85": 1.0,
     "86": 1.0,
     "87": 1.0,
-    "88": 1.0,
-    "89": 1.0,
-    "90": 1.0,
-    "91": 1.0
+    "88": 1.0
   },
   "gods": [
     {
@@ -743,6 +730,11 @@
       "degree": 7
     },
     {
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "label": "_self_test()",
+      "degree": 7
+    },
+    {
       "id": "app_lib_security_headers_buildsecurityheaders",
       "label": "buildSecurityHeaders()",
       "degree": 5
@@ -750,11 +742,6 @@
     {
       "id": "infra_apis_enabledapis",
       "label": "enabledApis",
-      "degree": 5
-    },
-    {
-      "id": "infra_config_region",
-      "label": "region",
       "degree": 5
     }
   ],
@@ -816,7 +803,7 @@
     }
   ],
   "tokens": {
-    "input": 1161,
-    "output": 855
+    "input": 12060,
+    "output": 1030
   }
 }

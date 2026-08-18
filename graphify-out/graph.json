@@ -4,33 +4,6 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "production_environment_config",
-        "label": "Production Environment Configuration",
-        "nodes": [
-          "gcp_project_branchleft_prod",
-          "branchleft_website_infra_region",
-          "branchleft_website_infra_github_repo",
-          "branchleft_website_infra_image_tag",
-          "branchleft_website_infra_smtp_config"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.9,
-        "source_file": "infra/Pulumi.production.yaml"
-      },
-      {
-        "id": "ci_test_suite",
-        "label": "CI Test Suite",
-        "nodes": [
-          "github_workflows_ci_checks",
-          "github_workflows_ci_e2e"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 0.9,
-        "source_file": ".github/workflows/ci.yml"
-      },
-      {
         "id": "ci_linting_standards",
         "label": "CI Linting and Standards",
         "nodes": [
@@ -41,19 +14,6 @@
         "confidence": "INFERRED",
         "confidence_score": 0.8,
         "source_file": ".github/workflows/docs-lint.yml"
-      },
-      {
-        "id": "local_pnpm_hooks",
-        "label": "Local PNPM Hooks",
-        "nodes": [
-          "pre_commit_config_prettier",
-          "pre_commit_config_eslint",
-          "pre_commit_config_vitest"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".pre-commit-config.yaml"
       },
       {
         "id": "prerendering_safety_constraint",
@@ -1192,7 +1152,7 @@
       "source_file": "app/routes/logo-svg.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 22,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "logo-svg.tsx",
       "id": "app_routes_logo_svg"
@@ -1204,7 +1164,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 22,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "loader()",
       "id": "app_routes_logo_svg_loader"
@@ -1355,7 +1315,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 62,
+      "community": 60,
       "community_name": "ESLint Config",
       "norm_label": "eslint.config.js",
       "id": "eslint_config"
@@ -1509,7 +1469,7 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
+      "community": 15,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "assert-no-edge-deletes.py",
       "id": "infra_scripts_assert_no_edge_deletes"
@@ -1521,7 +1481,7 @@
       "source_location": "L54",
       "_callable": true,
       "_origin": "ast",
-      "community": 17,
+      "community": 15,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "edge_deletes()",
       "id": "infra_scripts_assert_no_edge_deletes_edge_deletes"
@@ -1533,7 +1493,7 @@
       "source_location": "L98",
       "_callable": true,
       "_origin": "ast",
-      "community": 17,
+      "community": 15,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "self_test()",
       "id": "infra_scripts_assert_no_edge_deletes_self_test"
@@ -1545,7 +1505,7 @@
       "source_location": "L118",
       "_callable": true,
       "_origin": "ast",
-      "community": 17,
+      "community": 15,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "main()",
       "id": "infra_scripts_assert_no_edge_deletes_main"
@@ -1556,7 +1516,7 @@
       "source_file": "infra/scripts/assert-no-edge-deletes.py",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 17,
+      "community": 15,
       "community_name": "Edge Delete-Guard Script",
       "norm_label": "return the edge resources `text` plans to delete. pairs each `(delete)` line...",
       "id": "infra_scripts_assert_no_edge_deletes_rationale_55"
@@ -1622,7 +1582,7 @@
       "source_file": "playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
+      "community": 67,
       "community_name": "Playwright Config",
       "norm_label": "playwright.config.ts",
       "id": "playwright_config"
@@ -1633,7 +1593,7 @@
       "source_file": "react-router.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 83,
+      "community": 79,
       "community_name": "React Router Config",
       "norm_label": "react-router.config.ts",
       "id": "react_router_config"
@@ -1644,7 +1604,7 @@
       "source_file": "tests/404.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "404.spec.ts",
       "id": "tests_404_spec"
@@ -1655,7 +1615,7 @@
       "source_file": "tests/a11y.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "a11y.ts",
       "id": "tests_a11y"
@@ -1667,7 +1627,7 @@
       "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "waitforanimationssettled()",
       "id": "tests_a11y_waitforanimationssettled"
@@ -1679,7 +1639,7 @@
       "source_location": "L36",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "checka11y()",
       "id": "tests_a11y_checka11y"
@@ -1690,7 +1650,7 @@
       "source_file": "tests/about.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "about.spec.ts",
       "id": "tests_about_spec"
@@ -1701,7 +1661,7 @@
       "source_file": "tests/favicon.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 84,
+      "community": 81,
       "community_name": "Favicon Test",
       "norm_label": "favicon.spec.ts",
       "id": "tests_favicon_spec"
@@ -1712,7 +1672,7 @@
       "source_file": "tests/home.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "home.spec.ts",
       "id": "tests_home_spec"
@@ -1723,7 +1683,7 @@
       "source_file": "tests/logo-svg.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 85,
+      "community": 82,
       "community_name": "Logo SVG Test",
       "norm_label": "logo-svg.spec.ts",
       "id": "tests_logo_svg_spec"
@@ -1734,7 +1694,7 @@
       "source_file": "tests/meta.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 86,
+      "community": 83,
       "community_name": "Meta Tags Test",
       "norm_label": "meta.spec.ts",
       "id": "tests_meta_spec"
@@ -1745,7 +1705,7 @@
       "source_file": "tests/nav.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "nav.spec.ts",
       "id": "tests_nav_spec"
@@ -1756,7 +1716,7 @@
       "source_file": "tests/og-image.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 88,
+      "community": 85,
       "community_name": "OG Image Test",
       "norm_label": "og-image.spec.ts",
       "id": "tests_og_image_spec"
@@ -1767,7 +1727,7 @@
       "source_file": "tests/privacy.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "privacy.spec.ts",
       "id": "tests_privacy_spec"
@@ -1778,7 +1738,7 @@
       "source_file": "tests/robots-txt.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 89,
+      "community": 86,
       "community_name": "Robots.txt Test",
       "norm_label": "robots-txt.spec.ts",
       "id": "tests_robots_txt_spec"
@@ -1789,7 +1749,7 @@
       "source_file": "tests/sitemap-xml.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 90,
+      "community": 87,
       "community_name": "Sitemap Test",
       "norm_label": "sitemap-xml.spec.ts",
       "id": "tests_sitemap_xml_spec"
@@ -1800,7 +1760,7 @@
       "source_file": "tests/solutions-affordable-websites.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-affordable-websites.spec.ts",
       "id": "tests_solutions_affordable_websites_spec"
@@ -1811,7 +1771,7 @@
       "source_file": "tests/solutions-local-news.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-local-news.spec.ts",
       "id": "tests_solutions_local_news_spec"
@@ -1822,7 +1782,7 @@
       "source_file": "tests/terms.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "terms.spec.ts",
       "id": "tests_terms_spec"
@@ -1833,7 +1793,7 @@
       "source_file": "vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 46,
+      "community": 44,
       "community_name": "vite-config Dependency",
       "norm_label": "vite.config.ts",
       "id": "vite_config"
@@ -1845,7 +1805,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 46,
+      "community": 44,
       "community_name": "vite-config Dependency",
       "norm_label": "stripcssbanners()",
       "id": "vite_config_stripcssbanners"
@@ -1856,7 +1816,7 @@
       "source_file": "vitest.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 91,
+      "community": 88,
       "community_name": "Vitest Config",
       "norm_label": "vitest.config.ts",
       "id": "vitest_config"
@@ -1870,7 +1830,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 16,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "react router v7 framework mode (locked)",
       "_origin": "semantic",
@@ -1885,7 +1845,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 16,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "legacy patterns to migrate",
       "_origin": "semantic",
@@ -1900,7 +1860,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 53,
       "community_name": "React Router: RSC Future Path",
       "norm_label": "rsc (future path, not active)",
       "_origin": "semantic",
@@ -1915,7 +1875,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 16,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "skill references table",
       "_origin": "semantic",
@@ -1930,7 +1890,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 16,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "framework mode committed strategy",
       "_origin": "semantic",
@@ -1945,7 +1905,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 51,
+      "community": 49,
       "community_name": "React Router: Route Configuration",
       "norm_label": "route configuration (app/routes.ts)",
       "_origin": "semantic",
@@ -1960,7 +1920,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 52,
+      "community": 50,
       "community_name": "React Router: Route Modules",
       "norm_label": "route modules",
       "_origin": "semantic",
@@ -1975,7 +1935,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 45,
       "community_name": "React Router: Data & Mutations",
       "norm_label": "data and mutations (loader/action)",
       "_origin": "semantic",
@@ -1990,7 +1950,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 48,
+      "community": 46,
       "community_name": "React Router: Forms & Pending UI",
       "norm_label": "forms, fetchers, and pending ui",
       "_origin": "semantic",
@@ -2005,7 +1965,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 54,
+      "community": 52,
       "community_name": "React Router: Type Safety",
       "norm_label": "type safety (route.* generated types)",
       "_origin": "semantic",
@@ -2020,7 +1980,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
+      "community": 48,
       "community_name": "React Router: Rendering Strategy",
       "norm_label": "rendering strategy (ssr/spa/pre-render)",
       "_origin": "semantic",
@@ -2035,7 +1995,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 49,
+      "community": 47,
       "community_name": "React Router: Middleware & Sessions",
       "norm_label": "middleware, sessions, and auth",
       "_origin": "semantic",
@@ -2050,7 +2010,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 51,
       "community_name": "React Router: RSC Framework",
       "norm_label": "rsc framework (future path)",
       "_origin": "semantic",
@@ -2065,7 +2025,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 17,
       "community_name": "Dependency Update Policy",
       "norm_label": "dependabot: npm root updates",
       "_origin": "semantic",
@@ -2080,7 +2040,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: infra/ npm updates",
       "_origin": "semantic",
@@ -2095,7 +2055,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 54,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: github actions updates",
       "_origin": "semantic",
@@ -2110,7 +2070,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 61,
+      "community": 59,
       "community_name": "Contributing Prerequisites",
       "norm_label": "prerequisites (.nvmrc, pnpm)",
       "_origin": "semantic",
@@ -2125,7 +2085,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "setup steps",
       "_origin": "semantic",
@@ -2140,7 +2100,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 56,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "checks ci runs on every pr",
       "_origin": "semantic",
@@ -2155,7 +2115,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 60,
+      "community": 58,
       "community_name": "Pre-commit Hook Config",
       "norm_label": "pre-commit hooks setup",
       "_origin": "semantic",
@@ -2170,7 +2130,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 55,
       "community_name": "Testing & Accessibility Conventions",
       "norm_label": "accessibility requirement",
       "_origin": "semantic",
@@ -2185,7 +2145,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 57,
       "community_name": "Content & Copy Guidelines",
       "norm_label": "content & copy note",
       "_origin": "semantic",
@@ -2200,7 +2160,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 17,
       "community_name": "Dependency Update Policy",
       "norm_label": "fork pr install failure (missing github pat)",
       "_origin": "semantic",
@@ -2215,7 +2175,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 66,
+      "community": 64,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "pre-rendering disabled \u2014 security headers gap",
       "_origin": "semantic",
@@ -2230,7 +2190,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 67,
+      "community": 65,
       "community_name": "Open Source Licensing",
       "norm_label": "license scope (mit excludes brand/fonts)",
       "_origin": "semantic",
@@ -2245,7 +2205,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "trademarks and brand assets",
       "_origin": "semantic",
@@ -2260,7 +2220,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 68,
+      "community": 66,
       "community_name": "Third-Party Fonts Notice",
       "norm_label": "third-party fonts (sil ofl 1.1)",
       "_origin": "semantic",
@@ -2275,7 +2235,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "branchleft website overview",
       "_origin": "semantic",
@@ -2290,7 +2250,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "brand source assets (logo/wordmark)",
       "_origin": "semantic",
@@ -2305,7 +2265,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "branchleft-website-infra project (pulumi.yaml)",
       "_origin": "semantic",
@@ -2320,7 +2280,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 17,
       "community_name": "Dependency Update Policy",
       "norm_label": "pnpm-workspace allowbuilds",
       "_origin": "semantic",
@@ -2335,7 +2295,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 17,
       "community_name": "Dependency Update Policy",
       "norm_label": "minimumreleaseageexclude (@branchleft/*)",
       "_origin": "semantic",
@@ -2350,7 +2310,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 14,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "robots.txt rules",
       "_origin": "semantic",
@@ -2365,7 +2325,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 18,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft logo (lightning-bolt mark)",
       "_origin": "semantic",
@@ -2380,7 +2340,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 18,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft wordmark (icon + \"branchleft\" text lockup)",
       "_origin": "semantic",
@@ -2395,7 +2355,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 18,
       "community_name": "Brand & Social Assets",
       "norm_label": "favicon set (32/192/512px + apple-touch-icon, same lightning-bolt mark)",
       "_origin": "semantic",
@@ -2410,7 +2370,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 18,
       "community_name": "Brand & Social Assets",
       "norm_label": "social share card (og-image: logo + wordmark on black)",
       "_origin": "semantic",
@@ -2425,7 +2385,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 80,
+      "community": 76,
       "community_name": "Team Headshot",
       "norm_label": "person headshot (portrait, 3 sizes x jpg/webp)",
       "_origin": "semantic",
@@ -2506,7 +2466,7 @@
       "file_type": "image",
       "source_file": "public/apple-touch-icon.png",
       "source_location": null,
-      "community": 73,
+      "community": 69,
       "norm_label": "apple touch icon",
       "_origin": "semantic",
       "id": "public_apple_touch_icon"
@@ -2516,7 +2476,7 @@
       "file_type": "image",
       "source_file": "public/favicon-192.png",
       "source_location": null,
-      "community": 74,
+      "community": 70,
       "norm_label": "favicon 192",
       "_origin": "semantic",
       "id": "public_favicon_192"
@@ -2526,7 +2486,7 @@
       "file_type": "image",
       "source_file": "public/favicon-512.png",
       "source_location": null,
-      "community": 75,
+      "community": 71,
       "norm_label": "favicon 512",
       "_origin": "semantic",
       "id": "public_favicon_512"
@@ -2536,7 +2496,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.jpg",
       "source_location": null,
-      "community": 76,
+      "community": 72,
       "norm_label": "headshot 160px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_jpg"
@@ -2546,7 +2506,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.webp",
       "source_location": null,
-      "community": 77,
+      "community": 73,
       "norm_label": "headshot 160px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_webp"
@@ -2556,7 +2516,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.jpg",
       "source_location": null,
-      "community": 78,
+      "community": 74,
       "norm_label": "headshot 320px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_jpg"
@@ -2566,7 +2526,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.webp",
       "source_location": null,
-      "community": 79,
+      "community": 75,
       "norm_label": "headshot 320px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_webp"
@@ -2576,7 +2536,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-480.webp",
       "source_location": null,
-      "community": 81,
+      "community": 77,
       "norm_label": "headshot 480px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_480_webp"
@@ -2585,7 +2545,7 @@
       "label": "CodeQL Workflow",
       "file_type": "code",
       "source_file": ".github/workflows/codeql.yml",
-      "community": 63,
+      "community": 61,
       "norm_label": "codeql workflow",
       "_origin": "semantic",
       "id": "github_workflows_codeql"
@@ -2995,7 +2955,7 @@
       "source_file": "tests/contact.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "norm_label": "contact.spec.ts",
       "id": "tests_contact_spec"
     },
@@ -3005,7 +2965,7 @@
       "source_file": "tests/no-js.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 87,
+      "community": 84,
       "norm_label": "no-js.spec.ts",
       "id": "tests_no_js_spec"
     },
@@ -3013,7 +2973,7 @@
       "label": "Known Issues",
       "file_type": "document",
       "source_file": "infra/KNOWN_ISSUES.md",
-      "community": 31,
+      "community": 28,
       "norm_label": "known issues",
       "_origin": "semantic",
       "id": "infra_known_issues"
@@ -3022,136 +2982,10 @@
       "label": "GitHub Actions Deployer SA",
       "file_type": "concept",
       "source_file": "infra/KNOWN_ISSUES.md",
-      "community": 31,
+      "community": 28,
       "norm_label": "github actions deployer sa",
       "_origin": "semantic",
       "id": "github_actions_deployer"
-    },
-    {
-      "label": "pre-commit-hooks",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": "https://github.com/pre-commit/pre-commit-hooks",
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "pre-commit-hooks",
-      "_origin": "semantic",
-      "id": "pre_commit_config_pre_commit_hooks"
-    },
-    {
-      "label": "trailing-whitespace",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "trailing-whitespace",
-      "_origin": "semantic",
-      "id": "pre_commit_config_trailing_whitespace"
-    },
-    {
-      "label": "end-of-file-fixer",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "end-of-file-fixer",
-      "_origin": "semantic",
-      "id": "pre_commit_config_end_of_file_fixer"
-    },
-    {
-      "label": "check-yaml",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "check-yaml",
-      "_origin": "semantic",
-      "id": "pre_commit_config_check_yaml"
-    },
-    {
-      "label": "check-added-large-files",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "check-added-large-files",
-      "_origin": "semantic",
-      "id": "pre_commit_config_check_added_large_files"
-    },
-    {
-      "label": "check-merge-conflict",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "check-merge-conflict",
-      "_origin": "semantic",
-      "id": "pre_commit_config_check_merge_conflict"
-    },
-    {
-      "label": "prettier",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 71,
-      "norm_label": "prettier",
-      "_origin": "semantic",
-      "id": "pre_commit_config_prettier"
-    },
-    {
-      "label": "eslint",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 70,
-      "norm_label": "eslint",
-      "_origin": "semantic",
-      "id": "pre_commit_config_eslint"
-    },
-    {
-      "label": "vitest",
-      "file_type": "code",
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 72,
-      "norm_label": "vitest",
-      "_origin": "semantic",
-      "id": "pre_commit_config_vitest"
     },
     {
       "label": "Graphify Workflow",
@@ -3162,7 +2996,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
+      "community": 62,
       "norm_label": "graphify workflow",
       "_origin": "semantic",
       "id": "github_workflows_graphify_workflow"
@@ -3176,7 +3010,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 22,
       "norm_label": "docs-lint workflow",
       "_origin": "semantic",
       "id": "github_workflows_docs_lint_docs_lint"
@@ -3190,7 +3024,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 22,
       "norm_label": "branchleft/github-workflows docs-lint",
       "_origin": "semantic",
       "id": "branchleft_github_workflows_docs_lint"
@@ -3201,7 +3035,7 @@
       "source_file": "infra/package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "infra/package.json",
       "id": "infra_package"
     },
@@ -3211,7 +3045,7 @@
       "source_file": "infra/package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "name",
       "id": "infra_package_name"
     },
@@ -3221,7 +3055,7 @@
       "source_file": "infra/package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "private",
       "id": "infra_package_private"
     },
@@ -3231,7 +3065,7 @@
       "source_file": "infra/package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "main",
       "id": "infra_package_main"
     },
@@ -3241,7 +3075,7 @@
       "source_file": "infra/package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "dependencies",
       "id": "infra_package_dependencies"
     },
@@ -3251,7 +3085,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/gcp",
       "id": "infra_package_dependencies_pulumi_gcp"
     },
@@ -3261,7 +3095,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/gcp",
       "id": "pulumi_gcp"
     },
@@ -3271,7 +3105,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/pulumi",
       "id": "infra_package_dependencies_pulumi_pulumi"
     },
@@ -3281,7 +3115,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/pulumi",
       "id": "pulumi_pulumi"
     },
@@ -3291,7 +3125,7 @@
       "source_file": "infra/package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "devdependencies",
       "id": "infra_package_devdependencies"
     },
@@ -3301,7 +3135,7 @@
       "source_file": "infra/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "infra_package_devdependencies_branchleft_tsconfig"
     },
@@ -3311,7 +3145,7 @@
       "source_file": "infra/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "infra_package_devdependencies_types_node"
     },
@@ -3321,7 +3155,7 @@
       "source_file": "infra/package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "infra_package_devdependencies_typescript"
     },
@@ -3821,7 +3655,7 @@
       "source_file": "package.json",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "devdependencies",
       "id": "package_devdependencies"
     },
@@ -3831,7 +3665,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 23,
+      "community": 11,
       "norm_label": "@axe-core/playwright",
       "id": "package_devdependencies_axe_core_playwright"
     },
@@ -3841,7 +3675,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 23,
+      "community": 11,
       "norm_label": "@axe-core/playwright",
       "id": "axe_core_playwright"
     },
@@ -3851,7 +3685,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@branchleft/prettier-config",
       "id": "package_devdependencies_branchleft_prettier_config"
     },
@@ -3861,7 +3695,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@branchleft/prettier-config",
       "id": "branchleft_prettier_config"
     },
@@ -3871,7 +3705,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "package_devdependencies_branchleft_tsconfig"
     },
@@ -3881,7 +3715,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "package_json_branchleft_tsconfig"
     },
@@ -3891,7 +3725,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 28,
+      "community": 25,
       "norm_label": "@eslint/js",
       "id": "package_devdependencies_eslint_js"
     },
@@ -3901,7 +3735,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 28,
+      "community": 25,
       "norm_label": "@eslint/js",
       "id": "eslint_js"
     },
@@ -3911,7 +3745,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 34,
+      "community": 31,
       "norm_label": "@playwright/test",
       "id": "package_devdependencies_playwright_test"
     },
@@ -3921,7 +3755,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 34,
+      "community": 31,
       "norm_label": "@playwright/test",
       "id": "playwright_test"
     },
@@ -3931,7 +3765,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 36,
+      "community": 33,
       "norm_label": "@react-router/dev",
       "id": "package_devdependencies_react_router_dev"
     },
@@ -3941,7 +3775,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 36,
+      "community": 33,
       "norm_label": "@react-router/dev",
       "id": "react_router_dev"
     },
@@ -3951,7 +3785,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 38,
+      "community": 35,
       "norm_label": "@tailwindcss/vite",
       "id": "package_devdependencies_tailwindcss_vite"
     },
@@ -3961,7 +3795,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 38,
+      "community": 35,
       "norm_label": "@tailwindcss/vite",
       "id": "tailwindcss_vite"
     },
@@ -3971,7 +3805,7 @@
       "source_file": "package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "package_devdependencies_types_node"
     },
@@ -3981,7 +3815,7 @@
       "source_file": "package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "package_json_types_node"
     },
@@ -3991,7 +3825,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 39,
+      "community": 36,
       "norm_label": "@types/nodemailer",
       "id": "package_devdependencies_types_nodemailer"
     },
@@ -4001,7 +3835,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 39,
+      "community": 36,
       "norm_label": "@types/nodemailer",
       "id": "types_nodemailer"
     },
@@ -4011,7 +3845,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 40,
+      "community": 37,
       "norm_label": "@types/react",
       "id": "package_devdependencies_types_react"
     },
@@ -4021,7 +3855,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 40,
+      "community": 37,
       "norm_label": "@types/react",
       "id": "types_react"
     },
@@ -4031,7 +3865,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 10,
+      "community": 38,
       "norm_label": "@types/react-dom",
       "id": "package_devdependencies_types_react_dom"
     },
@@ -4041,7 +3875,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 10,
+      "community": 38,
       "norm_label": "@types/react-dom",
       "id": "types_react_dom"
     },
@@ -4051,7 +3885,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 42,
+      "community": 40,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "package_devdependencies_typescript_eslint_eslint_plugin"
     },
@@ -4061,7 +3895,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 42,
+      "community": 40,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "typescript_eslint_eslint_plugin"
     },
@@ -4071,7 +3905,7 @@
       "source_file": "package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@typescript-eslint/parser",
       "id": "package_devdependencies_typescript_eslint_parser"
     },
@@ -4081,7 +3915,7 @@
       "source_file": "package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@typescript-eslint/parser",
       "id": "typescript_eslint_parser"
     },
@@ -4091,7 +3925,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 43,
+      "community": 41,
       "norm_label": "@vitejs/plugin-react",
       "id": "package_devdependencies_vitejs_plugin_react"
     },
@@ -4101,7 +3935,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 43,
+      "community": 41,
       "norm_label": "@vitejs/plugin-react",
       "id": "vitejs_plugin_react"
     },
@@ -4111,7 +3945,7 @@
       "source_file": "package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@vitest/coverage-v8",
       "id": "package_devdependencies_vitest_coverage_v8"
     },
@@ -4121,7 +3955,7 @@
       "source_file": "package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@vitest/coverage-v8",
       "id": "vitest_coverage_v8"
     },
@@ -4131,7 +3965,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 45,
+      "community": 43,
       "norm_label": "@vitest/ui",
       "id": "package_devdependencies_vitest_ui"
     },
@@ -4141,7 +3975,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 45,
+      "community": 43,
       "norm_label": "@vitest/ui",
       "id": "vitest_ui"
     },
@@ -4151,7 +3985,7 @@
       "source_file": "package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 26,
+      "community": 23,
       "norm_label": "eslint",
       "id": "package_devdependencies_eslint"
     },
@@ -4161,7 +3995,7 @@
       "source_file": "package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 26,
+      "community": 23,
       "norm_label": "eslint",
       "id": "eslint"
     },
@@ -4171,7 +4005,7 @@
       "source_file": "package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 27,
+      "community": 24,
       "norm_label": "eslint-config-prettier",
       "id": "package_devdependencies_eslint_config_prettier"
     },
@@ -4181,7 +4015,7 @@
       "source_file": "package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 27,
+      "community": 24,
       "norm_label": "eslint-config-prettier",
       "id": "eslint_config_prettier"
     },
@@ -4191,7 +4025,7 @@
       "source_file": "package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 29,
+      "community": 26,
       "norm_label": "eslint-plugin-react",
       "id": "package_devdependencies_eslint_plugin_react"
     },
@@ -4201,7 +4035,7 @@
       "source_file": "package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 29,
+      "community": 26,
       "norm_label": "eslint-plugin-react",
       "id": "eslint_plugin_react"
     },
@@ -4211,7 +4045,7 @@
       "source_file": "package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 30,
+      "community": 27,
       "norm_label": "eslint-plugin-react-hooks",
       "id": "package_devdependencies_eslint_plugin_react_hooks"
     },
@@ -4221,7 +4055,7 @@
       "source_file": "package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 30,
+      "community": 27,
       "norm_label": "eslint-plugin-react-hooks",
       "id": "eslint_plugin_react_hooks"
     },
@@ -4231,7 +4065,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 32,
+      "community": 29,
       "norm_label": "globals",
       "id": "package_devdependencies_globals"
     },
@@ -4241,7 +4075,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 32,
+      "community": 29,
       "norm_label": "globals",
       "id": "globals"
     },
@@ -4251,7 +4085,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 33,
+      "community": 30,
       "norm_label": "jsdom",
       "id": "package_devdependencies_jsdom"
     },
@@ -4261,7 +4095,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 33,
+      "community": 30,
       "norm_label": "jsdom",
       "id": "jsdom"
     },
@@ -4271,7 +4105,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 35,
+      "community": 32,
       "norm_label": "prettier",
       "id": "package_devdependencies_prettier"
     },
@@ -4281,7 +4115,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 35,
+      "community": 32,
       "norm_label": "prettier",
       "id": "prettier"
     },
@@ -4291,7 +4125,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 37,
+      "community": 34,
       "norm_label": "tailwindcss",
       "id": "package_devdependencies_tailwindcss"
     },
@@ -4301,7 +4135,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 37,
+      "community": 34,
       "norm_label": "tailwindcss",
       "id": "tailwindcss"
     },
@@ -4311,7 +4145,7 @@
       "source_file": "package.json",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "package_devdependencies_typescript"
     },
@@ -4321,7 +4155,7 @@
       "source_file": "package.json",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "package_json_typescript"
     },
@@ -4331,7 +4165,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "typescript-eslint",
       "id": "package_devdependencies_typescript_eslint"
     },
@@ -4341,7 +4175,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "typescript-eslint",
       "id": "typescript_eslint"
     },
@@ -4351,7 +4185,7 @@
       "source_file": "package.json",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "vite",
       "id": "package_devdependencies_vite"
     },
@@ -4361,7 +4195,7 @@
       "source_file": "package.json",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "vite",
       "id": "vite"
     },
@@ -4371,7 +4205,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 44,
+      "community": 42,
       "norm_label": "vitest",
       "id": "package_devdependencies_vitest"
     },
@@ -4381,7 +4215,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 44,
+      "community": 42,
       "norm_label": "vitest",
       "id": "vitest"
     },
@@ -4556,20 +4390,6 @@
       "id": "tsconfig_compileroptions_paths"
     },
     {
-      "label": "CLAUDE.md",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 25,
-      "norm_label": "claude.md",
-      "_origin": "semantic",
-      "id": "claude_md"
-    },
-    {
       "label": "Pulumi Infrastructure",
       "file_type": "concept",
       "source_file": null,
@@ -4578,7 +4398,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 82,
+      "community": 78,
       "norm_label": "pulumi infrastructure",
       "_origin": "semantic",
       "id": "pulumi"
@@ -4592,7 +4412,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 25,
+      "community": 80,
       "norm_label": "react router v7",
       "_origin": "semantic",
       "id": "react_router_v7"
@@ -4606,7 +4426,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 65,
+      "community": 63,
       "norm_label": "standards workflow",
       "_origin": "semantic",
       "id": "github_workflows_standards_workflow"
@@ -4729,133 +4549,174 @@
       "id": "app_lib_security_headers_test_parsedirectives"
     },
     {
-      "label": "CI Workflow",
+      "label": "assert-no-committed-pulumi-secrets.py",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "community": 9,
+      "norm_label": "assert-no-committed-pulumi-secrets.py"
+    },
+    {
+      "label": "is_commented()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L86",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_is_commented",
+      "community": 9,
+      "norm_label": "is_commented()"
+    },
+    {
+      "label": "offending_lines()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L95",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "community": 9,
+      "norm_label": "offending_lines()"
+    },
+    {
+      "label": "is_stack_config()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L110",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "community": 9,
+      "norm_label": "is_stack_config()"
+    },
+    {
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "path",
+      "community": 9,
+      "norm_label": "path"
+    },
+    {
+      "label": "find_stack_configs()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L114",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "community": 9,
+      "norm_label": "find_stack_configs()"
+    },
+    {
+      "label": "check()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L124",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "community": 9,
+      "norm_label": "check()"
+    },
+    {
+      "label": "_quiet_check()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L180",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "community": 9,
+      "norm_label": "_quiet_check()"
+    },
+    {
+      "label": "_self_test()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L189",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "community": 9,
+      "norm_label": "_self_test()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L290",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "community": 9,
+      "norm_label": "main()"
+    },
+    {
+      "label": "Whether the line is entirely a comment. Only a leading `#` counts. A `#`\u2026",
+      "file_type": "rationale",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_87",
+      "community": 9,
+      "norm_label": "whether the line is entirely a comment. only a leading `#` counts. a `#`..."
+    },
+    {
+      "label": "Every (1-based line number, line) that commits a secret.",
+      "file_type": "rationale",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_96",
+      "community": 9,
+      "norm_label": "every (1-based line number, line) that commits a secret."
+    },
+    {
+      "label": "`check` with its report captured, so a fixture's own error output does not read\u2026",
+      "file_type": "rationale",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L181",
+      "_origin": "ast",
+      "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_181",
+      "community": 9,
+      "norm_label": "`check` with its report captured, so a fixture's own error output does not read..."
+    },
+    {
+      "label": ".pre-commit-config.yaml",
+      "file_type": "code",
+      "source_file": ".pre-commit-config.yaml",
+      "id": "pre_commit_config",
+      "community": 68,
+      "norm_label": ".pre-commit-config.yaml"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "id": "claude_md",
+      "community": 19,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": ".github/workflows/ci.yml",
       "file_type": "code",
       "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "community": 16,
-      "norm_label": "ci workflow",
-      "_origin": "semantic",
-      "id": "github_workflows_ci"
+      "id": "github_workflows_ci",
+      "community": 19,
+      "norm_label": ".github/workflows/ci.yml"
     },
     {
-      "label": "Checks Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "community": 16,
-      "norm_label": "checks job",
-      "_origin": "semantic",
-      "id": "github_workflows_ci_checks"
-    },
-    {
-      "label": "E2E Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "community": 16,
-      "norm_label": "e2e job",
-      "_origin": "semantic",
-      "id": "github_workflows_ci_e2e"
-    },
-    {
-      "label": "Pulumi Preview Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "community": 16,
-      "norm_label": "pulumi preview job",
-      "_origin": "semantic",
-      "id": "github_workflows_ci_pulumi_preview"
-    },
-    {
-      "label": "Deploy Job",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "source_location": null,
-      "community": 16,
-      "norm_label": "deploy job",
-      "_origin": "semantic",
-      "id": "github_workflows_ci_deploy"
-    },
-    {
-      "label": "Pulumi Production Configuration",
+      "label": "infra/Pulumi.production.yaml",
       "file_type": "code",
       "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "verification": "unverified",
-      "id": "infra_pulumi_production_yaml",
-      "community": 13,
-      "norm_label": "pulumi production configuration"
-    },
-    {
-      "label": "GCP Project: branchleft-prod",
-      "file_type": "concept",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "gcp_project_branchleft_prod",
-      "community": 13,
-      "norm_label": "gcp project: branchleft-prod"
-    },
-    {
-      "label": "Region: europe-west1",
-      "file_type": "concept",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "branchleft_website_infra_region",
-      "community": 13,
-      "norm_label": "region: europe-west1"
-    },
-    {
-      "label": "GitHub Repo: branchLeft/website",
-      "file_type": "concept",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "branchleft_website_infra_github_repo",
-      "community": 13,
-      "norm_label": "github repo: branchleft/website"
-    },
-    {
-      "label": "Image Tag: bootstrap-amd64-v2",
-      "file_type": "concept",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "branchleft_website_infra_image_tag",
-      "community": 13,
-      "norm_label": "image tag: bootstrap-amd64-v2"
-    },
-    {
-      "label": "SMTP Configuration",
-      "file_type": "concept",
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "branchleft_website_infra_smtp_config",
-      "community": 13,
-      "norm_label": "smtp configuration"
+      "id": "infra_pulumi_production",
+      "community": 19,
+      "norm_label": "infra/pulumi.production.yaml"
     }
   ],
   "links": [
@@ -8793,61 +8654,6 @@
       "target": "github_actions_deployer"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_pre_commit_hooks",
-      "target": "pre_commit_config_check_added_large_files"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_pre_commit_hooks",
-      "target": "pre_commit_config_check_merge_conflict"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_pre_commit_hooks",
-      "target": "pre_commit_config_check_yaml"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_pre_commit_hooks",
-      "target": "pre_commit_config_end_of_file_fixer"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "pre_commit_config_pre_commit_hooks",
-      "target": "pre_commit_config_trailing_whitespace"
-    },
-    {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -10436,15 +10242,6 @@
       "target": "ref_vite_client"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CLAUDE.md",
-      "_origin": "semantic",
-      "source": "claude_md",
-      "target": "react_router_v7"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/routes/privacy.tsx",
@@ -10557,156 +10354,348 @@
       "target": "app_lib_security_headers_test_parsedirectives"
     },
     {
-      "relation": "participate_in",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_checks",
-      "target": "github_workflows_ci"
-    },
-    {
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_deploy",
-      "target": "github_workflows_ci"
-    },
-    {
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_e2e",
-      "target": "github_workflows_ci"
-    },
-    {
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_pulumi_preview",
-      "target": "github_workflows_ci"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_deploy",
-      "target": "github_workflows_ci_checks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_pulumi_preview",
-      "target": "github_workflows_ci_checks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_deploy",
-      "target": "github_workflows_ci_e2e"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".github/workflows/ci.yml",
-      "_origin": "semantic",
-      "source": "github_workflows_ci_pulumi_preview",
-      "target": "github_workflows_ci_e2e"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L124",
       "weight": 1.0,
-      "source": "infra_pulumi_production_yaml",
-      "target": "branchleft_website_infra_github_repo"
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_commented",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L290",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_commented",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_87",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_commented",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_96",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L223",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L300",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L223",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L240",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L305",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_181",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L248",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
+      "source_location": "L298",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "infra_scripts_assert_no_committed_pulumi_secrets_main",
+      "target": "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "infra_pulumi_production_yaml",
-      "target": "branchleft_website_infra_image_tag"
+      "source_file": "CLAUDE.md",
+      "source": "claude_md",
+      "target": "infra_pulumi_production"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "infra_pulumi_production_yaml",
-      "target": "branchleft_website_infra_region"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "infra_pulumi_production_yaml",
-      "target": "branchleft_website_infra_smtp_config"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "infra/Pulumi.production.yaml",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "infra_pulumi_production_yaml",
-      "target": "gcp_project_branchleft_prod"
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci",
+      "target": "infra_pulumi_production"
     }
   ],
   "hyperedges": [
-    {
-      "id": "production_environment_config",
-      "label": "Production Environment Configuration",
-      "nodes": [
-        "gcp_project_branchleft_prod",
-        "branchleft_website_infra_region",
-        "branchleft_website_infra_github_repo",
-        "branchleft_website_infra_image_tag",
-        "branchleft_website_infra_smtp_config"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.9,
-      "source_file": "infra/Pulumi.production.yaml"
-    },
-    {
-      "id": "ci_test_suite",
-      "label": "CI Test Suite",
-      "nodes": [
-        "github_workflows_ci_checks",
-        "github_workflows_ci_e2e"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.9,
-      "source_file": ".github/workflows/ci.yml"
-    },
     {
       "id": "ci_linting_standards",
       "label": "CI Linting and Standards",
@@ -10718,19 +10707,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": ".github/workflows/docs-lint.yml"
-    },
-    {
-      "id": "local_pnpm_hooks",
-      "label": "Local PNPM Hooks",
-      "nodes": [
-        "pre_commit_config_prettier",
-        "pre_commit_config_eslint",
-        "pre_commit_config_vitest"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".pre-commit-config.yaml"
     },
     {
       "id": "prerendering_safety_constraint",
@@ -10746,5 +10722,5 @@
       "source_file": "KNOWN_ISSUES.md"
     }
   ],
-  "built_at_commit": "adbfe6b16c263fe6765d880e385dd757762ad771"
+  "built_at_commit": "357e551dec8578da0f36478a7d0d331bf9f39af6"
 }
