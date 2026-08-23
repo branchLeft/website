@@ -105,8 +105,8 @@ platform-owner action; there is no reviewed path to it.
 ```bash
 ssh -i ~/.ssh/id_ed25519_hetzner root@167.233.93.244 '
   docker ps --filter label=com.docker.compose.project=website &&
-  curl -fsS --max-time 10 http://127.0.0.1:8080/ -o /dev/null && echo app-ok &&
-  curl -fsS --max-time 10 http://127.0.0.1:9092/metrics'
+  curl -fsS --max-time 10 http://10.20.1.100:8080/ -o /dev/null && echo app-ok &&
+  curl -fsS --max-time 10 http://10.20.1.100:9092/metrics'
 ```
 
 Expect two containers `Up`, `app-ok`, and a `branchleft_website_contact_form_send_failures_total`
