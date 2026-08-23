@@ -48,8 +48,8 @@ export default function LocalNews(): React.JSX.Element {
         </SectionHeading>
         <p>
           There's no point in reiterating the brilliant vision that the Public Interest News
-          Foundation (PINF) are already acting on. Learn more about their work at the following
-          pages:
+          Foundation (PINF), their members and many others are already acting on. Learn more about
+          their work at the following pages:
         </p>
         <ul>
           <li>
@@ -78,9 +78,10 @@ export default function LocalNews(): React.JSX.Element {
           What We&rsquo;re Building
         </SectionHeading>
         <p>
-          <span className="logo-font">branchLeft</span> is building relationships with the PINF and
-          its members to provide a platform and ecosystem tailored to the needs of public interest
-          local news outlets in the UK. Initially built around{' '}
+          <span className="logo-font">branchLeft</span> is building technology and relationships in
+          the independent and public interest media space to provide a platform and ecosystem
+          tailored to the needs of public interest local news outlets in the UK. Initially built
+          around{' '}
           <a href="https://ghost.org/" target="_blank" rel="noopener noreferrer">
             Ghost
           </a>
