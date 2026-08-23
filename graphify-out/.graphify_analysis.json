@@ -296,10 +296,10 @@
     ],
     "10": [
       "branchleft_prettier_config",
-      "eslint_plugin_react",
+      "eslint",
       "package_devdependencies",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_eslint_plugin_react",
+      "package_devdependencies_eslint",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
@@ -385,12 +385,12 @@
       "github_workflows_docs_lint_docs_lint"
     ],
     "23": [
-      "claude_md",
-      "infra_pulumi_production"
+      "branchleft_github_workflows_graphify_workflow",
+      "github_workflows_graphify_workflow"
     ],
     "24": [
-      "eslint",
-      "package_devdependencies_eslint"
+      "claude_md",
+      "infra_pulumi_production"
     ],
     "25": [
       "eslint_config_prettier",
@@ -401,133 +401,134 @@
       "package_devdependencies_eslint_js"
     ],
     "27": [
+      "eslint_plugin_react",
+      "package_devdependencies_eslint_plugin_react"
+    ],
+    "28": [
       "eslint_plugin_react_hooks",
       "package_devdependencies_eslint_plugin_react_hooks"
     ],
-    "28": [
+    "29": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "29": [
+    "30": [
       "globals",
       "package_devdependencies_globals"
     ],
-    "30": [
+    "31": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "31": [
+    "32": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "32": [
+    "33": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "33": [
+    "34": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "34": [
+    "35": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "35": [
+    "36": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "36": [
+    "37": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "37": [
+    "38": [
       "package_devdependencies_types_react",
       "types_react"
     ],
-    "38": [
+    "39": [
       "package_devdependencies_types_react_dom",
       "types_react_dom"
     ],
-    "39": [
+    "40": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "40": [
+    "41": [
       "package_devdependencies_typescript_eslint_eslint_plugin",
       "typescript_eslint_eslint_plugin"
     ],
-    "41": [
+    "42": [
       "package_devdependencies_vitejs_plugin_react",
       "vitejs_plugin_react"
     ],
-    "42": [
+    "43": [
       "package_devdependencies_vitest",
       "vitest"
     ],
-    "43": [
+    "44": [
       "package_devdependencies_vitest_ui",
       "vitest_ui"
     ],
-    "44": [
+    "45": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "45": [
+    "46": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "46": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "47": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "48": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "49": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "50": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "51": [
+    "52": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "52": [
+    "53": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "53": [
+    "54": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "54": [
+    "55": [
       "_github_dependabot_github_actions_updates"
     ],
-    "55": [
+    "56": [
       "contributing_accessibility"
     ],
-    "56": [
+    "57": [
       "contributing_checks_ci_runs"
     ],
-    "57": [
+    "58": [
       "contributing_content_and_copy"
     ],
-    "58": [
+    "59": [
       "contributing_pre_commit_hooks"
     ],
-    "59": [
+    "60": [
       "contributing_prerequisites"
     ],
-    "60": [
+    "61": [
       "eslint_config"
     ],
-    "61": [
+    "62": [
       "github_workflows_ci"
     ],
-    "62": [
-      "github_workflows_codeql"
-    ],
     "63": [
-      "github_workflows_graphify_workflow"
+      "github_workflows_codeql"
     ],
     "64": [
       "github_workflows_standards_workflow"
@@ -810,7 +811,7 @@
     }
   ],
   "tokens": {
-    "input": 7075,
-    "output": 937
+    "input": 995,
+    "output": 239
   }
 }
