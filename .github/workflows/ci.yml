@@ -267,9 +267,10 @@ jobs:
       - name: Pin app1 to the pushed digest and restart the stack
         env:
           HETZNER_APP1_HOST: ${{ vars.HETZNER_APP1_HOST }}
+          DIGEST: ${{ steps.digest.outputs.digest }}
         run: |
           ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
-            "sudo -n /usr/local/sbin/branchleft-deploy website $IMAGE@${{ steps.digest.outputs.digest }}"
+            "sudo -n /usr/local/sbin/branchleft-deploy website $IMAGE@$DIGEST"
 
       # app1's public port is bound to its private address only (deploy/compose.yml)
       # -- this runner cannot reach it directly, so the check runs on the host
