@@ -58,7 +58,15 @@ mail host only if it needs to change, never here.
 
 ## 2. Copy the stack directory onto the host
 
+Provisioning creates `/opt/branchleft` itself but no per-service directory
+under it — the edge and monitoring stacks get theirs from a directory-tree
+`rsync`, which creates its own destination; this stack's `rsync` copies one
+file into a directory that has to already exist:
+
 ```bash
+ssh -i ~/.ssh/id_ed25519_hetzner root@167.233.93.244 \
+  'install -d -m 0755 -o root -g root /opt/branchleft/website'
+
 rsync -av -e 'ssh -i ~/.ssh/id_ed25519_hetzner' \
   deploy/compose.yml root@167.233.93.244:/opt/branchleft/website/compose.yml
 ```
