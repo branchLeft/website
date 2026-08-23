@@ -322,6 +322,16 @@ introduces it — the site being up does not mean the deploy succeeded.
 
 ## `github-actions-deployer` retains edge-admin IAM roles this program no longer uses — accepted risk, not closed
 
+**Update, Hetzner migration:** this repo's CI no longer authenticates to GCP
+at all — no `id-token: write`, no `google-github-actions/auth` step, no
+`pulumi` command against production state. A compromised workflow run today
+therefore cannot mint the OIDC token this section describes exploiting; doing
+so would need a further malicious change to `.github/workflows/ci.yml`
+itself, not just a compromised run of what is currently committed. The
+underlying gap — `github-actions-deployer`'s over-provisioned IAM roles and
+the WIF federation binding that lets this repo assume it — is unchanged and
+stays open until `infra/` and its GCP identities are removed, in the story that winds down the GCP stack entirely.
+
 **Symptom:** would be silent. Nothing errors; the gap is a standing
 capability, not a failure.
 

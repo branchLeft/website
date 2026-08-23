@@ -5,7 +5,12 @@ vi.mock('../lib/sendContactEmail.server', () => ({
   sendContactEmail: vi.fn(),
 }));
 
+vi.mock('../lib/metrics.server', () => ({
+  recordContactSendFailure: vi.fn(),
+}));
+
 import { sendContactEmail } from '../lib/sendContactEmail.server';
+import { recordContactSendFailure } from '../lib/metrics.server';
 import {
   EMAIL_MAX_LENGTH,
   HONEYPOT_FIELD_NAME,
@@ -84,6 +89,7 @@ function nextIp(): string {
 describe('action', () => {
   beforeEach(() => {
     vi.mocked(sendContactEmail).mockReset().mockResolvedValue(undefined);
+    vi.mocked(recordContactSendFailure).mockReset();
   });
 
   it('sends the email for a valid, human-looking submission', async () => {
@@ -170,6 +176,22 @@ describe('action', () => {
 
     expect(result.ok).toBe(false);
     expect(sendContactEmail).not.toHaveBeenCalled();
+  });
+
+  it('records a metric and shows a fallback message when sending throws', async () => {
+    vi.mocked(sendContactEmail).mockRejectedValueOnce(new Error('smtp unreachable'));
+
+    const result = await action(actionArgs(makeRequest(buildFormData(), nextIp())));
+
+    expect(result.ok).toBe(false);
+    expect(recordContactSendFailure).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not record a metric for a submission rejected before sending is attempted', async () => {
+    const formData = buildFormData({ category: 'not-a-category' });
+    await action(actionArgs(makeRequest(formData, nextIp())));
+
+    expect(recordContactSendFailure).not.toHaveBeenCalled();
   });
 
   it('does not rate-limit a fresh IP after another IP is exhausted', async () => {

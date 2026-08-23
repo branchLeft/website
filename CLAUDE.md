@@ -38,9 +38,27 @@ pnpm start               # serve production build — async terminal only
 
 ## Infrastructure
 
-`infra/` is the Pulumi program for the `branchleft-website-infra/production` stack. CI applies it on merge to `main` (`.github/workflows/ci.yml`) — that merge **is** the production deploy.
+**Production now serves from the Hetzner estate, not GCP.** `deploy/compose.yml`
+is the container definition CI deploys to `app1` (`10.20.1.100`) over SSH,
+proxied by the shared Caddy edge on `edge1` — see `deploy/RUNBOOK-app1-website.md`
+for the host-side bootstrap and `shared-infra/hetzner/RUNBOOK-edge.md` §11 for
+how a site is added to that edge. `.github/workflows/ci.yml`'s `deploy` job
+builds the image, pushes it to `ghcr.io/branchleft/website`, and pins app1 to
+the resulting digest with `branchleft-deploy` on every merge to `main` — that
+merge **is** the production deploy. There is no `imageTag` config value and no
+CI step that mutates Pulumi stack config: the pinned reference lives on the
+host, in `/etc/branchleft/website.image.env`, written only by
+`branchleft-deploy`.
 
-- **`infra/Pulumi.production.yaml` carries no `encryptionsalt`.** The salt is an offline verifier for the stack passphrase, so a public tree must not hold one. CI appends it from the `PULUMI_SALT_WEBSITE` repository secret immediately before the first `pulumi` command, in both the preview and the deploy job. An operator applying by hand appends it the same way from their own copy, and does not commit the result:
+`infra/` is retired from the deploy path but not deleted: it is the Pulumi
+program for the `branchleft-website-infra/production` Cloud Run stack, which
+keeps serving its last-deployed image until DNS moves to `edge1` (a
+platform-owner action, gated on the Hetzner edge carrying this traffic
+successfully) and is wound down in a later story. Nothing in CI applies it any
+more — `npx tsc --noEmit` is the only check it still gets, to keep it
+compilable until it is removed.
+
+- **`infra/Pulumi.production.yaml` carries no `encryptionsalt`.** The salt is an offline verifier for the stack passphrase, so a public tree must not hold one. Restoring it for a hand-gated operation on this now-inert stack means appending it from an operator's own copy and never committing the result:
 
   ```bash
   printf '\nencryptionsalt: %s\n' "$SALT" >> infra/Pulumi.production.yaml
@@ -59,7 +77,7 @@ pnpm start               # serve production build — async terminal only
 
 ### Legal Pages (`/privacy`, `/terms`)
 
-These routes are a documented exception to the "never write prose" rule above: they contain standard UK GDPR / ICO / template boilerplate written verbatim rather than as tokens. If future owner-input values arise (e.g. a new ICO registration number, a change of registered office, a new effective date), tokenise them via a local `<T>` component and render with the `.legal-page__token` style so unresolved values are obviously synthetic in the DOM. Both pages are currently fully resolved — no `<T>` tokens remain.
+These routes are a documented exception to the "never write prose" rule above: they contain standard UK GDPR / ICO / template boilerplate written verbatim rather than as tokens. If future owner-input values arise (e.g. a new ICO registration number, a change of registered office, a new effective date), tokenise them via a local `<T>` component and render with the `.legal-page__token` style so unresolved values are obviously synthetic in the DOM. Both pages are currently fully resolved — no `<T>` tokens remain. The privacy notice's processor list was last updated 23 August 2026 for the Hetzner hosting cutover: the separate GCP and Hetzner entries merged into one, since Hetzner now hosts both the website and the mail relay.
 
 **Canonical sources**
 
@@ -80,7 +98,8 @@ Update the relevant route file AND the corresponding note in this section whenev
 **Contact form**
 
 - `/contact` submits via a route `action` in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`) over SMTP AUTH submission (port 587, STARTTLS) against branchLeft's own self-hosted mail platform, sending to `info@branchleft.co.uk`. The submission credential is a dedicated, send-as-only account distinct from that mailbox's own password — a leaked website secret can't be used to read mail. No third-party mail processor is involved in sending.
-- Requires `CONTACT_SMTP_HOST`, `CONTACT_SMTP_PORT`, `CONTACT_SMTP_USER` and `CONTACT_SMTP_PASSWORD` environment variables (see `.env.example`). Not committed; set as real env vars/secrets on the hosting platform in production.
+- Requires `CONTACT_SMTP_HOST`, `CONTACT_SMTP_PORT`, `CONTACT_SMTP_USER` and `CONTACT_SMTP_PASSWORD` environment variables (see `.env.example`). Not committed; written once to `/etc/branchleft/website.env` on `app1` (`deploy/RUNBOOK-app1-website.md` §1), never by an automated path.
+- A failed send increments a Prometheus counter (`server/metrics.mjs`, wired in from `app/routes/contact.tsx`'s catch block) rather than relying on a `console.error` string a log pipeline greps for. `server/metrics-server.mjs` serves it on its own port, in its own Compose service, bound to `app1`'s private address only — see `deploy/compose.yml`. This is the metric doc 14 §9.2 replaces the old Cloud Logging log-based metric with; the alert that keys on it is a later story.
 
 ### Styling
 

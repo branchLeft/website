@@ -1,0 +1,69 @@
+# The website Compose stack, deployed as `website` under /opt/branchleft/website
+# on app1. Both services share one image: `${IMAGE}` is written by
+# /usr/local/sbin/branchleft-deploy after CI builds and pushes to GHCR (see
+# hetzner/provision/branchleft_deploy.py in shared-infra) and is always a
+# digest, never a tag.
+#
+# Two services rather than one so the metrics listener can bind app1's
+# private address independently of the app's own port -- see
+# server/metrics-server.mjs and app/lib/metrics.server.ts for why the counter
+# lives on a shared volume instead of in one process's memory.
+name: website
+
+services:
+  website:
+    image: ${IMAGE}
+    restart: unless-stopped
+    environment:
+      PORT: '8080'
+      CONTACT_METRICS_PATH: /var/lib/branchleft/metrics/contact-send-failures.count
+      CONTACT_SMTP_HOST: ${CONTACT_SMTP_HOST:?set CONTACT_SMTP_HOST in /etc/branchleft/website.env}
+      CONTACT_SMTP_PORT: ${CONTACT_SMTP_PORT:?set CONTACT_SMTP_PORT in /etc/branchleft/website.env}
+      CONTACT_SMTP_USER: ${CONTACT_SMTP_USER:?set CONTACT_SMTP_USER in /etc/branchleft/website.env}
+      CONTACT_SMTP_PASSWORD: ${CONTACT_SMTP_PASSWORD:?set CONTACT_SMTP_PASSWORD in /etc/branchleft/website.env}
+    ports:
+      # Private address only. app1's Hetzner firewall opens no inbound port
+      # but SSH -- edge1's Caddy is the only thing that ever reaches this,
+      # over the private network -- matching edge1's own compose.yml, which
+      # binds its metrics ports the same way rather than to 0.0.0.0.
+      - '10.20.1.100:8080:8080'
+    volumes:
+      - contact-metrics:/var/lib/branchleft/metrics
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    # Real containment: branchleft-compose@website is Type=oneshot running
+    # `docker compose up -d`, which detaches and exits, so a systemd
+    # MemoryMax/CPUWeight on that unit never reaches the containers dockerd
+    # creates as its own siblings under system.slice. mem_limit/cpu_shares
+    # here are Docker's per-container HostConfig, applied at creation
+    # regardless of that ancestry -- see shared-infra's
+    # RUNBOOK-monitoring.md "Colocation cgroup bounds" for the full
+    # reasoning this host will eventually need once it carries more than
+    # one service.
+    mem_limit: 512m
+    cpu_shares: 512
+
+  website-metrics:
+    image: ${IMAGE}
+    restart: unless-stopped
+    command: ['node', 'server/metrics-server.mjs']
+    environment:
+      METRICS_PORT: '9092'
+      CONTACT_METRICS_PATH: /var/lib/branchleft/metrics/contact-send-failures.count
+    ports:
+      # Private address only, same reasoning as the app port above. Never
+      # added to sites.ts, never reachable through any Caddy site block --
+      # only a scraper already on the private network (the monitoring
+      # stack) can reach it.
+      - '10.20.1.100:9092:9092'
+    volumes:
+      - contact-metrics:/var/lib/branchleft/metrics:ro
+    mem_limit: 64m
+    cpu_shares: 64
+
+volumes:
+  contact-metrics:

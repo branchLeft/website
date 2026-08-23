@@ -6,10 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+# No id-token: write at the workflow level any more -- nothing in this
+# workflow federates to GCP. Production deploys pin a GHCR image digest onto
+# app1 over SSH instead (the `deploy` job below); `packages: write` for that
+# job is granted there, not here.
 permissions:
   contents: read
   packages: read
-  id-token: write
 
 jobs:
   checks:
@@ -151,282 +154,24 @@ jobs:
             test-results/
           retention-days: 14
 
-  pulumi-preview:
-    name: Pulumi preview
+  docker-build:
+    name: docker build (website)
     runs-on: ubuntu-latest
-    needs: [checks, e2e]
-    if: github.event_name == 'pull_request'
-    # Job-level permissions replace the workflow-level block entirely — every
-    # scope this job needs must be listed here, not just the added one.
-    # Omitting packages: read fails the Docker build with a 403 fetching
-    # @branchleft/components from npm.pkg.github.com, a long way from
-    # anything that looks permissions-related.
-    #
-    # pull-requests: write is the scope actually being added; without it
-    # github.rest.issues.createComment fails with "Resource not accessible
-    # by integration". It has no effect on PRs from forks, where GITHUB_TOKEN
-    # is read-only whatever this block says — which is why the comment steps
-    # below are best-effort and the job summary is the real output.
-    permissions:
-      contents: read
-      packages: read
-      id-token: write
-      pull-requests: write
-    env:
-      IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
-
+    # Build-only, no credentials -- proves the Dockerfile still builds on
+    # every PR and on push, mirroring ghost-platform's mailgun-shim-image.yml
+    # split of a credential-free build job and a separate push-and-deploy job.
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Check for relevant file changes
-        id: paths
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.sha }}
-        run: |
-          git fetch --no-tags --depth=1 origin "$BASE_SHA"
-          if git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- infra Dockerfile .github/workflows/ci.yml | grep -q .; then
-            echo "infra=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "infra=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Post fork comment
-        # Best-effort: a fork PR's GITHUB_TOKEN is read-only, so this is the
-        # one case where it is guaranteed to fail. Must not fail the check.
-        continue-on-error: true
-        if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '## Pulumi Preview\n\nSkipped — fork PR, no infrastructure credentials available. This check is only available for PRs from the main repository.'
-            });
-
-      - name: Authenticate to GCP (Workload Identity Federation)
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        id: auth
-        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
-        with:
-          project_id: ${{ vars.GCP_PROJECT_ID }}
-          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.GCP_DEPLOYER_SA_EMAIL }}
-
-      - name: Set up gcloud
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
-
-      - name: Configure Docker for Artifact Registry
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        env:
-          GCP_REGION: ${{ vars.GCP_REGION }}
-        run: gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
-
-      - name: Set up Docker Buildx
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
-
-      - name: Build and push image
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE }}
-          secrets: |
-            node_auth_token=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install Pulumi CLI
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        uses: pulumi/actions@8e5e406f4007fca908480587cb9893c07090f58d # v7.0.0
-
-      # No node-version input: this step is here only to write the GitHub
-      # Packages auth into the job's npmrc, so `npm ci` can resolve
-      # @branchleft/tsconfig. Supplying a version would change the Node this
-      # job runs Pulumi under.
-      - name: Set up GitHub Packages auth
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          registry-url: https://npm.pkg.github.com
-          scope: '@branchleft'
-
-      - name: Install infra dependencies
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        working-directory: infra
-        run: npm ci
+      - name: Build image
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # The stack's `encryptionsalt` is not committed: it is an offline
-      # verifier for the passphrase, so a repository that anyone can clone
-      # must not carry it. Pulumi still needs it in the file to decrypt, so
-      # it is appended here, on the runner, for this job only.
-      #
-      # Both secrets are bound in this step's own `env:`, not the job's --
-      # scoped to the steps that actually run a `pulumi` command, not to the
-      # dependency install earlier in the job. Read from `env:` rather than
-      # interpolated as `${{ }}` inside `run`: an expression in `run` is
-      # substituted before the shell parses the line, so a value containing
-      # shell metacharacters would execute.
-      #
-      # Fails closed on an empty salt, an empty passphrase, or a salt missing
-      # its `v1:` prefix. Pulumi's own passphrase lookup does not distinguish
-      # "unset" from "set to the empty string", so a missing
-      # PULUMI_CONFIG_PASSPHRASE would otherwise reach `pulumi preview` and be
-      # treated as a valid passphrase rather than failing here. A malformed
-      # salt is the realistic failure mode for a hand-pasted secret and
-      # otherwise surfaces as an opaque Pulumi decryption error rather than as
-      # the malformed secret it actually is.
-      #
-      # Carries the same guard as the steps around it: a fork PR has no
-      # repository secrets at all, so an ungated fail-closed here would turn
-      # every fork PR red for the one reason a fork can never fix.
-      - name: Restore the stack's encryption salt
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        working-directory: infra
-        env:
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
-          PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
         run: |
-          if [ -z "$PULUMI_SALT_WEBSITE" ]; then
-            echo "PULUMI_SALT_WEBSITE is empty or unset -- set the repository secret before deploying" >&2
-            exit 1
-          fi
-          if [ -z "$PULUMI_CONFIG_PASSPHRASE" ]; then
-            echo "PULUMI_CONFIG_PASSPHRASE is empty or unset -- set the repository secret before deploying" >&2
-            exit 1
-          fi
-          case "$PULUMI_SALT_WEBSITE" in
-            v1:*) ;;
-            *)
-              echo "PULUMI_SALT_WEBSITE does not look like a Pulumi-generated salt (expected a 'v1:' prefix) -- check the repository secret was pasted in full" >&2
-              exit 1
-              ;;
-          esac
-          printf '\nencryptionsalt: %s\n' "$PULUMI_SALT_WEBSITE" >> Pulumi.production.yaml
-
-      - name: Run Pulumi preview
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        working-directory: infra
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
-        run: |
-          pulumi login gs://branchleft-pulumi-state
-          pulumi stack select production
-          pulumi config set imageTag "$IMAGE_TAG"
-          pulumi preview > preview-output.txt 2>&1
-
-      # The job summary is the authoritative output: it needs no token
-      # permissions, so it works on fork PRs where the PR comment cannot.
-      - name: Write preview to job summary
-        if: steps.paths.outputs.infra == 'true'
-        run: |
-          {
-            echo '## Pulumi Preview'
-            echo
-            echo '```'
-            cat infra/preview-output.txt
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Post preview as PR comment
-        # Best-effort: a fork PR's read-only GITHUB_TOKEN cannot comment, and
-        # that must not fail the check. The job summary above always has it.
-        continue-on-error: true
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const previewPath = 'infra/preview-output.txt';
-            let previewOutput = 'No preview output captured';
-            if (fs.existsSync(previewPath)) {
-              previewOutput = fs.readFileSync(previewPath, 'utf8');
-            }
-            // GitHub rejects comment bodies over 65536 characters. Keep the
-            // tail rather than the head: the resource list and the "N to
-            // create / M to update" summary are at the end, and they are the
-            // part worth reading.
-            const LIMIT = 60000;
-            let truncated = false;
-            if (previewOutput.length > LIMIT) {
-              previewOutput = previewOutput.slice(-LIMIT);
-              truncated = true;
-            }
-            const note = truncated
-              ? '\n\n_Output truncated to the last ' + LIMIT + ' characters; see the job log for the full preview._'
-              : '';
-            const comment = '## Pulumi Preview\n\n```\n' + previewOutput + '\n```' + note;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
-
-      - name: Post no-changes comment
-        continue-on-error: true
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'false'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '## Pulumi Preview\n\nSkipped — no infrastructure or deployment files changed.'
-            });
-
-      # Runs last, after the summary/comment steps above have already posted
-      # the full preview — so the failure below never hides that output. This
-      # is a real signal, not a guess: it parses the actual preview that ran
-      # against production state with real GCP credentials a few steps up.
-      # It is not a substitute for the merge gate described in the PR that
-      # introduced it (a separate private infrastructure repo now owns these
-      # resources via a Pulumi state move) — this repo's branch protection
-      # allows an admin to bypass required checks, so treat a green run here
-      # as one more piece of evidence, not a guarantee.
-      - name: Fail if the edge load balancer would be deleted
-        if: |
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          steps.paths.outputs.infra == 'true'
-        working-directory: infra
-        run: |
-          # Self-test first: prove the matcher still matches real preview
-          # output before trusting a pass from it. A checker that silently
-          # stops matching reports success and blocks nothing.
-          python3 scripts/assert-no-edge-deletes.py --self-test
-          python3 scripts/assert-no-edge-deletes.py preview-output.txt
+          docker build \
+            --secret id=node_auth_token,env=NODE_AUTH_TOKEN \
+            --tag website:ci \
+            .
 
   deploy:
     name: Build, push & deploy
@@ -434,161 +179,124 @@ jobs:
     needs: [checks, e2e]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     concurrency:
-      group: pulumi-production-deploy
+      group: website-production-deploy
       cancel-in-progress: false
+    # packages: write is scoped to this job alone, on the one trigger that
+    # ever runs it -- a PR build must never sit in the same permissions block
+    # as a publish credential (mailgun-shim-image.yml's reasoning, copied
+    # here verbatim).
+    permissions:
+      contents: read
+      packages: write
     env:
-      IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_AR_REPO }}/website:${{ github.sha }}
+      IMAGE: ghcr.io/branchleft/website
+      IMAGE_TAG: ${{ github.sha }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Authenticate to GCP (Workload Identity Federation)
-        id: auth
-        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+      - name: Log in to GHCR
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
-          project_id: ${{ vars.GCP_PROJECT_ID }}
-          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.GCP_DEPLOYER_SA_EMAIL }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
-
-      - name: Configure Docker for Artifact Registry
-        env:
-          GCP_REGION: ${{ vars.GCP_REGION }}
-        run: gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
-
+      # Two tags from one build so `latest` never points at a different layer
+      # set than the SHA tag pushed alongside it (mailgun-shim-image.yml's
+      # pattern).
       - name: Build and push image
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE }}
-          secrets: |
-            node_auth_token=${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install Pulumi CLI
-        uses: pulumi/actions@8e5e406f4007fca908480587cb9893c07090f58d # v7.0.0
-
-      # No node-version input: this step is here only to write the GitHub
-      # Packages auth into the job's npmrc, so `npm ci` can resolve
-      # @branchleft/tsconfig. Supplying a version would change the Node this
-      # job runs Pulumi under.
-      - name: Set up GitHub Packages auth
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          registry-url: https://npm.pkg.github.com
-          scope: '@branchleft'
-
-      - name: Install infra dependencies
-        working-directory: infra
-        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # The stack's `encryptionsalt` is not committed: it is an offline
-      # verifier for the passphrase, so a repository that anyone can clone
-      # must not carry it. Pulumi still needs it in the file to decrypt, so
-      # it is appended here, on the runner, for this job only.
-      #
-      # Both secrets are bound in this step's own `env:`, not the job's --
-      # scoped to the steps that actually run a `pulumi` command, not to the
-      # dependency install earlier in the job. Read from `env:` rather than
-      # interpolated as `${{ }}` inside `run`: an expression in `run` is
-      # substituted before the shell parses the line, so a value containing
-      # shell metacharacters would execute.
-      #
-      # Fails closed on an empty salt, an empty passphrase, or a salt missing
-      # its `v1:` prefix. Pulumi's own passphrase lookup does not distinguish
-      # "unset" from "set to the empty string", so a missing
-      # PULUMI_CONFIG_PASSPHRASE would otherwise reach `pulumi up` and be
-      # treated as a valid passphrase rather than failing here -- this job is
-      # the production deploy, so that failure mode is a stack update
-      # computed against config Pulumi could not read. A malformed salt is
-      # the realistic failure mode for a hand-pasted secret and otherwise
-      # surfaces as an opaque Pulumi decryption error rather than as the
-      # malformed secret it actually is.
-      - name: Restore the stack's encryption salt
-        working-directory: infra
-        env:
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
-          PULUMI_SALT_WEBSITE: ${{ secrets.PULUMI_SALT_WEBSITE }}
         run: |
-          if [ -z "$PULUMI_SALT_WEBSITE" ]; then
-            echo "PULUMI_SALT_WEBSITE is empty or unset -- set the repository secret before deploying" >&2
-            exit 1
-          fi
-          if [ -z "$PULUMI_CONFIG_PASSPHRASE" ]; then
-            echo "PULUMI_CONFIG_PASSPHRASE is empty or unset -- set the repository secret before deploying" >&2
-            exit 1
-          fi
-          case "$PULUMI_SALT_WEBSITE" in
-            v1:*) ;;
-            *)
-              echo "PULUMI_SALT_WEBSITE does not look like a Pulumi-generated salt (expected a 'v1:' prefix) -- check the repository secret was pasted in full" >&2
-              exit 1
-              ;;
-          esac
-          printf '\nencryptionsalt: %s\n' "$PULUMI_SALT_WEBSITE" >> Pulumi.production.yaml
+          docker build \
+            --secret id=node_auth_token,env=NODE_AUTH_TOKEN \
+            --tag "$IMAGE:$IMAGE_TAG" \
+            --tag "$IMAGE:latest" \
+            .
+          docker push "$IMAGE" --all-tags
 
-      - name: Deploy with Pulumi
-        working-directory: infra
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_CONFIG_PASSPHRASE }}
+      # branchleft-deploy refuses anything that is not digest-pinned, so a tag
+      # is not enough here. `imagetools inspect` has been observed printing a
+      # Name:/MediaType:/Digest: block despite --format; the grep yields the
+      # bare sha256:... value either way (the same trap shared-infra's
+      # RUNBOOK-edge.md documents hitting on 2026-08-22).
+      - name: Resolve the pushed image's digest
+        id: digest
         run: |
-          pulumi login gs://branchleft-pulumi-state
-          pulumi stack select production
-          pulumi config set imageTag "$IMAGE_TAG"
-
-          # Preflight: this deploy must never delete the edge load balancer.
-          # It moved to a separate private infrastructure repo via a Pulumi
-          # state move (see that repo's runbook); until that move completes,
-          # this stack's state still holds all 17 edge resources while this
-          # program no longer declares any of them, and an unguarded
-          # `pulumi up` would delete them — including the reserved anycast
-          # IP, which does not come back. This check has real, authenticated
-          # access to the same state `pulumi up` is about to act on, so a
-          # pass here is a genuine guarantee for this run, not an assumption.
-          pulumi preview > preflight-preview.txt 2>&1
-
-          # Self-test first: prove the matcher still matches real preview
-          # output before trusting a pass from it. A checker that silently
-          # stops matching reports success and blocks nothing.
-          python3 scripts/assert-no-edge-deletes.py --self-test
-          if ! python3 scripts/assert-no-edge-deletes.py preflight-preview.txt; then
-            cat preflight-preview.txt
+          DIGEST=$(docker buildx imagetools inspect "$IMAGE:$IMAGE_TAG" --format '{{.Manifest.Digest}}' \
+            | grep -o 'sha256:[0-9a-f]*' | head -1)
+          if [ -z "$DIGEST" ]; then
+            echo "::error::could not resolve a digest for $IMAGE:$IMAGE_TAG"
             exit 1
           fi
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
-          pulumi up --yes
+      # The private key never touches disk longer than this job needs it, and
+      # never appears in a log: it comes from a secret, not from `run:`
+      # interpolation.
+      - name: Write the deploy SSH key
+        env:
+          SSH_KEY: ${{ secrets.HETZNER_APP1_DEPLOY_SSH_KEY }}
+        run: |
+          install -d -m 0700 ~/.ssh
+          umask 077
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/app1_deploy_key
 
-      # `pulumi up` succeeding only means the API call to update the Cloud
-      # Run service returned OK — it does not confirm the new revision is
-      # actually serving traffic without errors (e.g. booting then 500ing
-      # on every request). Hit the live site directly, with retries to
-      # absorb cold start / DNS-level propagation, and fail the job loudly
-      # if it doesn't come up healthy.
-      - name: Smoke test deployed site
+      # Pinned rather than TOFU'd: a GitHub-hosted runner has no prior
+      # knowledge of app1's host key, and accepting whatever key answers on
+      # first connect is exactly the MITM window host-key pinning exists to
+      # close.
+      - name: Pin app1's host key
+        env:
+          HETZNER_APP1_SSH_HOST_KEY: ${{ vars.HETZNER_APP1_SSH_HOST_KEY }}
+        run: |
+          if [ -z "$HETZNER_APP1_SSH_HOST_KEY" ]; then
+            echo "HETZNER_APP1_SSH_HOST_KEY is empty or unset -- set the repository variable before deploying" >&2
+            exit 1
+          fi
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$HETZNER_APP1_SSH_HOST_KEY" >> ~/.ssh/known_hosts
+
+      # The whole of the CI deploy account's privilege: one sudo-permitted
+      # binary that validates its own arguments, pins the digest into
+      # /etc/branchleft/website.image.env, and restarts branchleft-compose@website
+      # (shared-infra's hetzner/provision/branchleft_deploy.py). Nothing here
+      # mutates Pulumi state -- there is none left for this stack to mutate.
+      - name: Pin app1 to the pushed digest and restart the stack
+        env:
+          HETZNER_APP1_HOST: ${{ vars.HETZNER_APP1_HOST }}
+        run: |
+          ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
+            "sudo -n /usr/local/sbin/branchleft-deploy website $IMAGE@${{ steps.digest.outputs.digest }}"
+
+      # app1's public port is bound to its private address only (deploy/compose.yml)
+      # -- this runner cannot reach it directly, so the check runs on the host
+      # itself, over the one SSH account CI holds, against loopback.
+      - name: Smoke test the deployed stack over the private network
+        env:
+          HETZNER_APP1_HOST: ${{ vars.HETZNER_APP1_HOST }}
         run: |
           check() {
-            url="$1"
+            path="$1"
             for attempt in $(seq 1 10); do
-              if curl -fsS --max-time 10 "$url" -o /dev/null; then
-                echo "OK: $url"
+              if ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
+                   "curl -fsS --max-time 10 http://127.0.0.1:8080$path -o /dev/null"; then
+                echo "OK: $path"
                 return 0
               fi
-              echo "Attempt $attempt failed for $url, retrying in 6s..."
+              echo "Attempt $attempt failed for $path, retrying in 6s..."
               sleep 6
             done
-            echo "::error::Smoke test failed: $url did not return a successful response after retries"
+            echo "::error::Smoke test failed: $path did not return a successful response after retries"
             return 1
           }
 
-          check "https://branchleft.co.uk/"
-          check "https://branchleft.co.uk/about"
-          check "https://branchleft.co.uk/contact"
+          check "/"
+          check "/about"
+          check "/contact"
+
+      - name: Remove the deploy SSH key
+        if: always()
+        run: rm -f ~/.ssh/app1_deploy_key

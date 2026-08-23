@@ -16,7 +16,7 @@ export default function Privacy(): React.JSX.Element {
       <header>
         <h1>Privacy Notice</h1>
         <p className="eyebrow legal-page__meta">
-          Effective: 13 August 2026 · Last updated: 15 August 2026
+          Effective: 13 August 2026 · Last updated: 23 August 2026
         </p>
       </header>
 
@@ -157,16 +157,10 @@ export default function Privacy(): React.JSX.Element {
             contact form.
           </li>
           <li>
-            <strong>Google Cloud Platform (GCP)</strong> — hosts this website. Where possible we
-            serve from UK/EEA regions; where processing occurs outside the UK it is covered by the
-            UK extension to the EU-US Data Privacy Framework and/or the UK International Data
-            Transfer Addendum.
-          </li>
-          <li>
-            <strong>Hetzner Online GmbH</strong> — hosts the mail server that relays messages
-            submitted through our contact form on to the inbox listed above. Hetzner is a German
-            company and this server operates from a Germany-based data centre, so no international
-            transfer applies to this step.
+            <strong>Hetzner Online GmbH</strong> — hosts this website and the mail server that
+            relays messages submitted through our contact form on to the inbox listed above. Hetzner
+            is a German company and these servers operate from Germany-based data centres, so no
+            international transfer applies to this hosting.
           </li>
           <li>
             <strong>IONOS</strong> — our domain registrar. IONOS processes only the registration
