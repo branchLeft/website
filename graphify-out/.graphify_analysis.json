@@ -55,6 +55,46 @@
       "infra_workloadidentity_workloadidentityprovider"
     ],
     "1": [
+      "app_lib_metrics_server",
+      "app_lib_metrics_server_recordcontactsendfailure",
+      "app_lib_sendcontactemail_server",
+      "app_lib_sendcontactemail_server_buildhtml",
+      "app_lib_sendcontactemail_server_buildtext",
+      "app_lib_sendcontactemail_server_contactsubmission",
+      "app_lib_sendcontactemail_server_escapehtml",
+      "app_lib_sendcontactemail_server_gettransport",
+      "app_lib_sendcontactemail_server_sendcontactemail",
+      "app_lib_sendcontactemail_server_test",
+      "app_lib_sendcontactemail_server_test_original_env",
+      "app_lib_sendcontactemail_server_test_sendmail_createtransport",
+      "app_lib_sendcontactemail_server_test_setenv",
+      "app_lib_sendcontactemail_server_test_valid_env",
+      "app_routes_contact",
+      "app_routes_contact_action",
+      "app_routes_contact_actionresult",
+      "app_routes_contact_categories",
+      "app_routes_contact_category_values",
+      "app_routes_contact_categoryvalue",
+      "app_routes_contact_contact",
+      "app_routes_contact_email_max_length",
+      "app_routes_contact_formstring",
+      "app_routes_contact_getclientip",
+      "app_routes_contact_honeypot_field_name",
+      "app_routes_contact_isknowncategory",
+      "app_routes_contact_isratelimited",
+      "app_routes_contact_loader",
+      "app_routes_contact_message_max_length",
+      "app_routes_contact_min_submit_delay_ms",
+      "app_routes_contact_rate_limit_max_submissions",
+      "app_routes_contact_rate_limit_window_ms",
+      "app_routes_contact_submissionsbyip",
+      "app_routes_contact_test",
+      "app_routes_contact_test_actionargs",
+      "app_routes_contact_test_buildformdata",
+      "app_routes_contact_test_makerequest",
+      "app_routes_contact_test_nextip"
+    ],
+    "2": [
       "branchleft_components",
       "framer_motion",
       "isbot",
@@ -93,44 +133,6 @@
       "react_router_node",
       "react_router_serve"
     ],
-    "2": [
-      "app_lib_sendcontactemail_server",
-      "app_lib_sendcontactemail_server_buildhtml",
-      "app_lib_sendcontactemail_server_buildtext",
-      "app_lib_sendcontactemail_server_contactsubmission",
-      "app_lib_sendcontactemail_server_escapehtml",
-      "app_lib_sendcontactemail_server_gettransport",
-      "app_lib_sendcontactemail_server_sendcontactemail",
-      "app_lib_sendcontactemail_server_test",
-      "app_lib_sendcontactemail_server_test_original_env",
-      "app_lib_sendcontactemail_server_test_sendmail_createtransport",
-      "app_lib_sendcontactemail_server_test_setenv",
-      "app_lib_sendcontactemail_server_test_valid_env",
-      "app_routes_contact",
-      "app_routes_contact_action",
-      "app_routes_contact_actionresult",
-      "app_routes_contact_categories",
-      "app_routes_contact_category_values",
-      "app_routes_contact_categoryvalue",
-      "app_routes_contact_contact",
-      "app_routes_contact_email_max_length",
-      "app_routes_contact_formstring",
-      "app_routes_contact_getclientip",
-      "app_routes_contact_honeypot_field_name",
-      "app_routes_contact_isknowncategory",
-      "app_routes_contact_isratelimited",
-      "app_routes_contact_loader",
-      "app_routes_contact_message_max_length",
-      "app_routes_contact_min_submit_delay_ms",
-      "app_routes_contact_rate_limit_max_submissions",
-      "app_routes_contact_rate_limit_window_ms",
-      "app_routes_contact_submissionsbyip",
-      "app_routes_contact_test",
-      "app_routes_contact_test_actionargs",
-      "app_routes_contact_test_buildformdata",
-      "app_routes_contact_test_makerequest",
-      "app_routes_contact_test_nextip"
-    ],
     "3": [
       "app_lib_meta",
       "app_lib_meta_buildmeta",
@@ -159,7 +161,6 @@
       "app_routes_sitemap_xml_buildsitemapxml",
       "app_routes_sitemap_xml_loader",
       "app_routes_solutions_affordable_websites",
-      "app_routes_solutions_affordable_websites_affordablewebsites",
       "app_routes_solutions_affordable_websites_meta",
       "app_routes_solutions_local_news",
       "app_routes_solutions_local_news_localnews",
@@ -220,6 +221,7 @@
       "app_routes_about_meta",
       "app_routes_about_sections",
       "app_routes_about_values",
+      "app_routes_solutions_affordable_websites_affordablewebsites",
       "package_dependencies_react",
       "react"
     ],
@@ -296,10 +298,10 @@
     ],
     "10": [
       "branchleft_prettier_config",
-      "eslint",
+      "globals",
       "package_devdependencies",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_eslint",
+      "package_devdependencies_globals",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
@@ -331,42 +333,46 @@
       "pulumi_pulumi"
     ],
     "13": [
+      "server_metrics",
+      "server_metrics_metric_name",
+      "server_metrics_readcounter",
+      "server_metrics_recordcontactsendfailure",
+      "server_metrics_rendermetrics",
+      "server_metrics_server",
+      "server_metrics_server_port",
+      "server_metrics_test"
+    ],
+    "14": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "14": [
-      "infra_scripts_assert_no_edge_deletes",
-      "infra_scripts_assert_no_edge_deletes_edge_deletes",
-      "infra_scripts_assert_no_edge_deletes_main",
-      "infra_scripts_assert_no_edge_deletes_rationale_55",
-      "infra_scripts_assert_no_edge_deletes_self_test"
-    ],
     "15": [
+      "deploy_compose_yml",
+      "deploy_runbook_app1_website_md",
+      "ghcr_io_branchleft_website",
+      "github_workflows_ci_yml",
+      "hetzner_app1"
+    ],
+    "16": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "16": [
+    "17": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "17": [
+    "18": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
-    ],
-    "18": [
-      "github_workflows_ci_checks",
-      "github_workflows_ci_deploy",
-      "github_workflows_ci_e2e",
-      "github_workflows_ci_pulumi_preview"
     ],
     "19": [
       "_github_dependabot_infra_npm_updates",
@@ -385,153 +391,151 @@
       "github_workflows_docs_lint_docs_lint"
     ],
     "23": [
-      "branchleft_github_workflows_graphify_workflow",
-      "github_workflows_graphify_workflow"
+      "eslint",
+      "package_devdependencies_eslint"
     ],
     "24": [
-      "claude_md",
-      "infra_pulumi_production"
-    ],
-    "25": [
       "eslint_config_prettier",
       "package_devdependencies_eslint_config_prettier"
     ],
-    "26": [
+    "25": [
       "eslint_js",
       "package_devdependencies_eslint_js"
     ],
-    "27": [
+    "26": [
       "eslint_plugin_react",
       "package_devdependencies_eslint_plugin_react"
     ],
-    "28": [
+    "27": [
       "eslint_plugin_react_hooks",
       "package_devdependencies_eslint_plugin_react_hooks"
     ],
-    "29": [
+    "28": [
       "github_actions_deployer",
       "infra_known_issues"
     ],
-    "30": [
-      "globals",
-      "package_devdependencies_globals"
-    ],
-    "31": [
+    "29": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "32": [
+    "30": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "33": [
+    "31": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "34": [
+    "32": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "35": [
+    "33": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "36": [
+    "34": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "37": [
+    "35": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "38": [
+    "36": [
       "package_devdependencies_types_react",
       "types_react"
     ],
-    "39": [
+    "37": [
       "package_devdependencies_types_react_dom",
       "types_react_dom"
     ],
-    "40": [
+    "38": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "41": [
+    "39": [
       "package_devdependencies_typescript_eslint_eslint_plugin",
       "typescript_eslint_eslint_plugin"
     ],
-    "42": [
+    "40": [
       "package_devdependencies_vitejs_plugin_react",
       "vitejs_plugin_react"
     ],
-    "43": [
+    "41": [
       "package_devdependencies_vitest",
       "vitest"
     ],
-    "44": [
+    "42": [
       "package_devdependencies_vitest_ui",
       "vitest_ui"
     ],
-    "45": [
+    "43": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "46": [
+    "44": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "47": [
+    "45": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "48": [
+    "46": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "49": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "50": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "51": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "52": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "53": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "54": [
+    "52": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "55": [
+    "53": [
       "_github_dependabot_github_actions_updates"
     ],
-    "56": [
+    "54": [
+      "claude_md"
+    ],
+    "55": [
       "contributing_accessibility"
     ],
-    "57": [
+    "56": [
       "contributing_checks_ci_runs"
     ],
-    "58": [
+    "57": [
       "contributing_content_and_copy"
     ],
-    "59": [
+    "58": [
       "contributing_pre_commit_hooks"
     ],
-    "60": [
+    "59": [
       "contributing_prerequisites"
     ],
-    "61": [
+    "60": [
       "eslint_config"
     ],
-    "62": [
-      "github_workflows_ci"
-    ],
-    "63": [
+    "61": [
       "github_workflows_codeql"
     ],
-    "64": [
+    "62": [
+      "github_workflows_graphify_workflow"
+    ],
+    "63": [
       "github_workflows_standards_workflow"
+    ],
+    "64": [
+      "infra_pulumi_production"
     ],
     "65": [
       "known_issues_prerendering_security_headers"
@@ -585,37 +589,40 @@
       "react_router_v7"
     ],
     "82": [
-      "tests_favicon_spec"
+      "server_metrics_d"
     ],
     "83": [
-      "tests_logo_svg_spec"
+      "tests_favicon_spec"
     ],
     "84": [
-      "tests_meta_spec"
+      "tests_logo_svg_spec"
     ],
     "85": [
-      "tests_no_js_spec"
+      "tests_meta_spec"
     ],
     "86": [
-      "tests_og_image_spec"
+      "tests_no_js_spec"
     ],
     "87": [
-      "tests_robots_txt_spec"
+      "tests_og_image_spec"
     ],
     "88": [
-      "tests_sitemap_xml_spec"
+      "tests_robots_txt_spec"
     ],
     "89": [
+      "tests_sitemap_xml_spec"
+    ],
+    "90": [
       "vitest_config"
     ]
   },
   "cohesion": {
     "0": 0.07088989441930618,
-    "1": 0.05405405405405406,
-    "2": 0.09047619047619047,
-    "3": 0.08907563025210084,
+    "1": 0.08961593172119488,
+    "2": 0.05405405405405406,
+    "3": 0.09269162210338681,
     "4": 0.07977207977207977,
-    "5": 0.12318840579710146,
+    "5": 0.11666666666666667,
     "6": 0.1225296442687747,
     "7": 0.19047619047619047,
     "8": 0.358974358974359,
@@ -623,11 +630,11 @@
     "10": 0.18181818181818182,
     "11": 0.2,
     "12": 0.2222222222222222,
-    "13": 0.4,
-    "14": 0.7,
-    "15": 0.5,
+    "13": 0.4642857142857143,
+    "14": 0.4,
+    "15": 0.4,
     "16": 0.5,
-    "17": 0.6666666666666666,
+    "17": 0.5,
     "18": 0.6666666666666666,
     "19": 1.0,
     "20": 1.0,
@@ -699,7 +706,8 @@
     "86": 1.0,
     "87": 1.0,
     "88": 1.0,
-    "89": 1.0
+    "89": 1.0,
+    "90": 1.0
   },
   "gods": [
     {
@@ -728,13 +736,13 @@
       "degree": 8
     },
     {
-      "id": "app_lib_usehasmounted_usehasmounted",
-      "label": "useHasMounted()",
-      "degree": 7
-    },
-    {
       "id": "app_routes_contact_action",
       "label": "action()",
+      "degree": 8
+    },
+    {
+      "id": "app_lib_usehasmounted_usehasmounted",
+      "label": "useHasMounted()",
       "degree": 7
     },
     {
@@ -754,17 +762,6 @@
     }
   ],
   "surprises": [
-    {
-      "source": "AffordableWebsites()",
-      "target": "react",
-      "source_files": [
-        "app/routes/solutions.affordable-websites.tsx",
-        "package.json"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "connects across different repos/directories; bridges separate communities; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
-    },
     {
       "source": "NavDropdown()",
       "target": "react",
@@ -786,6 +783,17 @@
       "confidence": "EXTRACTED",
       "relation": "references",
       "why": "connects across different repos/directories; peripheral node `About()` unexpectedly reaches hub `react`"
+    },
+    {
+      "source": "AffordableWebsites()",
+      "target": "react",
+      "source_files": [
+        "app/routes/solutions.affordable-websites.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
     },
     {
       "source": "Dependabot: npm root updates",
@@ -811,7 +819,7 @@
     }
   ],
   "tokens": {
-    "input": 995,
-    "output": 239
+    "input": 11341,
+    "output": 1021
   }
 }
