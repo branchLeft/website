@@ -29,5 +29,9 @@ FROM base
 COPY --chown=node:node package.json ./
 COPY --chown=node:node --from=production-dependencies-env /app/node_modules ./node_modules
 COPY --chown=node:node --from=build-env /app/build ./build
+# Plain Node, outside the Vite build: the website-metrics Compose service
+# (deploy/compose.yml) overrides CMD to run server/metrics-server.mjs from
+# this same image instead of react-router-serve.
+COPY --chown=node:node server ./server
 USER node
 CMD ["node_modules/.bin/react-router-serve", "build/server/index.js"]

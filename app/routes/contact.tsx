@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, useActionData, useNavigation, useSearchParams } from 'react-router';
 import type { Route } from './+types/contact';
 import { sendContactEmail } from '../lib/sendContactEmail.server';
+import { recordContactSendFailure } from '../lib/metrics.server';
 import { buildMeta } from '../lib/meta';
 
 /**
@@ -149,6 +150,14 @@ export async function action({ request }: Route.ActionArgs): Promise<ActionResul
     await sendContactEmail({ category, email, message });
   } catch (error) {
     console.error('Failed to send contact form email:', error);
+    // A failure here must never replace the graceful response below with an
+    // unhandled exception -- the send already failed, and the user's only
+    // path back is the message this catch block returns.
+    try {
+      recordContactSendFailure();
+    } catch (metricsError) {
+      console.error('Failed to record contact-form send-failure metric:', metricsError);
+    }
     return {
       ok: false,
       error: (
