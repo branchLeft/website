@@ -21,7 +21,20 @@ function readCounter(path) {
 }
 
 export function recordContactSendFailure(path) {
-  writeFileSync(path, String(readCounter(path) + 1), 'utf-8');
+  // Read-modify-write, not atomic -- safe only because deploy/compose.yml
+  // runs exactly one `website` replica, so there is never a second writer to
+  // race against. A second app replica would need a real counter (e.g. one
+  // maintained by the metrics service itself) rather than a shared file.
+  //
+  // A metrics write is best-effort: the volume it targets can be full or
+  // wrong-permissioned for reasons unrelated to (and plausibly correlated
+  // with) the send failure this counts. Losing a count must never turn
+  // into a second, user-visible failure on top of the first.
+  try {
+    writeFileSync(path, String(readCounter(path) + 1), 'utf-8');
+  } catch (error) {
+    console.error('recordContactSendFailure: could not write counter:', error);
+  }
 }
 
 export function renderMetrics(path) {

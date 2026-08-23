@@ -150,7 +150,14 @@ export async function action({ request }: Route.ActionArgs): Promise<ActionResul
     await sendContactEmail({ category, email, message });
   } catch (error) {
     console.error('Failed to send contact form email:', error);
-    recordContactSendFailure();
+    // A failure here must never replace the graceful response below with an
+    // unhandled exception -- the send already failed, and the user's only
+    // path back is the message this catch block returns.
+    try {
+      recordContactSendFailure();
+    } catch (metricsError) {
+      console.error('Failed to record contact-form send-failure metric:', metricsError);
+    }
     return {
       ok: false,
       error: (

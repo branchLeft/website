@@ -1,7 +1,7 @@
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { METRIC_NAME, recordContactSendFailure, renderMetrics } from './metrics.mjs';
 
@@ -54,5 +54,15 @@ describe('recordContactSendFailure', () => {
     writeFileSync(counterPath, 'garbage', 'utf-8');
     recordContactSendFailure(counterPath);
     expect(readFileSync(counterPath, 'utf-8')).toBe('1');
+  });
+
+  it('does not throw when the write fails, and logs instead', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const unwritablePath = join(dir, 'no-such-directory', 'contact-send-failures.count');
+
+    expect(() => recordContactSendFailure(unwritablePath)).not.toThrow();
+    expect(consoleError).toHaveBeenCalled();
+
+    consoleError.mockRestore();
   });
 });

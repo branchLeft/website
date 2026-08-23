@@ -194,6 +194,17 @@ describe('action', () => {
     expect(recordContactSendFailure).not.toHaveBeenCalled();
   });
 
+  it('still returns the graceful failure response when recording the metric itself throws', async () => {
+    vi.mocked(sendContactEmail).mockRejectedValueOnce(new Error('smtp unreachable'));
+    vi.mocked(recordContactSendFailure).mockImplementationOnce(() => {
+      throw new Error('metrics volume full');
+    });
+
+    const result = await action(actionArgs(makeRequest(buildFormData(), nextIp())));
+
+    expect(result.ok).toBe(false);
+  });
+
   it('does not rate-limit a fresh IP after another IP is exhausted', async () => {
     const exhaustedIp = nextIp();
     for (let i = 0; i < RATE_LIMIT_MAX_SUBMISSIONS + 1; i += 1) {
