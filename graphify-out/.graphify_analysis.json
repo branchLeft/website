@@ -95,45 +95,6 @@
       "app_routes_contact_test_nextip"
     ],
     "2": [
-      "branchleft_components",
-      "framer_motion",
-      "isbot",
-      "lucide_react",
-      "nodemailer",
-      "package",
-      "package_dependencies",
-      "package_dependencies_branchleft_components",
-      "package_dependencies_framer_motion",
-      "package_dependencies_isbot",
-      "package_dependencies_lucide_react",
-      "package_dependencies_nodemailer",
-      "package_dependencies_react_dom",
-      "package_dependencies_react_router",
-      "package_dependencies_react_router_node",
-      "package_dependencies_react_router_serve",
-      "package_name",
-      "package_packagemanager",
-      "package_prettier",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_format",
-      "package_scripts_format_check",
-      "package_scripts_lint",
-      "package_scripts_prepare",
-      "package_scripts_start",
-      "package_scripts_test_e2e",
-      "package_scripts_test_ui",
-      "package_scripts_test_unit",
-      "package_scripts_typecheck",
-      "package_type",
-      "react_dom",
-      "react_router",
-      "react_router_node",
-      "react_router_serve"
-    ],
-    "3": [
       "app_lib_meta",
       "app_lib_meta_buildmeta",
       "app_lib_meta_organization_json_ld",
@@ -149,6 +110,8 @@
       "app_lib_page_paths_test",
       "app_lib_page_paths_test_resource_route_paths",
       "app_lib_page_paths_test_routeconfigpaths",
+      "app_lib_social_links",
+      "app_lib_social_links_social_links",
       "app_routes",
       "app_routes_contact_meta",
       "app_routes_home",
@@ -161,6 +124,7 @@
       "app_routes_sitemap_xml_buildsitemapxml",
       "app_routes_sitemap_xml_loader",
       "app_routes_solutions_affordable_websites",
+      "app_routes_solutions_affordable_websites_affordablewebsites",
       "app_routes_solutions_affordable_websites_meta",
       "app_routes_solutions_local_news",
       "app_routes_solutions_local_news_localnews",
@@ -169,7 +133,7 @@
       "app_routes_terms_meta",
       "app_routes_terms_terms"
     ],
-    "4": [
+    "3": [
       "infra_tsconfig",
       "infra_tsconfig_compileroptions",
       "infra_tsconfig_compileroptions_pretty",
@@ -198,7 +162,7 @@
       "tsconfig_include",
       "tsconfig_json_ref_branchleft_tsconfig_strict_1_json"
     ],
-    "5": [
+    "4": [
       "app_components_navbar",
       "app_components_navbar_isdropdown",
       "app_components_navbar_nav_links",
@@ -221,11 +185,10 @@
       "app_routes_about_meta",
       "app_routes_about_sections",
       "app_routes_about_values",
-      "app_routes_solutions_affordable_websites_affordablewebsites",
       "package_dependencies_react",
       "react"
     ],
-    "6": [
+    "5": [
       "app_entry_server",
       "app_entry_server_handlerequest",
       "app_entry_server_streamtimeout",
@@ -250,7 +213,48 @@
       "app_root_meta",
       "docref_rfc_9110"
     ],
+    "6": [
+      "branchleft_components",
+      "framer_motion",
+      "isbot",
+      "lucide_react",
+      "nodemailer",
+      "package_dependencies",
+      "package_dependencies_branchleft_components",
+      "package_dependencies_framer_motion",
+      "package_dependencies_isbot",
+      "package_dependencies_lucide_react",
+      "package_dependencies_nodemailer",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_router",
+      "package_dependencies_react_router_node",
+      "package_dependencies_react_router_serve",
+      "react_dom",
+      "react_router",
+      "react_router_node",
+      "react_router_serve"
+    ],
     "7": [
+      "package",
+      "package_name",
+      "package_packagemanager",
+      "package_prettier",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_format",
+      "package_scripts_format_check",
+      "package_scripts_lint",
+      "package_scripts_prepare",
+      "package_scripts_start",
+      "package_scripts_test_e2e",
+      "package_scripts_test_ui",
+      "package_scripts_test_unit",
+      "package_scripts_typecheck",
+      "package_type"
+    ],
+    "8": [
       "app_components_footer",
       "app_components_footer_footer",
       "app_components_icons_blueskyicon",
@@ -263,11 +267,9 @@
       "app_components_icons_mediumicon_mediumicon",
       "app_components_sociallinksitems",
       "app_components_sociallinksitems_icons",
-      "app_components_sociallinksitems_sociallinksitems",
-      "app_lib_social_links",
-      "app_lib_social_links_social_links"
+      "app_components_sociallinksitems_sociallinksitems"
     ],
-    "8": [
+    "9": [
       "infra_scripts_assert_no_committed_pulumi_secrets",
       "infra_scripts_assert_no_committed_pulumi_secrets_check",
       "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs",
@@ -282,7 +284,7 @@
       "infra_scripts_assert_no_committed_pulumi_secrets_self_test",
       "path"
     ],
-    "9": [
+    "10": [
       "tests_404_spec",
       "tests_a11y",
       "tests_a11y_checka11y",
@@ -296,12 +298,12 @@
       "tests_solutions_local_news_spec",
       "tests_terms_spec"
     ],
-    "10": [
+    "11": [
+      "axe_core_playwright",
       "branchleft_prettier_config",
-      "globals",
       "package_devdependencies",
+      "package_devdependencies_axe_core_playwright",
       "package_devdependencies_branchleft_prettier_config",
-      "package_devdependencies_globals",
       "package_devdependencies_typescript_eslint_parser",
       "package_devdependencies_vite",
       "package_devdependencies_vitest_coverage_v8",
@@ -309,7 +311,7 @@
       "vite",
       "vitest_coverage_v8"
     ],
-    "11": [
+    "12": [
       "infra_package_devdependencies",
       "infra_package_devdependencies_branchleft_tsconfig",
       "infra_package_devdependencies_types_node",
@@ -321,7 +323,7 @@
       "package_json_types_node",
       "package_json_typescript"
     ],
-    "12": [
+    "13": [
       "infra_package",
       "infra_package_dependencies",
       "infra_package_dependencies_pulumi_gcp",
@@ -332,7 +334,7 @@
       "pulumi_gcp",
       "pulumi_pulumi"
     ],
-    "13": [
+    "14": [
       "server_metrics",
       "server_metrics_metric_name",
       "server_metrics_readcounter",
@@ -342,49 +344,47 @@
       "server_metrics_server_port",
       "server_metrics_test"
     ],
-    "14": [
+    "15": [
+      "app1_host",
+      "branchleft_deploy_binary",
+      "deploy_runbook_app1_website",
+      "ghcr_website_image",
+      "github_workflows_ci_checks",
+      "github_workflows_ci_deploy",
+      "github_workflows_ci_e2e"
+    ],
+    "16": [
       "brand_readme_brand_source_assets",
       "contributing_setup",
       "notice_trademarks_and_brand_assets",
       "public_robots_rules",
       "readme_overview"
     ],
-    "15": [
-      "deploy_compose_yml",
-      "deploy_runbook_app1_website_md",
-      "ghcr_io_branchleft_website",
-      "github_workflows_ci_yml",
-      "hetzner_app1"
-    ],
-    "16": [
+    "17": [
       "_agents_skills_react_router_references_framework_mode_committed_strategy",
       "_agents_skills_react_router_skill_legacy_patterns_to_migrate",
       "_agents_skills_react_router_skill_react_router_v7_framework_mode",
       "_agents_skills_react_router_skill_skill_references_table"
     ],
-    "17": [
+    "18": [
       "_github_dependabot_npm_root_updates",
       "contributing_fork_pat_issue",
       "pnpm_workspace_allow_builds",
       "pnpm_workspace_minimum_release_age_exclude"
     ],
-    "18": [
+    "19": [
       "brand_branchleft_logo_logo",
       "brand_branchleft_wordmark_wordmark",
       "public_favicon_32_favicon_set",
       "public_og_image_social_card"
     ],
-    "19": [
+    "20": [
       "_github_dependabot_infra_npm_updates",
       "infra_pulumi_project"
     ],
-    "20": [
+    "21": [
       "app_routes_logo_svg",
       "app_routes_logo_svg_loader"
-    ],
-    "21": [
-      "axe_core_playwright",
-      "package_devdependencies_axe_core_playwright"
     ],
     "22": [
       "branchleft_github_workflows_docs_lint",
@@ -415,228 +415,241 @@
       "infra_known_issues"
     ],
     "29": [
+      "globals",
+      "package_devdependencies_globals"
+    ],
+    "30": [
       "jsdom",
       "package_devdependencies_jsdom"
     ],
-    "30": [
+    "31": [
       "package_devdependencies_playwright_test",
       "playwright_test"
     ],
-    "31": [
+    "32": [
       "package_devdependencies_prettier",
       "prettier"
     ],
-    "32": [
+    "33": [
       "package_devdependencies_react_router_dev",
       "react_router_dev"
     ],
-    "33": [
+    "34": [
       "package_devdependencies_tailwindcss",
       "tailwindcss"
     ],
-    "34": [
+    "35": [
       "package_devdependencies_tailwindcss_vite",
       "tailwindcss_vite"
     ],
-    "35": [
+    "36": [
       "package_devdependencies_types_nodemailer",
       "types_nodemailer"
     ],
-    "36": [
+    "37": [
       "package_devdependencies_types_react",
       "types_react"
     ],
-    "37": [
+    "38": [
       "package_devdependencies_types_react_dom",
       "types_react_dom"
     ],
-    "38": [
+    "39": [
       "package_devdependencies_typescript_eslint",
       "typescript_eslint"
     ],
-    "39": [
+    "40": [
       "package_devdependencies_typescript_eslint_eslint_plugin",
       "typescript_eslint_eslint_plugin"
     ],
-    "40": [
+    "41": [
       "package_devdependencies_vitejs_plugin_react",
       "vitejs_plugin_react"
     ],
-    "41": [
+    "42": [
       "package_devdependencies_vitest",
       "vitest"
     ],
-    "42": [
+    "43": [
       "package_devdependencies_vitest_ui",
       "vitest_ui"
     ],
-    "43": [
+    "44": [
       "vite_config",
       "vite_config_stripcssbanners"
     ],
-    "44": [
+    "45": [
       "_agents_skills_react_router_references_framework_mode_data_and_mutations"
     ],
-    "45": [
+    "46": [
       "_agents_skills_react_router_references_framework_mode_forms_fetchers_pending_ui"
     ],
-    "46": [
+    "47": [
       "_agents_skills_react_router_references_framework_mode_middleware_sessions_auth"
     ],
-    "47": [
+    "48": [
       "_agents_skills_react_router_references_framework_mode_rendering_strategy"
     ],
-    "48": [
+    "49": [
       "_agents_skills_react_router_references_framework_mode_route_configuration"
     ],
-    "49": [
+    "50": [
       "_agents_skills_react_router_references_framework_mode_route_modules"
     ],
-    "50": [
+    "51": [
       "_agents_skills_react_router_references_framework_mode_rsc_framework"
     ],
-    "51": [
+    "52": [
       "_agents_skills_react_router_references_framework_mode_type_safety"
     ],
-    "52": [
+    "53": [
       "_agents_skills_react_router_skill_rsc_future_path"
     ],
-    "53": [
+    "54": [
       "_github_dependabot_github_actions_updates"
     ],
-    "54": [
+    "55": [
       "claude_md"
     ],
-    "55": [
+    "56": [
       "contributing_accessibility"
     ],
-    "56": [
+    "57": [
       "contributing_checks_ci_runs"
     ],
-    "57": [
+    "58": [
       "contributing_content_and_copy"
     ],
-    "58": [
+    "59": [
       "contributing_pre_commit_hooks"
     ],
-    "59": [
+    "60": [
       "contributing_prerequisites"
     ],
-    "60": [
-      "eslint_config"
-    ],
     "61": [
-      "github_workflows_codeql"
+      "deploy_compose_yml"
     ],
     "62": [
-      "github_workflows_graphify_workflow"
+      "eslint_config"
     ],
     "63": [
-      "github_workflows_standards_workflow"
+      "github_workflows_ci"
     ],
     "64": [
-      "infra_pulumi_production"
+      "github_workflows_ci_docker_build"
     ],
     "65": [
-      "known_issues_prerendering_security_headers"
+      "github_workflows_codeql"
     ],
     "66": [
-      "notice_license_scope"
+      "github_workflows_graphify_workflow"
     ],
     "67": [
-      "notice_third_party_fonts"
+      "github_workflows_standards_workflow"
     ],
     "68": [
-      "playwright_config"
+      "infra_pulumi_production"
     ],
     "69": [
-      "pre_commit_config"
+      "known_issues_prerendering_security_headers"
     ],
     "70": [
-      "public_apple_touch_icon"
+      "notice_license_scope"
     ],
     "71": [
-      "public_favicon_192"
+      "notice_third_party_fonts"
     ],
     "72": [
-      "public_favicon_512"
+      "playwright_config"
     ],
     "73": [
-      "public_people_headshot_160_jpg"
+      "pre_commit_config"
     ],
     "74": [
-      "public_people_headshot_160_webp"
+      "public_apple_touch_icon"
     ],
     "75": [
-      "public_people_headshot_320_jpg"
+      "public_favicon_192"
     ],
     "76": [
-      "public_people_headshot_320_webp"
+      "public_favicon_512"
     ],
     "77": [
-      "public_people_headshot_480_headshot"
+      "public_people_headshot_160_jpg"
     ],
     "78": [
-      "public_people_headshot_480_webp"
+      "public_people_headshot_160_webp"
     ],
     "79": [
-      "pulumi"
+      "public_people_headshot_320_jpg"
     ],
     "80": [
-      "react_router_config"
+      "public_people_headshot_320_webp"
     ],
     "81": [
-      "react_router_v7"
+      "public_people_headshot_480_headshot"
     ],
     "82": [
-      "server_metrics_d"
+      "public_people_headshot_480_webp"
     ],
     "83": [
-      "tests_favicon_spec"
+      "pulumi"
     ],
     "84": [
-      "tests_logo_svg_spec"
+      "react_router_config"
     ],
     "85": [
-      "tests_meta_spec"
+      "react_router_v7"
     ],
     "86": [
-      "tests_no_js_spec"
+      "server_metrics_d"
     ],
     "87": [
-      "tests_og_image_spec"
+      "tests_favicon_spec"
     ],
     "88": [
-      "tests_robots_txt_spec"
+      "tests_logo_svg_spec"
     ],
     "89": [
-      "tests_sitemap_xml_spec"
+      "tests_meta_spec"
     ],
     "90": [
+      "tests_no_js_spec"
+    ],
+    "91": [
+      "tests_og_image_spec"
+    ],
+    "92": [
+      "tests_robots_txt_spec"
+    ],
+    "93": [
+      "tests_sitemap_xml_spec"
+    ],
+    "94": [
       "vitest_config"
     ]
   },
   "cohesion": {
     "0": 0.07088989441930618,
     "1": 0.08961593172119488,
-    "2": 0.05405405405405406,
-    "3": 0.09269162210338681,
-    "4": 0.07977207977207977,
-    "5": 0.11666666666666667,
-    "6": 0.1225296442687747,
-    "7": 0.19047619047619047,
-    "8": 0.358974358974359,
-    "9": 0.3181818181818182,
-    "10": 0.18181818181818182,
-    "11": 0.2,
-    "12": 0.2222222222222222,
-    "13": 0.4642857142857143,
-    "14": 0.4,
-    "15": 0.4,
-    "16": 0.5,
+    "2": 0.08408408408408409,
+    "3": 0.07977207977207977,
+    "4": 0.12318840579710146,
+    "5": 0.1225296442687747,
+    "6": 0.10526315789473684,
+    "7": 0.1111111111111111,
+    "8": 0.21794871794871795,
+    "9": 0.358974358974359,
+    "10": 0.3181818181818182,
+    "11": 0.18181818181818182,
+    "12": 0.2,
+    "13": 0.2222222222222222,
+    "14": 0.4642857142857143,
+    "15": 0.38095238095238093,
+    "16": 0.4,
     "17": 0.5,
-    "18": 0.6666666666666666,
-    "19": 1.0,
+    "18": 0.5,
+    "19": 0.6666666666666666,
     "20": 1.0,
     "21": 1.0,
     "22": 1.0,
@@ -707,7 +720,11 @@
     "87": 1.0,
     "88": 1.0,
     "89": 1.0,
-    "90": 1.0
+    "90": 1.0,
+    "91": 1.0,
+    "92": 1.0,
+    "93": 1.0,
+    "94": 1.0
   },
   "gods": [
     {
@@ -751,17 +768,28 @@
       "degree": 7
     },
     {
-      "id": "app_lib_security_headers_buildsecurityheaders",
-      "label": "buildSecurityHeaders()",
-      "degree": 5
+      "id": "github_workflows_ci_deploy",
+      "label": "deploy job",
+      "degree": 6
     },
     {
-      "id": "infra_apis_enabledapis",
-      "label": "enabledApis",
+      "id": "app_lib_security_headers_buildsecurityheaders",
+      "label": "buildSecurityHeaders()",
       "degree": 5
     }
   ],
   "surprises": [
+    {
+      "source": "AffordableWebsites()",
+      "target": "react",
+      "source_files": [
+        "app/routes/solutions.affordable-websites.tsx",
+        "package.json"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
+    },
     {
       "source": "NavDropdown()",
       "target": "react",
@@ -783,17 +811,6 @@
       "confidence": "EXTRACTED",
       "relation": "references",
       "why": "connects across different repos/directories; peripheral node `About()` unexpectedly reaches hub `react`"
-    },
-    {
-      "source": "AffordableWebsites()",
-      "target": "react",
-      "source_files": [
-        "app/routes/solutions.affordable-websites.tsx",
-        "package.json"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "references",
-      "why": "connects across different repos/directories; peripheral node `AffordableWebsites()` unexpectedly reaches hub `react`"
     },
     {
       "source": "Dependabot: npm root updates",
@@ -819,7 +836,7 @@
     }
   ],
   "tokens": {
-    "input": 11341,
-    "output": 1021
+    "input": 6184,
+    "output": 1329
   }
 }

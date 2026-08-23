@@ -1,1 +1,0 @@
-{"nodes": [{"id": "github_workflows_ci_yml", "label": "CI Workflow", "file_type": "code", "source_file": ".github/workflows/ci.yml"}, {"id": "ghcr_io_branchleft_website", "label": "GHCR Website Image", "file_type": "concept", "source_file": ".github/workflows/ci.yml"}], "edges": [], "hyperedges": []}

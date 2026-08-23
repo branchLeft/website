@@ -4,15 +4,15 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "deployment_infrastructure",
-        "label": "Hetzner Deployment Stack",
+        "id": "website_deployment_flow",
+        "label": "Website Deployment Flow",
         "nodes": [
-          "github_workflows_ci_yml",
-          "deploy_runbook_app1_website_md",
-          "deploy_compose_yml",
-          "hetzner_app1"
+          "github_workflows_ci_deploy",
+          "deploy_runbook_app1_website",
+          "branchleft_deploy_binary",
+          "app1_host"
         ],
-        "relation": "form",
+        "relation": "participate_in",
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": "deploy/RUNBOOK-app1-website.md"
@@ -51,7 +51,7 @@
       "source_file": "app/components/Footer.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "footer.tsx",
       "id": "app_components_footer"
@@ -63,7 +63,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "footer()",
       "id": "app_components_footer_footer"
@@ -74,7 +74,7 @@
       "source_file": "app/components/NavBar.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navbar.tsx",
       "id": "app_components_navbar"
@@ -87,7 +87,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navlinkitem",
       "id": "app_components_navbar_navlinkitem"
@@ -100,7 +100,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navdropdownitem",
       "id": "app_components_navbar_navdropdownitem"
@@ -111,7 +111,7 @@
       "source_file": "app/components/NavBar.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "nav_links",
       "id": "app_components_navbar_nav_links"
@@ -123,7 +123,7 @@
       "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "isdropdown()",
       "id": "app_components_navbar_isdropdown"
@@ -135,7 +135,7 @@
       "source_location": "L26",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navdropdown()",
       "id": "app_components_navbar_navdropdown"
@@ -147,7 +147,7 @@
       "source_location": "L107",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navlinksitems()",
       "id": "app_components_navbar_navlinksitems"
@@ -159,7 +159,7 @@
       "source_location": "L132",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "navbar()",
       "id": "app_components_navbar_navbar"
@@ -170,7 +170,7 @@
       "source_file": "app/components/SocialLinksItems.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "sociallinksitems.tsx",
       "id": "app_components_sociallinksitems"
@@ -181,7 +181,7 @@
       "source_file": "app/components/SocialLinksItems.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "icons",
       "id": "app_components_sociallinksitems_icons"
@@ -193,7 +193,7 @@
       "source_location": "L24",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "sociallinksitems()",
       "id": "app_components_sociallinksitems_sociallinksitems"
@@ -204,7 +204,7 @@
       "source_file": "app/components/SolutionsShowcase.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutionsshowcase.tsx",
       "id": "app_components_solutionsshowcase"
@@ -217,7 +217,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solution",
       "id": "app_components_solutionsshowcase_solution"
@@ -228,7 +228,7 @@
       "source_file": "app/components/SolutionsShowcase.tsx",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutions",
       "id": "app_components_solutionsshowcase_solutions"
@@ -240,7 +240,7 @@
       "source_location": "L61",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "solutionsshowcase()",
       "id": "app_components_solutionsshowcase_solutionsshowcase"
@@ -251,7 +251,7 @@
       "source_file": "app/components/icons/BlueskyIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "blueskyicon.tsx",
       "id": "app_components_icons_blueskyicon"
@@ -263,7 +263,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "blueskyicon()",
       "id": "app_components_icons_blueskyicon_blueskyicon"
@@ -274,7 +274,7 @@
       "source_file": "app/components/icons/GitHubIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "githubicon.tsx",
       "id": "app_components_icons_githubicon"
@@ -286,7 +286,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "githubicon()",
       "id": "app_components_icons_githubicon_githubicon"
@@ -297,7 +297,7 @@
       "source_file": "app/components/icons/LinkedInIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "linkedinicon.tsx",
       "id": "app_components_icons_linkedinicon"
@@ -309,7 +309,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Navbar & Social Icons",
       "norm_label": "linkedinicon()",
       "id": "app_components_icons_linkedinicon_linkedinicon"
@@ -320,7 +320,7 @@
       "source_file": "app/components/icons/MediumIcon.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "mediumicon.tsx",
       "id": "app_components_icons_mediumicon"
@@ -332,7 +332,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "community_name": "Footer & Icon Components",
       "norm_label": "mediumicon()",
       "id": "app_components_icons_mediumicon_mediumicon"
@@ -343,7 +343,7 @@
       "source_file": "app/entry.server.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "entry.server.tsx",
       "id": "app_entry_server"
@@ -354,7 +354,7 @@
       "source_file": "app/entry.server.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "streamtimeout",
       "id": "app_entry_server_streamtimeout"
@@ -366,7 +366,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "handlerequest()",
       "id": "app_entry_server_handlerequest"
@@ -377,7 +377,7 @@
       "source_file": "app/entry.server.tsx",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "rfc-9110",
       "id": "docref_rfc_9110"
@@ -388,7 +388,7 @@
       "source_file": "app/lib/meta.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.test.ts",
       "id": "app_lib_meta_test"
@@ -401,7 +401,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentries",
       "id": "app_lib_meta_test_metaentries"
@@ -414,7 +414,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "metaentry",
       "id": "app_lib_meta_test_metaentry"
@@ -426,7 +426,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykey()",
       "id": "app_lib_meta_test_findbykey"
@@ -438,7 +438,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "findbykeyvalue()",
       "id": "app_lib_meta_test_findbykeyvalue"
@@ -449,7 +449,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta.ts",
       "id": "app_lib_meta"
@@ -460,7 +460,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "site_url",
       "id": "app_lib_meta_site_url"
@@ -471,7 +471,7 @@
       "source_file": "app/lib/meta.ts",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "organization_json_ld",
       "id": "app_lib_meta_organization_json_ld"
@@ -484,7 +484,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "pagemetainput",
       "id": "app_lib_meta_pagemetainput"
@@ -496,7 +496,7 @@
       "source_location": "L90",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildmeta()",
       "id": "app_lib_meta_buildmeta"
@@ -507,7 +507,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.test.ts",
       "id": "app_lib_page_paths_test"
@@ -518,7 +518,7 @@
       "source_file": "app/lib/page-paths.test.ts",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "resource_route_paths",
       "id": "app_lib_page_paths_test_resource_route_paths"
@@ -530,7 +530,7 @@
       "source_location": "L9",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routeconfigpaths()",
       "id": "app_lib_page_paths_test_routeconfigpaths"
@@ -541,7 +541,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page-paths.ts",
       "id": "app_lib_page_paths"
@@ -552,7 +552,7 @@
       "source_file": "app/lib/page-paths.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "page_paths",
       "id": "app_lib_page_paths_page_paths"
@@ -563,7 +563,7 @@
       "source_file": "app/lib/security-headers.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "security-headers.ts",
       "id": "app_lib_security_headers"
@@ -575,7 +575,7 @@
       "source_location": "L32",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "buildcontentsecuritypolicy()",
       "id": "app_lib_security_headers_buildcontentsecuritypolicy"
@@ -586,7 +586,7 @@
       "source_file": "app/lib/security-headers.ts",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "permissions_policy",
       "id": "app_lib_security_headers_permissions_policy"
@@ -598,7 +598,7 @@
       "source_location": "L75",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "buildsecurityheaders()",
       "id": "app_lib_security_headers_buildsecurityheaders"
@@ -609,7 +609,7 @@
       "source_file": "app/lib/social-links.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 7,
+      "community": 2,
       "community_name": "Footer & Icon Components",
       "norm_label": "social-links.ts",
       "id": "app_lib_social_links"
@@ -620,7 +620,7 @@
       "source_file": "app/lib/social-links.ts",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 7,
+      "community": 2,
       "community_name": "Footer & Icon Components",
       "norm_label": "social_links",
       "id": "app_lib_social_links_social_links"
@@ -631,7 +631,7 @@
       "source_file": "app/lib/useHasMounted.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted.test.ts",
       "id": "app_lib_usehasmounted_test"
@@ -643,7 +643,7 @@
       "source_location": "L17",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "probe()",
       "id": "app_lib_usehasmounted_test_probe"
@@ -654,7 +654,7 @@
       "source_file": "app/lib/useHasMounted.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted.ts",
       "id": "app_lib_usehasmounted"
@@ -666,7 +666,7 @@
       "source_location": "L3",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "subscribenoop()",
       "id": "app_lib_usehasmounted_subscribenoop"
@@ -678,7 +678,7 @@
       "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "usehasmounted()",
       "id": "app_lib_usehasmounted_usehasmounted"
@@ -689,7 +689,7 @@
       "source_file": "app/root.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "root.tsx",
       "id": "app_root"
@@ -701,7 +701,7 @@
       "source_location": "L19",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "links()",
       "id": "app_root_links"
@@ -713,7 +713,7 @@
       "source_location": "L55",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "meta()",
       "id": "app_root_meta"
@@ -725,7 +725,7 @@
       "source_location": "L83",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "headers()",
       "id": "app_root_headers"
@@ -737,7 +737,7 @@
       "source_location": "L85",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "layout()",
       "id": "app_root_layout"
@@ -749,7 +749,7 @@
       "source_location": "L107",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "app()",
       "id": "app_root_app"
@@ -761,7 +761,7 @@
       "source_location": "L120",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "community_name": "Footer & Icon Components",
       "norm_label": "errorboundary()",
       "id": "app_root_errorboundary"
@@ -772,7 +772,7 @@
       "source_file": "app/routes.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "routes.ts",
       "id": "app_routes"
@@ -783,7 +783,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "about.tsx",
       "id": "app_routes_about"
@@ -795,7 +795,7 @@
       "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "meta()",
       "id": "app_routes_about_meta"
@@ -806,7 +806,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "sections",
       "id": "app_routes_about_sections"
@@ -817,7 +817,7 @@
       "source_file": "app/routes/about.tsx",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "values",
       "id": "app_routes_about_values"
@@ -829,7 +829,7 @@
       "source_location": "L76",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "community_name": "Navbar & Social Icons",
       "norm_label": "about()",
       "id": "app_routes_about_about"
@@ -840,7 +840,7 @@
       "source_file": "app/routes/home.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home.tsx",
       "id": "app_routes_home"
@@ -852,7 +852,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_home_meta"
@@ -864,7 +864,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "home()",
       "id": "app_routes_home_home"
@@ -875,7 +875,7 @@
       "source_file": "app/routes/logo-svg.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 20,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "logo-svg.tsx",
       "id": "app_routes_logo_svg"
@@ -887,7 +887,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 20,
+      "community": 21,
       "community_name": "Logo SVG Route",
       "norm_label": "loader()",
       "id": "app_routes_logo_svg_loader"
@@ -898,7 +898,7 @@
       "source_file": "app/routes/sitemap-xml.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "sitemap-xml.tsx",
       "id": "app_routes_sitemap_xml"
@@ -910,7 +910,7 @@
       "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "buildsitemapxml()",
       "id": "app_routes_sitemap_xml_buildsitemapxml"
@@ -922,7 +922,7 @@
       "source_location": "L28",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "loader()",
       "id": "app_routes_sitemap_xml_loader"
@@ -933,7 +933,7 @@
       "source_file": "app/routes/solutions.affordable-websites.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "solutions.affordable-websites.tsx",
       "id": "app_routes_solutions_affordable_websites"
@@ -945,7 +945,7 @@
       "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_solutions_affordable_websites_meta"
@@ -957,7 +957,7 @@
       "source_location": "L16",
       "_callable": true,
       "_origin": "ast",
-      "community": 5,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "affordablewebsites()",
       "id": "app_routes_solutions_affordable_websites_affordablewebsites"
@@ -968,7 +968,7 @@
       "source_file": "app/routes/terms.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms.tsx",
       "id": "app_routes_terms"
@@ -980,7 +980,7 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "meta()",
       "id": "app_routes_terms_meta"
@@ -992,7 +992,7 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "Page Metadata & SEO",
       "norm_label": "terms()",
       "id": "app_routes_terms_terms"
@@ -1003,7 +1003,7 @@
       "source_file": "eslint.config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 60,
+      "community": 62,
       "community_name": "ESLint Config",
       "norm_label": "eslint.config.js",
       "id": "eslint_config"
@@ -1212,7 +1212,7 @@
       "source_file": "playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 68,
+      "community": 72,
       "community_name": "Playwright Config",
       "norm_label": "playwright.config.ts",
       "id": "playwright_config"
@@ -1223,7 +1223,7 @@
       "source_file": "react-router.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 80,
+      "community": 84,
       "community_name": "React Router Config",
       "norm_label": "react-router.config.ts",
       "id": "react_router_config"
@@ -1234,7 +1234,7 @@
       "source_file": "tests/404.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "404.spec.ts",
       "id": "tests_404_spec"
@@ -1245,7 +1245,7 @@
       "source_file": "tests/a11y.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "a11y.ts",
       "id": "tests_a11y"
@@ -1257,7 +1257,7 @@
       "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "waitforanimationssettled()",
       "id": "tests_a11y_waitforanimationssettled"
@@ -1269,7 +1269,7 @@
       "source_location": "L36",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "checka11y()",
       "id": "tests_a11y_checka11y"
@@ -1280,7 +1280,7 @@
       "source_file": "tests/about.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "about.spec.ts",
       "id": "tests_about_spec"
@@ -1291,7 +1291,7 @@
       "source_file": "tests/favicon.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 83,
+      "community": 87,
       "community_name": "Favicon Test",
       "norm_label": "favicon.spec.ts",
       "id": "tests_favicon_spec"
@@ -1302,7 +1302,7 @@
       "source_file": "tests/home.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "home.spec.ts",
       "id": "tests_home_spec"
@@ -1313,7 +1313,7 @@
       "source_file": "tests/logo-svg.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 84,
+      "community": 88,
       "community_name": "Logo SVG Test",
       "norm_label": "logo-svg.spec.ts",
       "id": "tests_logo_svg_spec"
@@ -1324,7 +1324,7 @@
       "source_file": "tests/meta.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 85,
+      "community": 89,
       "community_name": "Meta Tags Test",
       "norm_label": "meta.spec.ts",
       "id": "tests_meta_spec"
@@ -1335,7 +1335,7 @@
       "source_file": "tests/nav.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "nav.spec.ts",
       "id": "tests_nav_spec"
@@ -1346,7 +1346,7 @@
       "source_file": "tests/og-image.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 87,
+      "community": 91,
       "community_name": "OG Image Test",
       "norm_label": "og-image.spec.ts",
       "id": "tests_og_image_spec"
@@ -1357,7 +1357,7 @@
       "source_file": "tests/privacy.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "privacy.spec.ts",
       "id": "tests_privacy_spec"
@@ -1368,7 +1368,7 @@
       "source_file": "tests/robots-txt.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 88,
+      "community": 92,
       "community_name": "Robots.txt Test",
       "norm_label": "robots-txt.spec.ts",
       "id": "tests_robots_txt_spec"
@@ -1379,7 +1379,7 @@
       "source_file": "tests/sitemap-xml.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 89,
+      "community": 93,
       "community_name": "Sitemap Test",
       "norm_label": "sitemap-xml.spec.ts",
       "id": "tests_sitemap_xml_spec"
@@ -1390,7 +1390,7 @@
       "source_file": "tests/solutions-affordable-websites.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-affordable-websites.spec.ts",
       "id": "tests_solutions_affordable_websites_spec"
@@ -1401,7 +1401,7 @@
       "source_file": "tests/solutions-local-news.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "solutions-local-news.spec.ts",
       "id": "tests_solutions_local_news_spec"
@@ -1412,7 +1412,7 @@
       "source_file": "tests/terms.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "community_name": "Playwright E2E & A11y Tests",
       "norm_label": "terms.spec.ts",
       "id": "tests_terms_spec"
@@ -1423,7 +1423,7 @@
       "source_file": "vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 43,
+      "community": 44,
       "community_name": "vite-config Dependency",
       "norm_label": "vite.config.ts",
       "id": "vite_config"
@@ -1435,7 +1435,7 @@
       "source_location": "L10",
       "_callable": true,
       "_origin": "ast",
-      "community": 43,
+      "community": 44,
       "community_name": "vite-config Dependency",
       "norm_label": "stripcssbanners()",
       "id": "vite_config_stripcssbanners"
@@ -1449,7 +1449,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "react router v7 framework mode (locked)",
       "_origin": "semantic",
@@ -1464,7 +1464,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "legacy patterns to migrate",
       "_origin": "semantic",
@@ -1479,7 +1479,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 52,
+      "community": 53,
       "community_name": "React Router: RSC Future Path",
       "norm_label": "rsc (future path, not active)",
       "_origin": "semantic",
@@ -1494,7 +1494,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "skill references table",
       "_origin": "semantic",
@@ -1509,7 +1509,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 17,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "framework mode committed strategy",
       "_origin": "semantic",
@@ -1524,7 +1524,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 48,
+      "community": 49,
       "community_name": "React Router: Route Configuration",
       "norm_label": "route configuration (app/routes.ts)",
       "_origin": "semantic",
@@ -1539,7 +1539,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 49,
+      "community": 50,
       "community_name": "React Router: Route Modules",
       "norm_label": "route modules",
       "_origin": "semantic",
@@ -1554,7 +1554,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 44,
+      "community": 45,
       "community_name": "React Router: Data & Mutations",
       "norm_label": "data and mutations (loader/action)",
       "_origin": "semantic",
@@ -1569,7 +1569,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 45,
+      "community": 46,
       "community_name": "React Router: Forms & Pending UI",
       "norm_label": "forms, fetchers, and pending ui",
       "_origin": "semantic",
@@ -1584,7 +1584,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 51,
+      "community": 52,
       "community_name": "React Router: Type Safety",
       "norm_label": "type safety (route.* generated types)",
       "_origin": "semantic",
@@ -1599,7 +1599,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 48,
       "community_name": "React Router: Rendering Strategy",
       "norm_label": "rendering strategy (ssr/spa/pre-render)",
       "_origin": "semantic",
@@ -1614,7 +1614,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 46,
+      "community": 47,
       "community_name": "React Router: Middleware & Sessions",
       "norm_label": "middleware, sessions, and auth",
       "_origin": "semantic",
@@ -1629,7 +1629,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
+      "community": 51,
       "community_name": "React Router: RSC Framework",
       "norm_label": "rsc framework (future path)",
       "_origin": "semantic",
@@ -1644,7 +1644,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "dependabot: npm root updates",
       "_origin": "semantic",
@@ -1659,7 +1659,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: infra/ npm updates",
       "_origin": "semantic",
@@ -1674,7 +1674,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 54,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "dependabot: github actions updates",
       "_origin": "semantic",
@@ -1689,7 +1689,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 60,
       "community_name": "Contributing Prerequisites",
       "norm_label": "prerequisites (.nvmrc, pnpm)",
       "_origin": "semantic",
@@ -1704,7 +1704,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "setup steps",
       "_origin": "semantic",
@@ -1719,7 +1719,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 57,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "checks ci runs on every pr",
       "_origin": "semantic",
@@ -1734,7 +1734,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 59,
       "community_name": "Pre-commit Hook Config",
       "norm_label": "pre-commit hooks setup",
       "_origin": "semantic",
@@ -1749,7 +1749,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 56,
       "community_name": "Testing & Accessibility Conventions",
       "norm_label": "accessibility requirement",
       "_origin": "semantic",
@@ -1764,7 +1764,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 58,
       "community_name": "Content & Copy Guidelines",
       "norm_label": "content & copy note",
       "_origin": "semantic",
@@ -1779,7 +1779,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "fork pr install failure (missing github pat)",
       "_origin": "semantic",
@@ -1794,7 +1794,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 65,
+      "community": 69,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "pre-rendering disabled \u2014 security headers gap",
       "_origin": "semantic",
@@ -1809,7 +1809,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 66,
+      "community": 70,
       "community_name": "Open Source Licensing",
       "norm_label": "license scope (mit excludes brand/fonts)",
       "_origin": "semantic",
@@ -1824,7 +1824,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "trademarks and brand assets",
       "_origin": "semantic",
@@ -1839,7 +1839,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 67,
+      "community": 71,
       "community_name": "Third-Party Fonts Notice",
       "norm_label": "third-party fonts (sil ofl 1.1)",
       "_origin": "semantic",
@@ -1854,7 +1854,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "branchleft website overview",
       "_origin": "semantic",
@@ -1869,7 +1869,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "brand source assets (logo/wordmark)",
       "_origin": "semantic",
@@ -1884,7 +1884,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 20,
       "community_name": "React Router Skill & Dependabot Config",
       "norm_label": "branchleft-website-infra project (pulumi.yaml)",
       "_origin": "semantic",
@@ -1899,7 +1899,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "pnpm-workspace allowbuilds",
       "_origin": "semantic",
@@ -1914,7 +1914,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "community_name": "Dependency Update Policy",
       "norm_label": "minimumreleaseageexclude (@branchleft/*)",
       "_origin": "semantic",
@@ -1929,7 +1929,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "community_name": "Brand, Stack & License Docs",
       "norm_label": "robots.txt rules",
       "_origin": "semantic",
@@ -1944,7 +1944,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft logo (lightning-bolt mark)",
       "_origin": "semantic",
@@ -1959,7 +1959,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "branchleft wordmark (icon + \"branchleft\" text lockup)",
       "_origin": "semantic",
@@ -1974,7 +1974,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "favicon set (32/192/512px + apple-touch-icon, same lightning-bolt mark)",
       "_origin": "semantic",
@@ -1989,7 +1989,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "community_name": "Brand & Social Assets",
       "norm_label": "social share card (og-image: logo + wordmark on black)",
       "_origin": "semantic",
@@ -2004,7 +2004,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 77,
+      "community": 81,
       "community_name": "Team Headshot",
       "norm_label": "person headshot (portrait, 3 sizes x jpg/webp)",
       "_origin": "semantic",
@@ -2085,7 +2085,7 @@
       "file_type": "image",
       "source_file": "public/apple-touch-icon.png",
       "source_location": null,
-      "community": 70,
+      "community": 74,
       "norm_label": "apple touch icon",
       "_origin": "semantic",
       "id": "public_apple_touch_icon"
@@ -2095,7 +2095,7 @@
       "file_type": "image",
       "source_file": "public/favicon-192.png",
       "source_location": null,
-      "community": 71,
+      "community": 75,
       "norm_label": "favicon 192",
       "_origin": "semantic",
       "id": "public_favicon_192"
@@ -2105,7 +2105,7 @@
       "file_type": "image",
       "source_file": "public/favicon-512.png",
       "source_location": null,
-      "community": 72,
+      "community": 76,
       "norm_label": "favicon 512",
       "_origin": "semantic",
       "id": "public_favicon_512"
@@ -2115,7 +2115,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.jpg",
       "source_location": null,
-      "community": 73,
+      "community": 77,
       "norm_label": "headshot 160px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_jpg"
@@ -2125,7 +2125,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-160.webp",
       "source_location": null,
-      "community": 74,
+      "community": 78,
       "norm_label": "headshot 160px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_160_webp"
@@ -2135,7 +2135,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.jpg",
       "source_location": null,
-      "community": 75,
+      "community": 79,
       "norm_label": "headshot 320px (jpg)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_jpg"
@@ -2145,7 +2145,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-320.webp",
       "source_location": null,
-      "community": 76,
+      "community": 80,
       "norm_label": "headshot 320px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_320_webp"
@@ -2155,7 +2155,7 @@
       "file_type": "image",
       "source_file": "public/people/headshot-480.webp",
       "source_location": null,
-      "community": 78,
+      "community": 82,
       "norm_label": "headshot 480px (webp)",
       "_origin": "semantic",
       "id": "public_people_headshot_480_webp"
@@ -2164,7 +2164,7 @@
       "label": "CodeQL Workflow",
       "file_type": "code",
       "source_file": ".github/workflows/codeql.yml",
-      "community": 61,
+      "community": 65,
       "norm_label": "codeql workflow",
       "_origin": "semantic",
       "id": "github_workflows_codeql"
@@ -2574,7 +2574,7 @@
       "source_file": "tests/contact.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 10,
       "norm_label": "contact.spec.ts",
       "id": "tests_contact_spec"
     },
@@ -2584,7 +2584,7 @@
       "source_file": "tests/no-js.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 86,
+      "community": 90,
       "norm_label": "no-js.spec.ts",
       "id": "tests_no_js_spec"
     },
@@ -2640,7 +2640,7 @@
       "source_file": "infra/package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "infra/package.json",
       "id": "infra_package"
     },
@@ -2650,7 +2650,7 @@
       "source_file": "infra/package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "name",
       "id": "infra_package_name"
     },
@@ -2660,7 +2660,7 @@
       "source_file": "infra/package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "private",
       "id": "infra_package_private"
     },
@@ -2670,7 +2670,7 @@
       "source_file": "infra/package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "main",
       "id": "infra_package_main"
     },
@@ -2680,7 +2680,7 @@
       "source_file": "infra/package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "dependencies",
       "id": "infra_package_dependencies"
     },
@@ -2690,7 +2690,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/gcp",
       "id": "infra_package_dependencies_pulumi_gcp"
     },
@@ -2700,7 +2700,7 @@
       "source_file": "infra/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/gcp",
       "id": "pulumi_gcp"
     },
@@ -2710,7 +2710,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/pulumi",
       "id": "infra_package_dependencies_pulumi_pulumi"
     },
@@ -2720,7 +2720,7 @@
       "source_file": "infra/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "norm_label": "@pulumi/pulumi",
       "id": "pulumi_pulumi"
     },
@@ -2730,7 +2730,7 @@
       "source_file": "infra/package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "devdependencies",
       "id": "infra_package_devdependencies"
     },
@@ -2740,7 +2740,7 @@
       "source_file": "infra/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "infra_package_devdependencies_branchleft_tsconfig"
     },
@@ -2750,7 +2750,7 @@
       "source_file": "infra/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "infra_package_devdependencies_types_node"
     },
@@ -2760,7 +2760,7 @@
       "source_file": "infra/package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "infra_package_devdependencies_typescript"
     },
@@ -2770,7 +2770,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "infra/tsconfig.json",
       "id": "infra_tsconfig"
     },
@@ -2780,7 +2780,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "extends",
       "id": "infra_tsconfig_extends"
     },
@@ -2790,7 +2790,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "@branchleft/tsconfig/pulumi.json",
       "id": "ref_branchleft_tsconfig_pulumi_json"
     },
@@ -2800,7 +2800,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "compileroptions",
       "id": "infra_tsconfig_compileroptions"
     },
@@ -2810,7 +2810,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "pretty",
       "id": "infra_tsconfig_compileroptions_pretty"
     },
@@ -2820,7 +2820,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "include",
       "id": "infra_tsconfig_include"
     },
@@ -2830,7 +2830,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "**/*.ts",
       "id": "ref_ts"
     },
@@ -2840,7 +2840,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "exclude",
       "id": "infra_tsconfig_exclude"
     },
@@ -2850,7 +2850,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "node_modules",
       "id": "ref_node_modules"
     },
@@ -2860,7 +2860,7 @@
       "source_file": "infra/tsconfig.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "bin",
       "id": "ref_bin"
     },
@@ -2870,7 +2870,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "package.json",
       "id": "package"
     },
@@ -2880,7 +2880,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "name",
       "id": "package_name"
     },
@@ -2890,7 +2890,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "private",
       "id": "package_private"
     },
@@ -2900,7 +2900,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "type",
       "id": "package_type"
     },
@@ -2910,7 +2910,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "packagemanager",
       "id": "package_packagemanager"
     },
@@ -2920,7 +2920,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "prettier",
       "id": "package_prettier"
     },
@@ -2930,7 +2930,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "scripts",
       "id": "package_scripts"
     },
@@ -2940,7 +2940,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "build",
       "id": "package_scripts_build"
     },
@@ -2950,7 +2950,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "dev",
       "id": "package_scripts_dev"
     },
@@ -2960,7 +2960,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "start",
       "id": "package_scripts_start"
     },
@@ -2970,7 +2970,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "typecheck",
       "id": "package_scripts_typecheck"
     },
@@ -2980,7 +2980,7 @@
       "source_file": "package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "test:unit",
       "id": "package_scripts_test_unit"
     },
@@ -2990,7 +2990,7 @@
       "source_file": "package.json",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "test:ui",
       "id": "package_scripts_test_ui"
     },
@@ -3000,7 +3000,7 @@
       "source_file": "package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "test:e2e",
       "id": "package_scripts_test_e2e"
     },
@@ -3010,7 +3010,7 @@
       "source_file": "package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "lint",
       "id": "package_scripts_lint"
     },
@@ -3020,7 +3020,7 @@
       "source_file": "package.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "format",
       "id": "package_scripts_format"
     },
@@ -3030,7 +3030,7 @@
       "source_file": "package.json",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "format:check",
       "id": "package_scripts_format_check"
     },
@@ -3040,7 +3040,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 2,
+      "community": 7,
       "norm_label": "prepare",
       "id": "package_scripts_prepare"
     },
@@ -3050,7 +3050,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "dependencies",
       "id": "package_dependencies"
     },
@@ -3060,7 +3060,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@branchleft/components",
       "id": "package_dependencies_branchleft_components"
     },
@@ -3070,7 +3070,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@branchleft/components",
       "id": "branchleft_components"
     },
@@ -3080,7 +3080,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@react-router/node",
       "id": "package_dependencies_react_router_node"
     },
@@ -3090,7 +3090,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@react-router/node",
       "id": "react_router_node"
     },
@@ -3100,7 +3100,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@react-router/serve",
       "id": "package_dependencies_react_router_serve"
     },
@@ -3110,7 +3110,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "@react-router/serve",
       "id": "react_router_serve"
     },
@@ -3120,7 +3120,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "framer-motion",
       "id": "package_dependencies_framer_motion"
     },
@@ -3130,7 +3130,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "framer-motion",
       "id": "framer_motion"
     },
@@ -3140,7 +3140,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "isbot",
       "id": "package_dependencies_isbot"
     },
@@ -3150,7 +3150,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "isbot",
       "id": "isbot"
     },
@@ -3160,7 +3160,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "lucide-react",
       "id": "package_dependencies_lucide_react"
     },
@@ -3170,7 +3170,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "lucide-react",
       "id": "lucide_react"
     },
@@ -3180,7 +3180,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "nodemailer",
       "id": "package_dependencies_nodemailer"
     },
@@ -3190,7 +3190,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "nodemailer",
       "id": "nodemailer"
     },
@@ -3200,7 +3200,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "norm_label": "react",
       "id": "package_dependencies_react"
     },
@@ -3210,7 +3210,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 5,
+      "community": 4,
       "norm_label": "react",
       "id": "react"
     },
@@ -3220,7 +3220,7 @@
       "source_file": "package.json",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "react-dom",
       "id": "package_dependencies_react_dom"
     },
@@ -3230,7 +3230,7 @@
       "source_file": "package.json",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "react-dom",
       "id": "react_dom"
     },
@@ -3240,7 +3240,7 @@
       "source_file": "package.json",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "react-router",
       "id": "package_dependencies_react_router"
     },
@@ -3250,7 +3250,7 @@
       "source_file": "package.json",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 2,
+      "community": 6,
       "norm_label": "react-router",
       "id": "react_router"
     },
@@ -3260,7 +3260,7 @@
       "source_file": "package.json",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "devdependencies",
       "id": "package_devdependencies"
     },
@@ -3270,7 +3270,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 21,
+      "community": 11,
       "norm_label": "@axe-core/playwright",
       "id": "package_devdependencies_axe_core_playwright"
     },
@@ -3280,7 +3280,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 21,
+      "community": 11,
       "norm_label": "@axe-core/playwright",
       "id": "axe_core_playwright"
     },
@@ -3290,7 +3290,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@branchleft/prettier-config",
       "id": "package_devdependencies_branchleft_prettier_config"
     },
@@ -3300,7 +3300,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@branchleft/prettier-config",
       "id": "branchleft_prettier_config"
     },
@@ -3310,7 +3310,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "package_devdependencies_branchleft_tsconfig"
     },
@@ -3320,7 +3320,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@branchleft/tsconfig",
       "id": "package_json_branchleft_tsconfig"
     },
@@ -3350,7 +3350,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 30,
+      "community": 31,
       "norm_label": "@playwright/test",
       "id": "package_devdependencies_playwright_test"
     },
@@ -3360,7 +3360,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 30,
+      "community": 31,
       "norm_label": "@playwright/test",
       "id": "playwright_test"
     },
@@ -3370,7 +3370,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 32,
+      "community": 33,
       "norm_label": "@react-router/dev",
       "id": "package_devdependencies_react_router_dev"
     },
@@ -3380,7 +3380,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 32,
+      "community": 33,
       "norm_label": "@react-router/dev",
       "id": "react_router_dev"
     },
@@ -3390,7 +3390,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 34,
+      "community": 35,
       "norm_label": "@tailwindcss/vite",
       "id": "package_devdependencies_tailwindcss_vite"
     },
@@ -3400,7 +3400,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 34,
+      "community": 35,
       "norm_label": "@tailwindcss/vite",
       "id": "tailwindcss_vite"
     },
@@ -3410,7 +3410,7 @@
       "source_file": "package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "package_devdependencies_types_node"
     },
@@ -3420,7 +3420,7 @@
       "source_file": "package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "@types/node",
       "id": "package_json_types_node"
     },
@@ -3430,7 +3430,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 35,
+      "community": 36,
       "norm_label": "@types/nodemailer",
       "id": "package_devdependencies_types_nodemailer"
     },
@@ -3440,7 +3440,7 @@
       "source_file": "package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 35,
+      "community": 36,
       "norm_label": "@types/nodemailer",
       "id": "types_nodemailer"
     },
@@ -3450,7 +3450,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 36,
+      "community": 37,
       "norm_label": "@types/react",
       "id": "package_devdependencies_types_react"
     },
@@ -3460,7 +3460,7 @@
       "source_file": "package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 36,
+      "community": 37,
       "norm_label": "@types/react",
       "id": "types_react"
     },
@@ -3470,7 +3470,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 37,
+      "community": 38,
       "norm_label": "@types/react-dom",
       "id": "package_devdependencies_types_react_dom"
     },
@@ -3480,7 +3480,7 @@
       "source_file": "package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 37,
+      "community": 38,
       "norm_label": "@types/react-dom",
       "id": "types_react_dom"
     },
@@ -3490,7 +3490,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 39,
+      "community": 40,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "package_devdependencies_typescript_eslint_eslint_plugin"
     },
@@ -3500,7 +3500,7 @@
       "source_file": "package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 39,
+      "community": 40,
       "norm_label": "@typescript-eslint/eslint-plugin",
       "id": "typescript_eslint_eslint_plugin"
     },
@@ -3510,7 +3510,7 @@
       "source_file": "package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@typescript-eslint/parser",
       "id": "package_devdependencies_typescript_eslint_parser"
     },
@@ -3520,7 +3520,7 @@
       "source_file": "package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@typescript-eslint/parser",
       "id": "typescript_eslint_parser"
     },
@@ -3530,7 +3530,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 40,
+      "community": 41,
       "norm_label": "@vitejs/plugin-react",
       "id": "package_devdependencies_vitejs_plugin_react"
     },
@@ -3540,7 +3540,7 @@
       "source_file": "package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 40,
+      "community": 41,
       "norm_label": "@vitejs/plugin-react",
       "id": "vitejs_plugin_react"
     },
@@ -3550,7 +3550,7 @@
       "source_file": "package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@vitest/coverage-v8",
       "id": "package_devdependencies_vitest_coverage_v8"
     },
@@ -3560,7 +3560,7 @@
       "source_file": "package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "@vitest/coverage-v8",
       "id": "vitest_coverage_v8"
     },
@@ -3570,7 +3570,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 42,
+      "community": 43,
       "norm_label": "@vitest/ui",
       "id": "package_devdependencies_vitest_ui"
     },
@@ -3580,7 +3580,7 @@
       "source_file": "package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 42,
+      "community": 43,
       "norm_label": "@vitest/ui",
       "id": "vitest_ui"
     },
@@ -3670,7 +3670,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 10,
+      "community": 29,
       "norm_label": "globals",
       "id": "package_devdependencies_globals"
     },
@@ -3680,7 +3680,7 @@
       "source_file": "package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 10,
+      "community": 29,
       "norm_label": "globals",
       "id": "globals"
     },
@@ -3690,7 +3690,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 29,
+      "community": 30,
       "norm_label": "jsdom",
       "id": "package_devdependencies_jsdom"
     },
@@ -3700,7 +3700,7 @@
       "source_file": "package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 29,
+      "community": 30,
       "norm_label": "jsdom",
       "id": "jsdom"
     },
@@ -3710,7 +3710,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 31,
+      "community": 32,
       "norm_label": "prettier",
       "id": "package_devdependencies_prettier"
     },
@@ -3720,7 +3720,7 @@
       "source_file": "package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 31,
+      "community": 32,
       "norm_label": "prettier",
       "id": "prettier"
     },
@@ -3730,7 +3730,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 33,
+      "community": 34,
       "norm_label": "tailwindcss",
       "id": "package_devdependencies_tailwindcss"
     },
@@ -3740,7 +3740,7 @@
       "source_file": "package.json",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 33,
+      "community": 34,
       "norm_label": "tailwindcss",
       "id": "tailwindcss"
     },
@@ -3750,7 +3750,7 @@
       "source_file": "package.json",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "package_devdependencies_typescript"
     },
@@ -3760,7 +3760,7 @@
       "source_file": "package.json",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "norm_label": "typescript",
       "id": "package_json_typescript"
     },
@@ -3770,7 +3770,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 38,
+      "community": 39,
       "norm_label": "typescript-eslint",
       "id": "package_devdependencies_typescript_eslint"
     },
@@ -3780,7 +3780,7 @@
       "source_file": "package.json",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 38,
+      "community": 39,
       "norm_label": "typescript-eslint",
       "id": "typescript_eslint"
     },
@@ -3790,7 +3790,7 @@
       "source_file": "package.json",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "vite",
       "id": "package_devdependencies_vite"
     },
@@ -3800,7 +3800,7 @@
       "source_file": "package.json",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "norm_label": "vite",
       "id": "vite"
     },
@@ -3810,7 +3810,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 41,
+      "community": 42,
       "norm_label": "vitest",
       "id": "package_devdependencies_vitest"
     },
@@ -3820,7 +3820,7 @@
       "source_file": "package.json",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 41,
+      "community": 42,
       "norm_label": "vitest",
       "id": "vitest"
     },
@@ -3830,7 +3830,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "tsconfig.json",
       "id": "tsconfig"
     },
@@ -3840,7 +3840,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "extends",
       "id": "tsconfig_extends"
     },
@@ -3850,7 +3850,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "@branchleft/tsconfig/strict-1.json",
       "id": "tsconfig_json_ref_branchleft_tsconfig_strict_1_json"
     },
@@ -3860,7 +3860,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "@branchleft/tsconfig/react-app.json",
       "id": "ref_branchleft_tsconfig_react_app_json"
     },
@@ -3870,7 +3870,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "include",
       "id": "tsconfig_include"
     },
@@ -3880,7 +3880,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "**/*",
       "id": "ref"
     },
@@ -3890,7 +3890,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "**/.server/**/*",
       "id": "ref_server"
     },
@@ -3900,7 +3900,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "**/.client/**/*",
       "id": "ref_client"
     },
@@ -3910,7 +3910,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".react-router/types/**/*",
       "id": "ref_react_router_types"
     },
@@ -3920,7 +3920,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "exclude",
       "id": "tsconfig_exclude"
     },
@@ -3930,7 +3930,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "infra",
       "id": "ref_infra"
     },
@@ -3940,7 +3940,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "compileroptions",
       "id": "tsconfig_compileroptions"
     },
@@ -3950,7 +3950,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "types",
       "id": "tsconfig_compileroptions_types"
     },
@@ -3960,7 +3960,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "node",
       "id": "ref_node"
     },
@@ -3970,7 +3970,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "vite/client",
       "id": "ref_vite_client"
     },
@@ -3980,7 +3980,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "rootdirs",
       "id": "tsconfig_compileroptions_rootdirs"
     },
@@ -3990,7 +3990,7 @@
       "source_file": "tsconfig.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "paths",
       "id": "tsconfig_compileroptions_paths"
     },
@@ -4003,7 +4003,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 79,
+      "community": 83,
       "norm_label": "pulumi infrastructure",
       "_origin": "semantic",
       "id": "pulumi"
@@ -4017,7 +4017,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 81,
+      "community": 85,
       "norm_label": "react router v7",
       "_origin": "semantic",
       "id": "react_router_v7"
@@ -4031,7 +4031,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 63,
+      "community": 67,
       "norm_label": "standards workflow",
       "_origin": "semantic",
       "id": "github_workflows_standards_workflow"
@@ -4042,7 +4042,7 @@
       "source_file": "app/entry.server.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "entry.server.test.ts",
       "id": "app_entry_server_test"
     },
@@ -4052,7 +4052,7 @@
       "source_file": "app/entry.server.test.ts",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "{ rendertopipeablestream }",
       "id": "app_entry_server_test_rendertopipeablestream"
     },
@@ -4063,7 +4063,7 @@
       "source_location": "L34",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "mockrenderonce()",
       "id": "app_entry_server_test_mockrenderonce"
     },
@@ -4074,7 +4074,7 @@
       "source_location": "L51",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "makerequest()",
       "id": "app_entry_server_test_makerequest"
     },
@@ -4085,7 +4085,7 @@
       "source_location": "L55",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "makeroutercontext()",
       "id": "app_entry_server_test_makeroutercontext"
     },
@@ -4096,7 +4096,7 @@
       "source_location": "L59",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "run()",
       "id": "app_entry_server_test_run"
     },
@@ -4106,7 +4106,7 @@
       "source_file": "app/lib/security-headers.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "security-headers.test.ts",
       "id": "app_lib_security_headers_test"
     },
@@ -4117,7 +4117,7 @@
       "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "parsedirectives()",
       "id": "app_lib_security_headers_test_parsedirectives"
     },
@@ -4127,7 +4127,7 @@
       "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "assert-no-committed-pulumi-secrets.py",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets"
     },
@@ -4138,7 +4138,7 @@
       "source_location": "L86",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "is_commented()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_is_commented"
     },
@@ -4149,7 +4149,7 @@
       "source_location": "L95",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "offending_lines()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_offending_lines"
     },
@@ -4160,7 +4160,7 @@
       "source_location": "L110",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "is_stack_config()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_is_stack_config"
     },
@@ -4170,7 +4170,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "path",
       "id": "path"
     },
@@ -4181,7 +4181,7 @@
       "source_location": "L114",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "find_stack_configs()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_find_stack_configs"
     },
@@ -4192,7 +4192,7 @@
       "source_location": "L124",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "check()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_check"
     },
@@ -4203,7 +4203,7 @@
       "source_location": "L180",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "_quiet_check()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_quiet_check"
     },
@@ -4214,7 +4214,7 @@
       "source_location": "L189",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "_self_test()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_self_test"
     },
@@ -4225,7 +4225,7 @@
       "source_location": "L290",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "main()",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_main"
     },
@@ -4235,7 +4235,7 @@
       "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "whether the line is entirely a comment. only a leading `#` counts. a `#`...",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_87"
     },
@@ -4245,7 +4245,7 @@
       "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
       "source_location": "L96",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "every (1-based line number, line) that commits a secret.",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_96"
     },
@@ -4255,7 +4255,7 @@
       "source_file": "infra/scripts/assert-no-committed-pulumi-secrets.py",
       "source_location": "L181",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "`check` with its report captured, so a fixture's own error output does not read...",
       "id": "infra_scripts_assert_no_committed_pulumi_secrets_rationale_181"
     },
@@ -4263,7 +4263,7 @@
       "label": ".pre-commit-config.yaml",
       "file_type": "code",
       "source_file": ".pre-commit-config.yaml",
-      "community": 69,
+      "community": 73,
       "norm_label": ".pre-commit-config.yaml",
       "_origin": "semantic",
       "id": "pre_commit_config"
@@ -4272,7 +4272,7 @@
       "label": "infra/Pulumi.production.yaml",
       "file_type": "code",
       "source_file": "infra/Pulumi.production.yaml",
-      "community": 64,
+      "community": 68,
       "norm_label": "infra/pulumi.production.yaml",
       "_origin": "semantic",
       "id": "infra_pulumi_production"
@@ -4283,7 +4283,7 @@
       "source_file": "app/routes/solutions.local-news.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "norm_label": "solutions.local-news.tsx",
       "id": "app_routes_solutions_local_news"
     },
@@ -4294,7 +4294,7 @@
       "source_location": "L6",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "norm_label": "meta()",
       "id": "app_routes_solutions_local_news_meta"
     },
@@ -4305,7 +4305,7 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "norm_label": "localnews()",
       "id": "app_routes_solutions_local_news_localnews"
     },
@@ -4315,7 +4315,7 @@
       "source_file": "vitest.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 90,
+      "community": 94,
       "norm_label": "vitest.config.ts",
       "id": "vitest_config"
     },
@@ -4328,7 +4328,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 62,
+      "community": 66,
       "norm_label": "graphify workflow",
       "_origin": "semantic",
       "id": "github_workflows_graphify_workflow"
@@ -4339,9 +4339,9 @@
       "source_file": "app/lib/metrics.server.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_lib_metrics_server",
       "community": 1,
-      "norm_label": "metrics.server.ts"
+      "norm_label": "metrics.server.ts",
+      "id": "app_lib_metrics_server"
     },
     {
       "label": "recordContactSendFailure()",
@@ -4350,9 +4350,9 @@
       "source_location": "L12",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_lib_metrics_server_recordcontactsendfailure",
       "community": 1,
-      "norm_label": "recordcontactsendfailure()"
+      "norm_label": "recordcontactsendfailure()",
+      "id": "app_lib_metrics_server_recordcontactsendfailure"
     },
     {
       "label": "contact.test.ts",
@@ -4360,9 +4360,9 @@
       "source_file": "app/routes/contact.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_routes_contact_test",
       "community": 1,
-      "norm_label": "contact.test.ts"
+      "norm_label": "contact.test.ts",
+      "id": "app_routes_contact_test"
     },
     {
       "label": "buildFormData()",
@@ -4371,9 +4371,9 @@
       "source_location": "L53",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_test_buildformdata",
       "community": 1,
-      "norm_label": "buildformdata()"
+      "norm_label": "buildformdata()",
+      "id": "app_routes_contact_test_buildformdata"
     },
     {
       "label": "makeRequest()",
@@ -4382,9 +4382,9 @@
       "source_location": "L69",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_test_makerequest",
       "community": 1,
-      "norm_label": "makerequest()"
+      "norm_label": "makerequest()",
+      "id": "app_routes_contact_test_makerequest"
     },
     {
       "label": "actionArgs()",
@@ -4393,9 +4393,9 @@
       "source_location": "L79",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_test_actionargs",
       "community": 1,
-      "norm_label": "actionargs()"
+      "norm_label": "actionargs()",
+      "id": "app_routes_contact_test_actionargs"
     },
     {
       "label": "nextIp()",
@@ -4404,9 +4404,9 @@
       "source_location": "L84",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_test_nextip",
       "community": 1,
-      "norm_label": "nextip()"
+      "norm_label": "nextip()",
+      "id": "app_routes_contact_test_nextip"
     },
     {
       "label": "contact.tsx",
@@ -4414,9 +4414,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_routes_contact",
       "community": 1,
-      "norm_label": "contact.tsx"
+      "norm_label": "contact.tsx",
+      "id": "app_routes_contact"
     },
     {
       "label": "meta()",
@@ -4425,9 +4425,9 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_meta",
-      "community": 3,
-      "norm_label": "meta()"
+      "community": 2,
+      "norm_label": "meta()",
+      "id": "app_routes_contact_meta"
     },
     {
       "label": "CATEGORIES",
@@ -4435,9 +4435,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "app_routes_contact_categories",
       "community": 1,
-      "norm_label": "categories"
+      "norm_label": "categories",
+      "id": "app_routes_contact_categories"
     },
     {
       "label": "CategoryValue",
@@ -4447,9 +4447,9 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "app_routes_contact_categoryvalue",
       "community": 1,
-      "norm_label": "categoryvalue"
+      "norm_label": "categoryvalue",
+      "id": "app_routes_contact_categoryvalue"
     },
     {
       "label": "CATEGORY_VALUES",
@@ -4457,9 +4457,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "id": "app_routes_contact_category_values",
       "community": 1,
-      "norm_label": "category_values"
+      "norm_label": "category_values",
+      "id": "app_routes_contact_category_values"
     },
     {
       "label": "isKnownCategory()",
@@ -4468,9 +4468,9 @@
       "source_location": "L40",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_isknowncategory",
       "community": 1,
-      "norm_label": "isknowncategory()"
+      "norm_label": "isknowncategory()",
+      "id": "app_routes_contact_isknowncategory"
     },
     {
       "label": "EMAIL_MAX_LENGTH",
@@ -4478,9 +4478,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L50",
       "_origin": "ast",
-      "id": "app_routes_contact_email_max_length",
       "community": 1,
-      "norm_label": "email_max_length"
+      "norm_label": "email_max_length",
+      "id": "app_routes_contact_email_max_length"
     },
     {
       "label": "MESSAGE_MAX_LENGTH",
@@ -4488,9 +4488,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "app_routes_contact_message_max_length",
       "community": 1,
-      "norm_label": "message_max_length"
+      "norm_label": "message_max_length",
+      "id": "app_routes_contact_message_max_length"
     },
     {
       "label": "HONEYPOT_FIELD_NAME",
@@ -4498,9 +4498,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L57",
       "_origin": "ast",
-      "id": "app_routes_contact_honeypot_field_name",
       "community": 1,
-      "norm_label": "honeypot_field_name"
+      "norm_label": "honeypot_field_name",
+      "id": "app_routes_contact_honeypot_field_name"
     },
     {
       "label": "MIN_SUBMIT_DELAY_MS",
@@ -4508,9 +4508,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L63",
       "_origin": "ast",
-      "id": "app_routes_contact_min_submit_delay_ms",
       "community": 1,
-      "norm_label": "min_submit_delay_ms"
+      "norm_label": "min_submit_delay_ms",
+      "id": "app_routes_contact_min_submit_delay_ms"
     },
     {
       "label": "RATE_LIMIT_WINDOW_MS",
@@ -4518,9 +4518,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L68",
       "_origin": "ast",
-      "id": "app_routes_contact_rate_limit_window_ms",
       "community": 1,
-      "norm_label": "rate_limit_window_ms"
+      "norm_label": "rate_limit_window_ms",
+      "id": "app_routes_contact_rate_limit_window_ms"
     },
     {
       "label": "RATE_LIMIT_MAX_SUBMISSIONS",
@@ -4528,9 +4528,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L69",
       "_origin": "ast",
-      "id": "app_routes_contact_rate_limit_max_submissions",
       "community": 1,
-      "norm_label": "rate_limit_max_submissions"
+      "norm_label": "rate_limit_max_submissions",
+      "id": "app_routes_contact_rate_limit_max_submissions"
     },
     {
       "label": "submissionsByIp",
@@ -4538,9 +4538,9 @@
       "source_file": "app/routes/contact.tsx",
       "source_location": "L71",
       "_origin": "ast",
-      "id": "app_routes_contact_submissionsbyip",
       "community": 1,
-      "norm_label": "submissionsbyip"
+      "norm_label": "submissionsbyip",
+      "id": "app_routes_contact_submissionsbyip"
     },
     {
       "label": "getClientIp()",
@@ -4549,9 +4549,9 @@
       "source_location": "L73",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_getclientip",
       "community": 1,
-      "norm_label": "getclientip()"
+      "norm_label": "getclientip()",
+      "id": "app_routes_contact_getclientip"
     },
     {
       "label": "isRateLimited()",
@@ -4560,9 +4560,9 @@
       "source_location": "L81",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_isratelimited",
       "community": 1,
-      "norm_label": "isratelimited()"
+      "norm_label": "isratelimited()",
+      "id": "app_routes_contact_isratelimited"
     },
     {
       "label": "ActionResult",
@@ -4572,9 +4572,9 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "app_routes_contact_actionresult",
       "community": 1,
-      "norm_label": "actionresult"
+      "norm_label": "actionresult",
+      "id": "app_routes_contact_actionresult"
     },
     {
       "label": "formString()",
@@ -4583,9 +4583,9 @@
       "source_location": "L102",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_formstring",
       "community": 1,
-      "norm_label": "formstring()"
+      "norm_label": "formstring()",
+      "id": "app_routes_contact_formstring"
     },
     {
       "label": "loader()",
@@ -4594,9 +4594,9 @@
       "source_location": "L107",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_loader",
       "community": 1,
-      "norm_label": "loader()"
+      "norm_label": "loader()",
+      "id": "app_routes_contact_loader"
     },
     {
       "label": "action()",
@@ -4605,9 +4605,9 @@
       "source_location": "L111",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_action",
       "community": 1,
-      "norm_label": "action()"
+      "norm_label": "action()",
+      "id": "app_routes_contact_action"
     },
     {
       "label": "Contact()",
@@ -4616,9 +4616,9 @@
       "source_location": "L175",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_contact_contact",
       "community": 1,
-      "norm_label": "contact()"
+      "norm_label": "contact()",
+      "id": "app_routes_contact_contact"
     },
     {
       "label": "privacy.tsx",
@@ -4626,9 +4626,9 @@
       "source_file": "app/routes/privacy.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_routes_privacy",
-      "community": 3,
-      "norm_label": "privacy.tsx"
+      "community": 2,
+      "norm_label": "privacy.tsx",
+      "id": "app_routes_privacy"
     },
     {
       "label": "meta()",
@@ -4637,9 +4637,9 @@
       "source_location": "L5",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_privacy_meta",
-      "community": 3,
-      "norm_label": "meta()"
+      "community": 2,
+      "norm_label": "meta()",
+      "id": "app_routes_privacy_meta"
     },
     {
       "label": "Privacy()",
@@ -4648,9 +4648,9 @@
       "source_location": "L13",
       "_callable": true,
       "_origin": "ast",
-      "id": "app_routes_privacy_privacy",
-      "community": 3,
-      "norm_label": "privacy()"
+      "community": 2,
+      "norm_label": "privacy()",
+      "id": "app_routes_privacy_privacy"
     },
     {
       "label": "metrics-server.mjs",
@@ -4658,9 +4658,9 @@
       "source_file": "server/metrics-server.mjs",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "server_metrics_server",
-      "community": 13,
-      "norm_label": "metrics-server.mjs"
+      "community": 14,
+      "norm_label": "metrics-server.mjs",
+      "id": "server_metrics_server"
     },
     {
       "label": "port",
@@ -4668,9 +4668,9 @@
       "source_file": "server/metrics-server.mjs",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "server_metrics_server_port",
-      "community": 13,
-      "norm_label": "port"
+      "community": 14,
+      "norm_label": "port",
+      "id": "server_metrics_server_port"
     },
     {
       "label": "metrics.d.mts",
@@ -4678,9 +4678,9 @@
       "source_file": "server/metrics.d.mts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "server_metrics_d",
-      "community": 82,
-      "norm_label": "metrics.d.mts"
+      "community": 86,
+      "norm_label": "metrics.d.mts",
+      "id": "server_metrics_d"
     },
     {
       "label": "metrics.mjs",
@@ -4688,9 +4688,9 @@
       "source_file": "server/metrics.mjs",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "server_metrics",
-      "community": 13,
-      "norm_label": "metrics.mjs"
+      "community": 14,
+      "norm_label": "metrics.mjs",
+      "id": "server_metrics"
     },
     {
       "label": "METRIC_NAME",
@@ -4698,9 +4698,9 @@
       "source_file": "server/metrics.mjs",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "server_metrics_metric_name",
-      "community": 13,
-      "norm_label": "metric_name"
+      "community": 14,
+      "norm_label": "metric_name",
+      "id": "server_metrics_metric_name"
     },
     {
       "label": "readCounter()",
@@ -4709,9 +4709,9 @@
       "source_location": "L14",
       "_callable": true,
       "_origin": "ast",
-      "id": "server_metrics_readcounter",
-      "community": 13,
-      "norm_label": "readcounter()"
+      "community": 14,
+      "norm_label": "readcounter()",
+      "id": "server_metrics_readcounter"
     },
     {
       "label": "recordContactSendFailure()",
@@ -4720,9 +4720,9 @@
       "source_location": "L23",
       "_callable": true,
       "_origin": "ast",
-      "id": "server_metrics_recordcontactsendfailure",
-      "community": 13,
-      "norm_label": "recordcontactsendfailure()"
+      "community": 14,
+      "norm_label": "recordcontactsendfailure()",
+      "id": "server_metrics_recordcontactsendfailure"
     },
     {
       "label": "renderMetrics()",
@@ -4731,9 +4731,9 @@
       "source_location": "L40",
       "_callable": true,
       "_origin": "ast",
-      "id": "server_metrics_rendermetrics",
-      "community": 13,
-      "norm_label": "rendermetrics()"
+      "community": 14,
+      "norm_label": "rendermetrics()",
+      "id": "server_metrics_rendermetrics"
     },
     {
       "label": "metrics.test.ts",
@@ -4741,57 +4741,144 @@
       "source_file": "server/metrics.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "server_metrics_test",
-      "community": 13,
-      "norm_label": "metrics.test.ts"
+      "community": 14,
+      "norm_label": "metrics.test.ts",
+      "id": "server_metrics_test"
     },
     {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "id": "claude_md",
-      "community": 54,
-      "norm_label": "claude.md"
-    },
-    {
-      "label": "CI Workflow",
-      "file_type": "code",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "github_workflows_ci_yml",
-      "community": 15,
-      "norm_label": "ci workflow"
-    },
-    {
-      "label": "App1 Website Runbook",
-      "file_type": "document",
-      "source_file": "deploy/RUNBOOK-app1-website.md",
-      "id": "deploy_runbook_app1_website_md",
-      "community": 15,
-      "norm_label": "app1 website runbook"
+      "community": 55,
+      "norm_label": "claude.md",
+      "_origin": "semantic",
+      "id": "claude_md"
     },
     {
       "label": "Docker Compose Stack",
       "file_type": "code",
       "source_file": "deploy/compose.yml",
-      "id": "deploy_compose_yml",
-      "community": 15,
-      "norm_label": "docker compose stack"
+      "community": 61,
+      "norm_label": "docker compose stack",
+      "_origin": "semantic",
+      "id": "deploy_compose_yml"
     },
     {
-      "label": "Hetzner App1 Host",
-      "file_type": "concept",
+      "label": "CI Workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_ci",
+      "community": 63,
+      "norm_label": "ci workflow"
+    },
+    {
+      "label": "checks job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_ci_checks",
+      "community": 15,
+      "norm_label": "checks job"
+    },
+    {
+      "label": "e2e job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_ci_e2e",
+      "community": 15,
+      "norm_label": "e2e job"
+    },
+    {
+      "label": "docker-build job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_ci_docker_build",
+      "community": 64,
+      "norm_label": "docker-build job"
+    },
+    {
+      "label": "deploy job",
+      "file_type": "code",
+      "source_file": ".github/workflows/ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "github_workflows_ci_deploy",
+      "community": 15,
+      "norm_label": "deploy job"
+    },
+    {
+      "label": "Runbook \u2014 the website stack on app1",
+      "file_type": "document",
       "source_file": "deploy/RUNBOOK-app1-website.md",
-      "id": "hetzner_app1",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "deploy_runbook_app1_website",
+      "community": 15,
+      "norm_label": "runbook \u2014 the website stack on app1"
+    },
+    {
+      "label": "Hetzner app1 Host",
+      "file_type": "concept",
+      "source_file": null,
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "app1_host",
       "community": 15,
       "norm_label": "hetzner app1 host"
     },
     {
-      "label": "GHCR Website Image",
-      "file_type": "concept",
-      "source_file": ".github/workflows/ci.yml",
-      "id": "ghcr_io_branchleft_website",
+      "label": "/usr/local/sbin/branchleft-deploy",
+      "file_type": "code",
+      "source_file": null,
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "branchleft_deploy_binary",
       "community": 15,
-      "norm_label": "ghcr website image"
+      "norm_label": "/usr/local/sbin/branchleft-deploy"
+    },
+    {
+      "label": "ghcr.io/branchleft/website",
+      "file_type": "concept",
+      "source_file": null,
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ghcr_website_image",
+      "community": 15,
+      "norm_label": "ghcr.io/branchleft/website"
     }
   ],
   "links": [
@@ -5603,9 +5690,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_meta",
-      "confidence_score": 1.0
+      "target": "app_lib_meta"
     },
     {
       "relation": "imports_from",
@@ -5627,9 +5714,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_privacy",
-      "target": "app_lib_meta",
-      "confidence_score": 1.0
+      "target": "app_lib_meta"
     },
     {
       "relation": "imports_from",
@@ -5723,9 +5810,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_meta_buildmeta",
-      "confidence_score": 1.0
+      "target": "app_lib_meta_buildmeta"
     },
     {
       "relation": "calls",
@@ -5771,9 +5858,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_privacy",
-      "target": "app_lib_meta_buildmeta",
-      "confidence_score": 1.0
+      "target": "app_lib_meta_buildmeta"
     },
     {
       "relation": "calls",
@@ -7650,9 +7737,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_sendcontactemail_server",
-      "confidence_score": 1.0
+      "target": "app_lib_sendcontactemail_server"
     },
     {
       "relation": "imports_from",
@@ -7662,9 +7749,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_lib_sendcontactemail_server",
-      "confidence_score": 1.0
+      "target": "app_lib_sendcontactemail_server"
     },
     {
       "relation": "calls",
@@ -7722,9 +7809,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail",
-      "confidence_score": 1.0
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
     },
     {
       "relation": "calls",
@@ -7746,9 +7833,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_lib_sendcontactemail_server_sendcontactemail",
-      "confidence_score": 1.0
+      "target": "app_lib_sendcontactemail_server_sendcontactemail"
     },
     {
       "relation": "contains",
@@ -10237,9 +10324,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_lib_metrics_server",
-      "target": "app_lib_metrics_server_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "app_lib_metrics_server_recordcontactsendfailure"
     },
     {
       "relation": "imports_from",
@@ -10249,9 +10336,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_lib_metrics_server",
-      "target": "server_metrics",
-      "confidence_score": 1.0
+      "target": "server_metrics"
     },
     {
       "relation": "imports",
@@ -10261,9 +10348,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_lib_metrics_server",
-      "target": "server_metrics_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "server_metrics_recordcontactsendfailure"
     },
     {
       "relation": "imports_from",
@@ -10273,9 +10360,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_metrics_server",
-      "confidence_score": 1.0
+      "target": "app_lib_metrics_server"
     },
     {
       "relation": "imports_from",
@@ -10285,9 +10372,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_lib_metrics_server",
-      "confidence_score": 1.0
+      "target": "app_lib_metrics_server"
     },
     {
       "relation": "imports",
@@ -10297,9 +10384,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_lib_metrics_server_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "app_lib_metrics_server_recordcontactsendfailure"
     },
     {
       "relation": "calls",
@@ -10321,9 +10408,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_lib_metrics_server_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "app_lib_metrics_server_recordcontactsendfailure"
     },
     {
       "relation": "imports_from",
@@ -10333,9 +10420,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact",
-      "confidence_score": 1.0
+      "target": "app_routes_contact"
     },
     {
       "relation": "imports",
@@ -10345,9 +10432,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_action",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_action"
     },
     {
       "relation": "imports",
@@ -10357,9 +10444,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_email_max_length",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_email_max_length"
     },
     {
       "relation": "imports",
@@ -10369,9 +10456,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_honeypot_field_name",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_honeypot_field_name"
     },
     {
       "relation": "imports",
@@ -10381,9 +10468,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_isknowncategory",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isknowncategory"
     },
     {
       "relation": "imports",
@@ -10393,9 +10480,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_loader",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_loader"
     },
     {
       "relation": "imports",
@@ -10405,9 +10492,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_message_max_length",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_message_max_length"
     },
     {
       "relation": "imports",
@@ -10417,9 +10504,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_min_submit_delay_ms",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_min_submit_delay_ms"
     },
     {
       "relation": "imports",
@@ -10429,9 +10516,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_rate_limit_max_submissions",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_rate_limit_max_submissions"
     },
     {
       "relation": "contains",
@@ -10440,9 +10527,9 @@
       "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_test_actionargs",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_test_actionargs"
     },
     {
       "relation": "contains",
@@ -10451,9 +10538,9 @@
       "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_test_buildformdata",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_test_buildformdata"
     },
     {
       "relation": "contains",
@@ -10462,9 +10549,9 @@
       "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_test_makerequest",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_test_makerequest"
     },
     {
       "relation": "contains",
@@ -10473,9 +10560,9 @@
       "source_location": "L84",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_test",
-      "target": "app_routes_contact_test_nextip",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_test_nextip"
     },
     {
       "relation": "contains",
@@ -10484,9 +10571,9 @@
       "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_action",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_action"
     },
     {
       "relation": "contains",
@@ -10495,9 +10582,9 @@
       "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_actionresult",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_actionresult"
     },
     {
       "relation": "contains",
@@ -10506,9 +10593,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_categories",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_categories"
     },
     {
       "relation": "contains",
@@ -10517,9 +10604,9 @@
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_category_values",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_category_values"
     },
     {
       "relation": "contains",
@@ -10528,9 +10615,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_categoryvalue",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_categoryvalue"
     },
     {
       "relation": "contains",
@@ -10539,9 +10626,9 @@
       "source_location": "L175",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_contact",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_contact"
     },
     {
       "relation": "contains",
@@ -10550,9 +10637,9 @@
       "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_email_max_length",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_email_max_length"
     },
     {
       "relation": "contains",
@@ -10561,9 +10648,9 @@
       "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_formstring",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_formstring"
     },
     {
       "relation": "contains",
@@ -10572,9 +10659,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_getclientip",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_getclientip"
     },
     {
       "relation": "contains",
@@ -10583,9 +10670,9 @@
       "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_honeypot_field_name",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_honeypot_field_name"
     },
     {
       "relation": "contains",
@@ -10594,9 +10681,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_isknowncategory",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isknowncategory"
     },
     {
       "relation": "contains",
@@ -10605,9 +10692,9 @@
       "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_isratelimited",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isratelimited"
     },
     {
       "relation": "contains",
@@ -10616,9 +10703,9 @@
       "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_loader",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_loader"
     },
     {
       "relation": "contains",
@@ -10627,9 +10714,9 @@
       "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_message_max_length",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_message_max_length"
     },
     {
       "relation": "contains",
@@ -10638,9 +10725,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_meta",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_meta"
     },
     {
       "relation": "contains",
@@ -10649,9 +10736,9 @@
       "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_min_submit_delay_ms",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_min_submit_delay_ms"
     },
     {
       "relation": "contains",
@@ -10660,9 +10747,9 @@
       "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_rate_limit_max_submissions",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_rate_limit_max_submissions"
     },
     {
       "relation": "contains",
@@ -10671,9 +10758,9 @@
       "source_location": "L68",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_rate_limit_window_ms",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_rate_limit_window_ms"
     },
     {
       "relation": "contains",
@@ -10682,9 +10769,9 @@
       "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact",
-      "target": "app_routes_contact_submissionsbyip",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_submissionsbyip"
     },
     {
       "relation": "calls",
@@ -10694,9 +10781,9 @@
       "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_action",
-      "target": "app_routes_contact_isknowncategory",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isknowncategory"
     },
     {
       "relation": "calls",
@@ -10706,9 +10793,9 @@
       "source_location": "L178",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_contact",
-      "target": "app_routes_contact_isknowncategory",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isknowncategory"
     },
     {
       "relation": "calls",
@@ -10718,9 +10805,9 @@
       "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_action",
-      "target": "app_routes_contact_getclientip",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_getclientip"
     },
     {
       "relation": "calls",
@@ -10730,9 +10817,9 @@
       "source_location": "L115",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_action",
-      "target": "app_routes_contact_isratelimited",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_isratelimited"
     },
     {
       "relation": "calls",
@@ -10742,9 +10829,9 @@
       "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_contact_action",
-      "target": "app_routes_contact_formstring",
-      "confidence_score": 1.0
+      "target": "app_routes_contact_formstring"
     },
     {
       "relation": "contains",
@@ -10753,9 +10840,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_privacy",
-      "target": "app_routes_privacy_meta",
-      "confidence_score": 1.0
+      "target": "app_routes_privacy_meta"
     },
     {
       "relation": "contains",
@@ -10764,9 +10851,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "app_routes_privacy",
-      "target": "app_routes_privacy_privacy",
-      "confidence_score": 1.0
+      "target": "app_routes_privacy_privacy"
     },
     {
       "relation": "imports_from",
@@ -10776,9 +10863,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_server",
-      "target": "server_metrics",
-      "confidence_score": 1.0
+      "target": "server_metrics"
     },
     {
       "relation": "imports",
@@ -10788,9 +10875,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_server",
-      "target": "server_metrics_rendermetrics",
-      "confidence_score": 1.0
+      "target": "server_metrics_rendermetrics"
     },
     {
       "relation": "contains",
@@ -10799,9 +10886,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_server",
-      "target": "server_metrics_server_port",
-      "confidence_score": 1.0
+      "target": "server_metrics_server_port"
     },
     {
       "relation": "contains",
@@ -10810,9 +10897,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics",
-      "target": "server_metrics_metric_name",
-      "confidence_score": 1.0
+      "target": "server_metrics_metric_name"
     },
     {
       "relation": "contains",
@@ -10821,9 +10908,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics",
-      "target": "server_metrics_readcounter",
-      "confidence_score": 1.0
+      "target": "server_metrics_readcounter"
     },
     {
       "relation": "contains",
@@ -10832,9 +10919,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics",
-      "target": "server_metrics_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "server_metrics_recordcontactsendfailure"
     },
     {
       "relation": "contains",
@@ -10843,9 +10930,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics",
-      "target": "server_metrics_rendermetrics",
-      "confidence_score": 1.0
+      "target": "server_metrics_rendermetrics"
     },
     {
       "relation": "imports_from",
@@ -10855,9 +10942,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_test",
-      "target": "server_metrics",
-      "confidence_score": 1.0
+      "target": "server_metrics"
     },
     {
       "relation": "imports",
@@ -10867,9 +10954,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_test",
-      "target": "server_metrics_metric_name",
-      "confidence_score": 1.0
+      "target": "server_metrics_metric_name"
     },
     {
       "relation": "calls",
@@ -10879,9 +10966,9 @@
       "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_recordcontactsendfailure",
-      "target": "server_metrics_readcounter",
-      "confidence_score": 1.0
+      "target": "server_metrics_readcounter"
     },
     {
       "relation": "calls",
@@ -10891,9 +10978,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_rendermetrics",
-      "target": "server_metrics_readcounter",
-      "confidence_score": 1.0
+      "target": "server_metrics_readcounter"
     },
     {
       "relation": "imports",
@@ -10903,9 +10990,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_test",
-      "target": "server_metrics_recordcontactsendfailure",
-      "confidence_score": 1.0
+      "target": "server_metrics_recordcontactsendfailure"
     },
     {
       "relation": "imports",
@@ -10915,54 +11002,86 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "server_metrics_test",
-      "target": "server_metrics_rendermetrics",
-      "confidence_score": 1.0
+      "target": "server_metrics_rendermetrics"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_yml",
-      "target": "ghcr_io_branchleft_website"
+      "source": "github_workflows_ci_deploy",
+      "target": "github_workflows_ci_checks"
     },
     {
-      "relation": "calls",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".github/workflows/ci.yml",
-      "source": "github_workflows_ci_yml",
-      "target": "hetzner_app1"
+      "source": "github_workflows_ci_deploy",
+      "target": "github_workflows_ci_e2e"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "deploy/RUNBOOK-app1-website.md",
-      "source": "deploy_runbook_app1_website_md",
-      "target": "hetzner_app1"
+      "source": "deploy_runbook_app1_website",
+      "target": "github_workflows_ci_deploy"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "app1_host"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "branchleft_deploy_binary"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "deploy/compose.yml",
-      "source": "deploy_compose_yml",
-      "target": "ghcr_io_branchleft_website"
+      "source_file": ".github/workflows/ci.yml",
+      "source": "github_workflows_ci_deploy",
+      "target": "ghcr_website_image"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "deploy/RUNBOOK-app1-website.md",
+      "source": "deploy_runbook_app1_website",
+      "target": "app1_host"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "deploy/RUNBOOK-app1-website.md",
+      "source": "deploy_runbook_app1_website",
+      "target": "branchleft_deploy_binary"
     }
   ],
   "hyperedges": [
     {
-      "id": "deployment_infrastructure",
-      "label": "Hetzner Deployment Stack",
+      "id": "website_deployment_flow",
+      "label": "Website Deployment Flow",
       "nodes": [
-        "github_workflows_ci_yml",
-        "deploy_runbook_app1_website_md",
-        "deploy_compose_yml",
-        "hetzner_app1"
+        "github_workflows_ci_deploy",
+        "deploy_runbook_app1_website",
+        "branchleft_deploy_binary",
+        "app1_host"
       ],
-      "relation": "form",
+      "relation": "participate_in",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "deploy/RUNBOOK-app1-website.md"
@@ -10993,5 +11112,5 @@
       "source_file": "KNOWN_ISSUES.md"
     }
   ],
-  "built_at_commit": "868777f19fe854a5f034543983546985bd3a6c9a"
+  "built_at_commit": "16d030c77ad388434885c8d3451155608ebd5a3f"
 }
