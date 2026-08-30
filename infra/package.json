@@ -3,8 +3,8 @@
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@pulumi/gcp": "^9.33.0",
-    "@pulumi/pulumi": "^3.256.0"
+    "@pulumi/gcp": "^9.35.1",
+    "@pulumi/pulumi": "^3.259.0"
   },
   "devDependencies": {
     "@branchleft/tsconfig": "^0.3.1",
