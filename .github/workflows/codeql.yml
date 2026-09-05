@@ -16,6 +16,10 @@ jobs:
       actions: read
       contents: read
       security-events: write
+    # Observed 0.83-1.23min over the last 6 successful runs (p95 1.23min).
+    # Small sample: this workflow is manually disabled in favour of the
+    # default code-scanning setup, so no new runs accrue.
+    timeout-minutes: 15
 
     strategy:
       fail-fast: false

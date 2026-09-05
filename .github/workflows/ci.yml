@@ -18,6 +18,8 @@ jobs:
   checks:
     name: Typecheck, Pre-commit & Coverage
     runs-on: ubuntu-latest
+    # Observed 0.77-1.1min over the last 20 successful runs (p95 1.08min).
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -102,6 +104,8 @@ jobs:
   e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
+    # Observed 2.05-2.72min over the last 20 successful runs (p95 2.55min).
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -160,6 +164,8 @@ jobs:
     # Build-only, no credentials -- proves the Dockerfile still builds on
     # every PR and on push, mirroring ghost-platform's mailgun-shim-image.yml
     # split of a credential-free build job and a separate push-and-deploy job.
+    # Observed 0.45-0.68min over the last 12 successful runs (p95 0.68min).
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -188,6 +194,10 @@ jobs:
     permissions:
       contents: read
       packages: write
+    # Observed 1.42-2.88min over the last 5 successful runs (p95 2.88min) --
+    # small sample (only push-to-main triggers this job), so a wider margin
+    # than the p95-driven jobs above.
+    timeout-minutes: 15
     env:
       IMAGE: ghcr.io/branchleft/website
       IMAGE_TAG: ${{ github.sha }}
