@@ -17,3 +17,8 @@
 # Chrome DevTools workspace probe (auto-created by running `pnpm dev` and
 # opening DevTools locally; not project content)
 /public/.well-known/appspecific/com.chrome.devtools.json
+
+# Written by every local `graphify query`. CI's own extract step never reads
+# or writes it, so a fresh query here is disposable state, not part of the
+# graph CI commits.
+graphify-out/cache/last_query_stamp
