@@ -38,18 +38,47 @@ lands on `app1`.
 for stack secrets, and nothing automated ever writes it — the CI deploy
 account's one sudo-permitted command writes
 `/etc/branchleft/website.image.env` and only that. It needs the four contact
-form SMTP values (`website/CLAUDE.md`'s "Contact form" section):
+form SMTP values (`website/CLAUDE.md`'s "Contact form" section).
+
+Read each into a variable first — a placeholder pasted straight into the
+`ssh` command below would write the literal text to the file and fail
+silently, and even the real value would sit in this shell's history and, for
+the password, in this terminal's scrollback. Paste each line on its own,
+type or paste the value at the prompt it shows, then move to the next:
 
 ```bash
-ssh -i ~/.ssh/id_ed25519_hetzner root@167.233.93.244 '
-  install -d -m 0755 -o root -g root /etc/branchleft &&
-  umask 077 &&
-  { printf "CONTACT_SMTP_HOST=%s\n" "<SMTP_HOST>";
-    printf "CONTACT_SMTP_PORT=%s\n" "<SMTP_PORT>";
-    printf "CONTACT_SMTP_USER=%s\n" "<SMTP_USER>";
-    printf "CONTACT_SMTP_PASSWORD=%s\n" "<SMTP_PASSWORD>"; } > /etc/branchleft/website.env &&
-  chmod 0600 /etc/branchleft/website.env &&
-  ls -l /etc/branchleft/website.env'
+printf 'SMTP host: '; read -r CONTACT_SMTP_HOST
+```
+
+```bash
+printf 'SMTP port: '; read -r CONTACT_SMTP_PORT
+```
+
+```bash
+printf 'SMTP user: '; read -r CONTACT_SMTP_USER
+```
+
+```bash
+printf 'SMTP password: '; read -rs CONTACT_SMTP_PASSWORD; echo
+```
+
+Then send the script over `ssh`'s stdin rather than as part of the command
+line: an unquoted heredoc still substitutes the four variables before
+sending, but the values travel as stdin, never as an argument any local
+process shows in `ps` to every other user on this machine.
+
+```bash
+ssh -i ~/.ssh/id_ed25519_hetzner root@167.233.93.244 bash -s <<EOF
+install -d -m 0755 -o root -g root /etc/branchleft &&
+umask 077 &&
+{ printf "CONTACT_SMTP_HOST=%s\n" "$CONTACT_SMTP_HOST";
+  printf "CONTACT_SMTP_PORT=%s\n" "$CONTACT_SMTP_PORT";
+  printf "CONTACT_SMTP_USER=%s\n" "$CONTACT_SMTP_USER";
+  printf "CONTACT_SMTP_PASSWORD=%s\n" "$CONTACT_SMTP_PASSWORD"; } > /etc/branchleft/website.env &&
+chmod 0600 /etc/branchleft/website.env &&
+ls -l /etc/branchleft/website.env
+EOF
+unset CONTACT_SMTP_HOST CONTACT_SMTP_PORT CONTACT_SMTP_USER CONTACT_SMTP_PASSWORD
 ```
 
 Expect `-rw------- 1 root root`. The credential is the dedicated,
