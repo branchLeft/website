@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   docs-lint:
-    uses: branchLeft/github-workflows/.github/workflows/docs-lint.yml@v1.0.6
+    uses: branchLeft/github-workflows/.github/workflows/docs-lint.yml@v1.0.7
