@@ -1,5 +1,5 @@
 # Repo-specific ignores only. The shared set — node_modules, build output,
-# coverage, graphify-out, sibling worktrees, lockfiles, minified assets — lives
+# coverage, sibling worktrees, lockfiles, minified assets — lives
 # in node_modules/@branchleft/prettier-config/prettierignore and is passed as a
 # third --ignore-path. This file is named explicitly in the format scripts
 # because passing any --ignore-path replaces Prettier's default rather than
