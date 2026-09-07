@@ -80,7 +80,7 @@ BOM = "\ufeff"
 # never holds the salt, while `Pulumi.<stack>.yaml` does.
 STACK_CONFIG = re.compile(r"^Pulumi\.[^/]+\.yaml$")
 
-SKIP_DIRS = {".git", ".worktrees", "node_modules", "graphify-out", "dist", "vendor"}
+SKIP_DIRS = {".git", ".worktrees", "node_modules", "dist", "vendor"}
 
 
 def is_commented(line: str) -> bool:
