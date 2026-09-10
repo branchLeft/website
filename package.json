@@ -24,7 +24,7 @@
     "framer-motion": "^12.42.2",
     "isbot": "^5.1.36",
     "lucide-react": "^1.27.0",
-    "nodemailer": "^9.0.3",
+    "nodemailer": "^9.1.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "^8"
