@@ -3,11 +3,11 @@
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@pulumi/gcp": "^9.33.0",
-    "@pulumi/pulumi": "^3.256.0"
+    "@pulumi/gcp": "^9.36.1",
+    "@pulumi/pulumi": "^3.261.0"
   },
   "devDependencies": {
-    "@branchleft/tsconfig": "^0.3.1",
+    "@branchleft/tsconfig": "^0.4.0",
     "@types/node": "^26",
     "typescript": "^5.9.0"
   }
