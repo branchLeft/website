@@ -7,7 +7,7 @@
     "@pulumi/pulumi": "^3.256.0"
   },
   "devDependencies": {
-    "@branchleft/tsconfig": "^0.4.0",
+    "@branchleft/tsconfig": "^0.6.0",
     "@types/node": "^26",
     "typescript": "^5.9.0"
   }
