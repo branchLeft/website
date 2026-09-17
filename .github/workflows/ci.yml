@@ -57,16 +57,6 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Install infra dependencies
-        working-directory: infra
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Typecheck infra
-        working-directory: infra
-        run: npx tsc --noEmit
-
       - name: Setup Python (for pre-commit)
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
@@ -76,17 +66,6 @@ jobs:
         uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         env:
           SKIP: vitest
-
-      # Self-test first: a matcher that has quietly stopped matching passes
-      # every file, so prove it still works before trusting a pass. The scan
-      # then walks the tree rather than taking a list of changed files --
-      # pre-commit's `files:` pattern lives in another file and could drift,
-      # and a salt that arrived on a branch nobody ran the hook on has to fail
-      # here rather than at publication.
-      - name: Committed-secret guard
-        run: |
-          python3 infra/scripts/assert-no-committed-pulumi-secrets.py --self-test
-          python3 infra/scripts/assert-no-committed-pulumi-secrets.py --scan-tree .
 
       - name: Unit tests with coverage
         run: pnpm test:unit --run --coverage

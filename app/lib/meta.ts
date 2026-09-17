@@ -60,11 +60,10 @@ const ORGANIZATION_JSON_LD = {
 /**
  * Google Search Console HTML-tag verification. Left unset by default: the
  * apex domain almost certainly already has a DNS-verified Search Console
- * property (infra/config.ts notes GSC verification was a prerequisite for
- * the Cloud Run Domain Mapping this site used before its LB migration), and
- * a DNS-verified *domain* property covers every hostname/subdomain with no
- * HTML tag needed. Only set this to a real value (from Search Console's
- * "HTML tag" verification method) if that check comes back negative —
+ * property, and a DNS-verified *domain* property covers every
+ * hostname/subdomain with no HTML tag needed. Only set this to a real value
+ * (from Search Console's "HTML tag" verification method) if that check
+ * comes back negative —
  * shipping a placeholder token in a live meta tag would be worse than
  * omitting the tag entirely.
  */

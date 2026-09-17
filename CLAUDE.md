@@ -50,23 +50,16 @@ CI step that mutates Pulumi stack config: the pinned reference lives on the
 host, in `/etc/branchleft/website.image.env`, written only by
 `branchleft-deploy`.
 
-`infra/` is retired from the deploy path but not deleted: it is the Pulumi
-program for the `branchleft-website-infra/production` Cloud Run stack, which
-keeps serving its last-deployed image until DNS moves to `edge1` (a
-platform-owner action, gated on the Hetzner edge carrying this traffic
-successfully) and is wound down in a later story. Nothing in CI applies it any
-more — `npx tsc --noEmit` is the only check it still gets, to keep it
-compilable until it is removed.
-
-- **`infra/Pulumi.production.yaml` carries no `encryptionsalt`.** The salt is an offline verifier for the stack passphrase, so a public tree must not hold one. Restoring it for a hand-gated operation on this now-inert stack means appending it from an operator's own copy and never committing the result:
-
-  ```bash
-  printf '\nencryptionsalt: %s\n' "$SALT" >> infra/Pulumi.production.yaml
-  ```
-
-- **The `secure:` config values stay committed.** With no salt beside them, nothing in the file lets an attacker derive the key or verify a passphrase guess offline. `branchLeft/standards` PUL-12 bans the salt and only the salt, for exactly that reason.
-- **The repository's history is a different question, and it is still open.** Earlier revisions of `infra/Pulumi.production.yaml` carry the salt, and removing a line from the tip does not remove it from history — anyone can read it back and pair it with the ciphertexts at `HEAD`. The stack passphrase is a long random string, so this is not a practical attack, but it is only fully closed once the passphrase is rotated, the values re-encrypted under it, and the SMTP credential they hold rotated on the mail host. A green PUL-12 gate says the tip is clean; it says nothing about any of that.
-- `infra/scripts/assert-no-committed-pulumi-secrets.py` enforces the above locally (pre-commit) and in CI. It ships with a `--self-test` that runs on every edit to it, because a matcher that has quietly stopped matching passes every file.
+The `infra/` GCP Pulumi program (the `branchleft-website-infra/production`
+Cloud Run stack) is gone: the GCP estate it depended on was destroyed
+2026-09-13, and its own state bucket with it. Its removal from this repo was
+`branchLeft/workspace#1000`. The repository's history is a separate, still-open
+question: an earlier revision of `infra/Pulumi.production.yaml` carried an
+`encryptionsalt`, and deleting the file at the tip does not remove that salt
+from history — the stack passphrase is a long random string, so this is not a
+practical attack, but it is only fully closed once the passphrase is rotated,
+the values it protected re-encrypted, and the SMTP credential they held
+rotated on the mail host.
 
 ## Project Conventions
 
