@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
+import { themeInitScriptHash } from '@branchleft/components';
 
 import { buildContentSecurityPolicy, buildSecurityHeaders } from './security-headers';
+
+// The theme-init inline script (see root.tsx) has no nonce available at the
+// point it renders, so it's allow-listed by content hash instead — present
+// in script-src in every case below, nonce or no nonce.
+const THEME_HASH = `'${themeInitScriptHash}'`;
 
 // Splits a CSP header into its directives, keyed by directive name, so
 // assertions target one directive at a time instead of the whole string.
@@ -20,8 +26,8 @@ describe('buildContentSecurityPolicy', () => {
     const csp = buildContentSecurityPolicy('THE_NONCE');
     const directives = parseDirectives(csp);
 
-    it('gates script-src on self plus the nonce, with no unsafe-inline/unsafe-eval/wildcard', () => {
-      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'"]);
+    it('gates script-src on self plus the nonce plus the theme-init hash, with no unsafe-inline/unsafe-eval/wildcard', () => {
+      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'", THEME_HASH]);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-inline/);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-eval/);
       expect(csp).not.toMatch(/script-src[^;]*\*/);
@@ -65,9 +71,9 @@ describe('buildContentSecurityPolicy', () => {
   });
 
   describe('no nonce supplied (root.tsx pre-render path)', () => {
-    it('falls back script-src to self with no nonce token', () => {
+    it('falls back script-src to self plus the theme-init hash, with no nonce token', () => {
       const directives = parseDirectives(buildContentSecurityPolicy());
-      expect(directives['script-src']).toEqual(["'self'"]);
+      expect(directives['script-src']).toEqual(["'self'", THEME_HASH]);
     });
   });
 
@@ -80,7 +86,7 @@ describe('buildContentSecurityPolicy', () => {
     it('still gates script-src on the nonce — the dev/prod split is HSTS/upgrade only', () => {
       const csp = buildContentSecurityPolicy('THE_NONCE', false);
       const directives = parseDirectives(csp);
-      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'"]);
+      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'", THEME_HASH]);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-inline/);
     });
   });

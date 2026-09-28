@@ -6,8 +6,17 @@
   body {
     background: var(--color-bg);
     color: var(--color-fg);
-    color-scheme: dark;
+    /* color-scheme (dark by default, light under [data-theme="light"]) is
+     * set by @branchleft/brand-branchleft/css on :root — not fixed here, so
+     * the toggle actually changes native form-control/scrollbar theming. */
     font-family: var(--font-sans);
+    /* Tailwind's own preflight sets 1.5 on html; @branchleft/brand-
+     * branchleft/css separately sets 1.6 on body, and nothing else here
+     * competes with that second, more specific declaration for bare
+     * elements that don't set their own line-height (e.g. <address>). p/li
+     * already declare 1.6 explicitly below, so restating 1.5 on body only
+     * changes elements that had no opinion of their own. */
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -41,19 +50,34 @@
     @apply text-base;
   }
 
+  /* font-size: inherit on every bare text element below is deliberate, not
+   * a no-op: @branchleft/brand-branchleft/css sets an explicit font-size on
+   * each of these (its own body-text default), and since nothing else here
+   * touches that property on the bare element itself, the package's value
+   * would otherwise win by default — even from its lowest-priority layer —
+   * wherever a Tailwind text-size utility is applied to an ANCESTOR
+   * component class instead of the element itself (the site's own
+   * convention — see CLAUDE.md "Styling"), because cross-layer priority
+   * only arbitrates a property two layers both declare on the same
+   * element. Restoring `inherit` here keeps every such element sized by
+   * its ancestor, as it was before this package existed. */
   p {
+    font-size: inherit;
     line-height: 1.6;
   }
 
   ul {
     @apply list-disc pl-6;
+    font-size: inherit;
   }
 
   ol {
     @apply list-decimal pl-6;
+    font-size: inherit;
   }
 
   li {
+    font-size: inherit;
     line-height: 1.6;
   }
 
@@ -80,6 +104,7 @@
   textarea,
   label {
     font-family: inherit;
+    font-size: inherit;
   }
 
   code,
@@ -87,6 +112,7 @@
   kbd,
   samp {
     font-family: var(--font-mono);
+    font-size: inherit;
   }
 
   :focus-visible {

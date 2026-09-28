@@ -1,3 +1,5 @@
+import { themeInitScriptHash } from '@branchleft/components';
+
 /**
  * Security response headers, shared between `root.tsx` (`headers()` export,
  * runs before rendering — no nonce available yet) and `entry.server.tsx`
@@ -29,8 +31,20 @@ const STYLE_SRC = "'self' 'unsafe-inline'";
  * request, which breaks asset loading entirely against a server with no
  * TLS listener (`pnpm start`, the e2e test server).
  */
+/**
+ * The theme-init inline script (see `root.tsx`) runs before the per-request
+ * nonce exists on the client and before hydration, so it can't carry a
+ * `nonce` attribute — it's allow-listed by content hash instead, which CSP
+ * accepts for an inline `<script>` alongside (or instead of) a nonce. The
+ * hash comes from the package itself, not a value copied by hand here, so
+ * it can't silently drift from the actual script text.
+ */
+const THEME_INIT_SCRIPT_HASH = `'${themeInitScriptHash}'`;
+
 export function buildContentSecurityPolicy(nonce?: string, isSecure = true): string {
-  const scriptSrc = nonce ? `'self' 'nonce-${nonce}'` : "'self'";
+  const scriptSrc = nonce
+    ? `'self' 'nonce-${nonce}' ${THEME_INIT_SCRIPT_HASH}`
+    : `'self' ${THEME_INIT_SCRIPT_HASH}`;
   const directives = [
     "default-src 'self'",
     `script-src ${scriptSrc}`,

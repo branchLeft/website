@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router';
 import { ChevronDown } from 'lucide-react';
-import { Logo } from '@branchleft/components';
+import { Logo } from '@branchleft/brand-branchleft';
+import { ThemeToggle } from '@branchleft/components';
 
 type NavLinkItem = { to: string; label: string; end: boolean };
 type NavDropdownItem = { label: string; children: readonly NavLinkItem[] };
@@ -141,8 +142,13 @@ export function NavBar(): React.JSX.Element {
       <div className="site-nav__inner">
         <NavLink to="/" className="site-nav__brand" onClick={closeMobileMenu}>
           <Logo className="site-nav__logo" aria-hidden="true" />
-          <span className="logo-font">branchLeft</span>
+          <span className="bl-wordmark">branchLeft</span>
         </NavLink>
+
+        {/* Visible at every viewport width, unlike the collapsible nav links
+            below — the theme choice is a persistent site-wide control, not
+            navigation. Its own visible text is its accessible name. */}
+        <ThemeToggle className="site-nav__theme-toggle" />
 
         <details ref={mobileDetailsRef} className="site-nav__mobile-details">
           <summary className="site-nav__toggle" aria-label="Toggle navigation menu">

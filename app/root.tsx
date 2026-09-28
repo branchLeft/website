@@ -11,7 +11,14 @@ import {
 import type { Route } from './+types/root';
 import './app.css';
 import noJsStylesHref from './styles/no-js.css?url';
-import { PageTransition } from '@branchleft/components';
+// `?url` resolves to the built, hashed asset path rather than fetching the
+// file at build time — these are the same woff2 files `@branchleft/brand-
+// branchleft/css`'s own @font-face rules point at (imported in app.css), so
+// this is a second reference to one already-served file, not a second copy.
+// The site no longer self-hosts these under public/fonts/.
+import syneWoff2 from '@branchleft/brand-branchleft/fonts/Syne/Syne-VariableFont_wght.woff2?url';
+import robotoMonoWoff2 from '@branchleft/brand-branchleft/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2?url';
+import { PageTransition, themeInitScript } from '@branchleft/components';
 import { NavBar } from './components/NavBar';
 import { Footer } from './components/Footer';
 import { buildSecurityHeaders } from './lib/security-headers';
@@ -35,14 +42,14 @@ export const links: Route.LinksFunction = () => [
     rel: 'preload',
     as: 'font',
     type: 'font/woff2',
-    href: '/fonts/Syne/Syne-VariableFont_wght.woff2',
+    href: syneWoff2,
     crossOrigin: 'anonymous',
   },
   {
     rel: 'preload',
     as: 'font',
     type: 'font/woff2',
-    href: '/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2',
+    href: robotoMonoWoff2,
     crossOrigin: 'anonymous',
   },
 ];
@@ -88,6 +95,15 @@ export function Layout({ children }: { readonly children: React.JSX.Element }): 
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Applies a stored light-theme choice to <html> before any stylesheet
+            loads or hydration runs, so a returning light-mode visitor never
+            flashes dark. Dark is the default and needs no script — this only
+            ever sets `data-theme="light"`. Allow-listed in the CSP by content
+            hash (see security-headers.ts) rather than the per-request nonce,
+            which doesn't exist yet at this point in the render. Must stay
+            byte-for-byte the package's own `themeInitScript` export — the
+            hash only matches its exact text. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Meta />
         <Links />
         {/* Only fetched/applied when scripting is disabled — see no-js.css header comment */}

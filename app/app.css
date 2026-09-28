@@ -4,6 +4,23 @@
  * @font-face declarations live in ./styles/theme.css — do not add rules to this file.
  *
  * See website/CLAUDE.md → "Styling" for the styling hierarchy.
+ *
+ * `@branchleft/brand-branchleft/css` ships its element defaults inside a
+ * named cascade layer (`branchleft.base`). Cascade layer priority is order
+ * of FIRST APPEARANCE — earliest-registered name loses to everything
+ * registered after it, and any unlayered rule always beats every named
+ * layer regardless of order. Importing the brand stylesheet here, before
+ * `@import 'tailwindcss'` registers Tailwind's own `base`/`components`/
+ * `utilities` layers, puts `branchleft.base` at the very bottom of the
+ * priority order, so Tailwind's layers — and every unlayered site rule in
+ * styles/ — still win. A manual `@layer branchleft.base, base, components,
+ * utilities;` order statement would say the same thing more explicitly, but
+ * this project's Vite/Tailwind CSS bundling has already been found (see
+ * styles/components/values-cloud.css's prior note, and now removed) not to
+ * preserve an explicit multi-name order statement across the bundling pass
+ * — so this relies on plain import order instead, which the bundler must
+ * preserve for @import semantics to hold at all.
  */
+@import '@branchleft/brand-branchleft/css';
 @import 'tailwindcss';
 @import './styles/theme.css';
