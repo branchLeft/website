@@ -1,14 +1,10 @@
-/* Tailwind v4 entry.
+/* Tailwind v4 entry. Site rules live under ./styles/ (entry ./styles/theme.css);
+ * add none here. See website/CLAUDE.md → "Styling".
  *
- * Site rules live under ./styles/ (entry point ./styles/theme.css); do not
- * add rules to this file. See website/CLAUDE.md → "Styling".
- *
- * The layer order is declared before anything is imported, because import
- * order alone cannot slot the brand stylesheet's two layers between
- * Tailwind's: the brand's element defaults (`branchleft-base`) sit below the
- * site's own `base`, and its classes (`branchleft-components`, e.g.
- * `.bl-wordmark--hero`) sit above it, so a site `h1` rule never beats the
- * hero wordmark class. tests/layer-order.spec.ts checks the built result.
+ * The layer order comes first because import order alone cannot put the
+ * brand's element defaults (branchleft-base) below the site's `base` and
+ * its classes (branchleft-components, e.g. .bl-wordmark--hero) above it.
+ * tests/layer-order.spec.ts checks the built result.
  */
 @layer theme, branchleft-base, base, branchleft-components, components, utilities;
 

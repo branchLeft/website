@@ -73,20 +73,13 @@ export function meta() {
 }
 
 /**
- * Root-level `headers()` is inherited by every route that doesn't export its
- * own `headers()` (React Router v7 merges from root down to the matched leaf;
- * a leaf with no `headers()` export falls back to its parent's — see
- * `getDocumentHeadersImpl` in react-router's server runtime). No route in
- * this app currently exports `headers()`, so this set applies site-wide,
- * including resource routes like `/logo.svg`.
+ * Inherited by every route that exports no `headers()` of its own (none
+ * does), so this set applies site-wide, resource routes included.
  *
- * `Content-Security-Policy` is built without a nonce here — this function
- * runs during route matching, before rendering, so no nonce exists yet.
- * `app/entry.server.tsx` generates the real per-request nonce and overrides
- * this header for HTML document responses; this CSP (script-src 'self', no
- * nonce) is only what a response would carry if it bypassed entry.server.tsx
- * entirely (i.e. resource routes, which render no <Scripts /> and so need
- * no nonce).
+ * The CSP here carries no nonce: this runs before rendering, when none
+ * exists. `app/entry.server.tsx` overrides it with the nonce-bearing
+ * version for HTML documents; resource routes render no scripts, so this
+ * nonce-less policy is the right one for them.
  */
 export const headers: Route.HeadersFunction = () => buildSecurityHeaders();
 
