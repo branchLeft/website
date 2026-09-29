@@ -85,4 +85,11 @@ for (const theme of ['dark', 'light'] as const) {
     await showContactError(page);
     await checkA11y(page);
   });
+
+  test(`the contact submit button passes axe while hovered in ${theme} mode`, async ({ page }) => {
+    await page.goto('/contact');
+    await setStoredTheme(page, theme);
+    await page.getByRole('button', { name: 'Submit' }).hover();
+    await checkA11y(page);
+  });
 }

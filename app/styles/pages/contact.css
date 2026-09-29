@@ -90,10 +90,13 @@
     cursor: pointer;
   }
 
+  /* White on the bright fill is only 3.83:1 in dark mode; the page
+   * background colour clears 4.5:1 on it in both modes. */
   .contact-form__submit:hover,
   .contact-form__submit:focus-visible {
     background: var(--color-brand-bright);
     border-color: var(--color-brand-bright);
+    color: var(--color-bg);
   }
 
   .contact-form__submit:disabled {
