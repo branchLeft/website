@@ -100,12 +100,11 @@ Update the relevant route file AND the corresponding note in this section whenev
 
 #### File layout
 
-- `app/app.css` — Tailwind v4 entry. Two `@import` lines; do not add rules here.
+- `app/app.css` — Tailwind v4 entry: the cascade-layer order, then imports of `@branchleft/brand-branchleft/css` (tokens, `@font-face`, element defaults, the `.bl-wordmark` classes), Tailwind and `styles/theme.css`. Do not add rules here.
 - `app/styles/theme.css` — entry point for the split styling system. Imports in order:
-  - `fonts.css` → `@font-face` declarations. Family names must match the `--font-*` tokens.
   - `base.css` → `@layer base` element defaults (`html`, `body`, `h1`–`h6`, `p`, `a`, `img`, form controls, `code`, `pre`, focus ring).
   - `primitives.css` → `@layer components` cross-page utilities.
-  - `components/*.css` — component-specific patterns: `site-nav.css`, `page-transition.css`, `section-nav.css`, `section-heading.css`, `bio.css`, `back-link.css`, `call-to-action.css`, `values-cloud.css`, `solutions-showcase.css`, `site-footer.css`.
+  - `components/*.css` — component-specific patterns: `site-nav.css`, `page-transition.css`, `section-nav.css`, `section-heading.css`, `bio.css`, `back-link.css`, `call-to-action.css`, `solutions-showcase.css`, `site-footer.css`.
   - `pages/*.css` — page-specific overrides: `home.css`, `about.css`, `contact.css`, `article.css`, `legal.css`.
   - **Import order is authoritative for cascade** — later files override earlier ones.
 - `app/styles/no-js.css` — **not imported** in the main bundle. Loaded only via `<noscript><link>` in `root.tsx` to provide fallback styling for users with JavaScript disabled. See file header for what it overrides.
@@ -141,15 +140,14 @@ When you need to style something, work down this list and stop at the first leve
 
 ```css
 /* GOOD — token stays single-sourced */
-.hero-wordmark {
-  @apply text-6xl;
-  font-family: var(--font-wordmark);
+.brand-mark {
+  @apply w-36 h-36;
 }
 
 /* BAD — hardcoded literal with a Tailwind comment */
-.hero-wordmark {
-  font-size: 3.75rem; /* text-6xl */
-  font-family: var(--font-wordmark);
+.brand-mark {
+  width: 9rem; /* w-36 */
+  height: 9rem; /* h-36 */
 }
 ```
 

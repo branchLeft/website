@@ -1,7 +1,7 @@
 /**
  * Every indexable HTML page path — the single source of truth for
  * sitemap-xml.tsx's `<urlset>`. Resource routes (`/logo.svg`,
- * `/sitemap.xml`, favicons, manifest) are deliberately excluded: they're
+ * `/sitemap.xml`, `/theme`, favicons, manifest) are deliberately excluded: they're
  * not pages, so they don't belong in a sitemap.
  *
  * `app/routes.ts` isn't derived from this list (or vice versa) — it also

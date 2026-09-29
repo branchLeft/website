@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavLink, useLocation } from 'react-router';
 import { ChevronDown } from 'lucide-react';
 import { Logo } from '@branchleft/brand-branchleft';
-import { ThemeToggle } from '@branchleft/components';
+import { ThemeToggle, type Theme } from '@branchleft/components';
 
 type NavLinkItem = { to: string; label: string; end: boolean };
 type NavDropdownItem = { label: string; children: readonly NavLinkItem[] };
@@ -102,8 +102,6 @@ function NavDropdown({
  * collapse can't be reliably forced open via CSS alone (confirmed: even a
  * `display: flex !important` override on the child leaves it unrendered),
  * so the desktop nav can't depend on the mobile toggle's `<details>` at all.
- * Same "duplicate markup, pick one via a breakpoint" approach already used
- * for the Values cloud's ring vs. accordion (see values-cloud.css).
  */
 function NavLinksItems({ onNavigate }: { readonly onNavigate?: () => void }): React.JSX.Element {
   return (
@@ -130,7 +128,8 @@ function NavLinksItems({ onNavigate }: { readonly onNavigate?: () => void }): Re
   );
 }
 
-export function NavBar(): React.JSX.Element {
+export function NavBar({ theme }: { readonly theme: Theme }): React.JSX.Element {
+  const location = useLocation();
   const mobileDetailsRef = React.useRef<HTMLDetailsElement>(null);
 
   function closeMobileMenu() {
@@ -145,10 +144,15 @@ export function NavBar(): React.JSX.Element {
           <span className="bl-wordmark">branchLeft</span>
         </NavLink>
 
-        {/* Visible at every viewport width, unlike the collapsible nav links
-            below — the theme choice is a persistent site-wide control, not
-            navigation. Its own visible text is its accessible name. */}
-        <ThemeToggle className="site-nav__theme-toggle" />
+        {/* Outside the collapsible links, so it is reachable at every width.
+            With JavaScript off it posts to the theme route, which sends the
+            visitor back to this page. */}
+        <ThemeToggle
+          className="site-nav__theme-toggle"
+          theme={theme}
+          action="/theme"
+          returnTo={`${location.pathname}${location.search}`}
+        />
 
         <details ref={mobileDetailsRef} className="site-nav__mobile-details">
           <summary className="site-nav__toggle" aria-label="Toggle navigation menu">

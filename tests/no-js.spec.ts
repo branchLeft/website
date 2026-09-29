@@ -157,3 +157,19 @@ test.describe('SectionNav (About page)', () => {
     await expect(page).toHaveURL(/#values$/);
   });
 });
+
+test.describe('theme switch', () => {
+  test('posts, stores the choice and returns to the same page, both ways', async ({ page }) => {
+    await page.goto('/contact?category=general');
+    const html = page.locator('html');
+    await expect(html).toHaveAttribute('data-theme', 'dark');
+
+    await page.getByRole('button', { name: 'Switch to light mode' }).click();
+    await expect(page).toHaveURL(/\/contact\?category=general$/);
+    await expect(html).toHaveAttribute('data-theme', 'light');
+
+    await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+    await expect(page).toHaveURL(/\/contact\?category=general$/);
+    await expect(html).toHaveAttribute('data-theme', 'dark');
+  });
+});

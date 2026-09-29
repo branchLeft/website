@@ -107,7 +107,7 @@
 
   /* Hover accent for the home hero's "people & planet" copy (see
    * pages/home.css) — the package's ValuesColours "environment" hue reads
-   * as "planet" and is verified 4.5:1+ against both mode backgrounds. Not
+   * as "planet" and clears 4.5:1 on the background in both modes. Not
    * a general-purpose token; consumers wanting a values accent should
    * reach for `--bl-value-*` directly, or `[data-accent]` for ValuesCloud
    * itself, rather than this one. */

@@ -10,7 +10,7 @@ vi.mock('nodemailer', () => ({
   default: { createTransport },
 }));
 
-import { sendContactEmail } from './sendContactEmail.server';
+import { EMAIL_PALETTE, sendContactEmail } from './sendContactEmail.server';
 
 const ORIGINAL_ENV = { ...process.env };
 
@@ -187,5 +187,40 @@ describe('sendContactEmail', () => {
         message: 'hello there',
       })
     ).rejects.toThrow('SMTP connection refused');
+  });
+});
+
+/** WCAG 2 relative luminance of an opaque `#rrggbb` colour. */
+function luminance(hex: string): number {
+  const [r, g, b] = [1, 3, 5].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a: string, b: string): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+describe('contact email colours', () => {
+  it.each(['text', 'accent', 'muted'] as const)('%s clears 4.5:1 on the background', (key) => {
+    expect(contrast(EMAIL_PALETTE[key], EMAIL_PALETTE.background)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('uses only palette colours in the HTML body', async () => {
+    setEnv(...VALID_ENV);
+    sendMail.mockReset().mockResolvedValue(undefined);
+
+    await sendContactEmail({ category: 'general', email: 'a@example.com', message: 'hi' });
+
+    const html: string = sendMail.mock.calls[0]?.[0]?.html ?? '';
+    const palette = new Set(Object.values(EMAIL_PALETTE).map((c) => c.toLowerCase()));
+    const used = [...html.matchAll(/(?:#[0-9a-f]{3,8}\b|rgba?\([^)]*\))/gi)].map((m) =>
+      m[0].toLowerCase()
+    );
+    expect(used.length).toBeGreaterThan(0);
+    expect(used.filter((c) => !palette.has(c))).toEqual([]);
   });
 });

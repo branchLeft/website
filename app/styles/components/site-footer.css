@@ -20,9 +20,7 @@
   .site-footer__copy {
     @apply text-[10px];
     flex-shrink: 0;
-    color: var(
-      --colour-fg-muted
-    ); /* aliased to @branchleft/brand-branchleft's --bl-color-muted, verified 4.5:1+ in both modes */
+    color: var(--colour-fg-muted);
   }
 
   .site-footer__links {
@@ -42,9 +40,7 @@
   }
 
   .site-footer__link {
-    color: var(
-      --colour-fg-muted
-    ); /* aliased to @branchleft/brand-branchleft's --bl-color-muted, verified 4.5:1+ in both modes */
+    color: var(--colour-fg-muted);
     text-decoration: none;
   }
 

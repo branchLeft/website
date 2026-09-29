@@ -15,4 +15,7 @@ export default [
   // Resource route: serves a generated sitemap.xml listing the indexable
   // page routes above — see the module comment in sitemap-xml.tsx.
   route('sitemap.xml', 'routes/sitemap-xml.tsx'),
+  // Resource route: the theme switch posts here when JavaScript is off.
+  route('theme', 'routes/theme.tsx'),
+  route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;
