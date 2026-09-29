@@ -12,16 +12,14 @@
  *                     it wasn't promoted here.
  *
  * File split (import order is authoritative for cascade):
- *   fonts.css              → @font-face declarations
+ *   @branchleft/brand-branchleft/css → tokens, @font-face declarations and
+ *                             element defaults (imported in app.css, before
+ *                             this file — see app.css for why)
  *   base.css               → @layer base element defaults
  *   primitives.css         → @layer components cross-page primitives
  *   @branchleft/components/css → structural CSS shipped by the package
- *                             (bl-values-cloud layout, bl-section-heading's
- *                             icon/text gap), pulled into a `bl-components`
- *                             layer here so it stays low priority (see
- *                             components/values-cloud.css for why its
- *                             overrides are deliberately unlayered rather
- *                             than relying on layer order to win)
+ *                             (bl-values-cloud, bl-section-heading), in a
+ *                             `bl-components` layer (see the import below)
  *   components/site-nav    → primary sticky navigation
  *   components/page-transition → layout for bl-page-transition (from @branchleft/components)
  *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
@@ -29,7 +27,6 @@
  *   components/bio         → people section entry card
  *   components/back-link   → back-link styling (article page returns)
  *   components/call-to-action → CTA link styling
- *   components/values-cloud    → --bl-* token mapping + accent colours for bl-values-cloud (from @branchleft/components)
  *   components/solutions-showcase → tabbed solutions panel
  *   components/site-footer → site footer
  *   pages/home             → home route
@@ -47,12 +44,11 @@
  * ─────────────────────────────────────────────────────────────────────────── */
 
 /* ─── Imports ────────────────────────────────────────────────────────────── */
-@import './fonts.css';
 @import './base.css';
 @import './primitives.css';
-/* @branchleft/components' structural CSS (bl-values-cloud, bl-section-heading)
- * — kept in its own low-priority layer so it can't win against unlayered
- * local CSS regardless of import order (see components/values-cloud.css). */
+/* @branchleft/components' structural CSS. `bl-components` is first named
+ * here, after Tailwind's layers, so it outranks site component classes and
+ * utilities alike: a site override of a `.bl-*` rule must be unlayered. */
 @import '@branchleft/components/css' layer(bl-components);
 @import './components/site-nav.css';
 @import './components/page-transition.css';
@@ -61,7 +57,6 @@
 @import './components/bio.css';
 @import './components/back-link.css';
 @import './components/call-to-action.css';
-@import './components/values-cloud.css';
 @import './components/solutions-showcase.css';
 @import './components/site-footer.css';
 @import './pages/home.css';
@@ -71,50 +66,65 @@
 @import './pages/legal.css';
 
 /* ─── Design tokens ──────────────────────────────────────────────────────── */
+/* Colour and font VALUES are not defined here: @branchleft/brand-
+ * branchleft/css (imported in app.css) is the single source of truth for
+ * them, including its own dark/light pair for every one. This block only
+ * ALIASES the site's existing token names onto the package's `--bl-*`
+ * custom properties, so every existing consumer (`var(--color-fg)` etc.,
+ * all over styles/) keeps working unchanged and automatically gets the
+ * package's light-mode values too, instead of every callsite being
+ * rewritten to `--bl-*` directly. This is the one place that mapping
+ * happens — do not duplicate a literal colour value anywhere else in
+ * styles/.
+ *
+ * These are plain `var()` references, not literals, so they resolve at
+ * used-value time against whatever `--bl-*` is in scope for the current
+ * `data-theme` — a `@theme` token can hold a var() as safely as a literal;
+ * Tailwind only needs the name to generate `bg-*`/`text-*`/etc. utilities
+ * from, not a resolved value at build time. */
 @theme {
-  /* Colour palette */
-  --color-brand: #b31761;
-  --color-brand-bright: #ff006e;
-  --color-bg: #000000;
-  --color-fg: #ffffff;
-  --colour-fg-muted: color-mix(in srgb, var(--color-fg) 75%, var(--color-bg));
+  --color-brand: var(--bl-color-button-fill);
+  --color-brand-bright: var(--bl-color-active);
+  --color-bg: var(--bl-color-bg);
+  --color-fg: var(--bl-color-fg);
+  --colour-fg-muted: var(--bl-color-muted);
+  --color-hairline: var(--bl-color-hairline);
 
-  /* Values-cloud accent hues — one per value, used ONLY by .values-cloud
-   * (see components/values-cloud.css) to visually distinguish the 7 values.
-   * A deliberate, scoped exception to the monochrome + single-accent system
-   * above; not meant to be reused as general-purpose site colours. */
-  --color-value-sustainability: #d4a72c;
-  --color-value-environment: #3fae5c;
-  --color-value-ai: #8b6fd6;
-  --color-value-society: #e8637a;
-  --color-value-opensource: #3b9fd6;
-  --color-value-agility: #e07a2c;
-  --color-value-redlines: #c62828;
+  /* Text/icon colour for content sitting ON a solid --color-brand /
+   * --color-brand-bright fill (e.g. .contact-form__submit) — white in both
+   * modes, unlike --color-fg which flips to black in light mode and would
+   * fail contrast against these brand fills there. */
+  --color-brand-fg: var(--bl-color-button-fg);
 
-  /* Font stacks — family names must match the @font-face declarations in
-   * fonts.css.
+  /* Hover accent for the home hero's "people & planet" copy (see
+   * pages/home.css) — the package's ValuesColours "environment" hue reads
+   * as "planet" and clears 4.5:1 on the background in both modes. Not
+   * a general-purpose token; consumers wanting a values accent should
+   * reach for `--bl-value-*` directly, or `[data-accent]` for ValuesCloud
+   * itself, rather than this one. */
+  --color-hover-accent: var(--bl-value-environment);
+
+  /* Font stacks — aliased onto the package's font tokens; family names
+   * still line up with its @font-face declarations.
    *   --font-display : headings (h1–h6)
    *   --font-wordmark: brand mark / hero wordmark
    *   --font-sans    : body / reading copy (humanist geometric)
    *   --font-mono    : uppercase labels, CTAs, section-nav, code — anything
    *                    that should read as "machine voice". */
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-wordmark: 'Syne', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  --font-display: var(--bl-font-display);
+  --font-wordmark: var(--bl-font-wordmark);
+  --font-sans: var(--bl-font-sans);
+  --font-mono: var(--bl-font-mono);
 
   /* Sticky nav offset — the height of the primary .site-nav row. Section
    * pages use this for scroll-margin-top and for stacking the secondary
    * .bl-section-nav directly beneath the primary nav. Keep in sync with the
-   * primary nav padding/line-height if either changes. */
+   * primary nav padding/line-height if either changes. Site-specific
+   * layout, not a brand token — stays a literal. */
   --nav-offset: 3.5rem;
 
   /* Anchor-jump landing offset. Clears both nav bars when an anchor
    * scrolls into view. Consumed by .bl-section-heading, .about-page__section,
    * and .article-page__section. */
   --section-scroll-offset: calc(var(--nav-offset) + 3rem);
-
-  /* Hairline rule (nav/section-nav borders, table dividers). Single token
-   * so hairline opacity is tuned in one place. */
-  --color-hairline: color-mix(in srgb, var(--color-fg) 12%, transparent);
 }

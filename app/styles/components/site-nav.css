@@ -13,8 +13,11 @@
     @apply flex flex-nowrap items-center justify-between max-w-6xl mx-auto py-3 px-6 gap-3;
   }
 
+  /* Takes the free space, so the theme switch and the menu or links sit
+   * together on the right. */
   .site-nav__brand {
     @apply flex items-center gap-2 text-lg;
+    margin-inline-end: auto;
     font-family: var(--font-wordmark);
     color: var(--color-fg);
     text-decoration: none;
@@ -28,6 +31,28 @@
   .site-nav__brand:focus-visible {
     color: var(--color-brand-bright);
     text-decoration: none;
+  }
+
+  /* The theme switch (a form around an icon button). Outlined to match the
+   * menu button beside it on phones. */
+  .site-nav__theme-toggle {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .site-nav__theme-toggle button {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--color-fg) 25%, transparent);
+    color: var(--color-fg);
+    cursor: pointer;
+  }
+
+  .site-nav__theme-toggle button:hover,
+  .site-nav__theme-toggle button:focus-visible {
+    color: var(--color-brand-bright);
   }
 
   .site-nav__toggle {
@@ -186,6 +211,11 @@
   @media (min-width: 768px) {
     .site-nav__mobile-details {
       display: none;
+    }
+
+    /* Same spacing from the first link as the links have between them. */
+    .site-nav__theme-toggle {
+      margin-inline-end: 1.25rem;
     }
 
     .site-nav__links--desktop {

@@ -82,7 +82,10 @@
   .contact-form__submit {
     @apply inline-flex items-center justify-center self-start px-5 py-2 text-xs;
     background: var(--color-brand);
-    color: var(--color-fg);
+    /* Not --color-fg: that flips to black in light mode and fails contrast
+     * against this solid brand fill, which stays the same colour in both
+     * modes — --color-brand-fg is the dedicated on-fill token instead. */
+    color: var(--color-brand-fg);
     border: 1px solid var(--color-brand);
     cursor: pointer;
   }

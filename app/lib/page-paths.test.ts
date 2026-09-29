@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import routes from '../routes';
 import { PAGE_PATHS } from './page-paths';
 
-// Resource routes deliberately excluded from PAGE_PATHS/the sitemap — see
-// page-paths.ts's module comment.
-const RESOURCE_ROUTE_PATHS = new Set(['logo.svg', 'sitemap.xml']);
+// Routes deliberately excluded from PAGE_PATHS/the sitemap: resource routes
+// (see page-paths.ts's module comment) and the catch-all 404.
+const RESOURCE_ROUTE_PATHS = new Set(['logo.svg', 'sitemap.xml', 'theme', '*']);
 
 function routeConfigPaths(): string[] {
   return routes

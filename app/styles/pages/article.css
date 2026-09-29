@@ -43,19 +43,19 @@
   }
 
   .article-page__feature-group[data-accent='quality'] {
-    --feature-accent: var(--color-value-society);
+    --feature-accent: var(--bl-value-society);
   }
 
   .article-page__feature-group[data-accent='hosting'] {
-    --feature-accent: var(--color-value-environment);
+    --feature-accent: var(--bl-value-environment);
   }
 
   .article-page__feature-group[data-accent='ownership'] {
-    --feature-accent: var(--color-value-opensource);
+    --feature-accent: var(--bl-value-opensource);
   }
 
   .article-page__feature-group[data-accent='addons'] {
-    --feature-accent: var(--color-value-agility);
+    --feature-accent: var(--bl-value-agility);
   }
 
   /* The summary layout (flex, marker-hiding, cursor), chevron, and reveal

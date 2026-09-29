@@ -5,7 +5,7 @@
 The MIT license in [LICENSE](LICENSE) applies to the source code of this repository. It does **not** extend to:
 
 - The branchLeft name, logo, and wordmark (`branchLeft-logo.png`, `branchLeft-wordmark.png`, and any other brand marks used in this repo) — these are not licensed for reuse. See "Trademarks" below.
-- Third-party fonts bundled in `public/fonts/`, which carry their own license (see below).
+- Third-party fonts, served from the `@branchleft/brand-branchleft` package, which carry their own license (see below).
 
 ## Trademarks and brand assets
 
@@ -13,7 +13,7 @@ The MIT license in [LICENSE](LICENSE) applies to the source code of this reposit
 
 ## Third-party fonts
 
-Self-hosted under `public/fonts/`, all under the [SIL Open Font License 1.1](https://openfontlicense.org/), which permits bundling and redistribution:
+Self-hosted from the `@branchleft/brand-branchleft` package (its `dist/fonts/`), all under the [SIL Open Font License 1.1](https://openfontlicense.org/), which permits bundling and redistribution. Each family's full licence text ships beside its font files as `OFL.txt`:
 
 | Font          | Source                                                                                               |
 | ------------- | ---------------------------------------------------------------------------------------------------- |

@@ -20,7 +20,7 @@
   .site-footer__copy {
     @apply text-[10px];
     flex-shrink: 0;
-    color: #959595; /* WCAG-AAA minimum on black — 7:1 contrast */
+    color: var(--colour-fg-muted);
   }
 
   .site-footer__links {
@@ -40,7 +40,7 @@
   }
 
   .site-footer__link {
-    color: #959595; /* WCAG-AAA minimum on black — 7:1 contrast */
+    color: var(--colour-fg-muted);
     text-decoration: none;
   }
 
@@ -52,7 +52,7 @@
 
   .site-footer__social-link {
     @apply flex items-center;
-    color: #959595; /* WCAG-AAA minimum on black — 7:1 contrast, matches .site-footer__link */
+    color: var(--colour-fg-muted); /* matches .site-footer__link */
   }
 
   .site-footer__social-link:hover,

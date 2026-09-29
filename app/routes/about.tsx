@@ -93,11 +93,11 @@ export default function About() {
       <SectionNav sections={SECTIONS} ariaLabel="About sections" />
       <main className="long-form about-page">
         <SectionHeading as="h1" anchor="what-is-branchleft">
-          What is <span className="logo-font">branchLeft</span>?
+          What is <span className="bl-wordmark">branchLeft</span>?
         </SectionHeading>
         <section className="about-page__section" aria-labelledby="what-is-branchleft">
           <p>
-            Founded in July 2026, <span className="logo-font">branchLeft</span> is a 100%
+            Founded in July 2026, <span className="bl-wordmark">branchLeft</span> is a 100%
             worker-owned UK company building technology for people & planet. The name reflects the
             subversion of the capitalistic model typically associated with tech. Extractive and
             exploitative practices are not a prerequisite for success, and we're here to prove it.
@@ -169,7 +169,7 @@ export default function About() {
               <p className="bio__title">Director, Founder & Lead Engineer</p>
               <p>
                 Our founder is the technical and ideological driving force behind{' '}
-                <span className="logo-font">branchLeft</span>.
+                <span className="bl-wordmark">branchLeft</span>.
               </p>
               <p>
                 With a first-class Computer Science MEng from the University of Warwick, and over a

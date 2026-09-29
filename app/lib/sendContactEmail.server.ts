@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { branchLeftTokens } from '@branchleft/brand-branchleft';
 
 export type ContactSubmission = {
   readonly category: string;
@@ -7,6 +8,21 @@ export type ContactSubmission = {
 };
 
 const TO_ADDRESS = 'info@branchleft.co.uk';
+
+/**
+ * The email's colours: the brand's dark palette, as literal values because
+ * email clients support no CSS custom properties. Every text colour here
+ * clears 4.5:1 on `background` (checked in the unit test).
+ */
+const { colour } = branchLeftTokens;
+export const EMAIL_PALETTE = {
+  background: colour.background.dark,
+  text: colour.foreground.dark,
+  accent: colour.brandAccent.dark,
+  muted: colour.muted.dark,
+  rule: colour.brand.dark,
+  divider: colour.hairline.dark,
+} as const;
 
 function getTransport() {
   const host = process.env.CONTACT_SMTP_HOST;
@@ -62,25 +78,25 @@ function buildHtml(submission: ContactSubmission): string {
   const email = escapeHtml(submission.email);
   const message = escapeHtml(submission.message).replaceAll('\n', '<br>');
   return `
-    <div style="font-family: Helvetica, Arial, sans-serif; background: #000000; color: #ffffff; padding: 24px; max-width: 560px; margin: 0 auto;">
-      <div style="border-bottom: 3px solid #b31761; padding-bottom: 12px; margin-bottom: 20px;">
-        <span style="font-size: 20px; font-weight: bold; letter-spacing: 0.02em;">branch<span style="color: #ff006e;">Left</span></span>
-        <div style="color: #b31761; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px;">New website enquiry</div>
+    <div style="font-family: Helvetica, Arial, sans-serif; background: ${EMAIL_PALETTE.background}; color: ${EMAIL_PALETTE.text}; padding: 24px; max-width: 560px; margin: 0 auto;">
+      <div style="border-bottom: 3px solid ${EMAIL_PALETTE.rule}; padding-bottom: 12px; margin-bottom: 20px;">
+        <span style="font-size: 20px; font-weight: bold; letter-spacing: 0.02em;">branch<span style="color: ${EMAIL_PALETTE.accent};">Left</span></span>
+        <div style="color: ${EMAIL_PALETTE.accent}; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px;">New website enquiry</div>
       </div>
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
         <tr>
-          <td style="color: #b31761; font-size: 13px; padding: 4px 12px 4px 0; vertical-align: top; white-space: nowrap;">Category</td>
+          <td style="color: ${EMAIL_PALETTE.accent}; font-size: 13px; padding: 4px 12px 4px 0; vertical-align: top; white-space: nowrap;">Category</td>
           <td style="font-size: 14px; padding: 4px 0;">${category}</td>
         </tr>
         <tr>
-          <td style="color: #b31761; font-size: 13px; padding: 4px 12px 4px 0; vertical-align: top; white-space: nowrap;">From</td>
-          <td style="font-size: 14px; padding: 4px 0;"><a href="mailto:${email}" style="color: #ff006e;">${email}</a></td>
+          <td style="color: ${EMAIL_PALETTE.accent}; font-size: 13px; padding: 4px 12px 4px 0; vertical-align: top; white-space: nowrap;">From</td>
+          <td style="font-size: 14px; padding: 4px 0;"><a href="mailto:${email}" style="color: ${EMAIL_PALETTE.accent};">${email}</a></td>
         </tr>
       </table>
-      <div style="border-top: 1px solid #333333; padding-top: 16px; font-size: 14px; line-height: 1.6;">
+      <div style="border-top: 1px solid ${EMAIL_PALETTE.divider}; padding-top: 16px; font-size: 14px; line-height: 1.6;">
         ${message}
       </div>
-      <div style="border-top: 1px solid #333333; margin-top: 20px; padding-top: 12px; font-size: 12px; color: #999999;">
+      <div style="border-top: 1px solid ${EMAIL_PALETTE.divider}; margin-top: 20px; padding-top: 12px; font-size: 12px; color: ${EMAIL_PALETTE.muted};">
         Reply-To is already set to the sender — hit reply to respond directly.
       </div>
     </div>

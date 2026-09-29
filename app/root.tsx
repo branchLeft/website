@@ -7,11 +7,18 @@ import {
   Scripts,
   ScrollRestoration,
   useLocation,
+  useRouteLoaderData,
 } from 'react-router';
 import type { Route } from './+types/root';
 import './app.css';
 import noJsStylesHref from './styles/no-js.css?url';
-import { PageTransition } from '@branchleft/components';
+// `?url` resolves to the built, hashed asset path rather than fetching the
+// file at build time — these are the same woff2 files `@branchleft/brand-
+// branchleft/css`'s own @font-face rules point at (imported in app.css), so
+// this is a second reference to one already-served file, not a second copy.
+import syneWoff2 from '@branchleft/brand-branchleft/fonts/Syne/Syne-VariableFont_wght.woff2?url';
+import robotoMonoWoff2 from '@branchleft/brand-branchleft/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2?url';
+import { PageTransition, parseThemeCookie, type Theme } from '@branchleft/components';
 import { NavBar } from './components/NavBar';
 import { Footer } from './components/Footer';
 import { buildSecurityHeaders } from './lib/security-headers';
@@ -35,14 +42,14 @@ export const links: Route.LinksFunction = () => [
     rel: 'preload',
     as: 'font',
     type: 'font/woff2',
-    href: '/fonts/Syne/Syne-VariableFont_wght.woff2',
+    href: syneWoff2,
     crossOrigin: 'anonymous',
   },
   {
     rel: 'preload',
     as: 'font',
     type: 'font/woff2',
-    href: '/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2',
+    href: robotoMonoWoff2,
     crossOrigin: 'anonymous',
   },
 ];
@@ -65,26 +72,29 @@ export function meta() {
 }
 
 /**
- * Root-level `headers()` is inherited by every route that doesn't export its
- * own `headers()` (React Router v7 merges from root down to the matched leaf;
- * a leaf with no `headers()` export falls back to its parent's — see
- * `getDocumentHeadersImpl` in react-router's server runtime). No route in
- * this app currently exports `headers()`, so this set applies site-wide,
- * including resource routes like `/logo.svg`.
+ * Inherited by every route that exports no `headers()` of its own (none
+ * does), so this set applies site-wide, resource routes included.
  *
- * `Content-Security-Policy` is built without a nonce here — this function
- * runs during route matching, before rendering, so no nonce exists yet.
- * `app/entry.server.tsx` generates the real per-request nonce and overrides
- * this header for HTML document responses; this CSP (script-src 'self', no
- * nonce) is only what a response would carry if it bypassed entry.server.tsx
- * entirely (i.e. resource routes, which render no <Scripts /> and so need
- * no nonce).
+ * The CSP here carries no nonce: this runs before rendering, when none
+ * exists. `app/entry.server.tsx` overrides it with the nonce-bearing
+ * version for HTML documents; resource routes render no scripts, so this
+ * nonce-less policy is the right one for them.
  */
 export const headers: Route.HeadersFunction = () => buildSecurityHeaders();
 
+/**
+ * The visitor's theme, from the cookie the theme switch sets. Dark when
+ * there is none: dark is the brand default and never follows the OS setting.
+ */
+export function loader({ request }: Route.LoaderArgs): { theme: Theme } {
+  return { theme: parseThemeCookie(request.headers.get('cookie')) };
+}
+
 export function Layout({ children }: { readonly children: React.JSX.Element }): React.JSX.Element {
+  // Absent only when the root loader itself failed (the error page).
+  const theme = useRouteLoaderData<typeof loader>('root')?.theme ?? 'dark';
   return (
-    <html lang="en">
+    <html lang="en" data-theme={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,9 +116,10 @@ export function Layout({ children }: { readonly children: React.JSX.Element }): 
 
 export default function App() {
   const location = useLocation();
+  const { theme } = useRouteLoaderData<typeof loader>('root') ?? { theme: 'dark' as const };
   return (
     <div className="app-layout">
-      <NavBar />
+      <NavBar theme={theme} />
       <PageTransition key={location.pathname}>
         <Outlet />
       </PageTransition>

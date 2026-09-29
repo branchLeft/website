@@ -1,5 +1,5 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import { Logo } from '@branchleft/components';
+import { Logo } from '@branchleft/brand-branchleft';
 
 /**
  * Resource route that renders the `Logo` React component to an SVG file so

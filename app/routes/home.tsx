@@ -1,4 +1,4 @@
-import { Logo } from '@branchleft/components';
+import { Logo } from '@branchleft/brand-branchleft';
 import { SocialLinksItems } from '../components/SocialLinksItems';
 import { buildMeta } from '../lib/meta';
 
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="page-shell">
       <Logo role="img" aria-label="branchLeft logo" className="brand-mark" />
-      <h1 className="hero-wordmark">branchLeft</h1>
+      <h1 className="bl-wordmark bl-wordmark--hero">branchLeft</h1>
       <p className="tagline">
         building tech for <span className="hover-green">people</span> &{' '}
         <span className="hover-green">planet</span>

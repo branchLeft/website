@@ -78,8 +78,8 @@ export default function LocalNews(): React.JSX.Element {
           What We&rsquo;re Building
         </SectionHeading>
         <p>
-          <span className="logo-font">branchLeft</span> is building technology and relationships in
-          the independent and public interest media space to provide a platform and ecosystem
+          <span className="bl-wordmark">branchLeft</span> is building technology and relationships
+          in the independent and public interest media space to provide a platform and ecosystem
           tailored to the needs of public interest local news outlets in the UK. Initially built
           around{' '}
           <a href="https://ghost.org/" target="_blank" rel="noopener noreferrer">
@@ -141,8 +141,8 @@ export default function LocalNews(): React.JSX.Element {
           <p className="article-page__callout-label">New or growing outlet?</p>
           <p>
             If you're a local news outlet, or looking to start one, and want to learn more about how{' '}
-            <span className="logo-font">branchLeft</span> can help you, please get in touch via our{' '}
-            <Link to="/contact?category=local-news">contact form</Link>.
+            <span className="bl-wordmark">branchLeft</span> can help you, please get in touch via
+            our <Link to="/contact?category=local-news">contact form</Link>.
           </p>
         </div>
         <div className="article-page__callout">

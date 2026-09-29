@@ -47,12 +47,6 @@
     width: 100%;
   }
 
-  /* Inline brand-name span — switches to the wordmark font weight/family. */
-  .logo-font {
-    font-family: var(--font-wordmark);
-    font-weight: 500;
-  }
-
   /* Directional link: mono inline-flex link with a sliding arrow child.
    * Shared base for .cta, the home hero link, and .back-link. */
   .directional-link {

@@ -6,7 +6,9 @@
   body {
     background: var(--color-bg);
     color: var(--color-fg);
-    color-scheme: dark;
+    /* color-scheme (dark by default, light under [data-theme="light"]) is
+     * set by @branchleft/brand-branchleft/css on :root — not fixed here, so
+     * the toggle actually changes native form-control/scrollbar theming. */
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
