@@ -18,16 +18,8 @@
  *   base.css               → @layer base element defaults
  *   primitives.css         → @layer components cross-page primitives
  *   @branchleft/components/css → structural CSS shipped by the package
- *                             (bl-values-cloud layout, bl-section-heading's
- *                             icon/text gap), pulled into a `bl-components`
- *                             layer here so it stays low priority — kept in
- *                             its own named layer rather than unlayered like
- *                             the brand import in app.css, since nothing here
- *                             needs to win against it except our own
- *                             component classes below, which already share
- *                             Tailwind's `components` layer and so beat any
- *                             other named layer regardless of declaration
- *                             order
+ *                             (bl-values-cloud, bl-section-heading), in a
+ *                             `bl-components` layer (see the import below)
  *   components/site-nav    → primary sticky navigation
  *   components/page-transition → layout for bl-page-transition (from @branchleft/components)
  *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
@@ -54,10 +46,9 @@
 /* ─── Imports ────────────────────────────────────────────────────────────── */
 @import './base.css';
 @import './primitives.css';
-/* @branchleft/components' structural CSS (bl-values-cloud, bl-section-heading)
- * — kept in its own low-priority named layer; our own component classes
- * below share Tailwind's `components` layer, which always beats a
- * differently-named layer regardless of declaration order. */
+/* @branchleft/components' structural CSS. `bl-components` is first named
+ * here, after Tailwind's layers, so it outranks site component classes and
+ * utilities alike: a site override of a `.bl-*` rule must be unlayered. */
 @import '@branchleft/components/css' layer(bl-components);
 @import './components/site-nav.css';
 @import './components/page-transition.css';
@@ -75,7 +66,7 @@
 @import './pages/legal.css';
 
 /* ─── Design tokens ──────────────────────────────────────────────────────── */
-/* Colour and font VALUES are no longer defined here — @branchleft/brand-
+/* Colour and font VALUES are not defined here: @branchleft/brand-
  * branchleft/css (imported in app.css) is the single source of truth for
  * them, including its own dark/light pair for every one. This block only
  * ALIASES the site's existing token names onto the package's `--bl-*`

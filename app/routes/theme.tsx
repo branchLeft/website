@@ -24,14 +24,16 @@ function publicOrigin(request: Request): { origin: string; isSecure: boolean } {
  * the same cookie itself.
  */
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
-  const form = await request.formData();
-  const theme = form.get('theme');
+  // A body that is not a form (none at all, or JSON) is a bad request, not a
+  // server error.
+  const form = await request.formData().catch(() => null);
+  const theme = form?.get('theme');
   if (theme !== 'light' && theme !== 'dark') {
     return new Response('Unknown theme', { status: 400 });
   }
 
   const { origin, isSecure } = publicOrigin(request);
-  const returnValue = form.get('return');
+  const returnValue = form?.get('return');
   const target = safeReturnPath(
     typeof returnValue === 'string' ? returnValue : request.headers.get('referer'),
     origin

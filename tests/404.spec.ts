@@ -13,3 +13,8 @@ test('passes a11y', async ({ page }) => {
   await page.goto('/this-page-does-not-exist');
   await checkA11y(page);
 });
+
+test('a POST to an unknown path is a 404, not a 405', async ({ request }) => {
+  const response = await request.post('/this-page-does-not-exist', { form: { a: '1' } });
+  expect(response.status()).toBe(404);
+});

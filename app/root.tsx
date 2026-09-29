@@ -16,7 +16,6 @@ import noJsStylesHref from './styles/no-js.css?url';
 // file at build time — these are the same woff2 files `@branchleft/brand-
 // branchleft/css`'s own @font-face rules point at (imported in app.css), so
 // this is a second reference to one already-served file, not a second copy.
-// The site no longer self-hosts these under public/fonts/.
 import syneWoff2 from '@branchleft/brand-branchleft/fonts/Syne/Syne-VariableFont_wght.woff2?url';
 import robotoMonoWoff2 from '@branchleft/brand-branchleft/fonts/RobotoMono/RobotoMono-VariableFont_wght.woff2?url';
 import { PageTransition, parseThemeCookie, type Theme } from '@branchleft/components';

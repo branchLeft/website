@@ -56,6 +56,25 @@ describe('theme action', () => {
   });
 
   it.each([
+    ['no body', undefined, undefined],
+    ['a JSON body', '{"theme":"light"}', 'application/json'],
+  ])('refuses %s with a 400, not a server error', async (_label, body, type) => {
+    const request = new Request('http://branchleft.test/theme', {
+      method: 'POST',
+      headers: type ? { 'content-type': type } : {},
+      body,
+    });
+    const response = await action({
+      request,
+      params: {},
+      context: {},
+    } as unknown as Route.ActionArgs);
+
+    expect(response.status).toBe(400);
+    expect(response.headers.get('Set-Cookie')).toBeNull();
+  });
+
+  it.each([
     '//evil.example',
     'https://evil.example/',
     '/\\evil.example',

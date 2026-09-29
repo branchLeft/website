@@ -10,6 +10,11 @@ export function loader(): never {
   throw data(null, { status: 404 });
 }
 
+/** A POST to an unknown path is a 404 too, not a 405. */
+export function action(): never {
+  throw data(null, { status: 404 });
+}
+
 export default function NotFound(): null {
   return null;
 }
