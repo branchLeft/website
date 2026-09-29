@@ -18,8 +18,8 @@
     "prepare": "[ \"$CI\" = \"true\" ] || pre-commit install"
   },
   "dependencies": {
-    "@branchleft/brand-branchleft": "0.2.0",
-    "@branchleft/components": "0.5.0",
+    "@branchleft/brand-branchleft": "0.3.0",
+    "@branchleft/components": "0.6.0",
     "@react-router/node": "^8.4.0",
     "@react-router/serve": "^8.4.0",
     "framer-motion": "^13.2.0",
