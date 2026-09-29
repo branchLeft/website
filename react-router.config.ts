@@ -1,34 +1,14 @@
 import type { Config } from '@react-router/dev/config';
 
 /**
- * Routing strategy: React Router v7 Framework Mode + SSR
+ * Framework Mode with SSR always on, manual routes in `app/routes.ts`, no SPA
+ * mode: the committed decisions are in website/CLAUDE.md, "Routing Strategy".
  *
- * Committed decisions:
- *   - Framework Mode via `@react-router/dev` and the `reactRouter()` Vite plugin.
- *     This is the most expressive mode: route modules, generated types, server/client
- *     loaders/actions, middleware, and a clear upgrade path to RSC.
- *   - SSR is always on (`ssr: true`). Do not disable it.
- *   - Route config: manual `app/routes.ts` using `route()`, `index()`, `layout()`,
- *     and `prefix()` helpers from `@react-router/dev/routes`. No file-system routing.
- *   - SPA mode (`ssr: false`) is prohibited.
- *
- * Pre-rendering (not yet active):
- *   When a route has no dynamic data and should be served as a static HTML file,
- *   opt it in via the `prerender` array below. Pre-rendered routes still hydrate
- *   fully on the client and still benefit from server loaders at build time.
- *
- *   Example:
- *     prerender: ['/', '/about'],
- *
- *   Or use a function to generate paths dynamically at build time:
- *     async prerender({ getStaticPaths }) { return getStaticPaths(); },
- *
- *   See: node_modules/react-router/docs/how-to/pre-rendering.md
- *
- *   DO NOT enable this without first fixing a real problem it currently
- *   causes: prerendered pages would ship with no CSP/HSTS/X-Frame-Options
- *   (and contact.tsx's anti-bot check would silently break). See
- *   KNOWN_ISSUES.md for the full explanation and the fix path.
+ * Pre-rendering is off. To opt a route in, add `prerender: ['/path']` (see
+ * node_modules/react-router/docs/how-to/pre-rendering.md), but not before
+ * fixing what it breaks: prerendered pages ship with no CSP, HSTS or
+ * X-Frame-Options, and contact.tsx's anti-bot check fails silently. See
+ * KNOWN_ISSUES.md.
  */
 export default {
   ssr: true,
