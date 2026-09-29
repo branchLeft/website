@@ -5,6 +5,14 @@
     @apply w-36 h-36;
   }
 
+  /* One step down the type scale on narrow phones: at the full 60px the
+   * wordmark is wider than the page padding leaves room for below 400px. */
+  @media (max-width: 399px) {
+    .bl-wordmark--hero {
+      @apply text-5xl;
+    }
+  }
+
   /* Hero tagline hover highlight (people & planet) — the "environment"
    * ValuesColour, aliased as --color-hover-accent (see theme.css). */
   .hover-green {

@@ -16,6 +16,7 @@ const ROUTES = [
 // the hero is an <h1>, and the site's `h1` rule (in `base`) would otherwise
 // set it in the heading face at heading size. See app/app.css.
 test('the home hero wordmark renders in Syne 500 at 60px', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   const hero = page.locator('h1.bl-wordmark--hero');
   await expect(hero).toHaveCSS('font-size', '60px');
@@ -64,3 +65,30 @@ for (const width of [320, 375, 390]) {
     }
   });
 }
+
+test('on a 320px phone the hero steps down to 48px and keeps the page padding', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto('/');
+  const hero = page.locator('h1.bl-wordmark--hero');
+  await expect(hero).toHaveCSS('font-size', '48px');
+
+  const gaps = await hero.evaluate((h) => {
+    const range = document.createRange();
+    range.selectNodeContents(h);
+    const text = range.getBoundingClientRect();
+    return { left: text.left, right: window.innerWidth - text.right };
+  });
+  expect(gaps.left).toBeGreaterThanOrEqual(24);
+  expect(gaps.right).toBeGreaterThanOrEqual(24);
+});
+
+test('below 320px the page keeps its 320px layout instead of squeezing', async ({ page }) => {
+  await page.setViewportSize({ width: 280, height: 700 });
+  for (const route of ['/', '/about', '/contact']) {
+    await page.goto(route);
+    const width = await page.evaluate(() => document.documentElement.getBoundingClientRect().width);
+    expect(width, route).toBe(320);
+  }
+});
