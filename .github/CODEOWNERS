@@ -1,1 +1,8 @@
 * @branchLeft/branchleft-admin
+
+/.standardsignore        @branchLeft/branchleft-admin
+/.standards.mode         @branchLeft/branchleft-admin
+/.docs-lint*             @branchLeft/branchleft-admin
+/tools/floors.tsv        @branchLeft/branchleft-admin
+/.standards-db-tooling   @branchLeft/branchleft-admin
+/.github/                @branchLeft/branchleft-admin
