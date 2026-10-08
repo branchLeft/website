@@ -1,8 +1,9 @@
 allowBuilds:
   '@parcel/watcher': false
   esbuild: false
-# minimumReleaseAge blocks installing packages published within the cooldown window;
-# exempt the whole @branchleft scope since those are first-party releases from this org, not
-# third-party supply-chain risk, and pinning per-version here would break the next release again.
+# NOTE: minimumReleaseAge is NOT set in this repo, so no publish-age cooldown is enforced and
+# this exclude list has no effect today (`pnpm config get minimumReleaseAge` returns undefined).
+# Setting a cooldown is a separate supply-chain policy decision, not made here.
+# The @branchleft scope is listed so that a future cooldown would not gate first-party releases.
 minimumReleaseAgeExclude:
   - '@branchleft/*'
