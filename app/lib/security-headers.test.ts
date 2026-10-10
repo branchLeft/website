@@ -95,6 +95,8 @@ describe('buildContentSecurityPolicy', () => {
       ['a raw newline', 'abc\ndef'],
       ['a CRLF header injection', 'abc\r\nSet-Cookie: pwned=1'],
       ['a space', 'abc def'],
+      ['a trailing newline after a valid token', 'A'.repeat(22) + '\n'],
+      ['a leading newline before a valid token', '\n' + 'A'.repeat(22)],
       ['the directive name itself', 'script-src'],
       ['a token one character below the 22-character floor', 'A'.repeat(21)],
       ['a short token well below the floor', 'abc123XYZ'],
