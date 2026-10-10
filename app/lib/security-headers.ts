@@ -19,18 +19,26 @@
 const STYLE_SRC = "'self' 'unsafe-inline'";
 
 /**
- * `isSecure` defaults to `true` (production's normal case) since most
- * callers have no way to know the actual request's scheme — see
- * `app/entry.server.tsx`, the one caller that does, for why it matters:
- * `upgrade-insecure-requests` is a live, per-response instruction (unlike
- * `Strict-Transport-Security`, it doesn't need a prior secure connection or
- * any browser-side cache to take effect) that force-upgrades every
- * same-page subresource request to HTTPS — including on a plain-HTTP
- * request, which breaks asset loading entirely against a server with no
- * TLS listener (`pnpm start`, the e2e test server).
+ * Nonce must be a base64 or URL-safe token, so no quote, semicolon or space
+ * can end the source. 22 characters is the unpadded length of 16 random
+ * bytes (128 bits, CSP3's recommendation); the real caller sends 24.
+ */
+const NONCE_PATTERN = /^[A-Za-z0-9+/_-]{22,128}={0,2}$/;
+
+/**
+ * `isSecure` defaults to `true`, production's normal case. Only the caller
+ * that knows the request scheme (`app/entry.server.tsx`) passes it: sending
+ * `upgrade-insecure-requests` over plain HTTP breaks asset loading, since
+ * nothing listens on TLS there (`pnpm start`, the e2e test server).
  */
 export function buildContentSecurityPolicy(nonce?: string, isSecure = true): string {
-  const scriptSrc = nonce ? `'self' 'nonce-${nonce}'` : "'self'";
+  if (nonce !== undefined && (typeof nonce !== 'string' || !NONCE_PATTERN.test(nonce))) {
+    // Fail closed: an invalid nonce is never interpolated into the header.
+    throw new TypeError(
+      'CSP nonce must be 22 to 128 base64 or URL-safe characters, optionally followed by up to two = padding characters'
+    );
+  }
+  const scriptSrc = nonce !== undefined ? `'self' 'nonce-${nonce}'` : "'self'";
   const directives = [
     "default-src 'self'",
     `script-src ${scriptSrc}`,
