@@ -1,3 +1,5 @@
+import { randomBytes } from 'node:crypto';
+
 import { describe, expect, it } from 'vitest';
 
 import { buildContentSecurityPolicy, buildSecurityHeaders } from './security-headers';
@@ -17,11 +19,11 @@ function parseDirectives(csp: string): Record<string, string[]> {
 
 describe('buildContentSecurityPolicy', () => {
   describe('production path (isSecure default true, with a nonce)', () => {
-    const csp = buildContentSecurityPolicy('THE_NONCE');
+    const csp = buildContentSecurityPolicy('TEST_NONCE_01234567890A');
     const directives = parseDirectives(csp);
 
     it('gates script-src on self plus the nonce, with no unsafe-inline/unsafe-eval/wildcard', () => {
-      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'"]);
+      expect(directives['script-src']).toEqual(["'self'", "'nonce-TEST_NONCE_01234567890A'"]);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-inline/);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-eval/);
       expect(csp).not.toMatch(/script-src[^;]*\*/);
@@ -73,66 +75,81 @@ describe('buildContentSecurityPolicy', () => {
 
   describe('isSecure=false (plain-HTTP dev/test server)', () => {
     it('omits upgrade-insecure-requests, which would break asset loading with no TLS listener', () => {
-      const csp = buildContentSecurityPolicy('THE_NONCE', false);
+      const csp = buildContentSecurityPolicy('TEST_NONCE_01234567890A', false);
       expect(csp).not.toMatch(/upgrade-insecure-requests/);
     });
 
     it('still gates script-src on the nonce — the dev/prod split is HSTS/upgrade only', () => {
-      const csp = buildContentSecurityPolicy('THE_NONCE', false);
+      const csp = buildContentSecurityPolicy('TEST_NONCE_01234567890A', false);
       const directives = parseDirectives(csp);
-      expect(directives['script-src']).toEqual(["'self'", "'nonce-THE_NONCE'"]);
+      expect(directives['script-src']).toEqual(["'self'", "'nonce-TEST_NONCE_01234567890A'"]);
       expect(csp).not.toMatch(/script-src[^;]*unsafe-inline/);
     });
   });
 
-  describe('nonce interpolation — current (unvalidated) behaviour', () => {
-    // buildContentSecurityPolicy interpolates its `nonce` argument into the
-    // header string with no escaping or validation. The real caller
-    // (entry.server.tsx) always passes crypto.randomBytes(16).toString
-    // ('base64'), whose alphabet [A-Za-z0-9+/=] contains none of the
-    // characters below, so this is not reachable on any live path today.
-    // These tests document the function's actual behaviour given an
-    // out-of-alphabet input, as a discovered defensive-hardening gap
-    // rather than a live vulnerability — see the tracked follow-up issue.
-    // They are NOT a claim that the current behaviour is safe.
+  describe('nonce validation (fail closed on anything outside the base64 / URL-safe token shape)', () => {
+    const hostileNonces: Array<[string, unknown]> = [
+      ['a single quote', "abc'def"],
+      ['a semicolon that opens a second directive', "'; script-src 'unsafe-inline"],
+      ['a bare semicolon', 'abc;def'],
+      ['a raw newline', 'abc\ndef'],
+      ['a CRLF header injection', 'abc\r\nSet-Cookie: pwned=1'],
+      ['a space', 'abc def'],
+      ['the directive name itself', 'script-src'],
+      ['a token one character below the 22-character floor', 'A'.repeat(21)],
+      ['a short token well below the floor', 'abc123XYZ'],
+      ['an empty string', ''],
+      ['an over-long token (129 characters)', 'A'.repeat(129)],
+      ['a number', 12345],
+      ['an object', { toString: () => 'abc' }],
+      ['an array', ['abc']],
+    ];
 
-    it('KNOWN GAP: a semicolon in the nonce is interpolated verbatim, producing a second script-src token in the header value', () => {
-      const csp = buildContentSecurityPolicy("'; script-src 'unsafe-inline");
-
-      // The function performs no escaping: the semicolon is not neutralised.
-      expect(csp).toContain("'nonce-'; script-src 'unsafe-inline'");
-
-      // Not exploitable in a spec-compliant browser: CSP's own duplicate
-      // directive rule keeps only the *first* script-src occurrence and
-      // ignores the rest, so this can't add unsafe-inline to script-src —
-      // but it is still unvalidated data reaching a security header, and a
-      // nonce containing '; ' followed by a directive name not already
-      // present in the policy would take effect.
-      const scriptSrcOccurrences = csp.match(/script-src/g) ?? [];
-      expect(scriptSrcOccurrences.length).toBeGreaterThan(1);
+    it.each(hostileNonces)('throws for %s, and never returns a header string', (_label, nonce) => {
+      expect(() => buildContentSecurityPolicy(nonce as string)).toThrow(TypeError);
     });
 
-    it('a raw CR/LF in the nonce survives buildContentSecurityPolicy() unescaped — the WHATWG Headers API is what actually blocks it, not this function', () => {
-      const csp = buildContentSecurityPolicy('abc\r\nSet-Cookie: pwned=1');
+    it('rejects a hostile nonce on the buildSecurityHeaders path too', () => {
+      expect(() => buildSecurityHeaders("x'; script-src 'unsafe-inline")).toThrow(TypeError);
+    });
 
-      // This function itself does no sanitisation...
-      expect(csp).toMatch(/\r\n/);
+    it('accepts the shortest permitted token (22 characters, 128 bits)', () => {
+      const nonce = 'A'.repeat(22);
+      const directives = parseDirectives(buildContentSecurityPolicy(nonce));
+      expect(directives['script-src']).toEqual(["'self'", `'nonce-${nonce}'`]);
+    });
 
-      // ...so the guarantee that a CRLF-bearing nonce can never reach the
-      // wire depends entirely on every call site handing the result to a
-      // Headers-API setter, which validates header values and throws
-      // rather than silently splitting them. Confirmed against the actual
-      // API both production call sites use (responseHeaders.set() in
-      // entry.server.tsx; React Router constructs a Headers object from
-      // root.tsx's `headers()` return value the same way).
-      const headers = new Headers();
-      expect(() => headers.set('Content-Security-Policy', csp)).toThrow();
+    it('accepts the longest permitted token (128 characters)', () => {
+      const csp = buildContentSecurityPolicy('A'.repeat(128));
+      expect(parseDirectives(csp)['script-src']).toEqual(["'self'", `'nonce-${'A'.repeat(128)}'`]);
+    });
+
+    it('production path: every nonce from the real generator clears validation and interpolates', () => {
+      // Same generator as app/entry.server.tsx: 16 random bytes, base64.
+      for (let i = 0; i < 200; i++) {
+        const nonce = randomBytes(16).toString('base64');
+        const directives = parseDirectives(buildContentSecurityPolicy(nonce));
+        expect(directives['script-src']).toEqual(["'self'", `'nonce-${nonce}'`]);
+      }
+    });
+
+    it('control: a valid base64 nonce, the exact shape the real caller produces, still interpolates', () => {
+      // crypto.randomBytes(16).toString('base64') is 24 characters ending in '=='.
+      const nonce = 'q2Xb7Lr0VbM1pT9sYw8ZNw==';
+      const directives = parseDirectives(buildContentSecurityPolicy(nonce));
+      expect(directives['script-src']).toEqual(["'self'", `'nonce-${nonce}'`]);
+    });
+
+    it('control: a valid URL-safe nonce still interpolates', () => {
+      const nonce = 'abc-_XYZ0123456789ABCDEF';
+      const directives = parseDirectives(buildContentSecurityPolicy(nonce, false));
+      expect(directives['script-src']).toEqual(["'self'", `'nonce-${nonce}'`]);
     });
   });
 });
 
 describe('buildSecurityHeaders', () => {
-  const headers = buildSecurityHeaders('THE_NONCE');
+  const headers = buildSecurityHeaders('TEST_NONCE_01234567890A');
 
   it('sets the fixed, non-CSP security headers to their exact documented values', () => {
     expect(headers['X-Content-Type-Options']).toBe('nosniff');
@@ -141,7 +158,7 @@ describe('buildSecurityHeaders', () => {
   });
 
   it('threads the nonce through into the Content-Security-Policy header it sets', () => {
-    expect(headers['Content-Security-Policy']).toContain("'nonce-THE_NONCE'");
+    expect(headers['Content-Security-Policy']).toContain("'nonce-TEST_NONCE_01234567890A'");
   });
 
   describe('Permissions-Policy', () => {
