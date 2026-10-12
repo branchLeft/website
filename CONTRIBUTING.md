@@ -11,7 +11,7 @@ This repo follows the [org-wide contribution guide](https://github.com/branchLef
 
 ```bash
 nvm use
-pnpm install --frozen-lockfile
+command pnpm install --frozen-lockfile
 cp .env.example .env   # fill in any values you need locally
 ```
 
@@ -22,9 +22,9 @@ cp .env.example .env   # fill in any values you need locally
 These are exactly what [.github/workflows/ci.yml](.github/workflows/ci.yml) runs — matching them locally means no surprises:
 
 ```bash
-pnpm typecheck            # react-router typegen + tsc
-pnpm test:unit --run --coverage
-pnpm test:e2e              # Playwright + axe-core; requires: pnpm exec playwright install --with-deps chromium
+command pnpm typecheck            # react-router typegen + tsc
+command pnpm test:unit --run --coverage
+command pnpm test:e2e              # Playwright + axe-core; requires: pnpm exec playwright install --with-deps chromium
 ```
 
 ## Pre-commit hooks

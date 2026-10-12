@@ -26,14 +26,14 @@ For detailed patterns and doc pointers, see `.agents/skills/react-router/`.
 ## Commands
 
 ```bash
-pnpm build               # production build
-pnpm typecheck           # react-router typegen + tsc
-pnpm test:unit --run     # single Vitest pass
-pnpm lint                # eslint --fix
-pnpm format              # prettier --write
-pnpm format:check        # prettier --check, no writes
-pnpm dev                 # React Router dev server (HMR) — async terminal only
-pnpm start               # serve production build — async terminal only
+command pnpm build               # production build
+command pnpm typecheck           # react-router typegen + tsc
+command pnpm test:unit --run     # single Vitest pass
+command pnpm lint                # eslint --fix
+command pnpm format              # prettier --write
+command pnpm format:check        # prettier --check, no writes
+command pnpm dev                 # React Router dev server (HMR) — async terminal only
+command pnpm start               # serve production build — async terminal only
 ```
 
 ## Infrastructure
