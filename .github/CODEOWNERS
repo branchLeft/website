@@ -1,8 +1,41 @@
-* @branchLeft/branchleft-admin
+# Code owners for gating files only (m14, branchLeft/workspace#2265).
+# No catch-all line: a file that judges or gates a merge or a deploy here is
+# owned by the admin team, and every other file is reviewed by the agent App.
 
+# Standards entries, kept from the earlier file.
 /.standardsignore        @branchLeft/branchleft-admin
 /.standards.mode         @branchLeft/branchleft-admin
 /.docs-lint*             @branchLeft/branchleft-admin
 /tools/floors.tsv        @branchLeft/branchleft-admin
 /.standards-db-tooling   @branchLeft/branchleft-admin
+
+# CI workflows, workflow actions, dependabot and this file: CI decides pass or
+# fail and the deploy job ships to app1.
 /.github/                @branchLeft/branchleft-admin
+**/CODEOWNERS            @branchLeft/branchleft-admin
+
+# Deploy: the compose stack on app1, the image that CI builds and pins there,
+# and the build context that goes into that image.
+/deploy/                 @branchLeft/branchleft-admin
+/Dockerfile              @branchLeft/branchleft-admin
+/.dockerignore           @branchLeft/branchleft-admin
+**/*deploy*              @branchLeft/branchleft-admin
+
+# Gate-named paths and scripts at any depth (the merge script's word rules).
+**/*guard*               @branchLeft/branchleft-admin
+**/*approv*              @branchLeft/branchleft-admin
+**/scripts/              @branchLeft/branchleft-admin
+
+# Test runner and coverage floors: vitest sets the coverage thresholds and
+# playwright sets retries and forbidOnly, so CI's pass or fail depends on them.
+/vitest.config.ts        @branchLeft/branchleft-admin
+/playwright.config.ts    @branchLeft/branchleft-admin
+
+# What CI runs to decide pass or fail: the pre-commit hooks (CI skips vitest
+# there), the format and lint skip list, the lint rules, the typecheck config
+# and the package scripts CI calls.
+/.pre-commit-config.yaml @branchLeft/branchleft-admin
+/.prettierignore         @branchLeft/branchleft-admin
+/eslint.config.js        @branchLeft/branchleft-admin
+/tsconfig.json           @branchLeft/branchleft-admin
+/package.json            @branchLeft/branchleft-admin
