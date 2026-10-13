@@ -2,16 +2,9 @@
 # No catch-all line: a file that judges or gates a merge or a deploy here is
 # owned by the admin team, and every other file is reviewed by the agent App.
 
-# Standards entries, kept from the earlier file.
-/.standardsignore        @branchLeft/branchleft-admin
-/.standards.mode         @branchLeft/branchleft-admin
-/.docs-lint*             @branchLeft/branchleft-admin
-/tools/floors.tsv        @branchLeft/branchleft-admin
-/.standards-db-tooling   @branchLeft/branchleft-admin
-
 # CI workflows, workflow actions, dependabot and this file: CI decides pass or
-# fail and the deploy job ships to app1.
-/.github/                @branchLeft/branchleft-admin
+# fail and the deploy job ships to app1. The .github/ tree is owned by the
+# standards line at the foot of this file.
 **/CODEOWNERS            @branchLeft/branchleft-admin
 
 # Deploy: the compose stack on app1, the image that CI builds and pins there,
@@ -32,10 +25,20 @@
 /playwright.config.ts    @branchLeft/branchleft-admin
 
 # What CI runs to decide pass or fail: the pre-commit hooks (CI skips vitest
-# there), the format and lint skip list, the lint rules, the typecheck config
-# and the package scripts CI calls.
+# there), the format and lint skip lists (prettier reads .gitignore and
+# .prettierignore), the lint rules, the typecheck config and the package
+# scripts CI calls.
 /.pre-commit-config.yaml @branchLeft/branchleft-admin
 /.prettierignore         @branchLeft/branchleft-admin
+/.gitignore              @branchLeft/branchleft-admin
 /eslint.config.js        @branchLeft/branchleft-admin
 /tsconfig.json           @branchLeft/branchleft-admin
 /package.json            @branchLeft/branchleft-admin
+
+# Standards template lines (SYNC-1): these six stay the final lines of this file.
+/.standardsignore        @branchLeft/branchleft-admin
+/.standards.mode         @branchLeft/branchleft-admin
+/.docs-lint*             @branchLeft/branchleft-admin
+/tools/floors.tsv        @branchLeft/branchleft-admin
+/.standards-db-tooling   @branchLeft/branchleft-admin
+/.github/                @branchLeft/branchleft-admin
