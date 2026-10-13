@@ -34,6 +34,7 @@
 /eslint.config.js        @branchLeft/branchleft-admin
 /tsconfig.json           @branchLeft/branchleft-admin
 /package.json            @branchLeft/branchleft-admin
+/pnpm-workspace.yaml     @branchLeft/branchleft-admin
 
 # Standards template lines (SYNC-1): these six stay the final lines of this file.
 /.standardsignore        @branchLeft/branchleft-admin
