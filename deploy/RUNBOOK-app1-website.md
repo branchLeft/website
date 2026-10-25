@@ -82,8 +82,8 @@ unset CONTACT_SMTP_HOST CONTACT_SMTP_PORT CONTACT_SMTP_USER CONTACT_SMTP_PASSWOR
 ```
 
 Expect `-rw------- 1 root root`. The credential is the dedicated,
-send-as-only submission account already in use on GCP — rotate it on the
-mail host only if it needs to change, never here.
+send-as-only submission account — rotate it on the mail host only if it
+needs to change, never here.
 
 ## 2. Copy the stack directory onto the host
 

@@ -2,196 +2,67 @@
 
 # CLAUDE.md — branchLeft Website
 
-branchLeft-internal: cross-repo standards (Node/nvm, non-interactive commands, pre-commit, comment style) live in the local workspace root CLAUDE.md (not part of this repo).
+Cross-repo rules (Node/nvm, non-interactive commands, pre-commit, comment style) live in the workspace root `CLAUDE.md`.
 
-## Stack
+React 19, React Router v7 (Framework Mode, SSR), Tailwind CSS v4, Vite 8, pnpm, Playwright with `@axe-core/playwright`.
 
-- **Runtime/Package manager:** Node.js, pnpm
-- **Framework:** React 19 + React Router v7 (SSR, `react-router.config.ts`)
-- **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`
-- **Build:** Vite 8
-- **Tests:** Playwright + axe-core
+Commands: `pnpm build`, `pnpm typecheck`, `pnpm test:unit --run`, `pnpm lint`, `pnpm format:check`.
 
-## Routing Strategy
+The dev server (`pnpm dev` / `pnpm start`) is long-running: never run it in the foreground. Start it only through the preview tooling or a background terminal.
 
-This app is locked to **React Router v7 Framework Mode + SSR**. These decisions are final:
+Pre-commit runs prettier through pnpm. Commit with Node 26.5.0 (`.nvmrc`) first on PATH; Node 20 fails with `ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING`.
 
-- **Mode**: Framework Mode — `@react-router/dev` + `reactRouter()` Vite plugin. This is the most expressive mode and the natural upgrade path to RSC.
-- **SSR**: Always on (`ssr: true` in `react-router.config.ts`). Do not set `ssr: false`.
-- **Route config**: Manual `app/routes.ts` using `route()`, `index()`, `layout()`, and `prefix()` helpers. No file-system routing (`flatRoutes`).
-- **Pre-rendering**: Not yet active. Pattern is documented in `react-router.config.ts`. To opt a route in, add its path to the `prerender` array — appropriate for routes with no dynamic data.
-- **SPA mode**: Prohibited.
-- **RSC**: Not active. It is the future direction but is currently unstable. Do not introduce RSC APIs.
+## Routing
 
-For detailed patterns and doc pointers, see `.agents/skills/react-router/`.
-
-## Commands
-
-```bash
-pnpm build               # production build
-pnpm typecheck           # react-router typegen + tsc
-pnpm test:unit --run     # single Vitest pass
-pnpm lint                # eslint --fix
-pnpm format              # prettier --write
-pnpm format:check        # prettier --check, no writes
-pnpm dev                 # React Router dev server (HMR) — async terminal only
-pnpm start               # serve production build — async terminal only
-```
+- Framework Mode with SSR on (`ssr: true`). Do not set `ssr: false`, add SPA mode or introduce RSC APIs.
+- Routes are declared in `app/routes.ts` with `route()`, `index()`, `layout()`, `prefix()`. No `flatRoutes`. Each route is one file under `app/routes/` and exports `meta()`.
+- Pre-rendering is opt-in: add a route to the `prerender` array in `react-router.config.ts`, only for routes with no dynamic data.
+- Detailed React Router patterns are in `.agents/skills/react-router/`.
 
 ## Infrastructure
 
-**Production now serves from the Hetzner estate, not GCP.** `deploy/compose.yml`
-is the container definition CI deploys to `app1` (`10.20.1.100`) over SSH,
-proxied by the shared Caddy edge on `edge1` — see `deploy/RUNBOOK-app1-website.md`
-for the host-side bootstrap and `shared-infra/hetzner/RUNBOOK-edge.md` §11 for
-how a site is added to that edge. `.github/workflows/ci.yml`'s `deploy` job
-builds the image, pushes it to `ghcr.io/branchleft/website`, and pins app1 to
-the resulting digest with `branchleft-deploy` on every merge to `main` — that
-merge **is** the production deploy. There is no `imageTag` config value and no
-CI step that mutates Pulumi stack config: the pinned reference lives on the
-host, in `/etc/branchleft/website.image.env`, written only by
-`branchleft-deploy`.
+Production runs on the Hetzner estate. CI deploys `deploy/compose.yml` to `app1` over SSH, behind the shared Caddy edge on `edge1`. Host bootstrap: `deploy/RUNBOOK-app1-website.md`. Adding a site to the edge: `shared-infra/hetzner/RUNBOOK-edge.md` §11.
 
-The `infra/` GCP Pulumi program (the `branchleft-website-infra/production`
-Cloud Run stack) is gone: the GCP estate it depended on was destroyed
-2026-09-13, and its own state bucket with it. Its removal from this repo was
-`branchLeft/workspace#1000`. The repository's history is a separate, still-open
-question: an earlier revision of `infra/Pulumi.production.yaml` carried an
-`encryptionsalt`, and deleting the file at the tip does not remove that salt
-from history — the stack passphrase is a long random string, so this is not a
-practical attack, but it is only fully closed once the passphrase is rotated,
-the values it protected re-encrypted, and the SMTP credential they held
-rotated on the mail host.
+The `deploy` job in `.github/workflows/ci.yml` pushes to `ghcr.io/branchleft/website` and pins app1 to the digest with `branchleft-deploy`. A merge to `main` is the production deploy. The pinned reference lives only on the host, in `/etc/branchleft/website.image.env`.
 
-## Project Conventions
+Do not add US hyperscaler resources. This repo has no infrastructure code.
 
-### Content & Copy
+Open: git history holds an `encryptionsalt` from a removed Pulumi stack file. Closing it needs the passphrase and the SMTP credential rotated. Owner actions.
 
-- **Never write prose or copy on behalf of the user.** Use ALL_CAPS placeholder tokens instead: `HEADING_CONTENT`, `BODY_TEXT`, `CTA_LABEL`, `IMAGE_ALT`, etc.
-- Placeholder tokens live directly in JSX as string literals or comments — they must be obviously synthetic.
+## Content and Copy
 
-### Legal Pages (`/privacy`, `/terms`)
+- Never write prose or copy on the user's behalf. Use ALL_CAPS placeholder tokens (`HEADING_CONTENT`, `BODY_TEXT`, `CTA_LABEL`, `IMAGE_ALT`) as JSX string literals or comments.
+- Exception: `/privacy` and `/terms` carry standard UK GDPR, ICO and template boilerplate verbatim. A new owner-input value is tokenised with a local `<T>` component rendered with `.legal-page__token`.
+- Update the route and the privacy notice together when a processing purpose, processor, transfer or hosting region, company detail, retention or complaint route, or any service, liability, IP or governing-law term changes.
 
-These routes are a documented exception to the "never write prose" rule above: they contain standard UK GDPR / ICO / template boilerplate written verbatim rather than as tokens. If future owner-input values arise (e.g. a new ICO registration number, a change of registered office, a new effective date), tokenise them via a local `<T>` component and render with the `.legal-page__token` style so unresolved values are obviously synthetic in the DOM. Both pages are currently fully resolved — no `<T>` tokens remain. The privacy notice's processor list was last updated 23 August 2026 for the Hetzner hosting cutover: the separate GCP and Hetzner entries merged into one, since Hetzner now hosts both the website and the mail relay.
+## Contact Form
 
-**Canonical sources**
+- `/contact` posts to the action in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`). It sends over SMTP AUTH submission (587, STARTTLS) on branchLeft's self-hosted mail platform, to `info@branchleft.co.uk`.
+- The `CONTACT_SMTP_*` variables (see `.env.example`) are never committed. They are written by hand to `/etc/branchleft/website.env` on `app1` (`deploy/RUNBOOK-app1-website.md` §1). The submission account is send-as-only and separate from the mailbox password.
+- A failed send increments a Prometheus counter in `server/metrics.mjs`, served by `server/metrics-server.mjs` on a private port (`deploy/compose.yml`).
 
-- Privacy notice: adapted from the ICO "Create your own privacy notice" tool — <https://ico.org.uk/for-organisations/advice-for-small-organisations/privacy-notices-and-cookies/create-your-own-privacy-notice/>.
-- Terms of use: owner-reviewed template. The site is informational only with no client-relationship created by browsing or form submission; a formal solicitor review was judged unnecessary.
+## Styling
 
-**What triggers a re-review of these pages**
+All visual decisions live in `app/styles/`. Route TSX stays close to bare semantic markup. Import order in `app/styles/theme.css` is the cascade; later files win. Add no rules to `app/app.css`.
 
-Update the relevant route file AND the corresponding note in this section whenever any of the following change:
+Work down this list and stop at the first level that fits:
 
-- New data-processing purpose (e.g. adding analytics, cookies, newsletter, careers/recruitment, online payments)
-- New third-party processor (e.g. form backend, email marketing, error tracking, CDN)
-- New international data transfer or change of hosting region
-- Change in company details (registration number, registered office, ICO registration)
-- Change in retention periods or complaint routing
-- Any change to services, liability posture, IP ownership, or governing law
+1. Element default in `@layer base` (style `h2` directly, no class in TSX).
+2. Component class in `@layer components`, with BEM modifiers (`.page-shell--tight`).
+3. Tailwind utility on the element. Escape hatch only: comment the line above it.
 
-**Contact form**
+Hard rules:
 
-- `/contact` submits via a route `action` in `app/routes/contact.tsx`, which calls `sendContactEmail` (`app/lib/sendContactEmail.server.ts`) over SMTP AUTH submission (port 587, STARTTLS) against branchLeft's own self-hosted mail platform, sending to `info@branchleft.co.uk`. The submission credential is a dedicated, send-as-only account distinct from that mailbox's own password — a leaked website secret can't be used to read mail. No third-party mail processor is involved in sending.
-- Requires `CONTACT_SMTP_HOST`, `CONTACT_SMTP_PORT`, `CONTACT_SMTP_USER` and `CONTACT_SMTP_PASSWORD` environment variables (see `.env.example`). Not committed; written once to `/etc/branchleft/website.env` on `app1` (`deploy/RUNBOOK-app1-website.md` §1), never by an automated path.
-- A failed send increments a Prometheus counter (`server/metrics.mjs`, wired in from `app/routes/contact.tsx`'s catch block) rather than relying on a `console.error` string a log pipeline greps for. `server/metrics-server.mjs` serves it on its own port, in its own Compose service, bound to `app1`'s private address only — see `deploy/compose.yml`. This is the metric doc 14 §9.2 replaces the old Cloud Logging log-based metric with; the alert that keys on it is a later story.
+- No colour, font, size or spacing literal and no arbitrary Tailwind value in TSX (`text-[#b31761]`, `style={{ marginTop: 12 }}`). Extend `@theme` in `theme.css`.
+- At most one utility per element in TSX unless commented. `className` in `app/routes/**` is one component-class token or absent.
+- Never re-declare tokens, `@font-face` or element defaults outside `app/styles/`.
+- In `app/styles/`, use `@apply <utility>` instead of copying a Tailwind value as raw CSS.
+- One-off exception: `{/* one-off: <reason>, remove after <when> */}` above the utility.
+- Check every component at 375px and 1440px. Responsive rules go in `theme.css`.
 
-### Styling
+## Code and Tests
 
-**All visual decisions live in `app/styles/` — nowhere else.** Route TSX must stay as close to bare semantic markup as possible. If you find yourself typing more than one utility class on an element, stop and promote the pattern to the theme.
-
-#### File layout
-
-- `app/app.css` — Tailwind v4 entry: the cascade-layer order, then imports of `@branchleft/brand-branchleft/css` (tokens, `@font-face`, element defaults, the `.bl-wordmark` classes), Tailwind and `styles/theme.css`. Do not add rules here.
-- `app/styles/theme.css` — entry point for the split styling system. Imports in order:
-  - `base.css` → `@layer base` element defaults (`html`, `body`, `h1`–`h6`, `p`, `a`, `img`, form controls, `code`, `pre`, focus ring).
-  - `primitives.css` → `@layer components` cross-page utilities.
-  - `components/*.css` — component-specific patterns: `site-nav.css`, `page-transition.css`, `section-nav.css`, `section-heading.css`, `bio.css`, `back-link.css`, `call-to-action.css`, `solutions-showcase.css`, `site-footer.css`.
-  - `pages/*.css` — page-specific overrides: `home.css`, `about.css`, `contact.css`, `article.css`, `legal.css`.
-  - **Import order is authoritative for cascade** — later files override earlier ones.
-- `app/styles/no-js.css` — **not imported** in the main bundle. Loaded only via `<noscript><link>` in `root.tsx` to provide fallback styling for users with JavaScript disabled. See file header for what it overrides.
-
-#### The styling hierarchy (strict order)
-
-When you need to style something, work down this list and stop at the first level that fits:
-
-1. **Element default (`@layer base` in `app/styles/`).** If every `h2` on the site should look the same, style `h2` directly — no class in TSX.
-2. **Component class (`@layer components` in `app/styles/`).** If a pattern repeats or needs a variant (`.page-shell`, `.page-shell--tight`), define it once and reference it by name. Use BEM-style modifiers (`.name--variant`) rather than utility stacks.
-3. **Tailwind utility on the element.** Escape hatch only. Requires a code comment on the line above explaining why the pattern isn't promoted to the theme.
-
-#### Hard rules
-
-- **Never** hardcode a colour, font, size, or spacing literal in TSX (`className="text-[#b31761]"`, `style={{ marginTop: 12 }}`). Extend `@theme` tokens instead.
-- **Never** use arbitrary Tailwind values (`w-[137px]`, `text-[13px]`) in TSX. If you need a new size, add it as a token or component class.
-- **Never** stack more than one Tailwind utility on a single element in TSX without a justifying comment. Two utilities = you owe the theme a new component class.
-- **Never** re-declare tokens, `@font-face` blocks, or element defaults in `app.css` or route files.
-- **Never** duplicate a Tailwind token as a raw literal in `app/styles/` (`font-size: 1.125rem; /* text-lg */`). Use `@apply text-lg;` so the scale stays single-sourced in Tailwind's theme. Only fall back to raw CSS when no utility maps cleanly (`color-mix()`, `letter-spacing`, custom `--font-*` families, one-off `text-[10px]`).
-- `className` values in route TSX should be a single component-class token (`className="page-shell"`) or absent entirely. A grep for `className="` in `app/` is a quick health check.
-
-#### Recipes
-
-**Add a new colour or font.** Edit the `@theme` block in `app/styles/theme.css`. Tailwind auto-generates `bg-*`, `text-*`, `border-*`, `font-*` utilities from it — but you should still consume the token through a base rule or component class, not a utility in TSX.
-
-**Change how all `h1`s look.** Edit the `h1` rule in `@layer base` in `app/styles/base.css`. Do not add per-page overrides.
-
-**Introduce a new page layout.** Add a component class in `@layer components` (`.page-shell-*`, `.section-*`) and reference it from the route with a single `className`.
-
-**One-off exception.** Add the utility in TSX with a comment: `{/* one-off: RFP mock-up only, remove after launch */}`.
-
-**Reach for a Tailwind value inside `theme.css`.** Use `@apply <utility>` — never copy the raw rem/px value. Example:
-
-```css
-/* GOOD — token stays single-sourced */
-.brand-mark {
-  @apply w-36 h-36;
-}
-
-/* BAD — hardcoded literal with a Tailwind comment */
-.brand-mark {
-  width: 9rem; /* w-36 */
-  height: 9rem; /* h-36 */
-}
-```
-
-VS Code's built-in CSS validator does not recognise `@apply`/`@theme`/`@layer`. The workspace `.vscode/settings.json` silences the "unknown at-rule" warning; install the Tailwind CSS IntelliSense extension for hover/autocomplete on utility names.
-
-#### Migration checklist for new work
-
-- [ ] Route TSX contains no colour, spacing, or typography utilities.
-- [ ] Every `className` in `app/routes/**` is a single component-class name or empty.
-- [ ] New tokens landed in `theme.css` `@theme`, not inline.
-- [ ] New shared patterns landed in `@layer components`, not inline.
-- [ ] Any Tailwind-scale value in `theme.css` is written as `@apply <utility>`, not a hardcoded rem literal.
-
-#### Aesthetic principles
-
-- Designs should be simple. Favour whitespace, contrast, and hierarchy over decoration.
-- **Responsive-first:** every component must work at `sm`, `md`, `lg`, and `xl` breakpoints. Test at 375 px and 1440 px minimum. Responsive rules belong in `theme.css` (media queries inside base or component layers), not in TSX.
-
-### Components
-
-- Reusable, domain-agnostic UI components belong in the separate shared component repo (open-source). Import them as a package dependency.
-- Route-specific, one-off components live in `app/components/` and are candidates for extraction later.
-- All components must be accessible: semantic HTML, ARIA where required, keyboard navigable.
-
-### Routes
-
-- One file per route under `app/routes/`. Use the React Router v7 file-based convention.
-- `meta()` exports are required on every route — use placeholder values until real copy is confirmed.
-- Loaders/actions stay in the route file unless shared; extract to `app/lib/` when reused.
-
-### Code Quality
-
-- TypeScript strict mode. No `any`. Run `pnpm typecheck` before committing.
-- No default exports except route modules and `root.tsx`.
-- Imports are absolute from `app/` (configure path alias in `vite.config.ts` if not already set).
-
-## Testing
-
-- **Tool:** Playwright with `@axe-core/playwright`.
-- Every page/route must have a Playwright test that:
-  1. Navigates to the route.
-  2. Runs `checkA11y()` and asserts zero violations.
-  3. Covers at least one critical user interaction (if applicable).
-- Tests live in `tests/` at the repo root.
-- Accessibility failures are treated as build-blocking errors.
+- TypeScript strict, no `any`. No default exports except route modules and `root.tsx`. Imports are absolute from `app/`.
+- Reusable domain-agnostic components belong in `@branchleft/components`; route-specific ones live in `app/components/`.
+- Components are accessible: semantic HTML, ARIA where required, keyboard navigable.
+- Every route has a Playwright test in `tests/` that runs `checkA11y()` with zero violations and covers one critical interaction where one exists. Accessibility failures block the build.
