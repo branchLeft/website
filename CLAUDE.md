@@ -4,7 +4,7 @@
 
 Cross-repo rules (Node/nvm, non-interactive commands, pre-commit, comment style) live in the workspace root `CLAUDE.md`.
 
-React 19, React Router v7 (Framework Mode, SSR), Tailwind CSS v4, Vite 8, pnpm, Playwright with `@axe-core/playwright`.
+React 19, React Router v8 (Framework Mode, SSR), Tailwind CSS v4, Vite 8, pnpm, Playwright with `@axe-core/playwright`.
 
 Commands: `pnpm build`, `pnpm typecheck`, `pnpm test:unit --run`, `pnpm lint`, `pnpm format:check`.
 
@@ -17,7 +17,6 @@ Pre-commit runs prettier through pnpm. Commit with Node 26.5.0 (`.nvmrc`) first 
 - Framework Mode with SSR on (`ssr: true`). Do not set `ssr: false`, add SPA mode or introduce RSC APIs.
 - Routes are declared in `app/routes.ts` with `route()`, `index()`, `layout()`, `prefix()`. No `flatRoutes`. Each route is one file under `app/routes/` and exports `meta()`.
 - Pre-rendering is opt-in: add a route to the `prerender` array in `react-router.config.ts`, only for routes with no dynamic data.
-- Detailed React Router patterns are in `.agents/skills/react-router/`.
 
 ## Infrastructure
 
