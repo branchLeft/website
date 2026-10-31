@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   standards:
-    uses: branchLeft/standards/.github/workflows/standards.yml@v0.8.3
+    uses: branchLeft/standards/.github/workflows/standards.yml@v0.8.4
