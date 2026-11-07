@@ -4,6 +4,9 @@
 @layer components {
   .legal-page {
     @apply flex flex-col gap-8;
+    /* Long unbroken placeholder tokens (e.g. *_WORDING) must wrap at 320px
+     * instead of widening the page. No Tailwind utility maps to this. */
+    overflow-wrap: anywhere;
   }
 
   .legal-page__meta {

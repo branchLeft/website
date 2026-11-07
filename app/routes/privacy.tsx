@@ -275,6 +275,13 @@ export default function Privacy(): React.JSX.Element {
         </address>
       </section>
 
+      <section aria-labelledby="shared-address-cookie-limit">
+        <SectionHeading as="h2" anchor="shared-address-cookie-limit">
+          PRIVACY_NOTICE_SHARED_ADDRESS_COOKIE_LIMIT_HEADING
+        </SectionHeading>
+        <p>PRIVACY_NOTICE_SHARED_ADDRESS_COOKIE_LIMIT_WORDING</p>
+      </section>
+
       <section aria-labelledby="changes">
         <SectionHeading as="h2" anchor="changes">
           Changes to this notice
