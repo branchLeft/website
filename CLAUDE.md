@@ -22,7 +22,7 @@ Pre-commit runs prettier through pnpm. Commit with Node 26.5.0 (`.nvmrc`) first 
 
 Production runs on the Hetzner estate. CI deploys `deploy/compose.yml` to `app1` over SSH, behind the shared Caddy edge on `edge1`. Host bootstrap: `deploy/RUNBOOK-app1-website.md`. Adding a site to the edge: `shared-infra/hetzner/RUNBOOK-edge.md` §11.
 
-The `deploy` job in `.github/workflows/ci.yml` pushes to `ghcr.io/branchleft/website` and pins app1 to the digest with `branchleft-deploy`. A merge to `main` is the production deploy. The pinned reference lives only on the host, in `/etc/branchleft/website.image.env`.
+The `deploy` job in `.github/workflows/ci.yml` pushes to `ghcr.io/branchleft/website` and pins app1 to the digest with `branchleft-deploy`. A merge to `main` is the production deploy. Before it pins, the same job signs the pushed digest with a keyless artifact attestation and proves it (the attest, verify and wrong-identity steps, using ghost-platform's verifier scripts at a pinned commit); the host verifies that attestation again against the signer `branchLeft/website/.github/workflows/ci.yml` on `refs/heads/main`, so renaming that file changes the signing identity and needs the host's register changed in step. The pinned reference lives only on the host, in `/etc/branchleft/website.image.env`.
 
 Do not add US hyperscaler resources. This repo has no infrastructure code.
 

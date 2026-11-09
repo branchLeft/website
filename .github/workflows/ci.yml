@@ -169,10 +169,14 @@ jobs:
     # packages: write is scoped to this job alone, on the one trigger that
     # ever runs it -- a PR build must never sit in the same permissions block
     # as a publish credential (mailgun-shim-image.yml's reasoning, copied
-    # here verbatim).
+    # here verbatim). id-token: write and attestations: write let the run
+    # sign the pushed digest with a keyless artifact attestation (the attest
+    # step below); they are held by this job alone for the same reason.
     permissions:
       contents: read
       packages: write
+      id-token: write
+      attestations: write
     # Observed 1.42-2.88min over the last 5 successful runs (p95 2.88min) --
     # small sample (only push-to-main triggers this job), so a wider margin
     # than the p95-driven jobs above.
@@ -221,6 +225,89 @@ jobs:
             exit 1
           fi
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+
+      # The image is signed and the signature proven BEFORE anything reaches
+      # app1, so an image that fails here is never offered to the host. Each of
+      # the next four steps has no `if:` and no `continue-on-error`: none can be
+      # skipped or waved through. The host then checks the same attestation
+      # again, with the same identity, before it pins the digest
+      # (branchleft-deploy refuses a registered image it cannot verify).
+      #
+      # The verifier scripts are ghost-platform's, the one home of the check a
+      # host runs, fetched at a pinned commit rather than copied here so the two
+      # cannot drift. Only scripts/ is fetched; nothing from it is built or
+      # pushed, and no credential is persisted into the checkout.
+      - name: Fetch the attestation verifier scripts at a pinned commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: branchLeft/ghost-platform
+          ref: 653c21e04190f19f5c15ed329c01e17e989e64ea
+          path: .attest-tools
+          sparse-checkout: scripts
+          persist-credentials: false
+
+      # Keyless: the signing certificate is minted from this run's own OIDC
+      # token and logged in Sigstore's public-good instance. No key, secret or
+      # paid service. The bundle is stored beside the image in the registry, so
+      # a host verifies with `--bundle-from-oci` and holds no GitHub token.
+      - name: Attest the pushed image
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-name: ${{ env.IMAGE }}
+          subject-digest: ${{ steps.digest.outputs.digest }}
+          push-to-registry: true
+          # Storage records need `artifact-metadata: write`, which nothing here uses.
+          create-storage-record: false
+
+      # The same script a host runs. The identity is a literal on purpose: read
+      # from this run's own `github.workflow_ref` it would agree with itself
+      # and prove nothing. It is the value registered for this image on the
+      # host, with the source ref refs/heads/main. The attestation can take a
+      # moment to reach the API and the registry, so a failed verify is retried
+      # (five attempts, 12, 24, 36 and 48 seconds apart); only the last failure
+      # is annotated, so a retry that succeeds leaves no red mark.
+      - name: Verify the attestation through the GitHub API and from the registry
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DIGEST: ${{ steps.digest.outputs.digest }}
+          REPO: branchLeft/website
+          SIGNER_WORKFLOW: branchLeft/website/.github/workflows/ci.yml
+        run: |
+          verify() {
+            label="$1"
+            shift
+            for attempt in 1 2 3 4 5; do
+              echo "Verify $label, attempt $attempt of 5"
+              if [ "$attempt" -lt 5 ]; then plain=1; else plain=0; fi
+              if VERIFY_PLAIN_ERRORS="$plain" .attest-tools/scripts/verify-image-attestation.sh \
+                   "$IMAGE@$DIGEST" "$REPO" "$SIGNER_WORKFLOW" "$@"; then
+                return 0
+              fi
+              if [ "$attempt" -lt 5 ]; then
+                pause=$((attempt * 12))
+                echo "Attempt $attempt failed. Waiting ${pause}s before the next attempt."
+                sleep "$pause"
+              fi
+            done
+            echo "::error::the attestation did not verify $label in 5 attempts"
+            return 1
+          }
+          verify "through the GitHub API"
+          verify "from the registry bundle" --bundle-from-oci
+
+      # Sabotage control, run on every deploy. The step above just accepted this
+      # exact image with the right identity. This one requires a wrong identity
+      # to be refused, and refused for the identity: a network, TUF or registry
+      # fault also exits non-zero and fails the job rather than passing as a
+      # rejection. If a wrong identity is accepted the verify proves nothing,
+      # and this step fails the job too.
+      - name: Prove a wrong identity is rejected
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DIGEST: ${{ steps.digest.outputs.digest }}
+        run: |
+          .attest-tools/scripts/prove-wrong-identity-rejected.sh \
+            "$IMAGE@$DIGEST" branchLeft/website branchLeft/website/.github/workflows/ci.yml
 
       # The private key never touches disk longer than this job needs it, and
       # never appears in a log: it comes from a secret, not from `run:`
