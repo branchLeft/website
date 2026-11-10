@@ -1,9 +1,13 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node@sha256:233761595746769ebfdb6090f44fc7cdf818ae0ce62d2b37e0367723b9823e36 AS base
-# ^ node:26.5.1-alpine (alpine 3.24) — resolved via `docker buildx imagetools inspect node:26-alpine`
+FROM node@sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216 AS base
+# ^ node:26.13.0-alpine (alpine 3.24) — resolved via `docker buildx imagetools inspect node:26.13.0-alpine`
 ENV CI=true
-RUN npm install --global pnpm@11.17.0
+# The base's zlib 1.3.2 carries CVE-2026-4738 (critical); 1.4-r0 is the alpine 3.24 fix.
+RUN apk add --no-cache zlib=1.4-r0
+# npm and pnpm move together: the npm bundled with node and pnpm 11.17.0 each carry
+# undici, tar and brace-expansion versions with published fixes.
+RUN npm install --global npm@12.2.2 pnpm@11.28.11
 WORKDIR /app
 
 FROM base AS dependencies-env
