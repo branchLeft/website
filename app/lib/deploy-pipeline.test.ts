@@ -11,8 +11,12 @@ const workflow = readFileSync(resolve(__dirname, '../../.github/workflows/ci.yml
 
 const SHARED = 'branchLeft/github-workflows';
 const PIN = 'v1.1.0';
+// The standards require an action to be pinned to a full commit; the reusable
+// scan workflow is pinned to the tag, as docs-lint is. This is the commit the
+// v1.1.0 tag points at.
+const PIN_COMMIT = '77506b6d4603ef432bbdec734139fec91e5bea47';
 const SCAN_USES = `${SHARED}/.github/workflows/image-scan.yml@${PIN}`;
-const ATTEST_USES = `${SHARED}/.github/actions/attest-and-verify-image@${PIN}`;
+const ATTEST_USES = `${SHARED}/.github/actions/attest-and-verify-image@${PIN_COMMIT}`;
 const SIGNER = 'branchLeft/website/.github/workflows/ci.yml';
 const DIGEST_OUTPUT = '${{ needs.publish.outputs.digest }}';
 const JOB_HEADER = /^ {2}([a-z][a-z0-9-]*):[ \t]*$/gm;
@@ -138,9 +142,9 @@ describe('website image scan', () => {
 });
 
 describe('website image attestation', () => {
-  it('uses the shared attest-and-verify action at the v1.1.0 tag', () => {
+  it('uses the shared attest-and-verify action at the commit of the v1.1.0 tag', () => {
     const attest = step('attest', 'Attest and verify the pushed image');
-    expect(attest).toContain(`uses: ${ATTEST_USES}`);
+    expect(attest).toContain(`uses: ${ATTEST_USES} # ${PIN}`);
   });
 
   it('attests the pushed digest and names the signer as a literal', () => {
@@ -162,7 +166,7 @@ describe('website image attestation', () => {
     expect(code).not.toMatch(/\.attest-tools/);
   });
 
-  it('pins every use of the shared workflows repository to the v1.1.0 tag', () => {
+  it('pins every use of the shared workflows repository to v1.1.0', () => {
     const refs = [...code.matchAll(new RegExp(`uses: ${SHARED}/\\S+`, 'g'))].map(
       (match) => match[0]
     );

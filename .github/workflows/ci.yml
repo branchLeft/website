@@ -255,7 +255,10 @@ jobs:
   # signer is a literal: read from this run's own `github.workflow_ref` it
   # would agree with itself and prove nothing. This job `needs` the scan, so an
   # image that fails the scan is never signed. id-token and attestations are
-  # held by this job alone; it has no checkout and holds no deploy key.
+  # held by this job alone; it has no checkout and holds no deploy key. A
+  # composite action is pinned to the full commit of the v1.1.0 tag (the
+  # standards require a 40-character SHA for an action); the reusable scan
+  # workflow above is pinned to the tag itself, as docs-lint is.
   attest:
     name: Attest the scanned image
     runs-on: ubuntu-latest
@@ -293,7 +296,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Attest and verify the pushed image
-        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@v1.1.0
+        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@77506b6d4603ef432bbdec734139fec91e5bea47 # v1.1.0
         with:
           image: ${{ env.IMAGE }}
           digest: ${{ env.DIGEST }}
