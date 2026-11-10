@@ -6,6 +6,17 @@ on:
   pull_request:
     branches: [main]
 
+# Every push to main (the only run that publishes) shares one group and runs
+# one at a time, oldest first, whole pipeline included: build, scan, attest and
+# deploy. cancel-in-progress is false, so a run that has started is never cut
+# off; while one runs, only the newest waiting run is kept, which is the one
+# that should deploy. A pull-request run gets a group of its own, so it never
+# queues behind a deploy. The deploy job also checks that its commit is still
+# the tip of main, because arrival order is not commit order.
+concurrency:
+  group: ${{ github.event_name == 'push' && 'website-production-pipeline' || format('website-ci-{0}', github.run_id) }}
+  cancel-in-progress: false
+
 # No id-token: write at the workflow level any more -- nothing in this
 # workflow federates to GCP. Production deploys pin a GHCR image digest onto
 # app1 over SSH instead (the `deploy` job below); `packages: write` and the
@@ -311,9 +322,11 @@ jobs:
     concurrency:
       group: website-production-deploy
       cancel-in-progress: false
-    # This job only reaches app1 over SSH with a deploy key from a secret: it
-    # uses no GitHub token and checks nothing out, so it holds no permissions.
-    permissions: {}
+    # This job reaches app1 over SSH with a deploy key from a secret and checks
+    # nothing out. Its one use of the GitHub token is the read-only tip check
+    # below, so it holds contents: read and nothing else.
+    permissions:
+      contents: read
     # The 15 minutes carried over from the combined build-and-deploy job, which
     # was 1.42-2.88min over its last 5 runs; the deploy steps are the smaller
     # part of that.
@@ -323,6 +336,27 @@ jobs:
       DIGEST: ${{ needs.publish.outputs.digest }}
 
     steps:
+      # Runs first, before the deploy key is written. The group above gives
+      # arrival order, which is not commit order: a slow older run can reach
+      # this job after a newer one. This fails the job (it does not skip) when
+      # the commit being deployed is no longer the tip of main, so an older
+      # image can never be pinned over a newer one; the newer push's own run
+      # deploys. An unreadable tip fails the job too.
+      - name: Refuse to deploy a commit that is no longer the tip of main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TIP=$(gh api "repos/$REPO/commits/main" --jq .sha)
+          if [ -z "$TIP" ]; then
+            echo "::error::could not read the tip of main; not deploying $GITHUB_SHA"
+            exit 1
+          fi
+          if [ "$TIP" != "$GITHUB_SHA" ]; then
+            echo "::error::main has moved on to $TIP; refusing to deploy the older commit $GITHUB_SHA"
+            exit 1
+          fi
+
       # The private key never touches disk longer than this job needs it, and
       # never appears in a log: it comes from a secret, not from `run:`
       # interpolation.

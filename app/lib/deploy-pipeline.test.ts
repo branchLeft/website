@@ -203,9 +203,46 @@ describe('website pipeline permissions', () => {
     }
   });
 
-  it('gives the deploy job no GitHub permission at all', () => {
-    expect(job('deploy')).toMatch(/^ {4}permissions: \{\}$/m);
+  it('gives the deploy job read access to contents and nothing else', () => {
+    const text = permissions('deploy');
+    expect(text).toContain('contents: read');
+    expect(text).not.toMatch(/write/);
     expect(job('deploy')).not.toMatch(/actions\/checkout|docker\/login-action/);
+  });
+});
+
+describe('website deploy ordering', () => {
+  const GUARD = 'Refuse to deploy a commit that is no longer the tip of main';
+
+  it('serialises every push to main as one pipeline, never cutting a started run off', () => {
+    const top = code.slice(0, code.indexOf('\njobs:\n'));
+    const block = top.match(/^concurrency:\n((?: {2}.+\n)+)/m);
+    expect(block, 'a workflow-level concurrency block').not.toBeNull();
+    const text = (block as RegExpMatchArray)[1];
+    expect(text).toContain("github.event_name == 'push' && 'website-production-pipeline'");
+    expect(text).toContain('cancel-in-progress: false');
+    expect(text).not.toMatch(/cancel-in-progress: true/);
+  });
+
+  it('gives a pull-request run a group of its own so it never queues behind a deploy', () => {
+    expect(code).toContain("format('website-ci-{0}', github.run_id)");
+  });
+
+  it('refuses, as a failure, to deploy a commit that is not the tip of main', () => {
+    const guard = step('deploy', GUARD);
+    expect(guard).toContain('repos/$REPO/commits/main');
+    expect(guard).toContain('[ "$TIP" != "$GITHUB_SHA" ]');
+    expect(guard.match(/exit 1/g)?.length).toBe(2);
+    expect(guard).not.toMatch(/^\s+if:/m);
+    expect(guard).not.toMatch(/continue-on-error/);
+  });
+
+  it('runs the guard before the deploy key is written and before app1 is contacted', () => {
+    const deploy = job('deploy');
+    const guard = deploy.indexOf(`- name: ${GUARD}`);
+    expect(guard).toBeGreaterThan(-1);
+    expect(guard).toBeLessThan(deploy.indexOf('- name: Write the deploy SSH key'));
+    expect(guard).toBeLessThan(deploy.indexOf('branchleft-deploy'));
   });
 });
 
