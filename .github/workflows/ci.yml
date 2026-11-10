@@ -8,8 +8,9 @@ on:
 
 # No id-token: write at the workflow level any more -- nothing in this
 # workflow federates to GCP. Production deploys pin a GHCR image digest onto
-# app1 over SSH instead (the `deploy` job below); `packages: write` for that
-# job is granted there, not here.
+# app1 over SSH instead (the `deploy` job below); `packages: write` and the
+# signing permissions are granted to the `publish` and `attest` jobs there, not
+# here.
 permissions:
   contents: read
   packages: read
@@ -158,28 +159,36 @@ jobs:
             --tag website:ci \
             .
 
-  deploy:
-    name: Build, push & deploy
+  # The production pipeline on a push to main is four jobs in a fixed order:
+  # publish (build, push, resolve the digest) -> scan -> attest -> deploy. Each
+  # job holds only the permissions its own steps need, so the one credential
+  # that can write to the registry is never in the job that touches app1, and
+  # the signing credential is never in the job that builds.
+  publish:
+    name: Build & push
     runs-on: ubuntu-latest
     needs: [checks, e2e]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    concurrency:
-      group: website-production-deploy
-      cancel-in-progress: false
-    # packages: write is scoped to this job alone, on the one trigger that
-    # ever runs it -- a PR build must never sit in the same permissions block
-    # as a publish credential (mailgun-shim-image.yml's reasoning, copied
-    # here verbatim).
+    # packages: write is scoped to this job (and the attest job's registry
+    # login) alone, on the one trigger that ever runs it -- a PR build must
+    # never sit in the same permissions block as a publish credential
+    # (mailgun-shim-image.yml's reasoning, copied here verbatim).
     permissions:
       contents: read
       packages: write
-    # Observed 1.42-2.88min over the last 5 successful runs (p95 2.88min) --
-    # small sample (only push-to-main triggers this job), so a wider margin
-    # than the p95-driven jobs above.
+    # Observed 1.42-2.88min over the last 5 successful runs of the combined
+    # build-and-deploy job (p95 2.88min) -- small sample (only push-to-main
+    # triggers this job), so a wider margin than the p95-driven jobs above.
     timeout-minutes: 15
     env:
       IMAGE: ghcr.io/branchleft/website
       IMAGE_TAG: ${{ github.sha }}
+    # The image name and the digest leave this job as outputs so the scan, the
+    # attestation and the deploy all act on the one digest pushed here, never
+    # on a tag that could move.
+    outputs:
+      image: ${{ env.IMAGE }}
+      digest: ${{ steps.digest.outputs.digest }}
 
     steps:
       - name: Checkout
@@ -222,6 +231,95 @@ jobs:
           fi
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
 
+  # Grype over a Syft SBOM, against the pushed digest: any critical or high
+  # finding that no valid exemption covers fails this job, and with it the
+  # attest and deploy jobs that need it. The gate, its exemption file and its
+  # limits are the reusable workflow's own; it is pinned to an exact tag, and
+  # it reads the website's exemptions from `.image-scan-exemptions.json` when
+  # that file exists. The image is passed by digest, and the workflow refuses a
+  # tag.
+  scan:
+    name: Scan the pushed image
+    needs: [publish]
+    permissions:
+      contents: read
+      packages: read
+    uses: branchLeft/github-workflows/.github/workflows/image-scan.yml@v1.1.0
+    with:
+      image: ${{ needs.publish.outputs.image }}@${{ needs.publish.outputs.digest }}
+
+  # Signs the digest that just passed the scan and proves the signature, in
+  # the one shared action (github-workflows' attest-and-verify-image): the
+  # attestation, its verify through the GitHub API and from the registry, and
+  # the wrong-identity control all live there, and none is copied here. The
+  # signer is a literal: read from this run's own `github.workflow_ref` it
+  # would agree with itself and prove nothing. This job `needs` the scan, so an
+  # image that fails the scan is never signed. id-token and attestations are
+  # held by this job alone; it has no checkout and holds no deploy key.
+  attest:
+    name: Attest the scanned image
+    runs-on: ubuntu-latest
+    needs: [publish, scan]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      packages: write
+      id-token: write
+      attestations: write
+    # No runs observed yet: the action's verify retries total about four
+    # minutes at worst, so a bound well above that.
+    timeout-minutes: 15
+    env:
+      IMAGE: ${{ needs.publish.outputs.image }}
+      DIGEST: ${{ needs.publish.outputs.digest }}
+      SCAN_VERDICT: ${{ needs.scan.outputs.verdict }}
+
+    steps:
+      # A second, independent refusal: the scan job already fails on a block,
+      # and this fails the attest job if the verdict is anything but PASS
+      # (including unset), so a scan that returned without judging the image
+      # still cannot lead to a signature.
+      - name: Refuse to sign an image the scan did not pass
+        run: |
+          if [ "$SCAN_VERDICT" != "PASS" ]; then
+            echo "::error::the image scan verdict is '$SCAN_VERDICT', not PASS; not attesting $IMAGE@$DIGEST"
+            exit 1
+          fi
+
+      - name: Log in to GHCR
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Attest and verify the pushed image
+        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@v1.1.0
+        with:
+          image: ${{ env.IMAGE }}
+          digest: ${{ env.DIGEST }}
+          signer-workflow: branchLeft/website/.github/workflows/ci.yml
+          repo: branchLeft/website
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [publish, scan, attest]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    concurrency:
+      group: website-production-deploy
+      cancel-in-progress: false
+    # This job only reaches app1 over SSH with a deploy key from a secret: it
+    # uses no GitHub token and checks nothing out, so it holds no permissions.
+    permissions: {}
+    # The 15 minutes carried over from the combined build-and-deploy job, which
+    # was 1.42-2.88min over its last 5 runs; the deploy steps are the smaller
+    # part of that.
+    timeout-minutes: 15
+    env:
+      IMAGE: ${{ needs.publish.outputs.image }}
+      DIGEST: ${{ needs.publish.outputs.digest }}
+
+    steps:
       # The private key never touches disk longer than this job needs it, and
       # never appears in a log: it comes from a secret, not from `run:`
       # interpolation.
@@ -256,7 +354,6 @@ jobs:
       - name: Pin app1 to the pushed digest and restart the stack
         env:
           HETZNER_APP1_HOST: ${{ vars.HETZNER_APP1_HOST }}
-          DIGEST: ${{ steps.digest.outputs.digest }}
         run: |
           ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
             "sudo -n /usr/local/sbin/branchleft-deploy website $IMAGE@$DIGEST"

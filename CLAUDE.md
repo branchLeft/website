@@ -22,7 +22,7 @@ Pre-commit runs prettier through pnpm. Commit with Node 26.5.0 (`.nvmrc`) first 
 
 Production runs on the Hetzner estate. CI deploys `deploy/compose.yml` to `app1` over SSH, behind the shared Caddy edge on `edge1`. Host bootstrap: `deploy/RUNBOOK-app1-website.md`. Adding a site to the edge: `shared-infra/hetzner/RUNBOOK-edge.md` §11.
 
-The `deploy` job in `.github/workflows/ci.yml` pushes to `ghcr.io/branchleft/website` and pins app1 to the digest with `branchleft-deploy`. A merge to `main` is the production deploy. The pinned reference lives only on the host, in `/etc/branchleft/website.image.env`.
+A push to `main` runs four jobs in `.github/workflows/ci.yml` in order: `publish` pushes to `ghcr.io/branchleft/website` and resolves the digest, `scan` runs the shared `image-scan` workflow (Grype critical/high gate) against that digest, `attest` signs it with the shared `attest-and-verify-image` action, and `deploy` pins app1 to the digest with `branchleft-deploy`. Both shared pieces come from `branchLeft/github-workflows` at an exact tag (`v1.1.0`); there is no inline copy of either. A merge to `main` is the production deploy. The pinned reference lives only on the host, in `/etc/branchleft/website.image.env`. The signer is `branchLeft/website/.github/workflows/ci.yml`: renaming that file changes the signing identity and needs the host's register changed in step.
 
 Do not add US hyperscaler resources. This repo has no infrastructure code.
 
