@@ -7,3 +7,12 @@ allowBuilds:
 # The @branchleft scope is listed so that a future cooldown would not gate first-party releases.
 minimumReleaseAgeExclude:
   - '@branchleft/*'
+# Transitive packages whose critical or high findings have a published fix (Grype, 2026-11-10).
+overrides:
+  proxy-addr: 2.0.8
+  body-parser: 2.4.0
+  compression: 1.8.2
+  source-map-js: 1.2.2
+  zod: 4.6.6
+  'undici@8': 8.12.2
+  'brace-expansion@1': 1.1.21
