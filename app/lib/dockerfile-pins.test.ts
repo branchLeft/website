@@ -5,10 +5,13 @@ import { describe, expect, it } from 'vitest';
 // The base image digest is the index of node:26.13.0-alpine, the base the image
 // scan was run against on 2026-11-10. Grype reported one critical (zlib) and
 // npm-bundled highs in it; the pins below clear them.
-const SCANNED_BASE_DIGEST = 'sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216';
+const SCANNED_BASE_DIGEST =
+  'sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce216';
 
 const dockerfile = readFileSync(new URL('../../Dockerfile', import.meta.url), 'utf8');
-const packageJson = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8')) as {
+const packageJson = JSON.parse(
+  readFileSync(new URL('../../package.json', import.meta.url), 'utf8')
+) as {
   packageManager: string;
 };
 
