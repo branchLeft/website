@@ -13,26 +13,8 @@ type Solution = {
 };
 
 /**
- * Tabbed showcase for the About page Solutions section.
- *
- * Layout:
- *   - Desktop (`md`+): vertical tablist on the left, single expanded panel on
- *     the right — the panel occupies the same reading column as the rest of
- *     the About page (no viewport breakout, unlike the values carousel).
- *   - Mobile: tablist runs horizontally above the panel; both stack in a
- *     single column.
- *
- * Panel transitions crossfade via framer-motion and are skipped when the
- * viewer prefers reduced motion.
- *
- * Follows the WAI-ARIA authoring practices Tabs pattern:
- *   - `role="tablist"` on the tab container with `aria-orientation`.
- *   - Roving tabindex on tabs (only the active tab is in the tab order).
- *   - Arrow keys move focus + activate; Home/End jump to first/last.
- *
- * The Bespoke Technology CTA links to the contact form with a preset
- * category query param; the contact route whitelists inbound values before
- * pre-selecting the matching option.
+ * WAI-ARIA Tabs pattern: roving tabindex and arrow/Home/End keys. Keep both
+ * when changing markup. The CTA's category param is whitelisted by the contact route.
  */
 const SOLUTIONS: readonly Solution[] = [
   {
@@ -63,12 +45,9 @@ export function SolutionsShowcase(): React.JSX.Element {
   const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
   const prefersReduced = usePrefersReducedMotion();
 
-  // Without JS, `activeIndex` never changes from its initial value, so the
-  // two non-active panels would otherwise SSR as `aria-hidden="true"` and
-  // `tabIndex={-1}` forever — hiding their content from assistive tech and
-  // keyboard-only users even though the no-js.css fallback makes it visually
-  // reachable. Deferring both to post-mount keeps the real roving-tabindex
-  // tab behaviour once JS is actually running.
+  // Without JS the non-active panels would SSR as aria-hidden and tabIndex -1
+  // forever, hiding content the no-js.css fallback shows. Deferring both to
+  // post-mount keeps roving tabindex once JS runs.
   const hasMounted = useHasMounted();
 
   function focusTab(index: number) {
