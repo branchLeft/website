@@ -96,12 +96,8 @@ function NavDropdown({
 }
 
 /**
- * Renders the Home/About/Solutions/Contact `<li>`s. Used twice — once inside
- * the mobile `<details>` disclosure, once in a plain always-visible `<ul>`
- * for desktop (see NavBar below) — because a browser's native `<details>`
- * collapse can't be reliably forced open via CSS alone (confirmed: even a
- * `display: flex !important` override on the child leaves it unrendered),
- * so the desktop nav can't depend on the mobile toggle's `<details>` at all.
+ * Renders the Home/About/Solutions/Contact `<li>`s for the mobile `<details>`
+ * and the desktop `<ul>`: CSS cannot reliably force `<details>` open.
  */
 function NavLinksItems({ onNavigate }: { readonly onNavigate?: () => void }): React.JSX.Element {
   return (

@@ -1,14 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-// This file runs only under the `chromium-no-js` project (javaScriptEnabled:
-// false — see playwright.config.ts), which verifies the site degrades
-// gracefully with no client-side JS. axe-core injects and runs script inside
-// the page to compute violations, which doesn't execute in this context, so
-// accessibility coverage for this markup stays with the JS-enabled
-// `chromium` project's specs instead. Every assertion here uses Playwright's
-// CDP-backed locator matchers (toBeVisible/toHaveCSS/etc.), which don't
-// depend on the page's own script execution and were confirmed to work
-// correctly under javaScriptEnabled: false.
+// Runs only under the chromium-no-js project (javaScriptEnabled: false), which
+// checks graceful degradation. axe-core needs script, so a11y stays with the JS
+// project. Assertions use CDP-backed locator matchers, which need no page script.
 
 test.describe('sitewide content visibility', () => {
   for (const path of ['/', '/about', '/contact']) {
