@@ -17,7 +17,8 @@ vi.mock('@react-router/node', () => ({
   createReadableStreamFromReadable: () => new ReadableStream(),
 }));
 
-import handleRequest from './entry.server';
+import type { PassThrough } from 'node:stream';
+import handleRequest, { streamTimeout } from './entry.server';
 
 // A base64-encoded 16-byte value: exactly the shape
 // `randomBytes(16).toString('base64')` produces — 22 data characters plus
@@ -25,12 +26,9 @@ import handleRequest from './entry.server';
 // of adequate width, not e.g. Math.random() or a short/guessable string.
 const NONCE_SHAPE = /^[A-Za-z0-9+/]{22}==$/;
 
-// Stands in for react-dom/server actually rendering: immediately invokes
-// the ready callback (mirroring onShellReady/onAllReady firing synchronously
-// for a request with no suspended boundaries) and hands the test everything
-// entry.server.tsx passed to renderToPipeableStream — the element (so its
-// `nonce` prop can be checked) and the options object (so `options.nonce`
-// can be checked against it).
+// Stands in for react-dom/server: fires the ready callback and returns what
+// entry.server.tsx passed in, so the element nonce and options nonce can be
+// compared.
 function mockRenderOnce() {
   let captured: { element: unknown; options: Record<string, unknown> } | undefined;
   renderToPipeableStream.mockImplementationOnce((element: unknown, options: any) => {
@@ -157,5 +155,130 @@ describe('handleRequest HEAD requests', () => {
 
     expect(response.status).toBe(200);
     expect(renderToPipeableStream).not.toHaveBeenCalled();
+  });
+});
+
+describe('handleRequest render callbacks', () => {
+  beforeEach(() => {
+    renderToPipeableStream.mockReset();
+  });
+
+  it('waits for all content (onAllReady) in SPA mode', async () => {
+    let usedReadyOption: string | undefined;
+    renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+      usedReadyOption = 'onAllReady' in options ? 'onAllReady' : 'onShellReady';
+      queueMicrotask(() => options.onAllReady());
+      return { pipe: vi.fn(), abort: vi.fn() };
+    });
+
+    const response = (await handleRequest(
+      makeRequest({ 'x-forwarded-proto': 'https' }),
+      200,
+      new Headers(),
+      { isSpaMode: true } as unknown as EntryContext
+    )) as Response;
+
+    expect(usedReadyOption).toBe('onAllReady');
+    expect(response.status).toBe(200);
+  });
+
+  it('rejects the request when the shell fails to render', async () => {
+    renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+      queueMicrotask(() => options.onShellError(new Error('shell broke')));
+      return { pipe: vi.fn(), abort: vi.fn() };
+    });
+
+    await expect(
+      handleRequest(makeRequest(), 200, new Headers(), makeRouterContext())
+    ).rejects.toThrow('shell broke');
+  });
+
+  it('logs a streaming error raised after the shell has rendered', async () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const streamError = new Error('late boundary failure');
+    renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+      queueMicrotask(() => {
+        options.onShellReady();
+        options.onError(streamError);
+      });
+      return { pipe: vi.fn(), abort: vi.fn() };
+    });
+
+    await handleRequest(
+      makeRequest({ 'x-forwarded-proto': 'https' }),
+      200,
+      new Headers(),
+      makeRouterContext()
+    );
+
+    expect(consoleError).toHaveBeenCalledWith(streamError);
+    consoleError.mockRestore();
+  });
+
+  it('clears the abort timer once the response body has finished streaming', async () => {
+    const pipe = vi.fn();
+    const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
+    renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+      queueMicrotask(() => options.onShellReady());
+      return { pipe, abort: vi.fn() };
+    });
+
+    await handleRequest(
+      makeRequest({ 'x-forwarded-proto': 'https' }),
+      200,
+      new Headers(),
+      makeRouterContext()
+    );
+    const body = pipe.mock.calls[0]?.[0] as PassThrough;
+    body.end();
+    await new Promise((resolve) => setImmediate(resolve));
+
+    expect(clearTimeoutSpy).toHaveBeenCalled();
+    clearTimeoutSpy.mockRestore();
+  });
+
+  it('aborts rendering once the stream timeout elapses', async () => {
+    vi.useFakeTimers();
+    try {
+      const abort = vi.fn();
+      renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+        queueMicrotask(() => options.onShellReady());
+        return { pipe: vi.fn(), abort };
+      });
+
+      await handleRequest(
+        makeRequest({ 'x-forwarded-proto': 'https' }),
+        200,
+        new Headers(),
+        makeRouterContext()
+      );
+      vi.advanceTimersByTime(streamTimeout + 1000);
+
+      expect(abort).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('turns an error raised before the shell renders into a 500 without logging it here', async () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    renderToPipeableStream.mockImplementationOnce((_element: unknown, options: any) => {
+      queueMicrotask(() => {
+        options.onError(new Error('early failure'));
+        options.onShellReady();
+      });
+      return { pipe: vi.fn(), abort: vi.fn() };
+    });
+
+    const response = (await handleRequest(
+      makeRequest({ 'x-forwarded-proto': 'https' }),
+      200,
+      new Headers(),
+      makeRouterContext()
+    )) as Response;
+
+    expect(response.status).toBe(500);
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 });
