@@ -29,11 +29,9 @@ export default function handleRequest(
     let shellRendered = false;
     let userAgent = request.headers.get('user-agent');
 
-    // Per-request nonce for the inline <script> tags React Router's
-    // <Scripts /> emits for hydration (the __reactRouterContext assignment
-    // and the route-modules import map) — see app/lib/security-headers.ts.
-    // 16 random bytes, base64-encoded, per the CSP nonce recommendation:
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce
+    // Per-request nonce for React Router's inline hydration scripts (see
+    // app/lib/security-headers.ts). 16 random bytes, base64, per the CSP nonce
+    // recommendation: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce
     let nonce = randomBytes(16).toString('base64');
 
     // Ensure requests from bots and SPA Mode renders wait for all content to load before responding
@@ -66,36 +64,21 @@ export default function handleRequest(
 
           responseHeaders.set('Content-Type', 'text/html');
 
-          // Cloud Run terminates TLS upstream and forwards to this
-          // container over plain HTTP with `X-Forwarded-Proto: https` set —
-          // that header, not the request's own URL scheme, is the real
-          // signal for whether the original connection was secure.
-          // `pnpm start`/the e2e test server (plain HTTP, no proxy) has no
-          // such header, so `isSecure` is correctly `false` there.
+          // Cloud Run terminates TLS upstream, so the forwarded header, not the
+          // request URL scheme, shows whether the client used HTTPS. Plain-HTTP
+          // servers (pnpm start, e2e) send no such header, so isSecure is false.
           const isSecure = request.headers.get('x-forwarded-proto') === 'https';
 
-          // Override root.tsx's nonce-less CSP with the nonce-bearing
-          // version now that one exists — see app/lib/security-headers.ts.
-          // `isSecure` matters here: `upgrade-insecure-requests` is a live,
-          // per-response instruction, not something that needs a prior
-          // secure connection or any cache to take effect. Sent on a
-          // plain-HTTP response, it still force-upgrades every same-page
-          // subresource request to HTTPS, which fails outright against a
-          // server with no TLS listener — breaking asset loading and
-          // hydration entirely. (Confirmed this is the actual cause, not
-          // just a theoretical one: reproduced with a byte-for-byte fresh
-          // WebKit profile and zero other security headers present, so nothing
-          // about it depends on a cached browser-side HSTS decision.)
+          // Replaces root.tsx's nonce-less CSP. upgrade-insecure-requests applies
+          // per response, so on plain HTTP it breaks asset loading (no TLS
+          // listener): isSecure gates it.
           responseHeaders.set(
             'Content-Security-Policy',
             buildContentSecurityPolicy(nonce, isSecure)
           );
 
-          // Strict-Transport-Security has the same problem for a different
-          // reason: it's meaningless (and, unlike the above, actively
-          // harmful the moment ANY response on the origin carries it, since
-          // it's a persistent, origin-wide browser decision) on a response
-          // that didn't arrive over HTTPS.
+          // Strict-Transport-Security is harmful on a non-HTTPS response: it is
+          // a persistent, origin-wide browser decision.
           if (!isSecure) {
             responseHeaders.delete('Strict-Transport-Security');
           }
