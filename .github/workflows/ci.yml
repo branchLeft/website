@@ -181,7 +181,7 @@ jobs:
       # published before attestation began, or carries a signed attestation
       # from the repository and workflow the action's table names for it.
       - name: Verify every locked @branchleft package
-        uses: branchLeft/github-workflows/.github/actions/verify-package-attestations@2c34b90b367fd160bb01d311d29224d250460086 # v1.2.1
+        uses: branchLeft/github-workflows/.github/actions/verify-package-attestations@231e592397f4c94668c64646c14160d9d497bdde # v1.2.2
 
   deploy:
     name: Build, push & deploy
