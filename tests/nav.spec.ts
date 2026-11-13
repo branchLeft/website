@@ -101,3 +101,25 @@ test.describe('Solutions nav disclosure — mobile', () => {
     await expect(mobileDetails).not.toHaveAttribute('open', '');
   });
 });
+
+test.describe('Blog link', () => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 375, height: 812 },
+    { width: 360, height: 740 },
+  ]) {
+    test(`shows in the bar without opening the menu at ${viewport.width}px`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await page.goto('/about');
+
+      const blog = page.locator('.site-nav').getByRole('link', { name: 'Blog' });
+      await expect(blog).toBeVisible();
+      await expect(blog).toHaveAttribute('href', 'https://blog.branchleft.co.uk/');
+      await expect(blog).toBeInViewport({ ratio: 1 });
+
+      const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+      expect(scrollWidth).toBeLessThanOrEqual(viewport.width);
+      await checkA11y(page);
+    });
+  }
+});
