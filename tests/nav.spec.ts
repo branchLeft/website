@@ -107,6 +107,7 @@ test.describe('Blog link', () => {
     { width: 1440, height: 900 },
     { width: 375, height: 812 },
     { width: 360, height: 740 },
+    { width: 320, height: 640 },
   ]) {
     test(`shows in the bar without opening the menu at ${viewport.width}px`, async ({ page }) => {
       await page.setViewportSize(viewport);

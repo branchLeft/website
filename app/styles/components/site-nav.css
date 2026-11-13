@@ -248,13 +248,29 @@
 
   /* Narrow phones: the menu button drops its text label (the summary keeps
    * its aria-label) and the bar tightens, so the Blog link fits beside it
-   * down to 360px without the bar scrolling sideways. */
+   * at 360px and up without the bar scrolling sideways. */
   @media (max-width: 479px) {
     .site-nav__inner {
       @apply gap-2;
     }
 
     .site-nav__toggle-label {
+      display: none;
+    }
+  }
+
+  /* The smallest phones (320px): narrower side padding and a Blog pill
+   * without its arrow, so the bar still fits on one line. */
+  @media (max-width: 359px) {
+    .site-nav__inner {
+      @apply px-4;
+    }
+
+    .site-nav__blog {
+      @apply px-2;
+    }
+
+    .site-nav__blog-icon {
       display: none;
     }
   }
