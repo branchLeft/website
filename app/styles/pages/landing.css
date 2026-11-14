@@ -19,7 +19,7 @@
 
   .landing-hero .eyebrow {
     @apply text-xs;
-    color: var(--avenue-accent);
+    color: var(--avenue-accent-text);
   }
 
   .landing-hero h1 {
@@ -60,7 +60,7 @@
     font-family: var(--font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--avenue-accent);
+    color: var(--avenue-accent-text);
   }
 
   .landing-hero__actions {
@@ -141,7 +141,15 @@
 
   .callout .eyebrow {
     @apply text-xs;
-    color: var(--avenue-accent);
+    color: var(--avenue-accent-text);
+  }
+
+  /* The name and its mark on one line are wider than the hero's padding
+   * leaves room for at 48px below 360px. */
+  @media (max-width: 359px) {
+    .landing-hero .publicpress-title {
+      @apply text-4xl;
+    }
   }
 
   @media (min-width: 768px) {

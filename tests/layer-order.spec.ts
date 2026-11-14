@@ -12,18 +12,26 @@ const ROUTES = [
   '/this-page-does-not-exist',
 ];
 
-// The brand stylesheet's classes must beat the site's own element rules:
-// the hero is an <h1>, and the site's `h1` rule (in `base`) would otherwise
-// set it in the heading face at heading size. See app/app.css.
-test('the home hero wordmark renders in Syne 500 at 60px', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/');
-  const hero = page.locator('h1.bl-wordmark--hero');
-  await expect(hero).toHaveCSS('font-size', '60px');
-  await expect(hero).toHaveCSS('line-height', '60px');
-  await expect(hero).toHaveCSS('font-weight', '500');
-  await expect(hero).toHaveCSS('font-family', /Syne/);
-});
+// The hero is an <h1>, and the site's `h1` rule (in `base`) would otherwise
+// set it in the heading face at heading size. Its own rules (the brand's
+// `.bl-wordmark` and the home page's `.home-hero__text h1`, both in
+// `components`) must beat it. See app/app.css.
+const HERO = '.home-hero h1.bl-wordmark';
+
+for (const { width, size } of [
+  { width: 600, size: '60px' },
+  { width: 1440, size: '96px' },
+]) {
+  test(`the home hero wordmark renders in Syne 500 at ${size} (${width}px)`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const hero = page.locator(HERO);
+    await expect(hero).toHaveCSS('font-size', size);
+    await expect(hero).toHaveCSS('line-height', size);
+    await expect(hero).toHaveCSS('font-weight', '500');
+    await expect(hero).toHaveCSS('font-family', /Syne/);
+  });
+}
 
 // ...while the site's own element rules still beat the brand's defaults.
 test("the site's own h1 rule beats the brand stylesheet's element default", async ({ page }) => {
@@ -71,7 +79,7 @@ test('on a 320px phone the hero steps down to 48px and keeps the page padding', 
 }) => {
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/');
-  const hero = page.locator('h1.bl-wordmark--hero');
+  const hero = page.locator(HERO);
   await expect(hero).toHaveCSS('font-size', '48px');
 
   const gaps = await hero.evaluate((h) => {

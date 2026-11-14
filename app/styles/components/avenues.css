@@ -12,6 +12,12 @@
     --avenue-accent: var(--bl-value-opensource);
   }
 
+  /* The accent as text colour: pulled toward the foreground so it clears
+   * 4.5:1 on the page in both themes (the bare accent does not on light). */
+  [data-avenue] {
+    --avenue-accent-text: color-mix(in srgb, var(--avenue-accent) 70%, var(--color-fg));
+  }
+
   .avenues {
     @apply grid gap-4 w-full pl-0;
     list-style: none;
