@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@branchleft/brand-branchleft": "0.3.0",
+    "@branchleft/brand-publicpress": "0.3.0",
     "@branchleft/components": "0.6.0",
     "@react-router/node": "^8.5.1",
     "@react-router/serve": "^8.5.1",

@@ -21,21 +21,6 @@
     transform: none !important;
   }
 
-  /* Solutions tabs (About page): only the active panel is visible/hittable
-   * (grid overlay + opacity/pointer-events), and switching tabs is a JS
-   * click handler with no native fallback. Force all three panels to stack
-   * in normal flow, fully visible and interactive. */
-  .solutions-tabs__panel-frame {
-    display: block;
-  }
-
-  .solutions-tabs__panel {
-    position: static;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    margin-bottom: 3rem;
-  }
-
   /* Values cloud (About page, from @branchleft/components): the orbiting
    * ring is entirely click-to-reveal with no native fallback, so drop it
    * and force the accordion fallback (AccordionItem, native <details>) to

@@ -9,5 +9,6 @@
 @layer theme, branchleft-base, base, branchleft-components, components, utilities;
 
 @import '@branchleft/brand-branchleft/css';
+@import '@branchleft/brand-publicpress/css';
 @import 'tailwindcss';
 @import './styles/theme.css';
