@@ -7,17 +7,10 @@ test('renders and passes a11y', async ({ page }) => {
   await checkA11y(page);
 });
 
-test('switching solutions tabs reveals the matching panel and CTA', async ({ page }) => {
+test('ends with the other two avenues', async ({ page }) => {
   await page.goto('/about');
-
-  const affordableTab = page.getByRole('tab', { name: 'Affordable Websites' });
-  await affordableTab.click();
-  await expect(affordableTab).toHaveAttribute('aria-selected', 'true');
-
-  const panel = page.getByRole('tabpanel', { name: /Affordable Websites/ });
-  await expect(panel.getByRole('link', { name: /learn more/ })).toHaveAttribute(
-    'href',
-    '/solutions/affordable-websites'
-  );
-  await checkA11y(page);
+  const next = page.locator('.next-steps');
+  await expect(next.getByRole('link')).toHaveCount(2);
+  await next.getByRole('link', { name: /Announcing PublicPress/ }).click();
+  await expect(page).toHaveURL('/publicpress');
 });

@@ -3,9 +3,9 @@ import { setStoredTheme } from './theme';
 
 const ROUTES = [
   '/',
+  '/publicpress',
   '/about',
-  '/solutions/local-news',
-  '/solutions/affordable-websites',
+  '/bespoke',
   '/contact',
   '/privacy',
   '/terms',

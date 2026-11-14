@@ -20,6 +20,9 @@ importers:
       '@branchleft/brand-branchleft':
         specifier: 0.3.0
         version: 0.3.0(@branchleft/components@0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@branchleft/brand-publicpress':
+        specifier: 0.3.0
+        version: 0.3.0(@branchleft/components@0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@branchleft/components':
         specifier: 0.6.0
         version: 0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -231,6 +234,13 @@ packages:
     resolution: {integrity: sha512-7jfdez4cR33bjQ5X3LngUMPMY4SWTd05hOwLnruKIgBS+7ypcZELT9kVsbpKorp7HmdZZmRK+HtLyhxTk06qgA==, tarball: https://npm.pkg.github.com/download/@branchleft/brand-branchleft/0.3.0/a1a29ac21e2cb41824321274e29ddb67acc67cc3}
     peerDependencies:
       '@branchleft/components': '>=0.4.0 <1.0.0'
+      react: ^18.2.0 || ^19.0.0
+      react-dom: ^18.2.0 || ^19.0.0
+
+  '@branchleft/brand-publicpress@0.3.0':
+    resolution: {integrity: sha512-3RhzUYyXljDfiCvL+uUh0xb4GmAqFXcNC/FelTcYlkuW6QZ7nKUhPWRKWnH8NH1brrU0p0LUn/68lIDLSNtvjA==, tarball: https://npm.pkg.github.com/download/@branchleft/brand-publicpress/0.3.0/bd8093da8dd190711dcd16a0610f51a4f5924c83}
+    peerDependencies:
+      '@branchleft/components': '>=0.6.0 <1.0.0'
       react: ^18.2.0 || ^19.0.0
       react-dom: ^18.2.0 || ^19.0.0
 
@@ -2675,6 +2685,12 @@ snapshots:
       css-tree: 3.2.1
 
   '@branchleft/brand-branchleft@0.3.0(@branchleft/components@0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+    dependencies:
+      '@branchleft/components': 0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+
+  '@branchleft/brand-publicpress@0.3.0(@branchleft/components@0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@branchleft/components': 0.6.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1

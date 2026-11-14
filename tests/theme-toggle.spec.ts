@@ -5,9 +5,9 @@ import { openEverything, setStoredTheme, showContactError } from './theme';
 
 const ROUTES = [
   '/',
+  '/publicpress',
   '/about',
-  '/solutions/local-news',
-  '/solutions/affordable-websites',
+  '/bespoke',
   '/contact',
   '/privacy',
   '/terms',

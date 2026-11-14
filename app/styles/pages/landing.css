@@ -1,0 +1,103 @@
+/* ─── Avenue pages ───────────────────────────────────────────────────────── */
+/* /publicpress and /bespoke: a header band tinted in the avenue's colour,
+ * a few short sections using the full width, then NextSteps. */
+@layer components {
+  .landing {
+    @apply flex flex-col gap-12 w-full max-w-6xl mx-auto px-6 pb-16;
+  }
+
+  .landing-hero {
+    @apply flex flex-col gap-5 py-12 px-6;
+    margin-inline: -1.5rem;
+    border-bottom: 1px solid var(--color-hairline);
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--avenue-accent) 22%, transparent),
+      transparent 65%
+    );
+  }
+
+  .landing-hero__mark {
+    @apply flex h-16;
+  }
+
+  .landing-hero .eyebrow {
+    @apply text-xs;
+    color: var(--avenue-accent);
+  }
+
+  .landing-hero h1 {
+    @apply text-4xl max-w-4xl;
+    text-wrap: balance;
+  }
+
+  .landing-hero__lede {
+    @apply text-lg max-w-2xl;
+    color: var(--colour-fg-muted);
+  }
+
+  .landing-hero__fact {
+    @apply text-sm;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--avenue-accent);
+  }
+
+  .landing-hero__actions {
+    @apply flex flex-wrap gap-3 pl-0;
+    list-style: none;
+  }
+
+  .landing-section {
+    @apply flex flex-col gap-6;
+    scroll-margin-top: var(--section-scroll-offset);
+  }
+
+  .landing-section h3 {
+    @apply text-lg mb-3;
+  }
+
+  .landing-columns {
+    @apply grid gap-6;
+  }
+
+  .landing-facts {
+    @apply grid gap-4 pl-0;
+    list-style: none;
+  }
+
+  .landing-facts > li {
+    @apply p-5 text-lg;
+    font-family: var(--font-display);
+    border-left: 3px solid var(--avenue-accent);
+    background: color-mix(in srgb, var(--avenue-accent) 8%, transparent);
+  }
+
+  .callout {
+    @apply flex flex-col gap-2 p-6;
+    border-left: 3px solid var(--avenue-accent);
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+  }
+
+  .callout .eyebrow {
+    @apply text-xs;
+    color: var(--avenue-accent);
+  }
+
+  @media (min-width: 768px) {
+    .landing-hero {
+      @apply py-16 px-10;
+    }
+
+    .landing-hero h1 {
+      @apply text-5xl;
+    }
+
+    .landing-columns,
+    .landing-facts {
+      grid-template-columns: repeat(2, 1fr);
+      @apply gap-8;
+    }
+  }
+}

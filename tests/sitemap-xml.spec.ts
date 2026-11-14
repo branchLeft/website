@@ -13,8 +13,8 @@ test('is served as a valid sitemap listing every indexable page', async ({ reque
   expect(body).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
   expect(body).toContain('<loc>https://branchleft.co.uk/</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/about</loc>');
-  expect(body).toContain('<loc>https://branchleft.co.uk/solutions/local-news</loc>');
-  expect(body).toContain('<loc>https://branchleft.co.uk/solutions/affordable-websites</loc>');
+  expect(body).toContain('<loc>https://branchleft.co.uk/publicpress</loc>');
+  expect(body).toContain('<loc>https://branchleft.co.uk/bespoke</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/contact</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/privacy</loc>');
   expect(body).toContain('<loc>https://branchleft.co.uk/terms</loc>');
