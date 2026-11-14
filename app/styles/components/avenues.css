@@ -48,14 +48,12 @@
   }
 
   .avenue__title {
-    @apply flex items-center gap-3 text-2xl;
+    @apply text-2xl;
   }
 
-  /* Sized against the title's own text, so it scales with it. */
-  .avenue__mark {
-    display: flex;
-    flex-shrink: 0;
-    height: 1.25em;
+  /* The PublicPress wordmark in place of a text title. */
+  .avenue__wordmark {
+    @apply flex h-9;
   }
 
   .avenue__line {
@@ -77,6 +75,10 @@
 
   .avenues--compact .avenue__link {
     @apply p-5 gap-2;
+  }
+
+  .avenues--compact .avenue__wordmark {
+    @apply h-7;
   }
 
   .avenues--compact .avenue__title {

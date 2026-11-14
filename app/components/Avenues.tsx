@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { PublicPressLogo } from '@branchleft/brand-publicpress';
+import { PublicPressWordmark } from '@branchleft/brand-publicpress';
 
 export type Avenue = {
   readonly to: string;
   readonly title: string;
   readonly line: string;
   readonly accent: 'publicpress' | 'about' | 'bespoke';
-  /** Shows the PublicPress mark inline before the title. */
-  readonly publicPressMark?: boolean;
+  /** Renders the title as the PublicPress wordmark, which carries it as its accessible name. */
+  readonly publicPressWordmark?: boolean;
 };
 
 /**
@@ -19,10 +19,10 @@ export type Avenue = {
 export const AVENUES: readonly Avenue[] = [
   {
     to: '/publicpress',
-    title: 'Announcing PublicPress',
-    line: 'Independent journalism, on independent infrastructure.',
+    title: 'PublicPress',
+    line: 'Announcing our platform for local news & independent journalism',
     accent: 'publicpress',
-    publicPressMark: true,
+    publicPressWordmark: true,
   },
   {
     to: '/about',
@@ -50,13 +50,14 @@ function AvenueCard({
     <li className="avenue" data-avenue={avenue.accent}>
       <Link className="avenue__link" to={avenue.to}>
         <Heading className="avenue__title">
-          {avenue.publicPressMark === true && (
-            /* The span sets the size; the logo fills its height. */
-            <span className="avenue__mark">
-              <PublicPressLogo decorative height="100%" />
+          {avenue.publicPressWordmark === true ? (
+            /* The span sets the size; the wordmark fills its height. */
+            <span className="avenue__wordmark">
+              <PublicPressWordmark title={avenue.title} height="100%" />
             </span>
+          ) : (
+            avenue.title
           )}
-          {avenue.title}
         </Heading>
         <p className="avenue__line">{avenue.line}</p>
         <span className="avenue__arrow" aria-hidden="true">

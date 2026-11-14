@@ -11,6 +11,6 @@ test('ends with the other two avenues', async ({ page }) => {
   await page.goto('/about');
   const next = page.locator('.next-steps');
   await expect(next.getByRole('link')).toHaveCount(2);
-  await next.getByRole('link', { name: /Announcing PublicPress/ }).click();
+  await next.getByRole('link', { name: /PublicPress/ }).click();
   await expect(page).toHaveURL('/publicpress');
 });

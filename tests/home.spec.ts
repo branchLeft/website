@@ -8,7 +8,7 @@ test('renders the hero and passes a11y', async ({ page }) => {
 });
 
 for (const avenue of [
-  { name: 'Announcing PublicPress', url: '/publicpress' },
+  { name: 'PublicPress', url: '/publicpress' },
   { name: 'About branchLeft', url: '/about' },
   { name: 'Bespoke Solutions', url: '/bespoke' },
 ]) {
@@ -22,7 +22,8 @@ for (const avenue of [
   });
 }
 
-test('the PublicPress card carries the PublicPress mark', async ({ page }) => {
+test('the PublicPress card title is the PublicPress wordmark', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('[data-avenue="publicpress"] .avenue__mark svg')).toBeVisible();
+  const title = page.locator('[data-avenue="publicpress"]').getByRole('heading', { level: 2 });
+  await expect(title.getByRole('img', { name: 'PublicPress' })).toBeVisible();
 });
