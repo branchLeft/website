@@ -192,11 +192,8 @@ describe('buildSecurityHeaders', () => {
       expect(maxAge).toBeLessThanOrEqual(365 * oneDay);
     });
 
-    // includeSubDomains and preload are each a one-way, origin-wide
-    // commitment (preload especially — submission is not reversible on a
-    // human timescale). The current value omits both deliberately; this
-    // pins that decision so a future edit changes it on purpose, not by
-    // accident of string-editing the max-age.
+    // includeSubDomains and preload are one-way, origin-wide commitments
+    // (preload especially). The current value omits both on purpose.
     it('deliberately omits includeSubDomains', () => {
       expect(hsts).not.toMatch(/includeSubDomains/);
     });
