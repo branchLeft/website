@@ -17,10 +17,6 @@
     );
   }
 
-  .landing-hero__mark {
-    @apply flex h-16;
-  }
-
   .landing-hero .eyebrow {
     @apply text-xs;
     color: var(--avenue-accent);
@@ -28,6 +24,29 @@
 
   .landing-hero h1 {
     @apply text-4xl max-w-4xl;
+    text-wrap: balance;
+  }
+
+  /* /publicpress: the PublicPress mark inline with the name, set in
+   * PublicPress's own display face. */
+  /* Scoped under .landing-hero to outrank its plain h1 rule. */
+  .landing-hero .publicpress-title {
+    @apply flex items-center gap-3 text-5xl max-w-none;
+    font-family: var(--font-publicpress);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* Sized against the name's own text, so it scales with it. */
+  .publicpress-title__mark {
+    display: flex;
+    flex-shrink: 0;
+    height: 0.9em;
+  }
+
+  .landing-hero__headline {
+    @apply text-2xl max-w-3xl;
+    font-family: var(--font-display);
     text-wrap: balance;
   }
 
@@ -55,11 +74,51 @@
   }
 
   .landing-section h3 {
-    @apply text-lg mb-3;
+    @apply text-lg;
   }
 
-  .landing-columns {
-    @apply grid gap-6;
+  /* Running text: one column at a comfortable reading width. */
+  .landing-prose {
+    @apply flex flex-col gap-4 max-w-3xl;
+  }
+
+  .landing-block {
+    @apply flex flex-col gap-4;
+  }
+
+  /* A set with no order (who it is for): pills that wrap. */
+  .chip-list {
+    @apply flex flex-wrap gap-2 pl-0;
+    list-style: none;
+  }
+
+  .chip-list > li {
+    @apply px-4 py-2 text-sm rounded-full;
+    border: 1px solid color-mix(in srgb, var(--avenue-accent) 45%, transparent);
+    background: color-mix(in srgb, var(--avenue-accent) 10%, transparent);
+  }
+
+  /* A sequence (our process): numbered cards, left to right on wide
+   * screens and top to bottom on phones. */
+  .steps {
+    @apply grid gap-4 pl-0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .steps > li {
+    @apply flex flex-col gap-3 p-6;
+    counter-increment: step;
+    border: 1px solid var(--color-hairline);
+    border-top: 3px solid var(--avenue-accent);
+    background: color-mix(in srgb, var(--avenue-accent) 6%, transparent);
+  }
+
+  .steps > li::before {
+    @apply text-2xl;
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--font-mono);
+    color: var(--avenue-accent);
   }
 
   .landing-facts {
@@ -94,10 +153,23 @@
       @apply text-5xl;
     }
 
-    .landing-columns,
-    .landing-facts {
+    .landing-hero .publicpress-title {
+      @apply text-8xl gap-6;
+    }
+
+    .landing-hero__headline {
+      @apply text-3xl;
+    }
+
+    .landing-facts,
+    .steps {
       grid-template-columns: repeat(2, 1fr);
-      @apply gap-8;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .steps {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }

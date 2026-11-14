@@ -23,7 +23,9 @@ test('ends with the other two avenues', async ({ page }) => {
   await expect(page).toHaveURL('/bespoke');
 });
 
-test('shows the PublicPress mark in the header', async ({ page }) => {
+test('the heading is the PublicPress name with the mark inline', async ({ page }) => {
   await page.goto('/publicpress');
-  await expect(page.locator('.landing-hero__mark svg')).toBeVisible();
+  const heading = page.getByRole('heading', { level: 1 });
+  await expect(heading).toHaveText('PublicPress');
+  await expect(heading.locator('.publicpress-title__mark svg')).toBeVisible();
 });

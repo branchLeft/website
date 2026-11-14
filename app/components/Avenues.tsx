@@ -7,7 +7,7 @@ export type Avenue = {
   readonly title: string;
   readonly line: string;
   readonly accent: 'publicpress' | 'about' | 'bespoke';
-  /** Shows the PublicPress mark above the title. */
+  /** Shows the PublicPress mark inline before the title. */
   readonly publicPressMark?: boolean;
 };
 
@@ -49,13 +49,15 @@ function AvenueCard({
   return (
     <li className="avenue" data-avenue={avenue.accent}>
       <Link className="avenue__link" to={avenue.to}>
-        {avenue.publicPressMark === true && (
-          /* The span sets the size; the logo fills its height. */
-          <span className="avenue__mark">
-            <PublicPressLogo decorative height="100%" />
-          </span>
-        )}
-        <Heading className="avenue__title">{avenue.title}</Heading>
+        <Heading className="avenue__title">
+          {avenue.publicPressMark === true && (
+            /* The span sets the size; the logo fills its height. */
+            <span className="avenue__mark">
+              <PublicPressLogo decorative height="100%" />
+            </span>
+          )}
+          {avenue.title}
+        </Heading>
         <p className="avenue__line">{avenue.line}</p>
         <span className="avenue__arrow" aria-hidden="true">
           →

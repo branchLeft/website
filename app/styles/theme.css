@@ -111,6 +111,10 @@
   --font-wordmark: var(--bl-font-wordmark);
   --font-sans: var(--bl-font-sans);
   --font-mono: var(--bl-font-mono);
+  /* PublicPress's display face (Jost, from @branchleft/brand-publicpress,
+   * with that design system's own fallback stack), for the PublicPress
+   * name on /publicpress. */
+  --font-publicpress: 'Jost', 'Futura', 'Century Gothic', 'Avenir Next', system-ui, sans-serif;
 
   /* Sticky nav offset — the height of the primary .site-nav row. Section
    * pages use this for scroll-margin-top and for stacking the secondary

@@ -38,7 +38,7 @@ export default function Bespoke(): React.JSX.Element {
 
       <section className="landing-section" id="affordable-websites" aria-labelledby="websites">
         <h2 id="websites">Affordable Websites</h2>
-        <div className="landing-columns">
+        <div className="landing-prose">
           <p>
             Every organisation needs a website, but not all organisations have deep pockets,
             especially those doing work that benefits people & planet. You shouldn&rsquo;t be left
@@ -57,62 +57,59 @@ export default function Bespoke(): React.JSX.Element {
           <li>hosting starts from £10/month, scaling with traffic</li>
         </ul>
 
-        <div className="landing-columns">
-          <div>
-            <h3>Who This Is For</h3>
-            <ul>
-              <li>registered charities</li>
-              <li>Charitable Incorporated Organisations (CIOs)</li>
-              <li>Community Interest Companies (CICs)</li>
-              <li>community benefit societies</li>
-              <li>co-operative and mutual societies</li>
-              <li>worker-owned businesses</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Our Process</h3>
-            <ol>
-              <li>
-                a design consultation and wireframe or proof-of-concept, at a low fixed fee,
-                credited against your final invoice if you go ahead
-              </li>
-              <li>
-                the build itself, priced at-cost once you&rsquo;ve approved the direction, and with
-                a tight feedback loop to keep us on-track
-              </li>
-              <li>
-                handover, with documentation and access to everything, so you&rsquo;re never
-                dependent on us to keep going
-              </li>
-              <li>a discussion of support arrangements tailored to your needs</li>
-            </ol>
-          </div>
-        </div>
+        <section className="landing-block" aria-labelledby="who">
+          <h3 id="who">Who This Is For</h3>
+          <ul className="chip-list">
+            <li>registered charities</li>
+            <li>Charitable Incorporated Organisations (CIOs)</li>
+            <li>Community Interest Companies (CICs)</li>
+            <li>community benefit societies</li>
+            <li>co-operative and mutual societies</li>
+            <li>worker-owned businesses</li>
+          </ul>
+        </section>
 
-        <div className="landing-columns">
-          <aside className="callout" aria-labelledby="eligible">
-            <p className="eyebrow" id="eligible">
-              Eligible and ready to start?
-            </p>
-            <p>
-              If you&rsquo;re a charity, CIO, CIC, community benefit society, co-operative or
-              worker-owned business looking for an affordable website, get in touch via our{' '}
-              <Link to="/contact?category=affordable-websites">contact form</Link>. If our starting
-              prices still aren&rsquo;t viable for you, get in touch anyway — we may be able to find
-              a suitable arrangement.
-            </p>
-          </aside>
-          <aside className="callout" aria-labelledby="for-profit">
-            <p className="eyebrow" id="for-profit">
-              A for-profit company?
-            </p>
-            <p>
-              We&rsquo;d still love to work with you, at our adjusted rates. Get in touch via our{' '}
-              <Link to="/contact?category=affordable-websites">contact form</Link> and we&rsquo;ll
-              get started.
-            </p>
-          </aside>
-        </div>
+        <section className="landing-block" aria-labelledby="process">
+          <h3 id="process">Our Process</h3>
+          <ol className="steps">
+            <li>
+              a design consultation and wireframe or proof-of-concept, at a low fixed fee, credited
+              against your final invoice if you go ahead
+            </li>
+            <li>
+              the build itself, priced at-cost once you&rsquo;ve approved the direction, and with a
+              tight feedback loop to keep us on-track
+            </li>
+            <li>
+              handover, with documentation and access to everything, so you&rsquo;re never dependent
+              on us to keep going
+            </li>
+            <li>a discussion of support arrangements tailored to your needs</li>
+          </ol>
+        </section>
+
+        <aside className="callout" aria-labelledby="eligible">
+          <p className="eyebrow" id="eligible">
+            Eligible and ready to start?
+          </p>
+          <p>
+            If you&rsquo;re a charity, CIO, CIC, community benefit society, co-operative or
+            worker-owned business looking for an affordable website, get in touch via our{' '}
+            <Link to="/contact?category=affordable-websites">contact form</Link>. If our starting
+            prices still aren&rsquo;t viable for you, get in touch anyway — we may be able to find a
+            suitable arrangement.
+          </p>
+        </aside>
+        <aside className="callout" aria-labelledby="for-profit">
+          <p className="eyebrow" id="for-profit">
+            A for-profit company?
+          </p>
+          <p>
+            We&rsquo;d still love to work with you, at our adjusted rates. Get in touch via our{' '}
+            <Link to="/contact?category=affordable-websites">contact form</Link> and we&rsquo;ll get
+            started.
+          </p>
+        </aside>
       </section>
 
       <NextSteps current="/bespoke" />

@@ -47,12 +47,15 @@
     transform: translateY(-3px);
   }
 
-  .avenue__mark {
-    @apply flex h-10;
+  .avenue__title {
+    @apply flex items-center gap-3 text-2xl;
   }
 
-  .avenue__title {
-    @apply text-2xl;
+  /* Sized against the title's own text, so it scales with it. */
+  .avenue__mark {
+    display: flex;
+    flex-shrink: 0;
+    height: 1.25em;
   }
 
   .avenue__line {
@@ -74,10 +77,6 @@
 
   .avenues--compact .avenue__link {
     @apply p-5 gap-2;
-  }
-
-  .avenues--compact .avenue__mark {
-    @apply h-8;
   }
 
   .avenues--compact .avenue__title {

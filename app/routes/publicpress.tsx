@@ -16,19 +16,24 @@ export function meta() {
 const PUBLICPRESS_URL = 'https://publicpress.co.uk/';
 
 /*
- * The headline, lede and launch line are PublicPress's approved launch copy (publicpress.co.uk); the "why" is the
- * opening of the former Local News page.
+ * The headline, lede and launch line are PublicPress's approved launch copy
+ * (publicpress.co.uk); the "why" is the opening of the former Local News
+ * page.
  */
 export default function PublicPress(): React.JSX.Element {
   return (
     <main className="landing" data-avenue="publicpress">
       <header className="landing-hero">
-        {/* The span sets the size; the logo fills its height. */}
-        <span className="landing-hero__mark">
-          <PublicPressLogo decorative height="100%" />
-        </span>
-        <p className="eyebrow">Announcing PublicPress</p>
-        <h1>Independent journalism, on independent infrastructure.</h1>
+        <h1 className="publicpress-title">
+          {/* The span sets the size; the logo fills its height. */}
+          <span className="publicpress-title__mark">
+            <PublicPressLogo decorative height="100%" />
+          </span>
+          PublicPress
+        </h1>
+        <p className="landing-hero__headline">
+          Independent journalism, on independent infrastructure.
+        </p>
         <p className="landing-hero__lede">
           Your Ghost site, without compromise. Managed technical solutions for independent newsrooms
           in the UK, from a company that exists to support them.
@@ -45,7 +50,7 @@ export default function PublicPress(): React.JSX.Element {
 
       <section className="landing-section" aria-labelledby="why">
         <h2 id="why">Why we are doing this</h2>
-        <div className="landing-columns">
+        <div className="landing-prose">
           <p>
             Local news reporting in the public interest is more important than ever. Not too long
             ago, local newspapers and radio stations were the lifeblood of communities, providing
