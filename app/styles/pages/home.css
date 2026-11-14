@@ -1,20 +1,32 @@
 /* ─── Home page ──────────────────────────────────────────────────────────── */
+/* A compact hero, then the three avenue cards as the only calls to action,
+ * all on the first screen at desktop width. */
 @layer components {
-  /* Fixed square used for the logo mark. */
-  .brand-mark {
-    @apply w-36 h-36;
+  .home {
+    @apply flex flex-col items-center gap-10 w-full max-w-6xl mx-auto px-6 py-12;
+    flex: 1;
+    justify-content: center;
   }
 
-  /* One step down the type scale on narrow phones: at the full 60px the
-   * wordmark is wider than the page padding leaves room for below 400px. */
-  @media (max-width: 399px) {
-    .bl-wordmark--hero {
-      @apply text-5xl;
-    }
+  .home-hero {
+    @apply flex flex-col items-center gap-6 text-center;
   }
 
-  /* Hero tagline hover highlight (people & planet) — the "environment"
-   * ValuesColour, aliased as --color-hover-accent (see theme.css). */
+  .home-hero__text {
+    @apply flex flex-col items-center gap-4;
+  }
+
+  .home-hero__text h1 {
+    @apply text-6xl;
+    font-family: var(--font-wordmark);
+  }
+
+  .home-hero__mark {
+    @apply w-28 h-28;
+    filter: drop-shadow(0 0 28px color-mix(in srgb, var(--color-brand-bright) 45%, transparent));
+  }
+
+  /* Hero tagline hover highlight (people & planet). */
   .hover-green {
     &:hover {
       transition: color 0.5s ease;
@@ -22,13 +34,9 @@
     }
   }
 
-  /* Social icon row beneath the hero's "learn more" link. Repeated in the
-   * footer (see .site-footer__social-link) on every route except this one,
-   * to avoid showing the same icons twice on the homepage. */
   .home-socials {
-    @apply flex flex-wrap items-center gap-6 mt-4;
+    @apply flex flex-wrap items-center justify-center gap-6 pl-0;
     list-style: none;
-    padding: 0;
   }
 
   .home-socials > li {
@@ -37,7 +45,7 @@
 
   .home-socials__link {
     @apply flex items-center;
-    color: var(--color-fg);
+    color: var(--colour-fg-muted);
   }
 
   .home-socials__link:hover,
@@ -46,6 +54,32 @@
   }
 
   .home-socials__icon {
-    @apply w-6 h-6;
+    @apply w-5 h-5;
+  }
+
+  /* One step down on narrow phones: the full size is wider than the
+   * padding leaves room for below 400px. */
+  @media (max-width: 399px) {
+    .home-hero__text h1 {
+      @apply text-5xl;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .home-hero {
+      @apply flex-row text-left gap-8;
+    }
+
+    .home-hero__text {
+      @apply items-start;
+    }
+
+    .home-hero__text h1 {
+      @apply text-8xl;
+    }
+
+    .home-hero__mark {
+      @apply w-36 h-36;
+    }
   }
 }

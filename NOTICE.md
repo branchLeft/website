@@ -5,7 +5,16 @@
 The MIT license in [LICENSE](LICENSE) applies to the source code of this repository. It does **not** extend to:
 
 - The branchLeft name, logo, and wordmark (`branchLeft-logo.png`, `branchLeft-wordmark.png`, and any other brand marks used in this repo) — these are not licensed for reuse. See "Trademarks" below.
+- Images, photographs, video and other media files (see "Media files" below).
 - Third-party fonts, served from the `@branchleft/brand-branchleft` package, which carry their own license (see below).
+
+## Media files
+
+The MIT license applies to source code only. Images, photographs, video and other media files in this repository (for example under `public/` and `brand/`) are not licensed under it.
+
+- Our own media are copyright of branchLeft, all rights reserved. They may not be copied, reused, redistributed or modified without written permission.
+- Photographs of identifiable people are personal data. They are not licensed for any reuse.
+- Third-party media stay under their own terms, as listed in this file. A file that states its own license keeps it.
 
 ## Trademarks and brand assets
 

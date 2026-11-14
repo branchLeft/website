@@ -2,38 +2,19 @@ import type { MetaDescriptor } from 'react-router';
 import { SOCIAL_LINKS } from './social-links';
 
 /**
- * Shared meta-tag builder. Every route calls this from its own `meta()`
- * export instead of hand-rolling `<title>`/description/OG/Twitter tags, so
- * the canonical URL and social-card boilerplate can't drift between routes
- * or go missing on a new one.
- *
- * Before this existed, most routes only emitted `title` and `description` —
- * no canonical link, and nothing at all for Open Graph or Twitter Cards, so
- * links shared on LinkedIn/Bluesky/Slack rendered as bare text with no
- * title card or image.
+ * Shared meta-tag builder, so every route gets canonical and social-card tags
+ * that cannot drift apart or go missing.
  */
 
 /**
- * Production origin. Canonical, `og:url`, and `og:image`/`twitter:image`
- * must all be absolute — crawlers for OG/Twitter Cards silently ignore
- * relative URLs, unlike a plain `<link rel="canonical">`, which tolerates
- * one. Hardcoded rather than read from an env var: this is the one and only
- * public origin this site is ever served from, and a build-time constant
- * means every environment (including local dev) still emits real,
- * crawlable-looking tags.
+ * Production origin. Social crawlers silently drop relative og:/twitter: URLs,
+ * so every URL is absolute. A constant, so local dev emits the same tags.
  */
 export const SITE_URL = 'https://branchleft.co.uk';
 
 /**
- * No branded social-share image exists in this repo yet (only the SVG brand
- * mark served at `/logo.svg` — see logo-svg.tsx — and SVG is not reliably
- * rendered by LinkedIn/X/Slack link unfurlers, which expect a raster
- * image). This path is a deliberate placeholder: it 404s until a real
- * asset lands at `public/og-image.png` (recommended 1200x630, per the Open
- * Graph image guidance). Tracked as a placeholder in the PR description,
- * not a TODO comment, since there's no committed source string to search
- * for otherwise (a URL, unlike prose, doesn't read as obviously synthetic
- * on its own).
+ * Placeholder: 404s until public/og-image.png exists. SVG is not reliably
+ * rendered by link unfurlers, which expect a raster image.
  */
 const DEFAULT_OG_IMAGE_PATH = '/og-image.png';
 
@@ -43,10 +24,8 @@ const DEFAULT_OG_IMAGE_PATH = '/og-image.png';
 const DEFAULT_OG_IMAGE_ALT = 'branchLeft logo and wordmark on a black background';
 
 /**
- * schema.org/Organization JSON-LD, emitted on every real page (see
- * `buildMeta` below). No LocalBusiness type/address: branchLeft has no
- * public physical location to publish, and Organization is the correct type
- * for a fully-remote company.
+ * schema.org/Organization JSON-LD on every real page (see buildMeta). No
+ * LocalBusiness: there is no public physical location to publish.
  */
 const ORGANIZATION_JSON_LD = {
   '@context': 'https://schema.org',
@@ -58,14 +37,8 @@ const ORGANIZATION_JSON_LD = {
 } as const;
 
 /**
- * Google Search Console HTML-tag verification. Left unset by default: the
- * apex domain almost certainly already has a DNS-verified Search Console
- * property, and a DNS-verified *domain* property covers every
- * hostname/subdomain with no HTML tag needed. Only set this to a real value
- * (from Search Console's "HTML tag" verification method) if that check
- * comes back negative —
- * shipping a placeholder token in a live meta tag would be worse than
- * omitting the tag entirely.
+ * Search Console HTML-tag verification, unset: a DNS-verified domain property
+ * already covers every subdomain. Set only to a real token, never a placeholder.
  */
 const GOOGLE_SITE_VERIFICATION: string | undefined = undefined;
 
