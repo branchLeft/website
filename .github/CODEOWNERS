@@ -1,45 +1,72 @@
-# Code owners for gating files only (m14, branchLeft/workspace#2265).
-# No catch-all line: a file that judges or gates a merge or a deploy here is
-# owned by the admin team, and every other file is reviewed by the agent App.
+# Code owners. A merge comes to the owner only when
+# it can do harm that no later check of the owner's would catch. GitHub applies
+# the LAST matching pattern, so the order below is the rule: kept lines first,
+# then the owner's words and public content, then CODEOWNERS itself, then the
+# shared standards lines (SYNC-1), which must stay the final lines.
+# No catch-all line: every file not named here is reviewed by the agent App.
 
-# CI workflows, workflow actions, dependabot and this file: CI decides pass or
-# fail and the deploy job ships to app1. The .github/ tree is owned by the
-# standards line at the foot of this file.
-**/CODEOWNERS            @branchLeft/branchleft-admin
+# 1. The rules themselves: the guidance agents obey, the floors and the files
+# CI reads to decide pass or fail, and the tests of those rules.
+**/CLAUDE.md                          @branchLeft/branchleft-admin
+/.claude/                             @branchLeft/branchleft-admin
+/tools/floors.tsv                     @branchLeft/branchleft-admin
+/vitest.config.ts                     @branchLeft/branchleft-admin
+/playwright.config.ts                 @branchLeft/branchleft-admin
+/.pre-commit-config.yaml              @branchLeft/branchleft-admin
+/.prettierignore                      @branchLeft/branchleft-admin
+/.gitignore                           @branchLeft/branchleft-admin
+/eslint.config.js                     @branchLeft/branchleft-admin
+/tsconfig.json                        @branchLeft/branchleft-admin
+/app/lib/codeowners-ownership.test.ts @branchLeft/branchleft-admin
+/app/lib/ci-*.test.ts                 @branchLeft/branchleft-admin
 
-# Deploy: the compose stack on app1, the image that CI builds and pins there,
-# and the build context that goes into that image.
-/deploy/                 @branchLeft/branchleft-admin
-/Dockerfile              @branchLeft/branchleft-admin
-/.dockerignore           @branchLeft/branchleft-admin
-**/*deploy*              @branchLeft/branchleft-admin
+# 1 and 2. package.json: CI calls its scripts to decide pass or fail, and the
+# Dockerfile build and ci.yml run `pnpm install` with the registry token in the
+# environment, which runs its lifecycle scripts. A version bump and a scripts
+# edit cannot be told apart here, so a dependency bump touching it still comes
+# to the owner. The lockfile is not listed: it is released to the deep review.
+# pnpm-workspace.yaml holds `allowBuilds`, the list of install scripts allowed
+# to run in that same install.
+/package.json                         @branchLeft/branchleft-admin
+/pnpm-workspace.yaml                  @branchLeft/branchleft-admin
 
-# Gate-named paths and scripts at any depth (the merge script's word rules).
-**/*guard*               @branchLeft/branchleft-admin
-**/*approv*              @branchLeft/branchleft-admin
-**/scripts/              @branchLeft/branchleft-admin
+# 2. Keys, secrets and access: the registry auth file, the image build that
+# mounts the registry token, the compose stack that wires the SMTP credentials
+# into the container, and the one file that reads them to send mail (also 4).
+/.npmrc                               @branchLeft/branchleft-admin
+/Dockerfile                           @branchLeft/branchleft-admin
+/.dockerignore                        @branchLeft/branchleft-admin
+/deploy/compose.yml                   @branchLeft/branchleft-admin
+/app/lib/sendContactEmail.server.ts   @branchLeft/branchleft-admin
 
-# Test runner and coverage floors: vitest sets the coverage thresholds and
-# playwright sets retries and forbidOnly, so CI's pass or fail depends on them.
-/vitest.config.ts        @branchLeft/branchleft-admin
-/playwright.config.ts    @branchLeft/branchleft-admin
+# 5. What the public can reach: a merge to main redeploys the site (ci.yml
+# deploy on push), so the pages, components, page metadata, route table,
+# public files and brand images are owned.
+/app/routes.ts                        @branchLeft/branchleft-admin
+/app/root.tsx                         @branchLeft/branchleft-admin
+/app/routes/*.tsx                     @branchLeft/branchleft-admin
+/app/components/                      @branchLeft/branchleft-admin
+/app/lib/meta.ts                      @branchLeft/branchleft-admin
+/app/lib/page-paths.ts                @branchLeft/branchleft-admin
+/app/lib/social-links.ts              @branchLeft/branchleft-admin
+/public/                              @branchLeft/branchleft-admin
+/brand/*.png                          @branchLeft/branchleft-admin
 
-# What CI runs to decide pass or fail: the pre-commit hooks (CI skips vitest
-# there), the format and lint skip lists (prettier reads .gitignore and
-# .prettierignore), the lint rules, the typecheck config and the package
-# scripts CI calls.
-/.pre-commit-config.yaml @branchLeft/branchleft-admin
-/.prettierignore         @branchLeft/branchleft-admin
-/.gitignore              @branchLeft/branchleft-admin
-/eslint.config.js        @branchLeft/branchleft-admin
-/tsconfig.json           @branchLeft/branchleft-admin
-/package.json            @branchLeft/branchleft-admin
-/pnpm-workspace.yaml     @branchLeft/branchleft-admin
+# 8. The owner's words: marketing, product and legal text.
+/app/routes/home.tsx                  @branchLeft/branchleft-admin
+/app/routes/about.tsx                 @branchLeft/branchleft-admin
+/app/routes/solutions.*.tsx           @branchLeft/branchleft-admin
+/app/routes/privacy.tsx               @branchLeft/branchleft-admin
+/app/routes/terms.tsx                 @branchLeft/branchleft-admin
+/LICENSE                              @branchLeft/branchleft-admin
+/NOTICE.md                            @branchLeft/branchleft-admin
 
-# Standards template lines (SYNC-1): these six stay the final lines of this file.
+# 1. CODEOWNERS itself.
+**/CODEOWNERS                         @branchLeft/branchleft-admin
+
+# Standards template lines (SYNC-1): these five stay the final lines of this file.
 /.standardsignore        @branchLeft/branchleft-admin
 /.standards.mode         @branchLeft/branchleft-admin
 /.docs-lint*             @branchLeft/branchleft-admin
-/tools/floors.tsv        @branchLeft/branchleft-admin
 /.standards-db-tooling   @branchLeft/branchleft-admin
 /.github/                @branchLeft/branchleft-admin

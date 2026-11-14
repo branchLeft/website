@@ -5,13 +5,16 @@ FROM node@sha256:8996bb5821d62a8fd9bb27c1cb07462f3fdce6e47d640c6a881ead0b064ce21
 ENV CI=true
 # The base's zlib 1.3.2 carries CVE-2026-4738 (critical); 1.4-r0 is the alpine 3.24 fix.
 RUN apk add --no-cache zlib=1.4-r0
-# npm and pnpm move together: the npm bundled with node and pnpm 11.17.0 each carry
-# undici, tar and brace-expansion versions with published fixes.
-RUN npm install --global npm@12.2.2 pnpm@11.28.11
+# npm and pnpm move together: the npm bundled with node and the pnpm release each
+# carry undici, tar and brace-expansion versions with published fixes. The pnpm
+# release is read from package.json packageManager in dependencies-env, not repeated here.
+RUN npm install --global npm@12.2.2
 WORKDIR /app
 
 FROM base AS dependencies-env
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+RUN PNPM_VERSION=$(node -p "const p=require('./package.json').packageManager; if(!/^pnpm@\d+\.\d+\.\d+$/.test(p)) throw new Error('packageManager must pin pnpm: '+p); p.slice(5)") \
+    && npm install --global pnpm@"$PNPM_VERSION"
 # pnpm refuses to expand ${NODE_AUTH_TOKEN} from a project-level .npmrc (it's
 # committed to this public repo, so pnpm won't trust env expansion there —
 # see the warning at https://pnpm.io/npmrc). Put the auth line in the user

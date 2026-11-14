@@ -125,7 +125,7 @@ describe('handleRequest CSP/HSTS environment branching', () => {
   });
 
   it('does not trust a plain (non-forwarded) https:// request URL on its own — only the proxy header decides', async () => {
-    // Cloud Run terminates TLS upstream; the container always sees plain
+    // The edge proxy terminates TLS upstream; the container always sees plain
     // HTTP. A request whose URL happens to say https:// but carries no
     // x-forwarded-proto header must still be treated as insecure, or HSTS
     // would be sent on a connection that was never actually secure.

@@ -25,14 +25,12 @@
  *   components/section-nav → layout for bl-section-nav (from @branchleft/components)
  *   components/section-heading → bl-section-heading (from @branchleft/components)
  *   components/bio         → people section entry card
- *   components/back-link   → back-link styling (article page returns)
- *   components/call-to-action → CTA link styling
- *   components/solutions-showcase → tabbed solutions panel
+ *   components/avenues     → the three avenue cards (home, page endings)
  *   components/site-footer → site footer
  *   pages/home             → home route
  *   pages/about            → /about route
  *   pages/contact          → /contact route
- *   pages/article          → solutions.* article routes
+ *   pages/landing          → /publicpress and /bespoke
  *   pages/legal            → /privacy and /terms routes
  *
  * See website/CLAUDE.md → "Styling" for the full rule set.
@@ -55,14 +53,12 @@
 @import './components/section-nav.css';
 @import './components/section-heading.css';
 @import './components/bio.css';
-@import './components/back-link.css';
-@import './components/call-to-action.css';
-@import './components/solutions-showcase.css';
+@import './components/avenues.css';
 @import './components/site-footer.css';
 @import './pages/home.css';
 @import './pages/about.css';
 @import './pages/contact.css';
-@import './pages/article.css';
+@import './pages/landing.css';
 @import './pages/legal.css';
 
 /* ─── Design tokens ──────────────────────────────────────────────────────── */
@@ -115,6 +111,10 @@
   --font-wordmark: var(--bl-font-wordmark);
   --font-sans: var(--bl-font-sans);
   --font-mono: var(--bl-font-mono);
+  /* PublicPress's display face (Jost, from @branchleft/brand-publicpress,
+   * with that design system's own fallback stack), for the PublicPress
+   * name on /publicpress. */
+  --font-publicpress: 'Jost', 'Futura', 'Century Gothic', 'Avenir Next', system-ui, sans-serif;
 
   /* Sticky nav offset — the height of the primary .site-nav row. Section
    * pages use this for scroll-margin-top and for stacking the secondary
@@ -125,6 +125,6 @@
 
   /* Anchor-jump landing offset. Clears both nav bars when an anchor
    * scrolls into view. Consumed by .bl-section-heading, .about-page__section,
-   * and .article-page__section. */
+   * and .landing-section. */
   --section-scroll-offset: calc(var(--nav-offset) + 3rem);
 }

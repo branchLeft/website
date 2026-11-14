@@ -7,7 +7,7 @@ import { buildMeta } from '../lib/meta';
 
 /**
  * Abuse protection: length caps, a honeypot + minimum time-on-page check,
- * and a per-IP rate limit (in-memory, per Cloud Run instance — see
+ * and a per-IP rate limit (in-memory, per app instance — see
  * isRateLimited below).
  */
 

@@ -64,7 +64,7 @@ export default function handleRequest(
 
           responseHeaders.set('Content-Type', 'text/html');
 
-          // Cloud Run terminates TLS upstream, so the forwarded header, not the
+          // The edge proxy terminates TLS upstream, so the forwarded header, not the
           // request URL scheme, shows whether the client used HTTPS. Plain-HTTP
           // servers (pnpm start, e2e) send no such header, so isSecure is false.
           const isSecure = request.headers.get('x-forwarded-proto') === 'https';
