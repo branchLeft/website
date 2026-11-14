@@ -158,6 +158,31 @@ jobs:
             --tag website:ci \
             .
 
+  verify-package-attestations:
+    name: Verify package attestations
+    runs-on: ubuntu-latest
+    # Not yet observed: set from the first run's duration with headroom.
+    timeout-minutes: 10
+    # Exactly what the action needs: contents to read the lockfile, packages
+    # so the run's own token can download a private tarball. No write, no
+    # other secret.
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Reads every pnpm-lock.yaml in the repository. A pinned @branchleft
+      # version passes only if it is on the action's list of versions
+      # published before attestation began, or carries a signed attestation
+      # from the repository and workflow the action's table names for it.
+      - name: Verify every locked @branchleft package
+        uses: branchLeft/github-workflows/.github/actions/verify-package-attestations@231e592397f4c94668c64646c14160d9d497bdde # v1.2.2
+
   deploy:
     name: Build, push & deploy
     runs-on: ubuntu-latest
