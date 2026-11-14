@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest';
 // that is neither listed as published before attestation began nor attested.
 const JOB = 'verify-package-attestations';
 const ACTION = 'branchLeft/github-workflows/.github/actions/verify-package-attestations';
-const PINNED_SHA = '2c34b90b367fd160bb01d311d29224d250460086';
+const PINNED_SHA = '231e592397f4c94668c64646c14160d9d497bdde';
 
 const workflow = readFileSync(new URL('../../.github/workflows/ci.yml', import.meta.url), 'utf8');
 
@@ -57,7 +57,7 @@ describe('CI verify-package-attestations job', () => {
 
   it('pins the action to the release commit with its version comment, never a tag', () => {
     const [uses] = verifyUses(block ?? []);
-    expect(uses).toBe(`uses: ${ACTION}@${PINNED_SHA} # v1.2.1`);
+    expect(uses).toBe(`uses: ${ACTION}@${PINNED_SHA} # v1.2.2`);
     expect(uses).toMatch(/@[0-9a-f]{40} # v\d+\.\d+\.\d+$/);
   });
 
