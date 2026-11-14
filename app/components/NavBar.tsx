@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Logo } from '@branchleft/brand-branchleft';
 import { ThemeToggle, type Theme } from '@branchleft/components';
 
 type NavLinkItem = { to: string; label: string; end: boolean };
 type NavDropdownItem = { label: string; children: readonly NavLinkItem[] };
+
+const BLOG_URL = 'https://blog.branchleft.co.uk/';
 
 const NAV_LINKS: readonly (NavLinkItem | NavDropdownItem)[] = [
   { to: '/', label: 'Home', end: true },
@@ -176,6 +178,13 @@ export function NavBar({ theme }: { readonly theme: Theme }): React.JSX.Element 
         <ul className="site-nav__links site-nav__links--desktop">
           <NavLinksItems />
         </ul>
+
+        {/* Outside both link lists, so it shows in the bar at every width
+            without opening the menu. */}
+        <a href={BLOG_URL} className="site-nav__blog">
+          Blog
+          <ArrowUpRight size="1em" className="site-nav__blog-icon" aria-hidden="true" />
+        </a>
       </div>
     </nav>
   );

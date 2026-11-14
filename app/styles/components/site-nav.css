@@ -207,6 +207,74 @@
     opacity: 1;
   }
 
+  /* Blog: the one filled control in the bar, so it reads as a destination
+   * rather than another page link. Same height as the theme and menu
+   * buttons beside it on phones. */
+  .site-nav__blog {
+    @apply inline-flex items-center gap-1 text-xs;
+    flex-shrink: 0;
+    height: 2rem;
+    padding-inline: 0.75rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--color-brand);
+    color: var(--color-brand-fg);
+    border: 1px solid var(--color-brand);
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .site-nav__blog:hover,
+  .site-nav__blog:focus-visible {
+    background: var(--color-brand-bright);
+    border-color: var(--color-brand-bright);
+    color: var(--color-brand-fg);
+    text-decoration: none;
+  }
+
+  .site-nav__blog-icon {
+    @apply text-sm;
+    transition: transform 0.2s ease;
+  }
+
+  .site-nav__blog:hover .site-nav__blog-icon,
+  .site-nav__blog:focus-visible .site-nav__blog-icon {
+    transform: translate(1px, -1px);
+  }
+
+  /* Narrow phones: the menu button drops its text label (the summary keeps
+   * its aria-label) and the bar tightens, so the Blog link fits beside it
+   * at 360px and up without the bar scrolling sideways. */
+  @media (max-width: 479px) {
+    .site-nav__inner {
+      @apply gap-2;
+    }
+
+    .site-nav__toggle-label {
+      display: none;
+    }
+  }
+
+  /* The smallest phones (320px): narrower side padding and a Blog pill
+   * without its arrow, so the bar still fits on one line. */
+  @media (max-width: 359px) {
+    .site-nav__inner {
+      @apply px-4;
+    }
+
+    .site-nav__blog {
+      @apply px-2;
+    }
+
+    .site-nav__blog-icon {
+      display: none;
+    }
+  }
+
   /* Desktop: horizontal links, mobile disclosure hidden entirely */
   @media (min-width: 768px) {
     .site-nav__mobile-details {
@@ -216,6 +284,10 @@
     /* Same spacing from the first link as the links have between them. */
     .site-nav__theme-toggle {
       margin-inline-end: 1.25rem;
+    }
+
+    .site-nav__blog {
+      margin-inline-start: 0.75rem;
     }
 
     .site-nav__links--desktop {
