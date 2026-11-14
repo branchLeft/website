@@ -6,9 +6,8 @@ import { recordContactSendFailure } from '../lib/metrics.server';
 import { buildMeta } from '../lib/meta';
 
 /**
- * Abuse protection: length caps, a honeypot + minimum time-on-page check,
- * and a per-IP rate limit (in-memory, per app instance — see
- * isRateLimited below).
+ * Abuse protection: length caps, a honeypot, a minimum time-on-page check
+ * and a per-IP rate limit (see isRateLimited).
  */
 
 export function meta() {
@@ -21,10 +20,8 @@ export function meta() {
 }
 
 /**
- * Known category slugs — kept as a readonly tuple so we can both:
- *   - render the dropdown options from a single source, and
- *   - whitelist an inbound `?category=` query param before applying it as
- *     the default selection (guards against arbitrary/malicious values).
+ * Known category slugs: one source for the dropdown, and the whitelist for
+ * an inbound `?category=` value before it becomes the default selection.
  */
 const CATEGORIES = [
   { value: 'local-news', label: 'Local News & Independent Media' },

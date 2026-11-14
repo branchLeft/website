@@ -10,9 +10,8 @@ export type ContactSubmission = {
 const TO_ADDRESS = 'info@branchleft.co.uk';
 
 /**
- * The email's colours: the brand's dark palette, as literal values because
- * email clients support no CSS custom properties. Every text colour here
- * clears 4.5:1 on `background` (checked in the unit test).
+ * The email's colours: the brand's dark palette as literal values, since email
+ * clients support no CSS custom properties. Contrast is checked in the unit test.
  */
 const { colour } = branchLeftTokens;
 export const EMAIL_PALETTE = {
@@ -106,11 +105,8 @@ function buildHtml(submission: ContactSubmission): string {
 export async function sendContactEmail(submission: ContactSubmission): Promise<void> {
   const transport = getTransport();
   await transport.sendMail({
-    // CONTACT_SMTP_USER doubles as the visible From identity. It must be
-    // provisioned as a distinct, sender-login-mapped submission account —
-    // never TO_ADDRESS's own credential — or this both defeats the
-    // credential isolation the submission user exists for and reintroduces
-    // a from == to self-send.
+    // CONTACT_SMTP_USER is the visible From identity: it must be a distinct
+    // submission account, never TO_ADDRESS's own credential, or From equals To.
     from: `branchLeft website <${process.env.CONTACT_SMTP_USER}>`,
     to: TO_ADDRESS,
     replyTo: submission.email,

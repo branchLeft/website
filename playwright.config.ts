@@ -34,23 +34,15 @@ export default defineConfig({
       testIgnore: /no-js\.spec\.ts$/,
     },
     {
-      // Runs the full spec suite at a real mobile viewport (390px) on
-      // WebKit, the same engine iOS Safari uses — complements the explicit
-      // 375/1440 viewport overrides already present in individual specs
-      // (e.g. nav.spec.ts) by exercising every route's default viewport
-      // path too, per CLAUDE.md's 375px/1440px responsive requirement.
+      // The full suite at a 390px mobile viewport on WebKit, the engine iOS
+      // Safari uses, so every route's default viewport is exercised.
       name: 'mobile',
       use: { ...devices['iPhone 13'] },
       testIgnore: /no-js\.spec\.ts$/,
     },
     {
-      // javaScriptEnabled: false disables script execution in the page's
-      // browsing context — the same axe-core relies on to run, so a11y
-      // checks are intentionally out of scope for this project (see
-      // tests/no-js.spec.ts header comment). Scoped to its own spec file
-      // via testMatch since several assertions here are only true in a
-      // no-JS context (e.g. the solutions tabs being forced into normal
-      // flow instead of their JS-driven overlay layout).
+      // javaScriptEnabled: false stops script in the page, so axe-core cannot
+      // run here. Scoped by testMatch to the no-JS specs that assert no-JS layout.
       name: 'chromium-no-js',
       use: { ...devices['Desktop Chrome'], javaScriptEnabled: false },
       testMatch: /no-js\.spec\.ts$/,
