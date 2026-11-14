@@ -1,125 +1,42 @@
 import * as React from 'react';
 import { NavLink, useLocation } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Logo } from '@branchleft/brand-branchleft';
 import { ThemeToggle, type Theme } from '@branchleft/components';
 
 type NavLinkItem = { to: string; label: string; end: boolean };
-type NavDropdownItem = { label: string; children: readonly NavLinkItem[] };
 
-const NAV_LINKS: readonly (NavLinkItem | NavDropdownItem)[] = [
+const NAV_LINKS: readonly NavLinkItem[] = [
   { to: '/', label: 'Home', end: true },
+  { to: '/publicpress', label: 'PublicPress', end: false },
   { to: '/about', label: 'About', end: false },
-  {
-    label: 'Solutions',
-    children: [
-      { to: '/solutions/local-news', label: 'Local News', end: false },
-      { to: '/solutions/affordable-websites', label: 'Affordable Websites', end: false },
-    ],
-  },
+  { to: '/bespoke', label: 'Bespoke Solutions', end: false },
   { to: '/contact', label: 'Contact', end: false },
 ];
 
-function isDropdown(item: NavLinkItem | NavDropdownItem): item is NavDropdownItem {
-  return 'children' in item;
-}
-
-function NavDropdown({
-  item,
-  onNavigate,
-}: {
-  readonly item: NavDropdownItem;
-  readonly onNavigate?: () => void;
-}): React.JSX.Element {
-  const detailsRef = React.useRef<HTMLDetailsElement>(null);
-  const location = useLocation();
-
-  const isAnyChildActive = item.children.some((child) => {
-    if (child.end) {
-      return location.pathname === child.to;
-    }
-    return location.pathname.startsWith(child.to);
-  });
-
-  React.useEffect(() => {
-    function closeIfOutside(event: PointerEvent) {
-      if (detailsRef.current !== null && !detailsRef.current.contains(event.target as Node)) {
-        detailsRef.current.open = false;
-      }
-    }
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key !== 'Escape' || detailsRef.current?.open !== true) return;
-      detailsRef.current.open = false;
-      detailsRef.current.querySelector('summary')?.focus();
-    }
-    document.addEventListener('pointerdown', closeIfOutside);
-    document.addEventListener('keydown', closeOnEscape);
-    return () => {
-      document.removeEventListener('pointerdown', closeIfOutside);
-      document.removeEventListener('keydown', closeOnEscape);
-    };
-  }, []);
-
-  function handleLinkClick() {
-    if (detailsRef.current !== null) detailsRef.current.open = false;
-    onNavigate?.();
-  }
-
-  return (
-    <li className="site-nav__item">
-      <details ref={detailsRef} className="site-nav__details">
-        <summary
-          className={`site-nav__link site-nav__summary${isAnyChildActive ? ' site-nav__link--active' : ''}`}
-        >
-          {item.label}
-          <ChevronDown size="1em" className="site-nav__chevron chevron-icon" aria-hidden="true" />
-        </summary>
-        <ul className="site-nav__submenu">
-          {item.children.map((child) => (
-            <li key={child.to}>
-              <NavLink
-                to={child.to}
-                end={child.end}
-                className={({ isActive }) =>
-                  `site-nav__sublink${isActive ? ' site-nav__link--active' : ''}`
-                }
-                onClick={handleLinkClick}
-              >
-                {child.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </details>
-    </li>
-  );
-}
+const BLOG_URL = 'https://blog.branchleft.co.uk/';
 
 /**
- * Renders the Home/About/Solutions/Contact `<li>`s for the mobile `<details>`
- * and the desktop `<ul>`: CSS cannot reliably force `<details>` open.
+ * Renders the primary `<li>`s for the mobile `<details>` and the desktop `<ul>`:
+ * CSS cannot reliably force `<details>` open.
  */
 function NavLinksItems({ onNavigate }: { readonly onNavigate?: () => void }): React.JSX.Element {
   return (
     <>
-      {NAV_LINKS.map((item) =>
-        isDropdown(item) ? (
-          <NavDropdown key={item.label} item={item} onNavigate={onNavigate} />
-        ) : (
-          <li key={item.to} className="site-nav__item">
-            <NavLink
-              to={item.to}
-              end={item.end}
-              className={({ isActive }) =>
-                `site-nav__link${isActive ? ' site-nav__link--active' : ''}`
-              }
-              onClick={onNavigate}
-            >
-              {item.label}
-            </NavLink>
-          </li>
-        )
-      )}
+      {NAV_LINKS.map((item) => (
+        <li key={item.to} className="site-nav__item">
+          <NavLink
+            to={item.to}
+            end={item.end}
+            className={({ isActive }) =>
+              `site-nav__link${isActive ? ' site-nav__link--active' : ''}`
+            }
+            onClick={onNavigate}
+          >
+            {item.label}
+          </NavLink>
+        </li>
+      ))}
     </>
   );
 }
@@ -172,6 +89,13 @@ export function NavBar({ theme }: { readonly theme: Theme }): React.JSX.Element 
         <ul className="site-nav__links site-nav__links--desktop">
           <NavLinksItems />
         </ul>
+
+        {/* Outside both link lists, so it shows in the bar at every width
+            without opening the menu. */}
+        <a href={BLOG_URL} className="site-nav__blog">
+          Blog
+          <ArrowUpRight size="1em" className="site-nav__blog-icon" aria-hidden="true" />
+        </a>
       </div>
     </nav>
   );

@@ -4,9 +4,9 @@
  */
 export const PAGE_PATHS: readonly string[] = [
   '/',
+  '/publicpress',
   '/about',
-  '/solutions/local-news',
-  '/solutions/affordable-websites',
+  '/bespoke',
   '/contact',
   '/privacy',
   '/terms',

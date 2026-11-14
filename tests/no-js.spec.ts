@@ -5,7 +5,7 @@ import { expect, test } from '@playwright/test';
 // project. Assertions use CDP-backed locator matchers, which need no page script.
 
 test.describe('sitewide content visibility', () => {
-  for (const path of ['/', '/about', '/contact']) {
+  for (const path of ['/', '/publicpress', '/about', '/bespoke', '/contact']) {
     test(`${path} renders visible content without JS`, async ({ page }) => {
       await page.goto(path);
 
@@ -26,7 +26,7 @@ test.describe('sitewide content visibility', () => {
 test.describe('mobile nav — native <details> disclosure', () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
-  test('hamburger opens the menu and the nested Solutions disclosure works', async ({ page }) => {
+  test('the menu button opens the menu and its links navigate', async ({ page }) => {
     await page.goto('/');
 
     const mobileDetails = page.locator('.site-nav__mobile-details');
@@ -38,12 +38,8 @@ test.describe('mobile nav — native <details> disclosure', () => {
     await expect(page.getByRole('link', { name: 'Home', exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Contact', exact: true })).toBeVisible();
 
-    await mobileDetails.locator('.site-nav__summary').click();
-    await expect(page.getByRole('link', { name: 'Local News' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Affordable Websites' })).toBeVisible();
-
-    await page.getByRole('link', { name: 'Local News' }).click();
-    await expect(page).toHaveURL('/solutions/local-news');
+    await mobileDetails.getByRole('link', { name: 'PublicPress', exact: true }).click();
+    await expect(page).toHaveURL('/publicpress');
   });
 });
 
@@ -52,31 +48,20 @@ test.describe('desktop nav shows links without any interaction', () => {
 
   test('nav links are visible with no click', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('link', { name: 'About', exact: true })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Contact', exact: true })).toBeVisible();
-
     const desktopLinks = page.locator('.site-nav__links--desktop');
-    await desktopLinks.locator('.site-nav__summary').click();
-    await expect(page.getByRole('link', { name: 'Affordable Websites' })).toBeVisible();
+    for (const name of ['Home', 'PublicPress', 'About', 'Bespoke Solutions', 'Contact']) {
+      await expect(desktopLinks.getByRole('link', { name, exact: true })).toBeVisible();
+    }
   });
 });
 
-test.describe('Solutions tabs (About page)', () => {
-  test('all three panels are visible and reachable without JS', async ({ page }) => {
-    await page.goto('/about');
-
-    const panels: readonly [id: string, href: string][] = [
-      ['solutions-panel-local-news', '/solutions/local-news'],
-      ['solutions-panel-affordable-websites', '/solutions/affordable-websites'],
-      ['solutions-panel-bespoke-technology', '/contact?category=bespoke-technology'],
-    ];
-
-    for (const [id, href] of panels) {
-      const panel = page.locator(`#${id}`);
-      await expect(panel).toHaveCSS('opacity', '1');
-      await expect(panel).toHaveCSS('pointer-events', 'auto');
-      await expect(panel.getByRole('link')).toHaveAttribute('href', href);
-    }
+test.describe('home avenues', () => {
+  test('the three avenue cards are plain links', async ({ page }) => {
+    await page.goto('/');
+    const cards = page.locator('.avenues .avenue__link');
+    await expect(cards).toHaveCount(3);
+    await cards.nth(2).click();
+    await expect(page).toHaveURL('/bespoke');
   });
 });
 
@@ -100,27 +85,6 @@ test.describe('Values cloud (About page)', () => {
     await expect(firstItem).toHaveAttribute('open', '');
     await expect(firstItem.locator('.bl-values-cloud__accordion-body')).toBeVisible();
     await expect(firstItem.locator('.bl-values-cloud__accordion-body')).not.toHaveText('');
-  });
-});
-
-test.describe('Affordable Websites feature accordion', () => {
-  test('the initially-open group is visible and the rest are reachable without JS', async ({
-    page,
-  }) => {
-    await page.goto('/solutions/affordable-websites');
-
-    // Server-rendered `open` attribute drives AccordionItem's shipped CSS
-    // directly — no JS needed for the initially-open group to render
-    // expanded, or for a closed group's <summary> to reveal the rest.
-    const openPanel = page.locator('details[data-accent="design"] .bl-accordion-item__panel-inner');
-    await expect(openPanel).toHaveCSS('opacity', '1');
-    await expect(openPanel.locator('li').first()).toBeVisible();
-
-    const closedGroup = page.locator('details[data-accent="quality"]');
-    await expect(closedGroup).not.toHaveAttribute('open', '');
-    await closedGroup.locator('summary').click();
-    await expect(closedGroup).toHaveAttribute('open', '');
-    await expect(closedGroup.locator('.bl-accordion-item__panel-inner li').first()).toBeVisible();
   });
 });
 

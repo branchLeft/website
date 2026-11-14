@@ -51,13 +51,13 @@ describe('Dockerfile pins', () => {
     expect(dockerfile).toMatch(/^RUN apk add --no-cache zlib=1\.4-r0$/m);
   });
 
-  it('pins the global npm and pnpm releases that carry the fixed bundled packages', () => {
-    expect(dockerfile).toMatch(/^RUN npm install --global npm@12\.2\.2 pnpm@11\.28\.11$/m);
-    expect(dockerfile).not.toMatch(/pnpm@11\.17\.0/);
+  it('pins the global npm release that carries the fixed bundled packages', () => {
+    expect(dockerfile).toMatch(/^RUN npm install --global npm@12\.2\.2$/m);
   });
 
-  it('keeps the image pnpm equal to the repository packageManager', () => {
-    expect(packageJson.packageManager).toBe('pnpm@11.28.11');
-    expect(dockerfile).toContain(`pnpm@${packageJson.packageManager.split('@')[1]}`);
+  it('takes the pnpm release from package.json packageManager, never a literal in the Dockerfile', () => {
+    expect(packageJson.packageManager).toMatch(/^pnpm@\d+\.\d+\.\d+$/);
+    expect(dockerfile).not.toMatch(/pnpm@\d+\.\d+\.\d+/);
+    expect(dockerfile).toMatch(/^RUN .*require\('\.\/package\.json'\)\.packageManager/m);
   });
 });
