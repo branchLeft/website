@@ -1,7 +1,6 @@
 /**
- * Social profile URLs, shared between `SocialLinksItems.tsx` (renders the
- * footer/home icon links) and `meta.ts` (feeds `sameAs` in the Organization
- * JSON-LD) so there's exactly one list instead of two that can drift.
+ * Social profile URLs, shared by SocialLinksItems.tsx and the Organization
+ * JSON-LD `sameAs` in meta.ts, so there is one list that cannot drift.
  */
 export const SOCIAL_LINKS: readonly { href: string; label: string }[] = [
   { href: 'https://bsky.app/profile/branchleft.bsky.social', label: 'Bluesky' },

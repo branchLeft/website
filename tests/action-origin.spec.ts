@@ -1,10 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-// In production the server sees `http://` requests from the TLS edge while
-// browsers send `Origin: https://branchleft.co.uk`. React Router refuses an
-// action whose Origin differs from the request's own, unless the host is in
-// `allowedActionOrigins` (react-router.config.ts). These posts reproduce that
-// mismatch against the local http server.
+// Production sees http:// from the TLS edge while browsers send
+// Origin: https://branchleft.co.uk, which React Router refuses unless the host
+// is in allowedActionOrigins. These posts reproduce that mismatch locally.
 const SITE = 'https://branchleft.co.uk';
 const FOREIGN = 'https://evil.example';
 

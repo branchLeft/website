@@ -12,7 +12,8 @@
     "test:unit": "vitest",
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
-    "lint": "eslint app --ext .ts,.tsx --fix",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
     "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore --ignore-path node_modules/@branchleft/prettier-config/prettierignore",
     "format:check": "prettier --check . --ignore-path .gitignore --ignore-path .prettierignore --ignore-path node_modules/@branchleft/prettier-config/prettierignore",
     "prepare": "[ \"$CI\" = \"true\" ] || pre-commit install"

@@ -1,9 +1,7 @@
 #!/usr/bin/env node
-// Standalone Prometheus endpoint for the counter server/metrics.mjs
-// maintains. Its own Compose service (deploy/compose.yml) so the port can
-// be bound to app1's private address independently of the app container's
-// own port -- nothing about this listener runs through Caddy or the
-// website's own hostnames.
+// Standalone Prometheus endpoint for the counter in server/metrics.mjs. Its own
+// Compose service, so its port binds independently of the app container. Nothing
+// here runs through Caddy or the website's hostnames.
 import { createServer } from 'node:http';
 import { renderMetrics } from './metrics.mjs';
 

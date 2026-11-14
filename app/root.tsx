@@ -54,11 +54,8 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-// Fallback title/description for any request that matches no route (e.g. a
-// 404) and so never reaches a leaf route's own meta(). React Router's <Meta/>
-// lets the deepest matched route's meta win for shared keys like `title`, so
-// this has no effect on ordinary pages — each still renders only its own
-// leaf-level title.
+// Fallback title and description for requests that match no route (e.g. a 404).
+// A leaf route's meta() wins for shared keys, so this does not affect other pages.
 export function meta() {
   return [
     { title: 'Page not found — branchLeft' },
@@ -72,13 +69,8 @@ export function meta() {
 }
 
 /**
- * Inherited by every route that exports no `headers()` of its own (none
- * does), so this set applies site-wide, resource routes included.
- *
- * The CSP here carries no nonce: this runs before rendering, when none
- * exists. `app/entry.server.tsx` overrides it with the nonce-bearing
- * version for HTML documents; resource routes render no scripts, so this
- * nonce-less policy is the right one for them.
+ * Inherited by every route without its own headers() export, resource routes
+ * included. The CSP here has no nonce; entry.server.tsx overrides it for HTML.
  */
 export const headers: Route.HeadersFunction = () => buildSecurityHeaders();
 

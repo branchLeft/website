@@ -119,8 +119,46 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # The browser build is tied to the locked Playwright version, so the cache
+      # is keyed on that version alone, with no restore-keys fallback.
+      - name: Get Playwright version
+        id: playwright-version
+        run: node -p "'version=' + require('@playwright/test/package.json').version" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      # The apt step is the one that hung on a runner-network fault, so the
+      # system dependencies get their own timeout and bounded retry. The browser
+      # download is a separate step below and does not use apt.
+      - name: Install Playwright system dependencies
+        timeout-minutes: 7
+        run: |
+          for attempt in 1 2 3; do
+            if timeout 120 pnpm exec playwright install-deps chromium webkit; then
+              exit 0
+            fi
+            echo "::warning::install-deps attempt $attempt failed"
+            if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
+          done
+          echo "::error::install-deps failed after 3 attempts"
+          exit 1
+
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium webkit
+        timeout-minutes: 7
+        run: |
+          for attempt in 1 2 3; do
+            if timeout 120 pnpm exec playwright install chromium webkit; then
+              exit 0
+            fi
+            echo "::warning::browser install attempt $attempt failed"
+            if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
+          done
+          echo "::error::browser install failed after 3 attempts"
+          exit 1
 
       - name: End-to-end tests
         run: pnpm test:e2e
@@ -173,6 +211,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
+      attestations: write
     # Observed 1.42-2.88min over the last 5 successful runs (p95 2.88min) --
     # small sample (only push-to-main triggers this job), so a wider margin
     # than the p95-driven jobs above.
@@ -221,6 +261,23 @@ jobs:
             exit 1
           fi
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+
+      # Signs the pushed digest with a keyless GitHub artifact attestation, then
+      # verifies it with the identity below and checks that a wrong identity is
+      # refused. It sits before every SSH step, so a digest that did not verify
+      # never reaches app1. The identity is a literal on purpose: read from this
+      # run's own `github.workflow_ref` it would agree with itself and prove
+      # nothing. `id-token: write` mints the signing certificate and
+      # `attestations: write` stores the attestation; both are granted to this
+      # job alone. The same value, with the source ref `refs/heads/main`, is what
+      # app1's branchleft-deploy checks once the image is registered there.
+      - name: Attest and verify the pushed image
+        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@77506b6d4603ef432bbdec734139fec91e5bea47 # v1.1.0
+        with:
+          image: ghcr.io/branchleft/website
+          digest: ${{ steps.digest.outputs.digest }}
+          signer-workflow: branchLeft/website/.github/workflows/ci.yml
+          repo: branchLeft/website
 
       # The private key never touches disk longer than this job needs it, and
       # never appears in a log: it comes from a secret, not from `run:`

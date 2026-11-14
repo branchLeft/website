@@ -5,11 +5,8 @@ import { buildMeta, SITE_URL } from './meta';
 type MetaEntries = ReturnType<typeof buildMeta>;
 type MetaEntry = Record<string, unknown>;
 
-// Small lookup helpers (rather than a generic `predicate`-taking finder) —
-// a standalone function-type parameter here trips the base `no-unused-vars`
-// rule on its type-only parameter name (a known false positive when
-// `@typescript-eslint/no-unused-vars` runs alongside the base rule, as this
-// repo's eslint.config.js does), so key/value lookups sidestep it entirely.
+// Key/value lookup helpers, not a predicate-taking finder: a function-type
+// parameter trips the base no-unused-vars rule (a known false positive here).
 function findByKey(entries: MetaEntries, key: string): MetaEntry | undefined {
   return entries.find((entry) => key in (entry as MetaEntry)) as MetaEntry | undefined;
 }
