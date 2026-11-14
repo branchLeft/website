@@ -1,0 +1,130 @@
+/* ─── Avenues ────────────────────────────────────────────────────────────── */
+/* The three ways into the site (Avenues.tsx): large cards on the home page,
+ * a compact row closing each avenue page. Each card is one link. */
+@layer components {
+  [data-avenue='publicpress'] {
+    --avenue-accent: var(--bl-value-society);
+  }
+  [data-avenue='about'] {
+    --avenue-accent: var(--bl-value-sustainability);
+  }
+  [data-avenue='bespoke'] {
+    --avenue-accent: var(--bl-value-opensource);
+  }
+
+  /* The accent as text colour: pulled toward the foreground so it clears
+   * 4.5:1 on the page in both themes (the bare accent does not on light). */
+  [data-avenue] {
+    --avenue-accent-text: color-mix(in srgb, var(--avenue-accent) 70%, var(--color-fg));
+  }
+
+  .avenues {
+    @apply grid gap-4 w-full pl-0;
+    list-style: none;
+  }
+
+  .avenue {
+    display: flex;
+  }
+
+  .avenue__link {
+    @apply flex flex-col gap-3 w-full p-6;
+    position: relative;
+    color: var(--color-fg);
+    text-decoration: none;
+    border: 1px solid var(--color-hairline);
+    border-top: 4px solid var(--avenue-accent);
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--avenue-accent) 16%, transparent),
+      transparent 75%
+    );
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .avenue__link:hover,
+  .avenue__link:focus-visible {
+    color: var(--color-fg);
+    text-decoration: none;
+    border-color: var(--avenue-accent);
+    transform: translateY(-3px);
+  }
+
+  .avenue__title {
+    @apply text-2xl;
+  }
+
+  /* The PublicPress wordmark in place of a text title. */
+  .avenue__wordmark {
+    @apply flex h-9;
+  }
+
+  .avenue__line {
+    @apply text-sm flex-1;
+    color: var(--colour-fg-muted);
+  }
+
+  .avenue__arrow {
+    @apply text-2xl;
+    font-family: var(--font-mono);
+    color: var(--avenue-accent);
+    transition: transform 0.2s ease;
+  }
+
+  .avenue__link:hover .avenue__arrow,
+  .avenue__link:focus-visible .avenue__arrow {
+    transform: translateX(4px);
+  }
+
+  .avenues--compact .avenue__link {
+    @apply p-5 gap-2;
+  }
+
+  .avenues--compact .avenue__wordmark {
+    @apply h-7;
+  }
+
+  .avenues--compact .avenue__title {
+    @apply text-lg;
+  }
+
+  .next-steps {
+    @apply flex flex-col gap-4 w-full pt-8;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .next-steps__heading {
+    @apply text-xs;
+    color: var(--colour-fg-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .avenue__link,
+    .avenue__arrow {
+      transition: none;
+    }
+
+    .avenue__link:hover,
+    .avenue__link:focus-visible {
+      transform: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .avenues {
+      grid-template-columns: repeat(3, 1fr);
+      @apply gap-6;
+    }
+
+    .avenues--compact {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .avenue__link {
+      @apply p-8;
+    }
+  }
+}

@@ -2,12 +2,16 @@ import { type RouteConfig, index, route } from '@react-router/dev/routes';
 
 export default [
   index('routes/home.tsx'),
+  route('publicpress', 'routes/publicpress.tsx'),
   route('about', 'routes/about.tsx'),
-  route('solutions/local-news', 'routes/solutions.local-news.tsx'),
-  route('solutions/affordable-websites', 'routes/solutions.affordable-websites.tsx'),
+  route('bespoke', 'routes/bespoke.tsx'),
   route('contact', 'routes/contact.tsx'),
   route('privacy', 'routes/privacy.tsx'),
   route('terms', 'routes/terms.tsx'),
+  // The pages these addresses served were folded into /publicpress and
+  // /bespoke; links already shared keep working through a permanent redirect.
+  route('solutions/local-news', 'routes/moved.tsx', { id: 'moved-local-news' }),
+  route('solutions/affordable-websites', 'routes/moved.tsx', { id: 'moved-affordable-websites' }),
   // Resource route: renders the Logo React component to an SVG response so
   // the site favicon and any /logo.svg reference stay in sync with the
   // published component.

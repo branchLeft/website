@@ -2,15 +2,8 @@ import { SITE_URL } from '../lib/meta';
 import { PAGE_PATHS } from '../lib/page-paths';
 
 /**
- * Resource route that serves a generated `sitemap.xml`, mirroring the
- * pattern in logo-svg.tsx (a route module that returns a non-HTML
- * `Response` instead of rendering a page).
- *
- * No `<lastmod>` per URL: a build-time timestamp would mark every page as
- * "just changed" on every deploy regardless of real content changes — a
- * false freshness signal that's arguably worse than omitting the field —
- * and a git-derived per-file date is more moving parts than this low-churn
- * static site's sitemap needs.
+ * Serves a generated sitemap.xml as a non-HTML Response, like logo-svg.tsx.
+ * No per-URL lastmod: a build timestamp would mark every page as freshly changed.
  */
 function buildSitemapXml(): string {
   const urlEntries = PAGE_PATHS.map(

@@ -3,8 +3,16 @@ import routes from '../routes';
 import { PAGE_PATHS } from './page-paths';
 
 // Routes deliberately excluded from PAGE_PATHS/the sitemap: resource routes
-// (see page-paths.ts's module comment) and the catch-all 404.
-const RESOURCE_ROUTE_PATHS = new Set(['logo.svg', 'sitemap.xml', 'theme', '*']);
+// (see page-paths.ts's module comment), the catch-all 404, and old addresses
+// that only redirect (routes/moved.tsx).
+const RESOURCE_ROUTE_PATHS = new Set([
+  'logo.svg',
+  'sitemap.xml',
+  'theme',
+  '*',
+  'solutions/local-news',
+  'solutions/affordable-websites',
+]);
 
 function routeConfigPaths(): string[] {
   return routes

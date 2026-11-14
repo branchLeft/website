@@ -2,22 +2,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
 
 /**
- * Waits for any in-flight CSS/Web Animations on the page to finish, so axe
- * measures settled colours rather than a mid-animation blend.
- *
- * `playwright.config.ts` sets `reducedMotion: 'reduce'`, and app components
- * zero their framer-motion durations in response (see
- * `usePrefersReducedMotion`), so this should normally resolve immediately —
- * it's a defensive backstop for any animation that doesn't check the
- * preference, not the primary mechanism.
- *
- * `document.getAnimations()` is polled across a few frames rather than
- * checked once: framer-motion registers its WAAPI animation from an effect
- * that fires a tick after mount, so a single synchronous check can catch the
- * gap before that animation exists yet, return an empty list, and let axe
- * run while the animation is about to start (or still correcting its
- * duration post-hydration). That race is timing-sensitive enough to pass
- * locally and flake under CI's slower/shared runners.
+ * Waits for in-flight animations so axe measures settled colours. Polls several
+ * frames: framer-motion registers its animation a tick after mount, so one check races it.
  */
 async function waitForAnimationsSettled(page: Page): Promise<void> {
   await page.evaluate(async () => {

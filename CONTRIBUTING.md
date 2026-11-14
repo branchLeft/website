@@ -15,7 +15,7 @@ pnpm install --frozen-lockfile
 cp .env.example .env   # fill in any values you need locally
 ```
 
-`website` depends on `@branchleft/components`, which is currently published only to GitHub Packages. If you don't have a GitHub PAT with `read:packages` configured (see [.npmrc](.npmrc)), `pnpm install` will fail. **This means CI on a fork PR will currently fail at the install step** — a maintainer will run checks locally until this is resolved (tracked in `BACKLOG.md`). Don't let this stop you from opening the PR.
+`website` depends on `@branchleft/components`, which is currently published only to GitHub Packages. If you don't have a GitHub PAT with `read:packages` configured (see [.npmrc](.npmrc)), `pnpm install` will fail. **This means CI on a fork PR will currently fail at the install step** — a maintainer will run checks locally until this is resolved. Don't let this stop you from opening the PR.
 
 ## Checks CI runs on every PR
 

@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 # No id-token: write at the workflow level any more -- nothing in this
-# workflow federates to GCP. Production deploys pin a GHCR image digest onto
+# workflow federates to an external cloud. Production deploys pin a GHCR image digest onto
 # app1 over SSH instead (the `deploy` job below); `packages: write` for that
 # job is granted there, not here.
 permissions:
