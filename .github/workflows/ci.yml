@@ -82,7 +82,10 @@ jobs:
 
   e2e:
     name: End-to-end tests
-    runs-on: ubuntu-latest
+    # ubuntu-latest became 26.04 on 15 Nov 2026; Playwright 1.65's WebKit build
+    # needs libicudata.so.74 (24.04) and fails to launch there. Move back to
+    # ubuntu-latest once Playwright ships a WebKit build for 26.04.
+    runs-on: ubuntu-24.04
     # Observed 2.05-2.72min over the last 20 successful runs (p95 2.55min).
     timeout-minutes: 15
 
