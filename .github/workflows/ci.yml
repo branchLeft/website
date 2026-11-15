@@ -82,7 +82,10 @@ jobs:
 
   e2e:
     name: End-to-end tests
-    runs-on: ubuntu-latest
+    # ubuntu-latest became 26.04 on 15 Nov 2026; Playwright 1.65's WebKit build
+    # needs libicudata.so.74 (24.04) and fails to launch there. Move back to
+    # ubuntu-latest once Playwright ships a WebKit build for 26.04.
+    runs-on: ubuntu-24.04
     # Observed 2.05-2.72min over the last 20 successful runs (p95 2.55min).
     timeout-minutes: 15
 
@@ -272,7 +275,7 @@ jobs:
       # job alone. The same value, with the source ref `refs/heads/main`, is what
       # app1's branchleft-deploy checks once the image is registered there.
       - name: Attest and verify the pushed image
-        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@77506b6d4603ef432bbdec734139fec91e5bea47 # v1.1.0
+        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@231e592397f4c94668c64646c14160d9d497bdde # v1.2.2
         with:
           image: ghcr.io/branchleft/website
           digest: ${{ steps.digest.outputs.digest }}
