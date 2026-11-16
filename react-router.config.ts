@@ -1,22 +1,13 @@
 import type { Config } from '@react-router/dev/config';
 
 /**
- * Framework Mode with SSR always on, manual routes in `app/routes.ts`, no SPA
- * mode: the committed decisions are in website/CLAUDE.md, "Routing Strategy".
- *
- * Pre-rendering is off. To opt a route in, add `prerender: ['/path']` (see
- * node_modules/react-router/docs/how-to/pre-rendering.md), but not before
- * fixing what it breaks: prerendered pages ship with no CSP, HSTS or
- * X-Frame-Options, and contact.tsx's anti-bot check fails silently. See
- * KNOWN_ISSUES.md.
+ * Framework Mode, SSR on, routes in app/routes.ts, no SPA mode.
+ * Pre-rendering is off: prerendered pages lack CSP, HSTS and X-Frame-Options.
  */
 export default {
   ssr: true,
-  // React Router refuses an action whose `Origin` differs from the request
-  // URL's origin. Behind the TLS-terminating edge the server sees
-  // `http://branchleft.co.uk` while browsers send `https://branchleft.co.uk`,
-  // so every JavaScript form submission (a fetch to `<route>.data`) was
-  // refused with a 400. Only the site's own host is allowed; `www.`
-  // redirects to it before any form renders.
+  // Behind the TLS edge the server sees http:// while browsers send https://,
+  // so React Router refused every JS form submission with a 400. Only the
+  // site's own host is allowed; www. redirects to it first.
   allowedActionOrigins: ['branchleft.co.uk'],
 } satisfies Config;

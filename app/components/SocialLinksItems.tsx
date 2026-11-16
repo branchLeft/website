@@ -16,10 +16,8 @@ const ICONS: Record<string, React.ComponentType<{ readonly className?: string }>
 };
 
 /**
- * Renders bare `<li>`s for each social link — no `<ul>` of its own — so
- * callers can embed the icons inside whichever list they already own
- * (site-footer__links, home-socials, …), matching the fragment-of-`<li>`s
- * pattern NavBar.tsx uses for NavLinksItems.
+ * Renders bare `<li>`s for each social link, with no `<ul>` of its own, so
+ * callers can embed them in whichever list they already own.
  */
 export function SocialLinksItems({
   linkClassName,

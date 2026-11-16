@@ -1,35 +1,23 @@
 /**
- * Security response headers, shared between `root.tsx` (`headers()` export,
- * runs before rendering — no nonce available yet) and `entry.server.tsx`
- * (runs during rendering — generates the per-request nonce and overrides
- * the `Content-Security-Policy` header with the nonce-bearing version).
- *
- * See `app/entry.server.tsx` for why the nonce can't be produced here.
+ * Security response headers, shared by root.tsx (headers(), no nonce yet) and
+ * entry.server.tsx (adds the per-request nonce CSP). See entry.server.tsx.
  */
 
 /**
- * `style-src 'unsafe-inline'` is a deliberate, scoped compromise: framer-motion
- * (via `PageTransition` in root.tsx, and `SolutionsShowcase`) sets inline
- * `style=""` attributes for its animated initial state, SSR'd on every route
- * — see the comment block in `app/styles/no-js.css` for why that SSR'd inline
- * style exists and must not be removed. Inline styles can't execute script,
- * so this doesn't weaken the policy's protection against XSS; only
- * `script-src` (nonce-gated, no 'unsafe-inline') matters for that.
+ * `style-src 'unsafe-inline'` is a scoped compromise for framer-motion's inline
+ * styles (see app/styles/no-js.css); inline styles cannot run script.
  */
 const STYLE_SRC = "'self' 'unsafe-inline'";
 
 /**
- * Nonce must be a base64 or URL-safe token, so no quote, semicolon or space
- * can end the source. 22 characters is the unpadded length of 16 random
- * bytes (128 bits, CSP3's recommendation); the real caller sends 24.
+ * Nonce is base64 or URL-safe, so no quote, semicolon or space can end it.
+ * 22 characters is the unpadded length of 16 random bytes.
  */
 const NONCE_PATTERN = /^[A-Za-z0-9+/_-]{22,128}={0,2}$/;
 
 /**
- * `isSecure` defaults to `true`, production's normal case. Only the caller
- * that knows the request scheme (`app/entry.server.tsx`) passes it: sending
- * `upgrade-insecure-requests` over plain HTTP breaks asset loading, since
- * nothing listens on TLS there (`pnpm start`, the e2e test server).
+ * `isSecure` defaults to true. Only entry.server.tsx passes it: over plain HTTP,
+ * `upgrade-insecure-requests` breaks asset loading (nothing listens on TLS).
  */
 export function buildContentSecurityPolicy(nonce?: string, isSecure = true): string {
   if (nonce !== undefined && (typeof nonce !== 'string' || !NONCE_PATTERN.test(nonce))) {
@@ -76,9 +64,8 @@ const PERMISSIONS_POLICY = [
 ].join(', ');
 
 /**
- * The static (nonce-independent) header set. Applies to every response —
- * document requests and resource routes (e.g. `/logo.svg`) alike — via
- * root.tsx's `headers()` export.
+ * The static header set, nonce-independent. Applies to every response, via
+ * root.tsx's headers() export.
  */
 export function buildSecurityHeaders(nonce?: string): Record<string, string> {
   return {

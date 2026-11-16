@@ -2,9 +2,8 @@ import type { Page } from '@playwright/test';
 import { THEME_COOKIE_NAME } from '@branchleft/components';
 
 /**
- * Gives the browser the theme cookie a returning visitor would already have
- * (rather than clicking through the switch every time), then reloads so the
- * server renders `<html data-theme>` from it.
+ * Gives the browser the theme cookie a returning visitor would have, then
+ * reloads so the server renders the theme from it.
  */
 export async function setStoredTheme(page: Page, theme: 'light' | 'dark'): Promise<void> {
   const url = new URL(page.url());
@@ -15,9 +14,8 @@ export async function setStoredTheme(page: Page, theme: 'light' | 'dark'): Promi
 }
 
 /**
- * Opens every `<details>` on the page (the mobile menu, the Solutions
- * submenu, accordions), so axe also measures colours that only appear once
- * something is open.
+ * Opens every `<details>` on the page, so axe also measures colours that only
+ * appear once something is open.
  */
 export async function openEverything(page: Page): Promise<void> {
   await page.evaluate(() => {
@@ -26,10 +24,8 @@ export async function openEverything(page: Page): Promise<void> {
 }
 
 /**
- * Puts the contact form into its error state by submitting a message the
- * server rejects. Browser validation is switched off first so the request
- * actually reaches the server, and the wait clears the form's minimum
- * fill time (anything faster is treated as a bot and silently accepted).
+ * Submits a message the server rejects, so the contact form shows its error.
+ * Browser validation is off, and the wait clears the minimum fill time.
  */
 export async function showContactError(page: Page): Promise<void> {
   await page.goto('/contact');

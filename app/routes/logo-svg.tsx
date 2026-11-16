@@ -2,10 +2,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Logo } from '@branchleft/brand-branchleft';
 
 /**
- * Resource route that renders the `Logo` React component to an SVG file so
- * the same component that drives on-page brand marks also serves as the
- * favicon at `/logo.svg`. Eliminates the need to hand-maintain a static
- * `public/logo.svg` in lockstep with the component.
+ * Resource route that renders the Logo component to an SVG, so one component
+ * drives both the favicon at /logo.svg and the on-page brand marks.
  */
 export function loader(): Response {
   const body = renderToStaticMarkup(

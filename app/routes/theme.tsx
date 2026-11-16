@@ -5,10 +5,8 @@ import type { Route } from './+types/theme';
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 /**
- * The site's own origin as the visitor sees it. Behind the TLS-terminating
- * proxy the request URL is plain HTTP, so `x-forwarded-proto` decides the
- * scheme — otherwise an HTTPS `Referer` would never match and every
- * fallback redirect would land on `/`.
+ * The site's origin as the visitor sees it. The TLS proxy hides the scheme,
+ * so x-forwarded-proto decides it; otherwise no HTTPS Referer would match.
  */
 function publicOrigin(request: Request): { origin: string; isSecure: boolean } {
   const url = new URL(request.url);
@@ -18,10 +16,8 @@ function publicOrigin(request: Request): { origin: string; isSecure: boolean } {
 }
 
 /**
- * The no-JavaScript half of the theme switch: `ThemeToggle` posts the theme
- * it wants here, and the reply stores it and sends the visitor back to the
- * page they were on. With JavaScript the component never submits; it writes
- * the same cookie itself.
+ * The no-JavaScript half of the theme switch: the form posts the theme here,
+ * and the reply stores it and returns the visitor to their page.
  */
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   // A body that is not a form (none at all, or JSON) is a bad request, not a

@@ -1,5 +1,20 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import type { Route } from './+types/contact';
+
+const routerState = vi.hoisted(() => ({
+  actionData: undefined as unknown,
+}));
+
+vi.mock('react-router', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('react-router')>()),
+  useSearchParams: () => [new URLSearchParams('category=general')],
+  useActionData: () => routerState.actionData,
+  useNavigation: () => ({ state: 'idle' }),
+  Form: (props: { children?: unknown } & Record<string, unknown>) =>
+    createElement('form', props, props.children as never),
+}));
 
 vi.mock('../lib/sendContactEmail.server', () => ({
   sendContactEmail: vi.fn(),
@@ -18,8 +33,10 @@ import {
   MIN_SUBMIT_DELAY_MS,
   RATE_LIMIT_MAX_SUBMISSIONS,
   action,
+  default as Contact,
   isKnownCategory,
   loader,
+  meta,
 } from './contact';
 
 describe('isKnownCategory', () => {
@@ -216,5 +233,62 @@ describe('action', () => {
 
     expect(result).toEqual({ ok: true });
     expect(sendContactEmail).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the map bounded across many distinct IPs without rate-limiting them', async () => {
+    for (let i = 0; i < 501; i += 1) {
+      const result = await action(actionArgs(makeRequest(buildFormData(), nextIp())));
+      expect(result.ok).toBe(true);
+    }
+  });
+
+  it('buckets a request with no forwarded-for header under one shared fallback key', async () => {
+    const request = new Request('http://localhost/contact', {
+      method: 'POST',
+      body: buildFormData(),
+    });
+    const result = await action(actionArgs(request));
+
+    expect(result).toEqual({ ok: true });
+  });
+});
+
+describe('meta', () => {
+  it('sets a contact-specific title', () => {
+    const result = meta() as Array<Record<string, unknown>>;
+    expect(JSON.stringify(result)).toContain('Contact');
+  });
+});
+
+describe('Contact page', () => {
+  it('renders the form with the category from the query string preselected', () => {
+    routerState.actionData = undefined;
+    const html = renderToStaticMarkup(
+      createElement(Contact, { loaderData: { renderedAt: 0 } } as never)
+    );
+
+    expect(html).toContain('Contact Us');
+    expect(html).toContain('name="email"');
+    expect(html).toContain('name="renderedAt"');
+  });
+
+  it('shows the success message once the action has accepted the submission', () => {
+    routerState.actionData = { ok: true };
+    const html = renderToStaticMarkup(
+      createElement(Contact, { loaderData: { renderedAt: 0 } } as never)
+    );
+
+    expect(html).toContain('your message has been sent');
+    expect(html).not.toContain('name="email"');
+  });
+
+  it('shows the action error inside an alert on the form', () => {
+    routerState.actionData = { ok: false, error: 'Please enter a valid email address.' };
+    const html = renderToStaticMarkup(
+      createElement(Contact, { loaderData: { renderedAt: 0 } } as never)
+    );
+
+    expect(html).toContain('role="alert"');
+    expect(html).toContain('Please enter a valid email address.');
   });
 });
