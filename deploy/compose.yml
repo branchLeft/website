@@ -12,6 +12,12 @@ name: website
 
 services:
   website:
+    # Bounded log files (doc 14 s18.2): Docker's json-file default is unbounded.
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
     image: ${IMAGE}
     restart: unless-stopped
     environment:
@@ -48,6 +54,12 @@ services:
     cpu_shares: 512
 
   website-metrics:
+    # Bounded log files (doc 14 s18.2): Docker's json-file default is unbounded.
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
     image: ${IMAGE}
     restart: unless-stopped
     command: ['node', 'server/metrics-server.mjs']
