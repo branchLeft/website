@@ -45,12 +45,17 @@ export default [
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescript.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: {
       '@typescript-eslint': typescript.plugin,
     },
     rules: {
       ...typescript.configs.recommended.rules,
+      '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
