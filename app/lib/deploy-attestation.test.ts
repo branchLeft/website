@@ -1,8 +1,8 @@
 // @vitest-environment node
 
-import { readFileSync } from 'node:fs';
-
 import { describe, expect, it } from 'vitest';
+
+import { readRepoFile } from './test-helpers/repo-text';
 
 // The deploy job signs the image it pushed and proves the signature before any
 // step that reaches app1, so a digest that was not built and attested by this
@@ -14,7 +14,7 @@ const ATTEST_ACTION =
   /^branchLeft\/github-workflows\/\.github\/actions\/attest-and-verify-image@[0-9a-f]{40}\b/;
 const DEPLOY_JOB = 'deploy';
 
-const source = readFileSync(new URL(`../../${WORKFLOW_PATH}`, import.meta.url), 'utf8');
+const source = readRepoFile(WORKFLOW_PATH);
 
 // Comment-only lines are dropped, so a step that is only commented out does not count.
 const lines = source.split('\n').filter((line) => !/^\s*#/.test(line));
