@@ -13,9 +13,8 @@ export function meta() {
 }
 
 /*
- * Every sentence here is carried over from the former About "Solutions"
- * panel and the former Affordable Websites page, shortened to the parts a
- * reader needs to decide whether to get in touch.
+ * Carried over from the former About "Solutions" panel and the former
+ * Affordable Websites page, shortened to what a reader needs to decide.
  */
 export default function Bespoke(): React.JSX.Element {
   return (
