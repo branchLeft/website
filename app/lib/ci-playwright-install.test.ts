@@ -1,43 +1,15 @@
 // @vitest-environment node
 
-import { readFileSync } from 'node:fs';
-
 import { describe, expect, it } from 'vitest';
+
+import { ciJobBlock, ciStepBlock, readRepoFile } from './test-helpers/repo-text';
 
 // The e2e job's Playwright install. The system dependencies (apt) and the
 // browser download each run as their own step, with a step timeout and a
 // bounded retry that fails closed, so a runner-network fault cannot hang the job.
 const JOB = 'e2e';
-const WORKFLOW_STEP = /^ {6}- /;
 
-const workflow = readFileSync(new URL('../../.github/workflows/ci.yml', import.meta.url), 'utf8');
-
-// The lines of one job: from its key (two-space indent) to the next job key.
-function jobBlock(source: string, name: string): string[] {
-  const lines = source.split('\n');
-  const start = lines.findIndex((line) => line === `  ${name}:`);
-  if (start === -1) throw new Error(`no job named "${name}" in ci.yml`);
-  let end = lines.length;
-  for (let i = start + 1; i < lines.length; i++) {
-    if (/^ {2}[A-Za-z0-9_-]+:\s*$/.test(lines[i])) {
-      end = i;
-      break;
-    }
-  }
-  return lines.slice(start, end);
-}
-
-// The lines of one step: from its `- name:` line to the next step in the job.
-function stepBlock(job: string[], name: string): string[] {
-  const start = job.findIndex((line) => line.trim() === `- name: ${name}`);
-  if (start === -1) throw new Error(`no step named "${name}" in the job`);
-  const body: string[] = [];
-  for (const line of job.slice(start + 1)) {
-    if (WORKFLOW_STEP.test(line)) break;
-    body.push(line);
-  }
-  return body;
-}
+const workflow = readRepoFile('.github/workflows/ci.yml');
 
 // The shell lines of one step's `run: |` script, trimmed, blank lines dropped.
 function runScript(step: string[]): string[] {
@@ -75,10 +47,12 @@ function expectRetryFailsClosed(
   expect(script[successExit - 1]).toBe(`if timeout ${attemptSeconds} ${installCommand}; then`);
 }
 
-const job = jobBlock(workflow, JOB);
-const cache = stepBlock(job, 'Cache Playwright browsers');
-const systemDeps = stepBlock(job, 'Install Playwright system dependencies');
-const browsers = stepBlock(job, 'Install Playwright browsers');
+// Unlike the attestation job reader, a missing e2e job is a failure here, not a null.
+const job = ciJobBlock(workflow, JOB);
+if (job === null) throw new Error(`no job named "${JOB}" in ci.yml`);
+const cache = ciStepBlock(job, 'Cache Playwright browsers');
+const systemDeps = ciStepBlock(job, 'Install Playwright system dependencies');
+const browsers = ciStepBlock(job, 'Install Playwright browsers');
 
 describe('ci.yml e2e Playwright install', () => {
   it('caches the Playwright browsers with a SHA-pinned actions/cache', () => {
@@ -91,7 +65,7 @@ describe('ci.yml e2e Playwright install', () => {
       '          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}'
     );
     expect(cache.some((line) => line.trim().startsWith('restore-keys'))).toBe(false);
-    const versionStep = stepBlock(job, 'Get Playwright version');
+    const versionStep = ciStepBlock(job, 'Get Playwright version');
     expect(versionStep.join('\n')).toContain("require('@playwright/test/package.json')");
     expect(versionStep).toContain('        id: playwright-version');
   });
