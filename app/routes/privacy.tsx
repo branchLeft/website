@@ -16,7 +16,7 @@ export default function Privacy(): React.JSX.Element {
       <header>
         <h1>Privacy Notice</h1>
         <p className="eyebrow legal-page__meta">
-          Effective: 13 August 2026 · Last updated: 23 August 2026
+          Effective: 13 August 2026 · Last updated: 23 November 2026
         </p>
       </header>
 
@@ -277,9 +277,22 @@ export default function Privacy(): React.JSX.Element {
 
       <section aria-labelledby="shared-address-cookie-limit">
         <SectionHeading as="h2" anchor="shared-address-cookie-limit">
-          PRIVACY_NOTICE_SHARED_ADDRESS_COOKIE_LIMIT_HEADING
+          Customer sites on our shared PublicPress address
         </SectionHeading>
-        <p>PRIVACY_NOTICE_SHARED_ADDRESS_COOKIE_LIMIT_WORDING</p>
+        <p>
+          PublicPress is our hosted publishing platform. A customer&rsquo;s site can use its own
+          domain or a subdomain of <code>publicpress.co.uk</code>. Sites on that shared address sit
+          under the same parent domain as each other and as the PublicPress portal and sign-in
+          service. Web browsers do not yet treat these addresses as fully separate sites, so a
+          cookie set by one site on the shared address could, in principle, be sent to another.
+        </p>
+        <p>
+          To limit this, we do not allow customers to run their own scripts on a site on the shared
+          address; that option is available only on a customer&rsquo;s own domain. The
+          portal&rsquo;s sign-in cookies are set so that no other site can overwrite them. A site on
+          its own domain is not affected. Once the platform is large enough to qualify, we plan to
+          register the shared address so that browsers keep each site fully separate.
+        </p>
       </section>
 
       <section aria-labelledby="changes">
