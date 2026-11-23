@@ -137,11 +137,16 @@ jobs:
       # The apt step is the one that hung on a runner-network fault, so the
       # system dependencies get their own timeout and bounded retry. The browser
       # download is a separate step below and does not use apt.
+      # The runner's own apt (image update, unattended-upgrades) can hold the dpkg
+      # lock for minutes. DPkg::Lock::Timeout makes apt wait for it instead of
+      # failing at once. Worst case: 3 x 240s attempts + 15s + 30s sleeps = 765s,
+      # inside the 13-minute step timeout.
       - name: Install Playwright system dependencies
-        timeout-minutes: 7
+        timeout-minutes: 13
         run: |
+          printf 'DPkg::Lock::Timeout "180";\n' | sudo tee /etc/apt/apt.conf.d/99dpkg-lock-timeout >/dev/null
           for attempt in 1 2 3; do
-            if timeout 120 pnpm exec playwright install-deps chromium webkit; then
+            if timeout 240 pnpm exec playwright install-deps chromium webkit; then
               exit 0
             fi
             echo "::warning::install-deps attempt $attempt failed"
