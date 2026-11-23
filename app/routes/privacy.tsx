@@ -281,10 +281,10 @@ export default function Privacy(): React.JSX.Element {
         </SectionHeading>
         <p>
           PublicPress is our hosted publishing platform. A customer&rsquo;s site can use its own
-          domain or an address ending in <code>.sites.publicpress.co.uk</code>. Sites on that shared
-          address sit under the same parent domain as each other and as the PublicPress portal and
-          sign-in service. Web browsers do not yet treat these addresses as fully separate sites, so
-          a cookie set by one site on the shared address could, in principle, be sent to another.
+          domain or a subdomain of <code>publicpress.co.uk</code>. Sites on that shared address sit
+          under the same parent domain as each other and as the PublicPress portal and sign-in
+          service. Web browsers do not yet treat these addresses as fully separate sites, so a
+          cookie set by one site on the shared address could, in principle, be sent to another.
         </p>
         <p>
           To limit this, we do not allow customers to run their own scripts on a site on the shared
