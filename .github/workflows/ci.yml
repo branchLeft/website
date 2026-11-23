@@ -351,19 +351,15 @@ jobs:
           ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
             "sudo -n /usr/local/sbin/branchleft-deploy website $IMAGE@$DIGEST"
 
-      # app1's public port is bound to its private address only
-      # (deploy/compose.yml) -- nothing listens on loopback, so the check
-      # runs on the host itself, over the one SSH account CI holds, against
-      # that same private address.
-      - name: Smoke test the deployed stack over the private network
-        env:
-          HETZNER_APP1_HOST: ${{ vars.HETZNER_APP1_HOST }}
+      # The check runs from this runner against the public name, over HTTPS,
+      # through the shared edge. It needs no SSH: the deploy key runs only
+      # the deploy above.
+      - name: Smoke test the deployed stack at its public name
         run: |
           check() {
             path="$1"
             for attempt in $(seq 1 10); do
-              if ssh -i ~/.ssh/app1_deploy_key "deploy@$HETZNER_APP1_HOST" \
-                   "curl -fsS --max-time 10 http://10.20.1.100:8080$path -o /dev/null"; then
+              if curl -fsS --max-time 10 "https://branchleft.co.uk$path" -o /dev/null; then
                 echo "OK: $path"
                 return 0
               fi
