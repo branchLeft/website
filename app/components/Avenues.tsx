@@ -12,9 +12,8 @@ export type Avenue = {
 };
 
 /**
- * The three ways into the site, in the owner's order. The home page shows
- * them as cards; every avenue page ends with the other two (NextSteps). Each
- * line is existing site or launch copy.
+ * The three ways into the site, in the owner's order. The home page shows them
+ * as cards; avenue pages end with the other two (NextSteps). Lines are launch copy.
  */
 export const AVENUES: readonly Avenue[] = [
   {

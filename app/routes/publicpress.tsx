@@ -17,8 +17,7 @@ const PUBLICPRESS_URL = 'https://publicpress.co.uk/';
 
 /*
  * The headline, lede and launch line are PublicPress's approved launch copy
- * (publicpress.co.uk); the "why" is the opening of the former Local News
- * page.
+ * (publicpress.co.uk); the "why" opens the former Local News page.
  */
 export default function PublicPress(): React.JSX.Element {
   return (
