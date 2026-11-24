@@ -7,10 +7,9 @@
 #     (home, about, solutions, privacy, terms, LICENSE, NOTICE, README).
 # EVERYTHING ELSE is released and lands on agent review plus green CI: the
 # Dockerfile, deploy compose, .npmrc, package.json, workspace file, components,
-# route table, mail-sending code, public files, and the CodeQL and Dependabot
-# settings. Owner ruling. GitHub applies the
-# LAST matching pattern. No catch-all line. The shared standards lines (SYNC-1)
-# stay the final lines.
+# route table, mail-sending code, public files, and the Dependabot settings.
+# Owner ruling. GitHub applies the LAST matching pattern. No catch-all line.
+# The shared standards lines (SYNC-1) stay the final lines.
 
 # 1. Guardrails: agent guidance, floors, CI-config files, and the tests of them.
 **/CLAUDE.md                          @branchLeft/branchleft-admin
@@ -24,9 +23,11 @@
 /eslint.config.js                     @branchLeft/branchleft-admin
 /tsconfig.json                        @branchLeft/branchleft-admin
 # ci.yml carries both required checks and the deploy on push; the local actions it
-# calls run inside those jobs. The other two workflow callers come from the shared
-# lines at the end. codeql.yml and dependabot.yml are released.
+# calls run inside those jobs. codeql.yml grants a write permission, so it stays
+# owned. The other two workflow callers come from the shared lines at the end.
+# dependabot.yml is released.
 /.github/workflows/ci.yml             @branchLeft/branchleft-admin
+/.github/workflows/codeql.yml         @branchLeft/branchleft-admin
 /.github/actions/                     @branchLeft/branchleft-admin
 /app/lib/codeowners-ownership.test.ts @branchLeft/branchleft-admin
 /app/lib/ci-*.test.ts                 @branchLeft/branchleft-admin

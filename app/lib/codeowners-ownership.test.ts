@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -93,6 +93,7 @@ const OWNED: ReadonlyArray<readonly [string, string]> = [
   ['vitest.config.ts', '1: coverage thresholds CI reads'],
   ['tsconfig.json', '1: CI-config file'],
   ['.github/workflows/ci.yml', '3: required checks and the deploy'],
+  ['.github/workflows/codeql.yml', '3: grants a write permission'],
   ['.github/workflows/standards.yml', '3: required check, shared line'],
   ['.github/workflows/docs-lint.yml', '3: required check, shared line'],
   ['.github/actions/setup-pnpm-node/action.yml', '3: local action ci.yml calls'],
@@ -115,7 +116,6 @@ const UNOWNED: ReadonlyArray<readonly [string, string]> = [
   ['app/routes.ts', 'released: route table'],
   ['app/components/Button.tsx', 'released: components'],
   ['public/robots.txt', 'released: public files'],
-  ['.github/workflows/codeql.yml', 'released: not a required check'],
   ['.github/dependabot.yml', 'released: update settings'],
   ['pnpm-lock.yaml', 'lockfile'],
   ['deploy/RUNBOOK-app1-website.md', 'document inside a once-owned directory'],
@@ -153,5 +153,74 @@ describe('CODEOWNERS ownership of sample paths', () => {
 
   it.each(UNOWNED)('does not own %s (%s)', (path) => {
     expect(ownersOf(rules, path)).toEqual([]);
+  });
+});
+
+// The hold rule, read from the workflow text itself. A workflow or local action
+// stays owned when it names a secret other than GITHUB_TOKEN, carries an
+// environment, grants any write permission, has no explicit permissions block,
+// or declares secrets on workflow_call. A file that matches and is not owned
+// turns this test red, so a new workflow cannot be released by accident.
+function holdReasons(text: string, isAction: boolean): string[] {
+  const out: string[] = [];
+  if (
+    /(?<![\w-])secrets\.(?!GITHUB_TOKEN\b)[A-Za-z_]/.test(text) ||
+    /(?<![\w-])secrets\[/.test(text) ||
+    /secrets:\s*inherit/.test(text)
+  ) {
+    out.push('secrets');
+  }
+  if (/^\s+environment:/m.test(text)) out.push('environment');
+  if (/^\s+[a-z-]+:\s*write\s*(#.*)?$/m.test(text) || /permissions:\s*write-all/.test(text)) {
+    out.push('write permission');
+  }
+  if (/workflow_call:/.test(text) && /^\s{4}secrets:\s*$/m.test(text)) {
+    out.push('workflow_call secrets');
+  }
+  if (!isAction && !/^permissions:/m.test(text)) {
+    const jobsAt = text.search(/^jobs:\s*$/m);
+    const body = jobsAt < 0 ? '' : text.slice(jobsAt).replace(/^jobs:\s*\n/, '');
+    const jobs = body.split(/^ {2}(?=[A-Za-z0-9_.-]+:\s*(?:#.*)?$)/m).slice(1);
+    if (jobs.length === 0 || jobs.some((job) => !/^ {4}permissions:/m.test(job))) {
+      out.push('no permissions block');
+    }
+  }
+  return out;
+}
+
+function automationFiles(): string[] {
+  const found: string[] = [];
+  const workflows = rootFile('.github/workflows');
+  if (existsSync(workflows)) {
+    for (const name of readdirSync(workflows)) {
+      if (/\.ya?ml$/.test(name)) found.push(`.github/workflows/${name}`);
+    }
+  }
+  const actions = rootFile('.github/actions');
+  if (existsSync(actions)) {
+    for (const dir of readdirSync(actions)) {
+      for (const leaf of ['action.yml', 'action.yaml']) {
+        if (existsSync(rootFile(`.github/actions/${dir}/${leaf}`))) {
+          found.push(`.github/actions/${dir}/${leaf}`);
+        }
+      }
+    }
+  }
+  return found.sort();
+}
+
+describe('CODEOWNERS holds every workflow that matches the rule', () => {
+  const files = automationFiles();
+
+  it('finds the workflows', () => {
+    expect(files.length).toBeGreaterThan(0);
+  });
+
+  it.each(files)('%s is owned when the rule matches it', (path) => {
+    const text = readFileSync(rootFile(path), 'utf8');
+    const reasons = holdReasons(text, path.startsWith('.github/actions/'));
+    if (reasons.length > 0) {
+      expect(ownersOf(rules, path), `${path} (${reasons.join(', ')})`).toEqual([OWNER]);
+    }
   });
 });
