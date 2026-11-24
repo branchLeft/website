@@ -1,12 +1,16 @@
-# Code owners. A merge comes to the owner only when
-# it can do harm that no later check of the owner's would catch. GitHub applies
-# the LAST matching pattern, so the order below is the rule: kept lines first,
-# then the owner's words and public content, then CODEOWNERS itself, then the
-# shared standards lines (SYNC-1), which must stay the final lines.
-# No catch-all line: every file not named here is reviewed by the agent App.
+# Code owners. The owner is a required reviewer ONLY for:
+# (a) GUARDRAILS: anything that, if changed, could weaken an agent guardrail
+#     or stop a required check protecting us (CLAUDE.md, .claude/, floors, the
+#     CI-config files that decide pass or fail, CODEOWNERS and its proof test).
+# (b) HUMAN-FACING DOCS: the owner's marketing, product and legal prose
+#     (home, about, solutions, privacy, terms, LICENSE, NOTICE, README).
+# EVERYTHING ELSE is released and lands on agent review plus green CI: the
+# Dockerfile, deploy compose, .npmrc, package.json, workspace file, components,
+# route table, mail-sending code and public files. Owner ruling, issue
+# branchLeft/workspace#4323. GitHub applies the LAST matching pattern. No
+# catch-all line. The shared standards lines (SYNC-1) stay the final lines.
 
-# 1. The rules themselves: the guidance agents obey, the floors and the files
-# CI reads to decide pass or fail, and the tests of those rules.
+# 1. Guardrails: agent guidance, floors, CI-config files, and the tests of them.
 **/CLAUDE.md                          @branchLeft/branchleft-admin
 /.claude/                             @branchLeft/branchleft-admin
 /tools/floors.tsv                     @branchLeft/branchleft-admin
@@ -19,40 +23,9 @@
 /tsconfig.json                        @branchLeft/branchleft-admin
 /app/lib/codeowners-ownership.test.ts @branchLeft/branchleft-admin
 /app/lib/ci-*.test.ts                 @branchLeft/branchleft-admin
+**/CODEOWNERS                         @branchLeft/branchleft-admin
 
-# 1 and 2. package.json: CI calls its scripts to decide pass or fail, and the
-# Dockerfile build and ci.yml run `pnpm install` with the registry token in the
-# environment, which runs its lifecycle scripts. A version bump and a scripts
-# edit cannot be told apart here, so a dependency bump touching it still comes
-# to the owner. The lockfile is not listed: it is released to the deep review.
-# pnpm-workspace.yaml holds `allowBuilds`, the list of install scripts allowed
-# to run in that same install.
-/package.json                         @branchLeft/branchleft-admin
-/pnpm-workspace.yaml                  @branchLeft/branchleft-admin
-
-# 2. Keys, secrets and access: the registry auth file, the image build that
-# mounts the registry token, the compose stack that wires the SMTP credentials
-# into the container, and the one file that reads them to send mail (also 4).
-/.npmrc                               @branchLeft/branchleft-admin
-/Dockerfile                           @branchLeft/branchleft-admin
-/.dockerignore                        @branchLeft/branchleft-admin
-/deploy/compose.yml                   @branchLeft/branchleft-admin
-/app/lib/sendContactEmail.server.ts   @branchLeft/branchleft-admin
-
-# 5. What the public can reach: a merge to main redeploys the site (ci.yml
-# deploy on push), so the pages, components, page metadata, route table,
-# public files and brand images are owned.
-/app/routes.ts                        @branchLeft/branchleft-admin
-/app/root.tsx                         @branchLeft/branchleft-admin
-/app/routes/*.tsx                     @branchLeft/branchleft-admin
-/app/components/                      @branchLeft/branchleft-admin
-/app/lib/meta.ts                      @branchLeft/branchleft-admin
-/app/lib/page-paths.ts                @branchLeft/branchleft-admin
-/app/lib/social-links.ts              @branchLeft/branchleft-admin
-/public/                              @branchLeft/branchleft-admin
-/brand/*.png                          @branchLeft/branchleft-admin
-
-# 8. The owner's words: marketing, product and legal text.
+# 2. The owner's words: marketing, product and legal text.
 /app/routes/home.tsx                  @branchLeft/branchleft-admin
 /app/routes/about.tsx                 @branchLeft/branchleft-admin
 /app/routes/solutions.*.tsx           @branchLeft/branchleft-admin
@@ -60,9 +33,7 @@
 /app/routes/terms.tsx                 @branchLeft/branchleft-admin
 /LICENSE                              @branchLeft/branchleft-admin
 /NOTICE.md                            @branchLeft/branchleft-admin
-
-# 1. CODEOWNERS itself.
-**/CODEOWNERS                         @branchLeft/branchleft-admin
+/README.md                            @branchLeft/branchleft-admin
 
 # Standards template lines (SYNC-1): these five stay the final lines of this file.
 /.standardsignore        @branchLeft/branchleft-admin
