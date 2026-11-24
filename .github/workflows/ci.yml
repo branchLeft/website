@@ -25,34 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Setup Node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Setup pnpm, Node and dependencies
+        uses: ./.github/actions/setup-pnpm-node
         with:
-          node-version-file: .nvmrc
-          registry-url: https://npm.pkg.github.com
-          scope: '@branchleft'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "store=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Cache pnpm store
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.pnpm-cache.outputs.store }}
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Typecheck
         run: pnpm typecheck
@@ -93,80 +69,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Setup Node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - name: Setup pnpm, Node and dependencies
+        uses: ./.github/actions/setup-pnpm-node
         with:
-          node-version-file: .nvmrc
-          registry-url: https://npm.pkg.github.com
-          scope: '@branchleft'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "store=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Cache pnpm store
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.pnpm-cache.outputs.store }}
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # The browser build is tied to the locked Playwright version, so the cache
-      # is keyed on that version alone, with no restore-keys fallback.
-      - name: Get Playwright version
-        id: playwright-version
-        run: node -p "'version=' + require('@playwright/test/package.json').version" >> "$GITHUB_OUTPUT"
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-      # The apt step is the one that hung on a runner-network fault, so the
-      # system dependencies get their own timeout and bounded retry. The browser
-      # download is a separate step below and does not use apt.
-      # The runner's own apt (image update, unattended-upgrades) can hold the dpkg
-      # lock for minutes. DPkg::Lock::Timeout makes apt wait for it instead of
-      # failing at once. Worst case: 3 x 240s attempts + 15s + 30s sleeps = 765s,
-      # inside the 13-minute step timeout.
-      - name: Install Playwright system dependencies
-        timeout-minutes: 13
-        run: |
-          printf 'DPkg::Lock::Timeout "180";\n' | sudo tee /etc/apt/apt.conf.d/99dpkg-lock-timeout >/dev/null
-          for attempt in 1 2 3; do
-            if timeout 240 pnpm exec playwright install-deps chromium webkit; then
-              exit 0
-            fi
-            echo "::warning::install-deps attempt $attempt failed"
-            if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
-          done
-          echo "::error::install-deps failed after 3 attempts"
-          exit 1
-
-      - name: Install Playwright browsers
-        timeout-minutes: 7
-        run: |
-          for attempt in 1 2 3; do
-            if timeout 120 pnpm exec playwright install chromium webkit; then
-              exit 0
-            fi
-            echo "::warning::browser install attempt $attempt failed"
-            if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
-          done
-          echo "::error::browser install failed after 3 attempts"
-          exit 1
+          node-auth-token: ${{ secrets.GITHUB_TOKEN }}
+          playwright: 'true'
 
       - name: End-to-end tests
         run: pnpm test:e2e

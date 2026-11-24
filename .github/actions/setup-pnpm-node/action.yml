@@ -1,0 +1,99 @@
+name: Setup pnpm, Node and dependencies
+description: Sets up Node from .nvmrc and pnpm, restores the pnpm store cache, installs dependencies and, when `playwright` is 'true', installs the Playwright system dependencies and browsers. The caller checks out the repository first.
+
+# Used by the checks and e2e jobs of ci.yml. The cache keys, the store path, the
+# pinned action SHAs and the retry bounds are the ones the inline steps had.
+inputs:
+  node-auth-token:
+    description: Token for the @branchleft scope on the GitHub Packages registry. Pass secrets.GITHUB_TOKEN; a composite action cannot read the secrets context itself.
+    required: true
+  playwright:
+    description: "'true' to install the Playwright system dependencies and browsers. Only the e2e job sets it."
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version-file: .nvmrc
+        registry-url: https://npm.pkg.github.com
+        scope: '@branchleft'
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      with:
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: echo "store=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - name: Cache pnpm store
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ steps.pnpm-cache.outputs.store }}
+        key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          pnpm-store-${{ runner.os }}-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.node-auth-token }}
+
+    # The browser build is tied to the locked Playwright version, so the cache
+    # is keyed on that version alone, with no restore-keys fallback.
+    - name: Get Playwright version
+      if: inputs.playwright == 'true'
+      id: playwright-version
+      shell: bash
+      run: node -p "'version=' + require('@playwright/test/package.json').version" >> "$GITHUB_OUTPUT"
+
+    - name: Cache Playwright browsers
+      if: inputs.playwright == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+    # The apt step is the one that hung on a runner-network fault, so the
+    # system dependencies get their own timeout and bounded retry. The browser
+    # download is a separate step below and does not use apt.
+    # The runner's own apt (image update, unattended-upgrades) can hold the dpkg
+    # lock for minutes. DPkg::Lock::Timeout makes apt wait for it instead of
+    # failing at once. Worst case: 3 x 240s attempts + 15s + 30s sleeps = 765s.
+    # A composite step takes no timeout-minutes, so the caller job's
+    # timeout-minutes is the outer bound.
+    - name: Install Playwright system dependencies
+      if: inputs.playwright == 'true'
+      shell: bash
+      run: |
+        printf 'DPkg::Lock::Timeout "180";\n' | sudo tee /etc/apt/apt.conf.d/99dpkg-lock-timeout >/dev/null
+        for attempt in 1 2 3; do
+          if timeout 240 pnpm exec playwright install-deps chromium webkit; then
+            exit 0
+          fi
+          echo "::warning::install-deps attempt $attempt failed"
+          if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
+        done
+        echo "::error::install-deps failed after 3 attempts"
+        exit 1
+
+    - name: Install Playwright browsers
+      if: inputs.playwright == 'true'
+      shell: bash
+      run: |
+        for attempt in 1 2 3; do
+          if timeout 120 pnpm exec playwright install chromium webkit; then
+            exit 0
+          fi
+          echo "::warning::browser install attempt $attempt failed"
+          if [ "$attempt" -lt 3 ]; then sleep $((attempt * 15)); fi
+        done
+        echo "::error::browser install failed after 3 attempts"
+        exit 1
