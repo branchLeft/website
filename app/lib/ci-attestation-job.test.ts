@@ -8,7 +8,8 @@ import { ciJobBlock, readRepoFile } from './test-helpers/repo-text';
 // that is neither listed as published before attestation began nor attested.
 const JOB = 'verify-package-attestations';
 const ACTION = 'branchLeft/github-workflows/.github/actions/verify-package-attestations';
-const PINNED_SHA = 'b8beebe6342391ed33570265e910a6e26e48fd62';
+// The pin is read from the workflow, never copied here, so a Dependabot bump of
+// the action needs no edit to this test. The test checks its shape, not its value.
 
 const workflow = readRepoFile('.github/workflows/ci.yml');
 
@@ -42,7 +43,7 @@ describe('CI verify-package-attestations job', () => {
 
   it('pins the action to the release commit with its version comment, never a tag', () => {
     const [uses] = verifyUses(block ?? []);
-    expect(uses).toBe(`uses: ${ACTION}@${PINNED_SHA} # v1.2.3`);
+    expect(uses.startsWith(`uses: ${ACTION}@`)).toBe(true);
     expect(uses).toMatch(/@[0-9a-f]{40} # v\d+\.\d+\.\d+$/);
   });
 
