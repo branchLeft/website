@@ -1,8 +1,8 @@
 // @vitest-environment node
 
-import { readFileSync } from 'node:fs';
-
 import { describe, expect, it } from 'vitest';
+
+import { ciJobBlock, readRepoFile } from './test-helpers/repo-text';
 
 // The consumer check: the job that refuses an installed @branchleft package
 // that is neither listed as published before attestation began nor attested.
@@ -10,22 +10,7 @@ const JOB = 'verify-package-attestations';
 const ACTION = 'branchLeft/github-workflows/.github/actions/verify-package-attestations';
 const PINNED_SHA = 'b8beebe6342391ed33570265e910a6e26e48fd62';
 
-const workflow = readFileSync(new URL('../../.github/workflows/ci.yml', import.meta.url), 'utf8');
-
-// The lines of one job: from its key (two-space indent) to the next job key.
-function jobBlock(source: string, name: string): string[] | null {
-  const lines = source.split('\n');
-  const start = lines.findIndex((line) => line === `  ${name}:`);
-  if (start === -1) return null;
-  let end = lines.length;
-  for (let i = start + 1; i < lines.length; i++) {
-    if (/^ {2}[A-Za-z0-9_-]+:\s*$/.test(lines[i])) {
-      end = i;
-      break;
-    }
-  }
-  return lines.slice(start, end);
-}
+const workflow = readRepoFile('.github/workflows/ci.yml');
 
 // The keys under the job's `permissions:` mapping, as written.
 function jobPermissions(block: string[]): string[] {
@@ -45,7 +30,7 @@ function verifyUses(block: string[]): string[] {
 }
 
 describe('CI verify-package-attestations job', () => {
-  const block = jobBlock(workflow, JOB);
+  const block = ciJobBlock(workflow, JOB);
 
   it('exists in the CI workflow', () => {
     expect(block).not.toBeNull();
@@ -88,17 +73,17 @@ describe('CI verify-package-attestations job parser', () => {
   ].join('\n');
 
   it('stops a job at the next job key', () => {
-    expect(jobBlock(sample, 'one')).toHaveLength(6);
+    expect(ciJobBlock(sample, 'one')).toHaveLength(6);
   });
 
   it('reports a widened permission set', () => {
-    expect(jobPermissions(jobBlock(sample, 'one') ?? [])).toEqual([
+    expect(jobPermissions(ciJobBlock(sample, 'one') ?? [])).toEqual([
       'contents: read',
       'id-token: write',
     ]);
   });
 
   it('returns null for a job that is absent', () => {
-    expect(jobBlock(sample, 'missing')).toBeNull();
+    expect(ciJobBlock(sample, 'missing')).toBeNull();
   });
 });
