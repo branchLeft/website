@@ -4,12 +4,28 @@ import { describe, expect, it } from 'vitest';
 
 import { ciJobBlock, ciStepBlock, readRepoFile } from './test-helpers/repo-text';
 
-// The e2e job's Playwright install. The system dependencies (apt) and the
-// browser download each run as their own step, with a step timeout and a
-// bounded retry that fails closed, so a runner-network fault cannot hang the job.
-const JOB = 'e2e';
+// The Playwright install lives in the shared composite that ci.yml's checks and
+// e2e jobs call. Only the e2e job turns it on. Its system dependencies (apt) and
+// the browser download each run as their own step, with a bounded retry that
+// fails closed, so a runner-network fault cannot hang the job.
+const ACTION_PATH = '.github/actions/setup-pnpm-node/action.yml';
+const COMPOSITE = '.github/actions/setup-pnpm-node';
 
 const workflow = readRepoFile('.github/workflows/ci.yml');
+const action = readRepoFile(ACTION_PATH);
+
+// The steps of the composite: each starts at a four-space `- name:` line.
+function actionStepBlock(name: string): string[] {
+  const lines = action.split('\n');
+  const start = lines.findIndex((line) => line === `    - name: ${name}`);
+  if (start === -1) throw new Error(`no step named "${name}" in the composite`);
+  const body: string[] = [];
+  for (const line of lines.slice(start + 1)) {
+    if (/^ {4}- name: /.test(line)) break;
+    body.push(line);
+  }
+  return body;
+}
 
 // The shell lines of one step's `run: |` script, trimmed, blank lines dropped.
 function runScript(step: string[]): string[] {
@@ -47,40 +63,59 @@ function expectRetryFailsClosed(
   expect(script[successExit - 1]).toBe(`if timeout ${attemptSeconds} ${installCommand}; then`);
 }
 
-// Unlike the attestation job reader, a missing e2e job is a failure here, not a null.
-const job = ciJobBlock(workflow, JOB);
-if (job === null) throw new Error(`no job named "${JOB}" in ci.yml`);
-const cache = ciStepBlock(job, 'Cache Playwright browsers');
-const systemDeps = ciStepBlock(job, 'Install Playwright system dependencies');
-const browsers = ciStepBlock(job, 'Install Playwright browsers');
+// The e2e job is the only caller that installs Playwright.
+const e2e = ciJobBlock(workflow, 'e2e');
+if (e2e === null) throw new Error('no job named "e2e" in ci.yml');
+const checks = ciJobBlock(workflow, 'checks');
+if (checks === null) throw new Error('no job named "checks" in ci.yml');
 
-describe('ci.yml e2e Playwright install', () => {
-  it('caches the Playwright browsers with a SHA-pinned actions/cache', () => {
+const e2eSetup = ciStepBlock(e2e, 'Setup pnpm, Node and dependencies');
+const checksSetup = ciStepBlock(checks, 'Setup pnpm, Node and dependencies');
+const cache = actionStepBlock('Cache Playwright browsers');
+const systemDeps = actionStepBlock('Install Playwright system dependencies');
+const browsers = actionStepBlock('Install Playwright browsers');
+
+describe('ci.yml e2e Playwright install, through the setup composite', () => {
+  it('calls the composite from the e2e job with Playwright turned on', () => {
+    expect(e2eSetup).toContain(`        uses: ./${COMPOSITE}`);
+    expect(e2eSetup).toContain("          playwright: 'true'");
+    expect(e2eSetup).toContain('          node-auth-token: ${{ secrets.GITHUB_TOKEN }}');
+  });
+
+  it('leaves Playwright off in the checks job', () => {
+    expect(checksSetup).toContain(`        uses: ./${COMPOSITE}`);
+    expect(checksSetup.join('\n')).not.toContain('playwright:');
+  });
+
+  it('keeps the Playwright steps out of the workflow itself', () => {
+    expect(e2e.join('\n')).not.toContain('Install Playwright');
+    expect(e2e.join('\n')).not.toContain('--with-deps');
+    expect(e2e.join('\n')).not.toContain('playwright install');
+  });
+
+  it('caches the Playwright browsers with a SHA-pinned actions/cache, only when Playwright is on', () => {
     expect(cache.join('\n')).toMatch(/uses: actions\/cache@[0-9a-f]{40} # v\d+\.\d+\.\d+/);
-    expect(cache).toContain('          path: ~/.cache/ms-playwright');
+    expect(cache).toContain('        path: ~/.cache/ms-playwright');
+    expect(cache).toContain("      if: inputs.playwright == 'true'");
   });
 
   it('keys the browser cache on the locked Playwright version, with no fallback', () => {
     expect(cache).toContain(
-      '          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}'
+      '        key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}'
     );
     expect(cache.some((line) => line.trim().startsWith('restore-keys'))).toBe(false);
-    const versionStep = ciStepBlock(job, 'Get Playwright version');
+    const versionStep = actionStepBlock('Get Playwright version');
     expect(versionStep.join('\n')).toContain("require('@playwright/test/package.json')");
-    expect(versionStep).toContain('        id: playwright-version');
+    expect(versionStep).toContain('      id: playwright-version');
   });
 
   it('runs the apt system-dependency install before the browser download', () => {
-    const names = job.filter((line) => line.trim().startsWith('- name: '));
-    const index = (name: string) => names.indexOf(`      - name: ${name}`);
+    const names = action.split('\n').filter((line) => /^ {4}- name: /.test(line));
+    const index = (name: string) => names.indexOf(`    - name: ${name}`);
     expect(index('Install Playwright system dependencies')).toBeGreaterThanOrEqual(0);
     expect(index('Install Playwright system dependencies')).toBeLessThan(
       index('Install Playwright browsers')
     );
-  });
-
-  it('gives the system-dependency install a step timeout', () => {
-    expect(systemDeps.some((line) => /^ {8}timeout-minutes: \d+$/.test(line))).toBe(true);
   });
 
   it('waits for the runner dpkg lock: writes an apt DPkg::Lock::Timeout before the retries', () => {
@@ -92,22 +127,6 @@ describe('ci.yml e2e Playwright install', () => {
     );
     expect(config).toBe(0);
     expect(config).toBeLessThan(script.indexOf('for attempt in 1 2 3; do'));
-  });
-
-  it('bounds the system-dependency install worst case inside its step timeout', () => {
-    // 3 attempts, each capped by timeout, plus the 15s and 30s sleeps between them.
-    const attempt = Number(
-      /timeout (\d+) pnpm exec playwright install-deps/.exec(runScript(systemDeps).join('\n'))?.[1]
-    );
-    const minutes = Number(
-      systemDeps.map((line) => /^ {8}timeout-minutes: (\d+)$/.exec(line)?.[1]).find(Boolean)
-    );
-    expect(attempt).toBeGreaterThan(0);
-    expect(3 * attempt + 15 + 30).toBeLessThanOrEqual(minutes * 60);
-  });
-
-  it('gives the browser download a step timeout', () => {
-    expect(browsers.some((line) => /^ {8}timeout-minutes: \d+$/.test(line))).toBe(true);
   });
 
   it('system-dependency retry fails closed: its last failed attempt prints ::error:: and exits 1', () => {
@@ -128,8 +147,8 @@ describe('ci.yml e2e Playwright install', () => {
     );
   });
 
-  it('no longer installs apt dependencies through --with-deps', () => {
-    expect(job.join('\n')).not.toContain('--with-deps');
-    expect(browsers.join('\n')).not.toContain('install-deps');
+  it('gates both Playwright install steps on the playwright input', () => {
+    expect(systemDeps).toContain("      if: inputs.playwright == 'true'");
+    expect(browsers).toContain("      if: inputs.playwright == 'true'");
   });
 });
