@@ -1,14 +1,15 @@
 # Code owners. The owner is a required reviewer ONLY for:
 # (a) GUARDRAILS: anything that, if changed, could weaken an agent guardrail
 #     or stop a required check protecting us (CLAUDE.md, .claude/, floors, the
-#     CI-config files that decide pass or fail, CODEOWNERS and its proof test).
+#     CI-config files that decide pass or fail, the workflows that enforce a
+#     required check or deploy, CODEOWNERS and its proof test).
 # (b) HUMAN-FACING DOCS: the owner's marketing, product and legal prose
 #     (home, about, solutions, privacy, terms, LICENSE, NOTICE, README).
 # EVERYTHING ELSE is released and lands on agent review plus green CI: the
 # Dockerfile, deploy compose, .npmrc, package.json, workspace file, components,
-# route table, mail-sending code and public files. Owner ruling, issue
-# branchLeft/workspace#4323. GitHub applies the LAST matching pattern. No
-# catch-all line. The shared standards lines (SYNC-1) stay the final lines.
+# route table, mail-sending code, public files, and the Dependabot settings.
+# Owner ruling. GitHub applies the LAST matching pattern. No catch-all line.
+# The shared standards lines (SYNC-1) stay the final lines.
 
 # 1. Guardrails: agent guidance, floors, and the CI-config files that decide pass or fail.
 #    The tests of the CI workflows (app/lib/ci-*.test.ts) are released.
@@ -22,6 +23,13 @@
 /.gitignore                           @branchLeft/branchleft-admin
 /eslint.config.js                     @branchLeft/branchleft-admin
 /tsconfig.json                        @branchLeft/branchleft-admin
+# ci.yml carries both required checks and the deploy on push; the local actions it
+# calls run inside those jobs. codeql.yml grants a write permission, so it stays
+# owned. The other two workflow callers come from the shared lines at the end.
+# dependabot.yml is released.
+/.github/workflows/ci.yml             @branchLeft/branchleft-admin
+/.github/workflows/codeql.yml         @branchLeft/branchleft-admin
+/.github/actions/                     @branchLeft/branchleft-admin
 /app/lib/codeowners-ownership.test.ts @branchLeft/branchleft-admin
 **/CODEOWNERS                         @branchLeft/branchleft-admin
 
@@ -35,9 +43,12 @@
 /NOTICE.md                            @branchLeft/branchleft-admin
 /README.md                            @branchLeft/branchleft-admin
 
-# Standards template lines (SYNC-1): these five stay the final lines of this file.
+# Standards template lines (SYNC-1): these seven stay the final lines of this file.
+# No /.github/ catch-all: it would own dependabot.yml, which is released.
 /.standardsignore        @branchLeft/branchleft-admin
 /.standards.mode         @branchLeft/branchleft-admin
 /.docs-lint*             @branchLeft/branchleft-admin
 /.standards-db-tooling   @branchLeft/branchleft-admin
-/.github/                @branchLeft/branchleft-admin
+/.github/CODEOWNERS      @branchLeft/branchleft-admin
+/.github/workflows/standards.yml  @branchLeft/branchleft-admin
+/.github/workflows/docs-lint.yml  @branchLeft/branchleft-admin
