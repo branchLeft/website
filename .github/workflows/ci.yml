@@ -134,7 +134,7 @@ jobs:
       # published before attestation began, or carries a signed attestation
       # from the repository and workflow the action's table names for it.
       - name: Verify every locked @branchleft package
-        uses: branchLeft/github-workflows/.github/actions/verify-package-attestations@b8beebe6342391ed33570265e910a6e26e48fd62 # v1.2.3
+        uses: branchLeft/github-workflows/.github/actions/verify-package-attestations@f559ca696956d3d58440f56666d85f36c829c08b # v1.2.7
 
   deploy:
     name: Build, push & deploy
@@ -212,7 +212,7 @@ jobs:
       # job alone. The same value, with the source ref `refs/heads/main`, is what
       # app1's branchleft-deploy checks once the image is registered there.
       - name: Attest and verify the pushed image
-        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@231e592397f4c94668c64646c14160d9d497bdde # v1.2.2
+        uses: branchLeft/github-workflows/.github/actions/attest-and-verify-image@f559ca696956d3d58440f56666d85f36c829c08b # v1.2.7
         with:
           image: ghcr.io/branchleft/website
           digest: ${{ steps.digest.outputs.digest }}
