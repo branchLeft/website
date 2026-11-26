@@ -43,15 +43,12 @@
 /NOTICE.md                            @branchLeft/branchleft-admin
 /README.md                            @branchLeft/branchleft-admin
 
-# Owned .github files. The standards template lines below cover all of .github/
-# and stay the final lines of this file.
-/.github/CODEOWNERS      @branchLeft/branchleft-admin
-/.github/workflows/standards.yml  @branchLeft/branchleft-admin
-/.github/workflows/docs-lint.yml  @branchLeft/branchleft-admin
-
-# Standards template lines (SYNC-1): these five stay the final lines of this file.
+# Standards template lines (SYNC-1): these seven stay the final lines of this file.
+# No /.github/ catch-all: it would own dependabot.yml, which is released.
 /.standardsignore        @branchLeft/branchleft-admin
 /.standards.mode         @branchLeft/branchleft-admin
 /.docs-lint*             @branchLeft/branchleft-admin
 /.standards-db-tooling   @branchLeft/branchleft-admin
-/.github/                @branchLeft/branchleft-admin
+/.github/CODEOWNERS      @branchLeft/branchleft-admin
+/.github/workflows/standards.yml  @branchLeft/branchleft-admin
+/.github/workflows/docs-lint.yml  @branchLeft/branchleft-admin
