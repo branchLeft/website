@@ -11,7 +11,8 @@
 # Owner ruling. GitHub applies the LAST matching pattern. No catch-all line.
 # The shared standards lines (SYNC-1) stay the final lines.
 
-# 1. Guardrails: agent guidance, floors, CI-config files, and the tests of them.
+# 1. Guardrails: agent guidance, floors, and the CI-config files that decide pass or fail.
+#    The tests of the CI workflows (app/lib/ci-*.test.ts) are released.
 **/CLAUDE.md                          @branchLeft/branchleft-admin
 /.claude/                             @branchLeft/branchleft-admin
 /tools/floors.tsv                     @branchLeft/branchleft-admin
@@ -30,7 +31,6 @@
 /.github/workflows/codeql.yml         @branchLeft/branchleft-admin
 /.github/actions/                     @branchLeft/branchleft-admin
 /app/lib/codeowners-ownership.test.ts @branchLeft/branchleft-admin
-/app/lib/ci-*.test.ts                 @branchLeft/branchleft-admin
 **/CODEOWNERS                         @branchLeft/branchleft-admin
 
 # 2. The owner's words: marketing, product and legal text.

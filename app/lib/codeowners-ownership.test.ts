@@ -120,6 +120,8 @@ const UNOWNED: ReadonlyArray<readonly [string, string]> = [
   ['pnpm-lock.yaml', 'lockfile'],
   ['deploy/RUNBOOK-app1-website.md', 'document inside a once-owned directory'],
   ['app/lib/dockerfile-pins.test.ts', 'test of a released file'],
+  ['app/lib/ci-attestation-job.test.ts', 'released: test of a CI workflow'],
+  ['app/lib/ci-playwright-install.test.ts', 'released: test of a CI workflow'],
   ['tests/home.spec.ts', 'end-to-end test'],
   ['app/styles/theme.css', 'styles'],
   ['app/lib/security-headers.ts', 'no criterion names it'],

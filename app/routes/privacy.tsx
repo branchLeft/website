@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SectionHeading } from '@branchleft/components';
+import { LegalSection } from '../components/LegalSection';
 import { buildMeta } from '../lib/meta';
 
 export function meta() {
@@ -20,10 +21,7 @@ export default function Privacy(): React.JSX.Element {
         </p>
       </header>
 
-      <section aria-labelledby="who-we-are">
-        <SectionHeading as="h2" anchor="who-we-are">
-          Who we are
-        </SectionHeading>
+      <LegalSection id="who-we-are" title="Who we are">
         <p>
           BRANCHLEFT LTD (&ldquo;branchLeft&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is a company
           registered in England & Wales (company number 17355203). Our registered office is 71-75
@@ -34,22 +32,16 @@ export default function Privacy(): React.JSX.Element {
           registered with the Information Commissioner&rsquo;s Office under registration number
           ZC207801.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="contact">
-        <SectionHeading as="h2" anchor="contact">
-          Contact
-        </SectionHeading>
+      <LegalSection id="contact" title="Contact">
         <p>
           For any question about this notice or your personal information, email{' '}
           <a href="mailto:contact@branchleft.co.uk">contact@branchleft.co.uk</a>.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="what-we-collect">
-        <SectionHeading as="h2" anchor="what-we-collect">
-          What information we collect and why
-        </SectionHeading>
+      <LegalSection id="what-we-collect" title="What information we collect and why">
         <p>
           The website has one interactive feature: a contact form. We collect only the information
           you choose to submit through that form, together with a minimal amount of technical
@@ -96,12 +88,9 @@ export default function Privacy(): React.JSX.Element {
           cookies are set. We do not track visitors across sites, and we do not use automated
           decision-making or profiling.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="lawful-bases">
-        <SectionHeading as="h2" anchor="lawful-bases">
-          Lawful bases
-        </SectionHeading>
+      <LegalSection id="lawful-bases" title="Lawful bases">
         <p>
           Under the UK GDPR we must have a &ldquo;lawful basis&rdquo; for collecting and using
           personal information. The bases we rely on are:
@@ -126,12 +115,9 @@ export default function Privacy(): React.JSX.Element {
             privacy; you can object at any time.
           </li>
         </ul>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="sources">
-        <SectionHeading as="h2" anchor="sources">
-          Where we get personal information from
-        </SectionHeading>
+      <LegalSection id="sources" title="Where we get personal information from">
         <ul>
           <li>Directly from you (via the contact form or subsequent correspondence).</li>
           <li>
@@ -139,12 +125,9 @@ export default function Privacy(): React.JSX.Element {
             website) when preparing to reply to an enquiry.
           </li>
         </ul>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="processors">
-        <SectionHeading as="h2" anchor="processors">
-          Who we share it with
-        </SectionHeading>
+      <LegalSection id="processors" title="Who we share it with">
         <p>
           We do not sell personal information. We process some information on our own
           infrastructure, and we share other information only with:
@@ -177,12 +160,9 @@ export default function Privacy(): React.JSX.Element {
           from this website to the mail server above; no third-party form-processing service is
           involved.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="retention">
-        <SectionHeading as="h2" anchor="retention">
-          How long we keep information
-        </SectionHeading>
+      <LegalSection id="retention" title="How long we keep information">
         <table className="legal-page__table">
           <thead>
             <tr>
@@ -218,12 +198,9 @@ export default function Privacy(): React.JSX.Element {
           technically practical (for example, encrypted backups), we isolate it and delete it on the
           next scheduled purge.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="rights">
-        <SectionHeading as="h2" anchor="rights">
-          Your UK GDPR rights
-        </SectionHeading>
+      <LegalSection id="rights" title="Your UK GDPR rights">
         <p>You have the right to:</p>
         <ul>
           <li>Ask for a copy of the personal information we hold about you (right of access).</li>
@@ -246,12 +223,9 @@ export default function Privacy(): React.JSX.Element {
           </a>
           .
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="complaints">
-        <SectionHeading as="h2" anchor="complaints">
-          How to complain
-        </SectionHeading>
+      <LegalSection id="complaints" title="How to complain">
         <p>
           If you have a concern about how we&rsquo;ve used your personal information, please contact
           us first at <a href="mailto:complaints@branchleft.co.uk">complaints@branchleft.co.uk</a>{' '}
@@ -273,12 +247,12 @@ export default function Privacy(): React.JSX.Element {
             ico.org.uk/make-a-complaint
           </a>
         </address>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="shared-address-cookie-limit">
-        <SectionHeading as="h2" anchor="shared-address-cookie-limit">
-          Customer sites on our shared PublicPress address
-        </SectionHeading>
+      <LegalSection
+        id="shared-address-cookie-limit"
+        title="Customer sites on our shared PublicPress address"
+      >
         <p>
           PublicPress is our hosted publishing platform. A customer&rsquo;s site can use its own
           domain or a subdomain of <code>publicpress.co.uk</code>. Sites on that shared address sit
@@ -293,18 +267,15 @@ export default function Privacy(): React.JSX.Element {
           its own domain is not affected. Once the platform is large enough to qualify, we plan to
           register the shared address so that browsers keep each site fully separate.
         </p>
-      </section>
+      </LegalSection>
 
-      <section aria-labelledby="changes">
-        <SectionHeading as="h2" anchor="changes">
-          Changes to this notice
-        </SectionHeading>
+      <LegalSection id="changes" title="Changes to this notice">
         <p>
           We will post any material change to this notice here, together with an updated effective
           date. Where a change materially affects how we use information you have already given us,
           we will contact you directly.
         </p>
-      </section>
+      </LegalSection>
     </main>
   );
 }
